@@ -1,0 +1,26 @@
+.FeedDetail{
+    display: grid;
+    gap: 2em;
+}
+
+.FeedDetail-main{
+    display: grid;
+    grid-template-columns: max-content minmax(180px, 550px);
+    gap: 2.5em;
+}
+
+
+.FeedDetail-sidebar{
+    display: flex;
+    row-gap: 1.5em;
+    flex-direction: column;
+} 
+.FeedDetail-body .ant-typography{
+    line-height: 2em;
+}
+.FeedDetail-header h2{
+    margin-bottom: 0em !important;
+}
+.FeedDetail-header a{
+    font-size: 1.175em;
+}

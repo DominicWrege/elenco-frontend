@@ -1,0 +1,16 @@
+
+.Header-links {
+    display: flex !important;
+    align-items: center;
+    font-size: 1.25em;
+    justify-content: center;
+}
+
+
+.Header-background{
+    background: cfd8dc !important;
+    /* background: #C6DDF0 !important; */
+    /* background: #D8DBE2!important; */
+    /* background: #fff !important; */
+    
+}

@@ -1,0 +1,25 @@
+.NewFeed-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.NewFeed-input{
+    max-width: 67vw;
+}
+.NewFeed-content{
+    width: 80%;
+    max-width: 850px;
+}
+
+.NewFeed-form{
+    width: 100%;
+    display: flex;
+    gap: 2em;
+}
+
+@media(max-width: 600px){
+    .NewFeed-content{
+        width: 100%;
+    } 
+}

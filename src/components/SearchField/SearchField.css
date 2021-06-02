@@ -1,0 +1,19 @@
+.ant-select.ant-select-auto-complete.ant-select-single.ant-select-customize-input.ant-select-show-search {
+    width: 80%;
+}
+
+
+.SearchField-option
+.SearchField-option small{
+    color: gray;
+}
+.SearchField-option small{
+    color: gray;
+}
+.SearchField-option div.ant-typography {
+    margin: 0 !important;
+}
+
+.completion-search-dropdown .rc-virtual-list-holder  {
+    max-height: 470px !important;
+}

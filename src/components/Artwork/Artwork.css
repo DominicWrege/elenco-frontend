@@ -1,0 +1,8 @@
+.Artwork img {
+    object-fit: scale-down;
+    display: block;
+}
+.Artwork{
+    display: block;
+    height: max-content;
+}
