@@ -14,7 +14,7 @@ import { auth } from "../../functions/auth";
 import Guard from "../Guard/Guard";
 import PodcastPlayer from "../PodcastPlayer/PodcastPlayer";
 import { Feed } from "../Feed/Feed";
-import  Preview  from "../../pages/Preview/Preview";
+import Preview from "../../pages/Preview/Preview";
 
 
 const App: React.FC = () => {

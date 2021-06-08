@@ -14,10 +14,10 @@ export function SubmitFeed(): JSX.Element {
     const [_, setLocation] = useLocation();
 
     const handleSubmit = (event: SubmitEvent): void => {
-            const urlParam = event.url;
-            const uri = encodeURI(`/preview?url=${urlParam}`);
-            setLocation(uri);
-    
+        const urlParam = event.url;
+        const uri = encodeURI(`/preview?url=${urlParam}`);
+        setLocation(uri);
+
     };
 
     return (
