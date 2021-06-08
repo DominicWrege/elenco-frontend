@@ -5,11 +5,17 @@
 
 }
 /* :FIXME adas */
-/* .EpisodeItem-text-body h2, h3, h4, p{
+.EpisodeItem-text-body h2, h3, h4{
     margin-bottom: 0 !important;
-    line-height: 1em;
-} */
+    line-height: 1.2em;
+}
 
+.EpisodeItem-text-body p{
+    margin-bottom: 0 !important;
+}
+.EpisodeItem-text-body{
+    width: 100%;
+}
 .EpisodeItem-text-small{
     /* color: #52585c;
     display: flex;
@@ -21,9 +27,16 @@
     color: #52585c;
     display: flex;
     /* width: max-content; */
-    margin-bottom: 1em;
+    margin-bottom: 0.5em;
     justify-content: space-between;
 }
+
+.EpisodeItem-explicit:After {
+    content: '[E]';
+    margin-left: 0.5em;
+    font-weight: normal;
+}
+
 .EpisodeItem-play-pause{
     cursor: pointer;
     color: #3f51b5;

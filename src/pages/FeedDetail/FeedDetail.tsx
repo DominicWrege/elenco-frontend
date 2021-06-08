@@ -28,7 +28,6 @@ export function FeedDetail({ feed }: Properties): JSX.Element {
         if (!feed) {
             return null;
         }
-        console.log(feed);
         return (
             <div className="FeedDetail">
                 <header className="FeedDetail-header">

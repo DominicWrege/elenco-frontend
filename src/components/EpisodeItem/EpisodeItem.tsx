@@ -29,14 +29,14 @@ const EpisodeItem: React.FC<Properties> = ({ episode, key }) => {
                 }
             </div>
             <section className="EpisodeItem-text-body">
-                <Title level={3}>{episode.title}</Title>
+                <Title className={episode.explicit ? "EpisodeItem-explicit" : ""} level={3}>{episode.title}</Title>
                 {/* <Paragraph ellipsis> */}
                 <div className="EpisodeItem-text-small">
                     <p>{formatDuration(episode.duration)}</p>
                     <p>{formatDate(episode.published)}</p>
                 </div>
                 <p>
-                    {stripHtml(episode.description ?? "").result}
+                    {stripHtml(episode.description ?? "").result}...
                 </p>
                 {/* </Paragraph> */}
                 {/* <Text type="secondary">{episode.keywords?.map(item => item).join(", ")}</Text> */}
