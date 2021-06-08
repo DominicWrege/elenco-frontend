@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import "./App.css";
-import { Content } from "antd/lib/layout/layout";
+import { Content, Footer } from "antd/lib/layout/layout";
 import AppHeader from "../Header/Header";
 import { Button, Layout } from "antd";
 import { Redirect, Route, Switch } from "wouter";
@@ -9,10 +9,12 @@ import RegisterLogin, { ComponentType } from "../../pages/RegisterLogin";
 import { User } from "../../models/user";
 import SearchResults from "../../pages/SearchResults/SearchResults";
 import { UserContext } from "../../contexts/UserContext";
-import { Feed } from "../Feed/Feed";
 import SubmitFeed from "../../pages/SubmitFeed/SubmitFeed";
 import { auth } from "../../functions/auth";
 import Guard from "../Guard/Guard";
+import PodcastPlayer from "../PodcastPlayer/PodcastPlayer";
+import { Feed } from "../Feed/Feed";
+import  Preview  from "../../pages/Preview/Preview";
 
 
 const App: React.FC = () => {
@@ -81,6 +83,7 @@ const App: React.FC = () => {
                                     <SubmitFeed />
                                 </Guard>
                             </Route>
+                            <Route path="/preview" component={Preview}></Route>
                             <Route path="/feed/:name" component={Feed}></Route>
                             <Route>
                                 <h2>
@@ -89,7 +92,12 @@ const App: React.FC = () => {
                             </Route>
                         </Switch>
                     </Content>
-                    <div>Playerrrrrrrrrrrrr</div>
+                    <Footer>
+                        <div hidden>
+                            <PodcastPlayer name="delte me" />
+                        </div>
+                    </Footer>
+
                 </Layout>
             </UserContext.Provider>
         </div >

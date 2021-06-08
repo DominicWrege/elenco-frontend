@@ -107,12 +107,8 @@ export const PodcastPlayer: React.FC<Props> = (props) => {
     // };
     const s = { maxWidth: "950px", minWidth: "400px" };
     return (
-        <div className="Player-wrapper" >
-            <Title level={4}>Episodes</Title>
-            <div id="player-div" data-template="/podlove-template.html"
-                style={{ maxWidth: "950px", minWidth: "450px" }} >
-            </div>
-        </div >
+        <div id="player-div" data-template="/template2.html" >
+        </div>
     );
 }
 

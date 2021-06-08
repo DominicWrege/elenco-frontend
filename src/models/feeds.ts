@@ -1,4 +1,4 @@
-import { Url } from "url";
+import { Episode } from "./episode";
 
 export interface Meta {
     rss_url: string,
@@ -7,7 +7,7 @@ export interface Meta {
     categories: TopCategory[]
 }
 
-export interface FeedResult {
+export interface FeedModel {
     title: string,
     id: number,
     url: string,
@@ -20,9 +20,10 @@ export interface FeedResult {
     language?: string,
     last_modified: string, // Datetime UTC
     categories: TopCategory[],
+    episodes: Episode[]
 }
 
-
+/// <reference path="./episode.ts" />
 export interface FeedPreview {
     title: string,
     id: number,
@@ -35,8 +36,8 @@ export interface FeedPreview {
     language?: string,
     last_modified: string, // Datetime UTC
     categories: Map<string, Array<string>>
+    episodes: Episode[]
 }
-
 
 
 export interface TopCategory {
@@ -51,7 +52,7 @@ export interface Category {
     description: string,
 }
 
-export function compareByDescription(a: FeedResult, b: FeedResult): number {
+export function compareByDescription(a: FeedModel, b: FeedModel): number {
     return a.description.localeCompare(b.description) ? 1 : -1;
 }
 
@@ -59,3 +60,4 @@ export interface Completion {
     title: string,
     authorName: string
 }
+

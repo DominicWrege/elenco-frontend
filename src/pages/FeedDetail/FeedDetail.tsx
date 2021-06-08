@@ -1,21 +1,21 @@
 import "./FeedDetail.css";
 import React, { useEffect } from "react"
 
-import { FeedResult } from "../../models/feeds";
+import type { FeedModel } from "../../models/feeds";
 import { Card, Typography } from 'antd';
 import Artwork from "../../components/Artwork/Artwork"; import FeedMetaInfo from "../../components/FeedMetaInfo/FeedMetaInfo";
 import { Link } from "wouter";
+import EpisodeList from "../../components/EpisodeList/EpisodeList";
 
 const { Title, Paragraph } = Typography;
 
 
 
 interface Properties {
-    feed: FeedResult | null
-    episodes?: JSX.Element
+    feed: FeedModel | null
 }
 
-export function FeedDetail({ feed, episodes }: Properties): JSX.Element {
+export function FeedDetail({ feed }: Properties): JSX.Element {
 
     const renderSubtitle = (subtitle?: string) => {
         if (!subtitle) {
@@ -53,10 +53,10 @@ export function FeedDetail({ feed, episodes }: Properties): JSX.Element {
                             <Paragraph >
                                 {feed.description}
                             </Paragraph>
-                        </Card>,
+                        </Card>
 
                         <div>
-                            {episodes}
+                            <EpisodeList episodes={feed.episodes} />
                         </div>
                     </section>
 

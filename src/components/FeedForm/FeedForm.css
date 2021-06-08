@@ -8,18 +8,19 @@
     max-width: 67vw;
 }
 .NewFeed-content{
-    width: 80%;
+    width: 100%;
     max-width: 850px;
 }
 
 .NewFeed-form{
+    min-width: 350px;
     width: 100%;
     display: flex;
     gap: 2em;
 }
 
-@media(max-width: 600px){
-    .NewFeed-content{
-        width: 100%;
-    } 
+@media(min-width: 640px) {
+    .NewFeed-form{
+        min-width: 640px;
+    }
 }

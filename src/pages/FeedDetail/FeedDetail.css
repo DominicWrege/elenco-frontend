@@ -5,7 +5,7 @@
 
 .FeedDetail-main{
     display: grid;
-    grid-template-columns: max-content minmax(180px, 550px);
+    grid-template-columns: max-content minmax(200px, 800px);
     gap: 2.5em;
 }
 
@@ -15,6 +15,13 @@
     row-gap: 1.5em;
     flex-direction: column;
 } 
+
+
+.FeedDetail-body{
+    display: inherit;
+    gap: 2em;
+}
+
 .FeedDetail-body .ant-typography{
     line-height: 2em;
 }

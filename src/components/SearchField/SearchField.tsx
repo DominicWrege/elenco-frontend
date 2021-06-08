@@ -1,11 +1,11 @@
 import { AutoComplete, Input, Select, Typography } from "antd";
 import "./SearchField.css";
-import React, { ChangeEventHandler, useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { useLocation, useRoute } from "wouter";
 import { API_URL } from "../../env";
 import { http } from "../../functions/http";
-import { Completion } from "../../models/feeds";
 import { SearchProperties } from "../../pages/SearchResults/SearchResults";
+import type { Completion } from "../../models/feeds";
 const { Paragraph } = Typography;
 
 // TODO get para an set the field

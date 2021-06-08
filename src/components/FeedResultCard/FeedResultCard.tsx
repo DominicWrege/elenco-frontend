@@ -1,14 +1,14 @@
 import { Card, Image, Tag } from "antd";
 import React from "react";
-import { TopCategory, FeedResult, Category } from "../../models/feeds";
 import { Link } from 'wouter';
 import { TagFilled } from '@ant-design/icons';
 import "./FeedResultCard.css";
 import Artwork from "../Artwork/Artwork";
 import { API_URL } from "../../env";
+import { Category, FeedModel, TopCategory } from "../../models/feeds";
 
 interface Props {
-    feed: FeedResult
+    feed: FeedModel
 }
 const FeedResultCard: React.FC<Props> = (props: Props) => {
 

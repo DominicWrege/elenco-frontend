@@ -3,6 +3,7 @@ import "./FeedForm.css";
 
 import { Typography } from 'antd';
 import { useRef, useState } from "react";
+import { Url } from "url";
 const { Option } = Select;
 const { Title } = Typography;
 
@@ -12,7 +13,7 @@ interface Properties {
 
 export interface SubmitEvent {
     protocol: string,
-    url: string
+    url: URL
 }
 
 export function NewFeed({ onSubmit }) {
@@ -42,11 +43,16 @@ export function NewFeed({ onSubmit }) {
     const handleSubmit = (event: React.SyntheticEvent): void => {
         event.preventDefault();
         if (inputElement.current) {
-            const data: SubmitEvent = {
-                url: inputElement.current.input.value,
-                protocol: protocol
-            };
-            onSubmit(data);
+            try {
+                const data: SubmitEvent = {
+                    url: new URL(inputElement.current.input.value),
+                    protocol: protocol
+                };
+                onSubmit(data);
+            } catch (e) {
+                console.error(e);
+            }
+
         }
         // console.log(form.current?.elements[0].nodeValue);
         // console.log(event);s

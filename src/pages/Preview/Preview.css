@@ -1,0 +1,42 @@
+.Preview {
+    display: flex;
+    justify-content: center; 
+    min-width: 300px !important;  
+}
+
+#Preview-card{
+    background: #f0f2f5;
+}
+
+#Preview-card h4
+{
+    margin: 0 !important;
+}
+
+.Preview-card-title .ant-btn-icon-only > * {
+    font-size: 1.3em;
+}
+
+.Preview-card-title{
+    display: flex;
+    flex-direction: row;
+    gap: 0.75em;
+}
+#Preview-card > div.ant-card-head{
+    border-bottom: 1px solid #bebebee6;
+}
+
+.Preview-card-extras{
+    display: flex;
+    gap: 1.5em;
+    align-items: center;
+}
+
+.Preview-loading{
+    width: 100%;
+
+}
+
+.ant-skeleton.ant-skeleton-active .ant-skeleton-content .ant-skeleton-title, .ant-skeleton.ant-skeleton-active .ant-skeleton-content .ant-skeleton-paragraph > li{
+    background: linear-gradient( 90deg, rgba(190, 190, 190, 0.2) 25%, rgb(129 129 129 / 30%) 37%, rgb(190 190 190 / 17%) 63%);
+}

@@ -1,11 +1,14 @@
+import ApiError from "../models/api";
+
 export namespace http {
 
-    export class HttpError extends Error {
-        constructor(public statusCode: number, public response: Response) {
-            super();
-            this.statusCode = statusCode;
+    export class HttpError {
+
+        constructor(public response: Response, public json: ApiError) {
             this.response = response;
+            this.json = json;
         }
+
     }
 
     export enum WithCredentials {
@@ -51,10 +54,9 @@ export namespace http {
             },
             body: ctx.data ? JSON.stringify(ctx.data) : undefined
         };
-
         let resp = await fetch(url, options);
         if (resp.status !== 200) {
-            throw new HttpError(resp.status, resp);
+            throw new HttpError(resp, await resp.json());
         }
         return resp;
     }

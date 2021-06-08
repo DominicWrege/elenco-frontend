@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { DefaultParams, useRoute } from "wouter";
 import { getByName } from "../../functions/feed";
-import { FeedResult } from "../../models/feeds";
+import type { FeedModel } from "../../models/feeds";
 import { FeedDetail } from "../../pages/FeedDetail/FeedDetail";
 
 interface FeedRouterProperties extends DefaultParams {
@@ -10,13 +10,12 @@ interface FeedRouterProperties extends DefaultParams {
 
 export function Feed(): React.ReactElement<void> {
 
-    const [feed, setFeed] = useState<FeedResult | null>(null);
+    const [feed, setFeed] = useState<FeedModel | null>(null);
     const [_match, params] = useRoute<FeedRouterProperties>("/feed/:name");
 
     const loadFeed = async (name: string) => {
         try {
             const json_feed = await getByName(name);
-            console.log(json_feed);
             setFeed(json_feed);
         } catch (err) {
             console.log(err);
