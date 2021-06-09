@@ -15,14 +15,14 @@ import Guard from "../Guard/Guard";
 import PodcastPlayer from "../PodcastPlayer/PodcastPlayer";
 import { Feed } from "../Feed/Feed";
 import Preview from "../../pages/Preview/Preview";
-import { PodcastPlayerContext } from "../../contexts/PlayerContext";
+import { EpisodeContext, PodcastPlayerContext } from "../../contexts/PlayerContext";
 import Episode, { PlayerEpisode } from "../../models/episode";
 
 
 const App: React.FC = () => {
     let userCache: User | null = auth.getSession();
     const [user, setUser] = useState<User | null>(userCache);
-    const [currentEpisode, setCurrentEpisode] = useState<PlayerEpisode | null>(null);
+    const [currentEpisode, setCurrentEpisode] = useState<EpisodeContext | null>(null);
 
     const userContext = useContext(UserContext);
 

@@ -1,13 +1,17 @@
 import React from "react";
-import { Episode, PlayerEpisode } from "../models/episode";
-import { FeedShort } from "../models/feeds";
+import { PlayerEpisode } from "../models/episode";
 
-type context = null | PlayerEpisode;
 
+export interface EpisodeContext {
+    guid: string,
+    value: PlayerEpisode
+}
+
+type Episode = null | EpisodeContext;
 
 export interface PodcastPlayerValue {
-    currentEpisode: context,
-    setCurrentEpisode: React.Dispatch<React.SetStateAction<context>>
+    currentEpisode: Episode,
+    setCurrentEpisode: React.Dispatch<React.SetStateAction<Episode>>
 }
 
 

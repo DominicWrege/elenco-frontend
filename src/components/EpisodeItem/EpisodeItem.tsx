@@ -6,37 +6,36 @@ import { formatDate, formatDuration } from "../../functions/util";
 import { stripHtml } from "string-strip-html";
 import { PlayCircleFilled, PauseCircleFilled } from '@ant-design/icons';
 import { PodcastPlayerContext } from "../../contexts/PlayerContext";
-import { toPlayerEpisode } from "../PodcastPlayer/PodcastPlayer";
+import { PlayerStatus, toPlayerEpisode } from "../PodcastPlayer/PodcastPlayer";
 import { FeedShort } from "../../models/feeds";
 const { Title, Text, Paragraph } = Typography;
+
+
 
 interface Properties {
     episode: Episode
     feedMeta: FeedShort
     key: React.Key
+    status: PlayerStatus
 }
 
-
-const EpisodeItem: React.FC<Properties> = ({ episode, key, feedMeta }) => {
-
-    const [play, setPlay] = useState<boolean>(false);
+const EpisodeItem: React.FC<Properties> = ({ episode, key, feedMeta, status = PlayerStatus.Pause }) => {
 
     const player = useContext(PodcastPlayerContext);
 
     const handlePlay = (_event) => {
         const playerEpisode = toPlayerEpisode(episode, feedMeta);
-        player?.setCurrentEpisode(playerEpisode);
-        setPlay(true);
+        player?.setCurrentEpisode({ guid: episode.guid, value: playerEpisode });
     };
 
     return (
         <List.Item key={key} className="EpisodeItem">
             <div className="EpisodeItem-play-pause">
-                {!play &&
+                {status === PlayerStatus.Pause &&
                     <PlayCircleFilled onClick={handlePlay} />
                 }
-                {play &&
-                    <PauseCircleFilled onClick={(e) => setPlay(false)} />
+                {status === PlayerStatus.Playing &&
+                    <PauseCircleFilled onClick={(e) => console.log("")} />
                 }
             </div>
             <section className="EpisodeItem-text-body">

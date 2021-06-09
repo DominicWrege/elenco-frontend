@@ -17,6 +17,12 @@ interface Props {
     hidden?: boolean
 }
 
+
+export enum PlayerStatus {
+    Playing,
+    Pause
+}
+
 // const w = window as any;
 
 declare global {
@@ -107,6 +113,8 @@ export const PodcastPlayer: React.FC<Props> = ({ hidden = true }) => {
 
     const initEpisode = (episode: PlayerEpisode): void => {
 
+
+        // console.log(episode);
         store?.dispatch({
             type: INIT,
             payload: { ...episode }
@@ -121,7 +129,7 @@ export const PodcastPlayer: React.FC<Props> = ({ hidden = true }) => {
         const w = window as any;
         const podLovePlayer = w.podlovePlayer;
         if (podLovePlayer && playerScript) {
-            const store = await podLovePlayer(`#${playerWrapperDiv}`, player?.currentEpisode, config);
+            const store = await podLovePlayer(`#${playerWrapperDiv}`, player?.currentEpisode?.value, config);
             setStore(store);
             store.subscribe(() => {
                 const { lastAction } = store.getState();
@@ -130,7 +138,7 @@ export const PodcastPlayer: React.FC<Props> = ({ hidden = true }) => {
                 }
             });
             if (player?.currentEpisode) {
-                initEpisode(player?.currentEpisode);
+                initEpisode(player?.currentEpisode.value);
             }
         }
     };
@@ -140,7 +148,8 @@ export const PodcastPlayer: React.FC<Props> = ({ hidden = true }) => {
             initPlayer();
         }
         if (player?.currentEpisode) {
-            initEpisode(player?.currentEpisode);
+            console.log(player?.currentEpisode.value);
+            initEpisode(player?.currentEpisode.value);
         }
     }, [player?.currentEpisode]);
 
