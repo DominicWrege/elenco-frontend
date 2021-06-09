@@ -11,7 +11,6 @@ export interface PreviewJson {
     feed: FeedPreview
 }
 
-
 export interface FormBody {
     feedUrl: string
 }

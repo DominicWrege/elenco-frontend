@@ -1,18 +1,20 @@
 import { type } from "os";
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useContext, useRef, useState } from "react";
 import { useEffect } from "react";
 import "./PodcastPlayer.css";
 import { config } from "./config";
-import episode from "./epsiode";
-import Title from "antd/lib/typography/Title";
+import Episode, { PlayerEpisode, Audio } from "../../models/episode";
+import { formatDuration } from "../../functions/util";
+import { FeedShort } from "../../models/feeds";
+import { PodcastPlayerContext } from "../../contexts/PlayerContext";
 
-// import "Player.css"
+import { INIT, READY } from "@podlove/player-actions/types";
+import { requestPlay } from "@podlove/player-actions/play";
 
-const PODCAST_PLAYER_ID = "podcast-player";
+const PODCAST_PLAYER_SCRIPT = "podcast-player";
 
 interface Props {
-    name: string;
-    onChange?: (bob: string) => void;
+    hidden?: boolean
 }
 
 // const w = window as any;
@@ -46,7 +48,7 @@ declare global {
 
 async function insertPlayerScript(): Promise<HTMLScriptElement> {
     const w = window as any;
-    let playerScript = document.querySelector(`#${PODCAST_PLAYER_ID}`) as HTMLScriptElement | undefined;
+    let playerScript = document.querySelector(`#${PODCAST_PLAYER_SCRIPT}`) as HTMLScriptElement | undefined;
     return new Promise((resolve, _reject) => {
         if (!playerScript || !w.podLovePlayer) {
             const playerScript = createScript();
@@ -62,34 +64,106 @@ async function insertPlayerScript(): Promise<HTMLScriptElement> {
 };
 
 
-export const PodcastPlayer: React.FC<Props> = (props) => {
+export function toPlayerEpisode(episode: Episode, feed: FeedShort): PlayerEpisode {
+
+    const audio: Audio[] = [
+        {
+            url: episode.enclosure.mediaUrl,
+            size: episode.enclosure.length,
+            title: `${episode.title}.${episode.enclosure.mimeType.split("/")[1] ?? "mp3"}`,
+            mimeType: episode.enclosure.mimeType
+        }
+    ]
+    return {
+        version: 5,
+        base: "/",
+        show: {
+            title: feed.title,
+            subtitle: feed.description,
+            summary: "",
+            link: feed.linkWeb
+        },
+        title: episode.title,
+        subtitle: episode.description,
+        summary: "",
+        publicationDate: episode.published ?? Date.now().toLocaleString(), //ISO 8601 DateTime
+        duration: formatDuration(episode.duration), // ISO 8601 Duration format ([hh]:[mm]:[ss].[sss]
+        poster: feed.img ?? "", //use img cache
+        link: episode.webLink,
+        audio: audio,
+        chapter: [],
+        files: audio,
+        contributors: [],
+        transcripts: ""
+    }
+}
 
 
-    const [counter, setCounter] = useState<Number>(100);
+export const PodcastPlayer: React.FC<Props> = ({ hidden = true }) => {
+
+    const playerWrapperDiv = "Player-wrapper";
+    const player = useContext(PodcastPlayerContext);
+    const [store, setStore] = useState<any>(null);
+
+    const initEpisode = (episode: PlayerEpisode): void => {
+
+        store?.dispatch({
+            type: INIT,
+            payload: { ...episode }
+        });
+        // store?.dispatch(requestPlay());
+
+    }
+
+    const initPlayer = async (): Promise<void> => {
+
+        const playerScript = await insertPlayerScript();
+        const w = window as any;
+        const podLovePlayer = w.podlovePlayer;
+        if (podLovePlayer && playerScript) {
+            const store = await podLovePlayer(`#${playerWrapperDiv}`, player?.currentEpisode, config);
+            setStore(store);
+            store.subscribe(() => {
+                const { lastAction } = store.getState();
+                if (lastAction.type === READY) {
+                    store?.dispatch(requestPlay());
+                }
+            });
+            if (player?.currentEpisode) {
+                initEpisode(player?.currentEpisode);
+            }
+        }
+    };
 
     useEffect(() => {
-        insertPlayerScript().then(playerScript => {
-            console.log(playerScript);
-            const w = window as any;
-            const podLovePlayer = w.podlovePlayer;
-            if (podLovePlayer && playerScript) {
-                podLovePlayer("#player-div", episode, config).then((store: any) => {
-                    // store.subscribe(() => {
-                    //     console.log(store.getState());
-                    // });
-                });
-            }
-        });
-        // if (podLovePlayer) {
-        //     podLovePlayer("#player-div", episode, config).then((store: any) => {
-        //         store.subscribe(() => {
-        //             //console.log(store.getState());
-        //             console.log("das");
-        //         });
-        //     });
-        // }
-        //insertPlayer();
-    }, []);
+        if (!store && player?.currentEpisode) {
+            initPlayer();
+        }
+        if (player?.currentEpisode) {
+            initEpisode(player?.currentEpisode);
+        }
+    }, [player?.currentEpisode]);
+
+
+
+    if (hidden) {
+        return null;
+    }
+
+    return (
+        <div id={playerWrapperDiv} data-template="/template2.html"></div>
+    );
+}
+
+export default PodcastPlayer;
+
+function createScript() {
+    const scriptElement = document.createElement("script");
+    scriptElement.id = PODCAST_PLAYER_SCRIPT;
+    scriptElement.src = "/podlove-webplayer.js";
+    return scriptElement;
+}
+
 
 
     // const onButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -105,18 +179,3 @@ export const PodcastPlayer: React.FC<Props> = (props) => {
     //     }
 
     // };
-    const s = { maxWidth: "950px", minWidth: "400px" };
-    return (
-        <div id="player-div" data-template="/template2.html" >
-        </div>
-    );
-}
-
-export default PodcastPlayer;
-
-function createScript() {
-    const scriptElement = document.createElement("script");
-    scriptElement.id = PODCAST_PLAYER_ID;
-    scriptElement.src = "/podlove-webplayer.js";
-    return scriptElement;
-}

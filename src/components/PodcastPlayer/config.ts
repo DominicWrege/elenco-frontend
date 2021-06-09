@@ -15,8 +15,8 @@ const config = {
          * - use this generator to get a direct visual feedback:
          */
         tokens: {
-            brand: "#E64415",
-            brandDark: "#166255",
+            brand: "#3f51b5",
+            brandDark: "#3f51b5",
             brandDarkest: "#1A3A4A",
             brandLightest: "#E9F1F5",
             shadeDark: "#807E7C",
@@ -35,6 +35,8 @@ const config = {
          * - weight: font weight of the defined font
          * - src: list of web font sources (allowed: woff, woff2, ttf, eot, svg)
          */
+
+        // FIX ME
         fonts: {
             ci: {
                 name: "RobotoBlack",
@@ -78,54 +80,9 @@ const config = {
         }
     },
 
-    /**
-     * Subscribe Button
-     * - configuration for the subsscribe button overlay
-     * - if not defined the subscribe button won't be rendered
-     */
     "subscribe-button": null,
+    playlist: [],
 
-    /**
-     * Playlist:
-     * - can be a plain list or a reference to a json file
-     * - if present playlist tab will be available
-     */
-    playlist: [
-        {
-            title: "LOV018 Finanziell unabh\u00e4ngig mit Podcasts \u2013 Philip Banse",
-            config:
-                "https://backend.podlovers.org/wp-json/podlove-web-player/shortcode/publisher/235",
-            duration: "01:48:07.660"
-        },
-        {
-            title: "Freakshow ",
-            config:
-                "https://backend.podlovers.org/wp-json/podlove-web-player/shortcode/publisher/223",
-            duration: "01:47:43.726"
-        },
-        {
-            title: "Epsiode 1234",
-            config:
-                "https://backend.podlovers.org/wp-json/podlove-web-player/shortcode/publisher/223",
-            duration: "01:47:43.726"
-        },
-        {
-            title: "Epsiode 1234",
-            config:
-                "https://backend.podlovers.org/wp-json/podlove-web-player/shortcode/publisher/223",
-            duration: "01:47:43.726"
-        },
-        {
-            title: "Epsiode 1234",
-            config:
-                "https://backend.podlovers.org/wp-json/podlove-web-player/shortcode/publisher/223",
-            duration: "01:47:43.726"
-        }
-    ],
-
-    /*
-      Share Tab
-    */
     share: {
         /**
          * Share Channels:

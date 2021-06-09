@@ -15,14 +15,19 @@ import Guard from "../Guard/Guard";
 import PodcastPlayer from "../PodcastPlayer/PodcastPlayer";
 import { Feed } from "../Feed/Feed";
 import Preview from "../../pages/Preview/Preview";
+import { PodcastPlayerContext } from "../../contexts/PlayerContext";
+import Episode, { PlayerEpisode } from "../../models/episode";
 
 
 const App: React.FC = () => {
     let userCache: User | null = auth.getSession();
     const [user, setUser] = useState<User | null>(userCache);
+    const [currentEpisode, setCurrentEpisode] = useState<PlayerEpisode | null>(null);
+
     const userContext = useContext(UserContext);
 
-    const providerValue = useMemo(() => ({ user, setUser }), [user, setUser]);
+    const playerProvideValue = useMemo(() => ({ currentEpisode, setCurrentEpisode }), [currentEpisode, setCurrentEpisode]);
+    const userProviderValue = useMemo(() => ({ user, setUser }), [user, setUser]);
 
     const checkUserStatus = async () => {
         if (auth.hasSession()) {
@@ -49,56 +54,56 @@ const App: React.FC = () => {
 
     return (
         <div className="App">
-            <UserContext.Provider value={providerValue}>
-                <Layout key="dsss">
-                    <AppHeader key="fuck" />
-                    <Content
-                        className="App-pages"
-                    >
-                        <Switch>
-                            <Route path="/">
-                                <h2>Home</h2>
-                                {
-                                    showUserInfo()
-                                }
-                                <Button> fish</Button>
-                                {userContext}
-                            </Route>
-                            <Route path="/authors">
-                                <h2>Authors</h2>
-                            </Route>
-                            <Route path="/categories">
-                                <h2>Categories</h2>
-                            </Route>
-                            <Route path="/login">
-                                <RegisterLogin component={ComponentType.Login} />
-                            </Route>
-                            <Route path="/register">
-                                <RegisterLogin component={ComponentType.Register} />
-                            </Route>
-                            <Route path="/search/:query" component={SearchResults}>
-                            </Route>
-                            <Route path="/new-feed">
-                                <Guard>
-                                    <SubmitFeed />
-                                </Guard>
-                            </Route>
-                            <Route path="/preview" component={Preview}></Route>
-                            <Route path="/feed/:name" component={Feed}></Route>
-                            <Route>
-                                <h2>
-                                    404: nothing found!
+            <UserContext.Provider value={userProviderValue}>
+                <PodcastPlayerContext.Provider value={playerProvideValue} >
+                    <Layout key="dsss">
+                        <AppHeader key="fuck" />
+                        <Content
+                            className="App-pages"
+                        >
+                            <Switch>
+                                <Route path="/">
+                                    <h2>Home</h2>
+                                    {
+                                        showUserInfo()
+                                    }
+                                    <Button> fish</Button>
+                                    {userContext}
+                                </Route>
+                                <Route path="/authors">
+                                    <h2>Authors</h2>
+                                </Route>
+                                <Route path="/categories">
+                                    <h2>Categories</h2>
+                                </Route>
+                                <Route path="/login">
+                                    <RegisterLogin component={ComponentType.Login} />
+                                </Route>
+                                <Route path="/register">
+                                    <RegisterLogin component={ComponentType.Register} />
+                                </Route>
+                                <Route path="/search/:query" component={SearchResults}>
+                                </Route>
+                                <Route path="/new-feed">
+                                    <Guard>
+                                        <SubmitFeed />
+                                    </Guard>
+                                </Route>
+                                <Route path="/preview" component={Preview}></Route>
+                                <Route path="/feed/:name" component={Feed}></Route>
+                                <Route>
+                                    <h2>
+                                        404: nothing found!
                                 </h2>
-                            </Route>
-                        </Switch>
-                    </Content>
-                    <Footer>
-                        <div hidden>
-                            <PodcastPlayer name="delte me" />
-                        </div>
-                    </Footer>
+                                </Route>
+                            </Switch>
+                        </Content>
+                        <Footer>
+                            <PodcastPlayer hidden={currentEpisode === null} />
+                        </Footer>
 
-                </Layout>
+                    </Layout>
+                </PodcastPlayerContext.Provider>
             </UserContext.Provider>
         </div >
     );

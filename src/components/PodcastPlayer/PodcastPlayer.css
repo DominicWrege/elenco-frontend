@@ -1,11 +1,4 @@
 
-/* .Player-wrapper #iFrameResizer0 {
-   /* border: 1px solid #424242; */
-   /* width: min-max(300px, 600px); 
-   min-width: 300px;
-   width: 100%;
-} */
-
 /* .Player-wrapper iframe{
     width: min-max(300px, 600px);
     background: #e8eaf6;
@@ -13,12 +6,7 @@
     /* width: max-content; 
 } */
 
-#player {
+
+#Player-wrapper iframe{
     width: 100%;
-    left: 0;
-    bottom: 0;
-    z-index: 99;
-    box-sizing: border-box;
-    background: red;
-    padding-bottom: 0.25rem;
 }

@@ -1,10 +1,11 @@
 import React from "react";
 import { User } from "../models/user";
 
+type context = User | null;
 
 export interface UserContextValue {
-    user: User | null,
-    setUser: React.Dispatch<React.SetStateAction<null | User>>
+    user: context,
+    setUser: React.Dispatch<React.SetStateAction<context>>
 }
 
 

@@ -50,7 +50,7 @@ export function FeedMetaInfo({ feed }: Properties) {
             <div className="FeedMetaInfo-inner" >
                 <div className="FeedMetaInfo-svg-text">
                     <img src="/icons/public.svg" />
-                    <a target="_blank" href={feed.link_web ?? "fix me"} >
+                    <a target="_blank" href={feed.linkWeb ?? "fix me"} >
                         Website
                     </a>
                 </div>

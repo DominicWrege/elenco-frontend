@@ -1,9 +1,10 @@
+import { Url } from "url";
 import { Episode } from "./episode";
 
 export interface Meta {
     rss_url: string,
     language?: string
-    link_web?: string,
+    linkWeb?: string,
     categories: TopCategory[]
 }
 
@@ -12,33 +13,45 @@ export interface FeedModel {
     id: number,
     url: string,
     img?: string,
-    img_cache?: string,
+    imgCache?: string,
     author: string,
-    link_web?: string,
+    linkWeb?: string,
     description: string,
     subtitle?: string,
     language?: string,
-    last_modified: string, // Datetime UTC
+    lastModified: string, // Datetime UTC
     categories: TopCategory[],
     episodes: Episode[]
 }
 
-/// <reference path="./episode.ts" />
 export interface FeedPreview {
     title: string,
     id: number,
     url: string,
     img?: string,
     author: string,
-    link_web?: string,
+    linkWeb?: string,
     description: string,
     subtitle?: string,
     language?: string,
-    last_modified: string, // Datetime UTC
+    lastModified: string, // Datetime UTC
     categories: Map<string, Array<string>>
     episodes: Episode[]
 }
 
+export interface FeedShort {
+    img?: string
+    title: string,
+    description: string,
+    linkWeb?: string,
+}
+
+export interface Show {
+    title: string,
+    subtitle?: string,
+    summary: string,
+    link?: string
+}
 
 export interface TopCategory {
     id: number,

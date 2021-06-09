@@ -29,13 +29,16 @@ export function formatDuration(duration?: number): string {
     const seconds = duration % 60;
     const minutes = Math.round((duration / 60) % 60);
     const hours = Math.round(duration / 3600);
-        return `${appendZero(hours)}:${appendZero(minutes)}:${appendZero(seconds)}`;
+    return `${appendZero(hours)}:${appendZero(minutes)}:${appendZero(seconds)}`;
 }
 
-export function formatDate(dateStr: string): string {
+export function formatDate(dateStr?: string): string | null {
 
-    const date = Date.parse(dateStr);
+    if (!dateStr) {
+        return null;
+    }
 
+    const date = Date.parse(dateStr)
     const formatter = new Intl.DateTimeFormat(navigator.language, {
         weekday: 'long',
         year: 'numeric',

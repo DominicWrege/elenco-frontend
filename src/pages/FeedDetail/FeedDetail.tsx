@@ -42,7 +42,7 @@ export function FeedDetail({ feed }: Properties): JSX.Element {
                         <FeedMetaInfo feed={{
                             rss_url: feed.url,
                             language: feed.language,
-                            link_web: feed.link_web,
+                            linkWeb: feed.linkWeb,
                             categories: feed.categories
                         }} />
                     </aside>
@@ -56,7 +56,14 @@ export function FeedDetail({ feed }: Properties): JSX.Element {
                         </Card>
 
                         <div>
-                            <EpisodeList episodes={feed.episodes} />
+                            <EpisodeList episodes={feed.episodes} feedMeta={
+                                {
+                                    img: feed.img,
+                                    title: feed.title,
+                                    linkWeb: feed.linkWeb,
+                                    description: feed.description
+                                }
+                            } />
                         </div>
                     </section>
 
