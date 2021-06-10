@@ -1,4 +1,5 @@
 import React from "react";
+import { PlayerAction, PlayerStatus } from "../components/PodcastPlayer/PodcastPlayer";
 import { PlayerEpisode } from "../models/episode";
 
 
@@ -9,10 +10,14 @@ export interface EpisodeContext {
 
 type Episode = null | EpisodeContext;
 
-export interface PodcastPlayerValue {
-    currentEpisode: Episode,
-    setCurrentEpisode: React.Dispatch<React.SetStateAction<Episode>>
+export interface PodcastPlayerContext {
+    status: PlayerStatus,
+    setStatus: React.Dispatch<React.SetStateAction<PlayerStatus>>,
+    action: PlayerAction | null,
+    setAction: React.Dispatch<React.SetStateAction<PlayerAction | null>>
+    episode: Episode,
+    setEpisode: React.Dispatch<React.SetStateAction<Episode>>
 }
 
 
-export const PodcastPlayerContext = React.createContext<PodcastPlayerValue | null>(null);
+export const PodcastPlayerContext = React.createContext<PodcastPlayerContext | null>(null);

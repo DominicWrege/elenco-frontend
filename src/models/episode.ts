@@ -2,7 +2,6 @@ import { Show } from "./feeds";
 
 export interface Episode {
     title: string,
-    id: number,
     description?: string
     duration?: number
     keywords?: string[],

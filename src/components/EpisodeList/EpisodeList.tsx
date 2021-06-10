@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Episode from "../../models/episode";
 import EpisodeItem from "../EpisodeItem/EpisodeItem";
 import { Typography, List } from 'antd';
 import { FeedShort } from "../../models/feeds";
 import { EpisodeContext, PodcastPlayerContext } from "../../contexts/PlayerContext";
 import { PlayerStatus } from "../PodcastPlayer/PodcastPlayer";
+import { title } from "process";
 
 const { Title } = Typography;
 
@@ -16,15 +17,21 @@ interface Properties {
 
 const EpisodeList: React.FC<Properties> = ({ episodes, feedMeta }) => {
 
-    const episodeContext = useContext(PodcastPlayerContext);
-    const setEpisodeStatus = (episode: Episode, playingEpisode: EpisodeContext | null | undefined): PlayerStatus => {
+    const player = useContext(PodcastPlayerContext);
 
-        if (!playingEpisode || episode.guid !== playingEpisode?.guid) {
-            return PlayerStatus.Pause;
+
+    const setEpisodeStatus = (episode: Episode, playingEpisode: EpisodeContext | null | undefined): PlayerStatus => {
+        // let ref = useRef(null);
+        if (player && episode.guid === playingEpisode?.guid) {
+            return player?.status ?? PlayerStatus.Pause;
         }
 
-        return PlayerStatus.Playing;
+        return PlayerStatus.Pause;
     };
+
+    useEffect(() => {
+        // console.log("list", player?.status)
+    }, [player?.status]);
 
     return (
         <List
@@ -32,7 +39,13 @@ const EpisodeList: React.FC<Properties> = ({ episodes, feedMeta }) => {
             header={<Title level={5}>Episodes</Title>}
             bordered
             dataSource={episodes}
-            renderItem={item => <EpisodeItem key={item.id} episode={item} feedMeta={feedMeta} status={setEpisodeStatus(item, episodeContext?.currentEpisode)} ></EpisodeItem>}
+            renderItem={episode =>
+                <EpisodeItem
+                    key={episode.title}
+                    episode={episode}
+                    feedMeta={feedMeta}
+                    status={setEpisodeStatus(episode, player?.episode)}
+                ></EpisodeItem>}
         />
     );
 }

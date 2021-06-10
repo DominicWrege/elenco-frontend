@@ -12,21 +12,35 @@ import { UserContext } from "../../contexts/UserContext";
 import SubmitFeed from "../../pages/SubmitFeed/SubmitFeed";
 import { auth } from "../../functions/auth";
 import Guard from "../Guard/Guard";
-import PodcastPlayer from "../PodcastPlayer/PodcastPlayer";
+import PodcastPlayer, { PlayerAction, PlayerStatus } from "../PodcastPlayer/PodcastPlayer";
 import { Feed } from "../Feed/Feed";
 import Preview from "../../pages/Preview/Preview";
 import { EpisodeContext, PodcastPlayerContext } from "../../contexts/PlayerContext";
 import Episode, { PlayerEpisode } from "../../models/episode";
+import EpisodeItem from "../EpisodeItem/EpisodeItem";
 
 
 const App: React.FC = () => {
     let userCache: User | null = auth.getSession();
-    const [user, setUser] = useState<User | null>(userCache);
-    const [currentEpisode, setCurrentEpisode] = useState<EpisodeContext | null>(null);
 
     const userContext = useContext(UserContext);
 
-    const playerProvideValue = useMemo(() => ({ currentEpisode, setCurrentEpisode }), [currentEpisode, setCurrentEpisode]);
+    const [playingEpisode, setPlayingEpisode] = useState<EpisodeContext | null>(null);
+    const [playerStatus, setPlayerStatus] = useState<PlayerStatus>(PlayerStatus.Init);
+    const [action, setAction] = useState<PlayerAction | null>(null);
+
+    const playerProvideValue = useMemo(() => (
+        {
+            action,
+            setAction,
+            status: playerStatus,
+            setStatus: setPlayerStatus,
+            episode: playingEpisode,
+            setEpisode: setPlayingEpisode
+        }),
+        [playingEpisode, setPlayingEpisode, playerStatus, setPlayerStatus, action, setAction]);
+
+    const [user, setUser] = useState<User | null>(userCache);
     const userProviderValue = useMemo(() => ({ user, setUser }), [user, setUser]);
 
     const checkUserStatus = async () => {
@@ -99,7 +113,7 @@ const App: React.FC = () => {
                             </Switch>
                         </Content>
                         <Footer>
-                            <PodcastPlayer hidden={currentEpisode === null} />
+                            <PodcastPlayer hidden={playingEpisode === null} />
                         </Footer>
 
                     </Layout>

@@ -3,13 +3,13 @@ import React, { useCallback, useContext, useRef, useState } from "react";
 import { useEffect } from "react";
 import "./PodcastPlayer.css";
 import { config } from "./config";
-import Episode, { PlayerEpisode, Audio } from "../../models/episode";
+import Episode, { PlayerEpisode as PodloveEpisode, Audio } from "../../models/episode";
 import { formatDuration } from "../../functions/util";
 import { FeedShort } from "../../models/feeds";
 import { PodcastPlayerContext } from "../../contexts/PlayerContext";
 
-import { INIT, READY } from "@podlove/player-actions/types";
-import { requestPlay } from "@podlove/player-actions/play";
+import { INIT, READY, REQUEST_PAUSE, REQUEST_PLAY } from "@podlove/player-actions/types";
+import { requestPlay, requestPause } from "@podlove/player-actions/play";
 
 const PODCAST_PLAYER_SCRIPT = "podcast-player";
 
@@ -17,39 +17,16 @@ interface Props {
     hidden?: boolean
 }
 
-
 export enum PlayerStatus {
+    Init = 0,
     Playing,
     Pause
 }
 
-// const w = window as any;
 
-declare global {
-    namespace JSX {
-        interface IntrinsicElements {
-            "play-button": any;
-            "root": any,
-            "play-state": any,
-            "episode-title": any,
-            "chapter-previous": any,
-            "chapter-next": any,
-            "show-title": any,
-            "divider": any,
-            "poster": any,
-            "speed-control": any,
-            "step-forward": any,
-            "step-next": any
-            "step-backward": any
-            "timer-duration": any
-            "tap-trigger": any,
-            "volume-control": any,
-            "tab-trigger": any
-            "icon": any,
-            "timer-current": any,
-            "progress-bar": any
-        }
-    }
+export enum PlayerAction {
+    Play,
+    Pause
 }
 
 async function insertPlayerScript(): Promise<HTMLScriptElement> {
@@ -70,7 +47,7 @@ async function insertPlayerScript(): Promise<HTMLScriptElement> {
 };
 
 
-export function toPlayerEpisode(episode: Episode, feed: FeedShort): PlayerEpisode {
+export function toPlayerEpisode(episode: Episode, feed: FeedShort): PodloveEpisode {
 
     const audio: Audio[] = [
         {
@@ -111,17 +88,22 @@ export const PodcastPlayer: React.FC<Props> = ({ hidden = true }) => {
     const player = useContext(PodcastPlayerContext);
     const [store, setStore] = useState<any>(null);
 
-    const initEpisode = (episode: PlayerEpisode): void => {
-
-
-        // console.log(episode);
+    const initEpisode = (episode: PodloveEpisode): void => {
         store?.dispatch({
             type: INIT,
             payload: { ...episode }
         });
-        // store?.dispatch(requestPlay());
-
+        store?.dispatch(requestPlay());
     }
+
+    const playEpisode = (store?: any): void => {
+        store?.dispatch(requestPlay());
+
+    };
+    const pauseEpisode = (store?: any): void => {
+        store?.dispatch(requestPause());
+    };
+
 
     const initPlayer = async (): Promise<void> => {
 
@@ -129,38 +111,61 @@ export const PodcastPlayer: React.FC<Props> = ({ hidden = true }) => {
         const w = window as any;
         const podLovePlayer = w.podlovePlayer;
         if (podLovePlayer && playerScript) {
-            const store = await podLovePlayer(`#${playerWrapperDiv}`, player?.currentEpisode?.value, config);
+            const store = await podLovePlayer(`#${playerWrapperDiv}`, player?.episode?.value, config);
             setStore(store);
             store.subscribe(() => {
                 const { lastAction } = store.getState();
+                // console.log(store.getState());
+                if (lastAction.type === REQUEST_PAUSE) {
+                    player?.setStatus(PlayerStatus.Pause);
+                }
+                if (lastAction.type === REQUEST_PLAY) {
+                    player?.setStatus(PlayerStatus.Playing);
+                }
                 if (lastAction.type === READY) {
-                    store?.dispatch(requestPlay());
+                    playEpisode(store);
                 }
             });
-            if (player?.currentEpisode) {
-                initEpisode(player?.currentEpisode.value);
+
+            if (player?.episode) {
+                initEpisode(player?.episode.value);
             }
         }
     };
 
     useEffect(() => {
-        if (!store && player?.currentEpisode) {
+        if (!store && player?.episode) {
             initPlayer();
         }
-        if (player?.currentEpisode) {
-            console.log(player?.currentEpisode.value);
-            initEpisode(player?.currentEpisode.value);
+        if (player?.episode) {
+            // console.log(player?.episode.value);
+            initEpisode(player?.episode.value);
         }
-    }, [player?.currentEpisode]);
+    }, [player?.episode]);
+
+    useEffect(() => {
+        if (player) {
+            switch (++player!.action!) {
+                case PlayerStatus.Pause:
+                    pauseEpisode(store);
+                    break;
+                case PlayerStatus.Playing:
+                    playEpisode(store);
+                    break;
+                default:
+                    break
+            }
+
+        }
+    }, [player?.action]);
 
 
 
     if (hidden) {
         return null;
     }
-
     return (
-        <div id={playerWrapperDiv} data-template="/template2.html"></div>
+        <div id={playerWrapperDiv} data-template="/podloveTemplate.html"></div>
     );
 }
 
@@ -169,7 +174,7 @@ export default PodcastPlayer;
 function createScript() {
     const scriptElement = document.createElement("script");
     scriptElement.id = PODCAST_PLAYER_SCRIPT;
-    scriptElement.src = "/podlove-webplayer.js";
+    scriptElement.src = "/podlove-webplayer_v5.js";
     return scriptElement;
 }
 
