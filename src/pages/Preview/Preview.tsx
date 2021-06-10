@@ -57,7 +57,7 @@ const Preview: React.FC = () => {
             try {
                 const resp = await http.post(`${API_URL}/api/feed/new`, body, http.WithCredentials.Yes);
                 console.log(resp);
-                // setLocation("/new-feed");
+                setLocation("/new-feed");
             } catch (err: http.HttpError | any) {
                 console.log(err.json);
                 // console.log(await err.json())
