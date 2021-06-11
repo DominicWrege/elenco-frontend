@@ -1,4 +1,4 @@
-import { Button, Divider, Form, FormInstance, Input } from "antd";
+import { Button, Form, FormInstance, Input } from "antd";
 import { useContext, useRef, useState } from "react";
 import { useLocation, Link } from "wouter";
 import { auth } from "../../functions/auth";

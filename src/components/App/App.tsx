@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import "./App.css";
 import { Content, Footer } from "antd/lib/layout/layout";
 import AppHeader from "../Header/Header";
 import { Button, Layout } from "antd";
-import { Route, Switch } from "wouter";
+import { Route, Switch, useLocation } from "wouter";
 import RegisterLogin, { ComponentType } from "../../pages/RegisterLogin";
 
 import { User } from "../../models/user";
@@ -24,6 +24,7 @@ const App: React.FC = () => {
     let userCache: User | null = auth.getSession();
 
     const userContext = useContext(UserContext);
+    const setLocation = useLocation()[1];
 
     const [playingEpisode, setPlayingEpisode] = useState<EpisodeContext | null>(null);
     const [playerStatus, setPlayerStatus] = useState<PlayerStatus>(PlayerStatus.Init);
@@ -43,21 +44,26 @@ const App: React.FC = () => {
     const [user, setUser] = useState<User | null>(userCache);
     const userProviderValue = useMemo(() => ({ user, setUser }), [user, setUser]);
 
-    const checkUserStatus = async () => {
+
+    const checkUserStatus = useCallback(async () => {
         if (auth.hasSession()) {
             try {
                 const user = await auth.fetchUser();
                 setUser(user);
                 window.location["user"] = JSON.stringify(user);
             } catch (err) {
-                console.log(err);
+                //TODO 
+                //- show popup message 
+                //- make route LOGIN.. = "/login"; constants
+                setLocation("/Login");
+                console.error(err);
             }
         }
-    }
+    }, []);
 
     useEffect(() => {
         checkUserStatus();
-    }, []);
+    }, [checkUserStatus]);
 
     const showUserInfo = () => {
         if (!user) {
