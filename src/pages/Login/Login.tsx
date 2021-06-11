@@ -1,14 +1,14 @@
 import { Button, Divider, Form, FormInstance, Input } from "antd";
 import { useContext, useRef, useState } from "react";
-import { useLocation } from "wouter";
+import { useLocation, Link } from "wouter";
 import { auth } from "../../functions/auth";
 import { UserContext } from "../../contexts/UserContext";
-// eslint-disable-next-line
-import { http } from "../../functions/http";
+import { User } from "../../models/user";
+import { RegisterLoginChildProps } from "../RegisterLogin";
 
 
 
-const Login: React.FC = () => {
+const Login: React.FC<RegisterLoginChildProps> = ({ onError }) => {
 
     const form = useRef<FormInstance | null>(null);
     const userContext = useContext(UserContext);
@@ -20,12 +20,14 @@ const Login: React.FC = () => {
     const onFinish = async (values: auth.LoginFields) => {
         try {
             setIsLoading(true);
-            userContext?.setUser(await auth.login(values));
+            const resp: User = await auth.login(values);
+            // console.log(resp);
+            userContext?.setUser(resp);
             setLocation("/");
-        } catch (err: http.HttpError | any) {
+        } catch (err: any) {
             setIsLoading(false);
-            console.log(err);
-            console.log(err.statusCode);
+            // console.log(err.json.message);
+            onError(err.json.message);
         }
     };
 
@@ -51,8 +53,6 @@ const Login: React.FC = () => {
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
             >
-                <Divider />
-
                 <Form.Item
                     className="das"
                     label="Email"
@@ -77,7 +77,10 @@ const Login: React.FC = () => {
                 </Button >
                 </Form.Item>
             </Form>
-            {/* <Link href="/login">Login</Link> */}
+            <Link href="/register">
+                Need to Register?
+            </Link>
+            {/* {// copy from githu msg} */}
         </div>
 
 

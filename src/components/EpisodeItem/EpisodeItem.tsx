@@ -39,8 +39,6 @@ const EpisodeItem: React.FC<Properties> = React.memo(({ episode, feedMeta, statu
         player?.setAction(PlayerAction.Pause);
     };
 
-
-
     return (
         <List.Item className="EpisodeItem">
             <div className="EpisodeItem-play-pause">

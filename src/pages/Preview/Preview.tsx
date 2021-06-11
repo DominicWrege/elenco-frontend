@@ -59,7 +59,7 @@ const Preview: React.FC = () => {
                 console.log(resp);
                 setLocation("/new-feed");
             } catch (err: http.HttpError | any) {
-                console.log(err.json);
+                console.log(err.c);
                 // console.log(await err.json())
                 setError(err.json);
             }

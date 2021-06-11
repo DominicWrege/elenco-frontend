@@ -1,13 +1,17 @@
 import { Button, Divider, Form, Input } from "antd";
 import React from "react";
+import { RegisterLoginChildProps } from "../RegisterLogin";
 
-const Register: React.FC = () => {
+const Register: React.FC<RegisterLoginChildProps> = ({ onError }) => {
+
+
+    // onError -> when register failed
+
     return (
         <Form
             name="Register"
             initialValues={{ remember: true }}
         >
-            <Divider />
 
             <Form.Item
                 label="Username"
