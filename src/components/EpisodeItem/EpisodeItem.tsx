@@ -1,5 +1,5 @@
 import "./EpisodeItem.css";
-import React, { useContext } from "react";
+import React, { PropsWithChildren, useContext } from "react";
 import Episode from "../../models/episode";
 import { Typography, List } from 'antd';
 import { formatDate, formatDuration } from "../../functions/util";
@@ -19,9 +19,13 @@ interface Properties {
     status?: PlayerStatus
 }
 
-const EpisodeItem: React.FC<Properties> = ({ episode, feedMeta, status = PlayerStatus.Init }) => {
+// function compare
+
+const EpisodeItem: React.FC<Properties> = React.memo(({ episode, feedMeta, status }) => {
 
     const player = useContext(PlayerContext);
+
+    // console.log("render");
     // const [guide, setguide] = useState(episode.guid.slice());
     const handlePlay = (_event): void => {
         if (player?.episode === null || player?.episode.guid !== episode.guid) {
@@ -62,6 +66,12 @@ const EpisodeItem: React.FC<Properties> = ({ episode, feedMeta, status = PlayerS
             </section>
         </List.Item>
     );
-}
+}, (prevProps: Readonly<PropsWithChildren<Properties>>, nextProps: Readonly<PropsWithChildren<Properties>>): boolean => {
+
+    return prevProps.status === nextProps.status;
+});
+
+
+
 
 export default EpisodeItem;
