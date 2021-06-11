@@ -11,7 +11,7 @@ interface FeedRouterProperties extends DefaultParams {
 export function Feed(): React.ReactElement<void> {
 
     const [feed, setFeed] = useState<FeedModel | null>(null);
-    const [_match, params] = useRoute<FeedRouterProperties>("/feed/:name");
+    const params = useRoute<FeedRouterProperties>("/feed/:name")[1];
 
     const loadFeed = async (name: string) => {
         try {

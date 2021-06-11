@@ -1,10 +1,10 @@
-import { Button, Input, Select } from "antd";
+import { Button, Input } from "antd";
 import "./FeedForm.css";
 
 import { Typography } from 'antd';
 import { useRef, useState } from "react";
-import { Url } from "url";
-const { Option } = Select;
+import React from "react";
+// const { Option } = Select;
 const { Title } = Typography;
 
 interface Properties {
@@ -16,29 +16,28 @@ export interface SubmitEvent {
     url: URL
 }
 
-export function NewFeed({ onSubmit }) {
+export const NewFeed: React.FC<Properties> = ({ onSubmit }) => {
 
     const form = useRef<HTMLFormElement>(null); //TODO Fix me rm any
 
     const inputElement = useRef<Input>(null); //TODO Fix me rm any
-    const [protocol, setProtocol] = useState<string>("https://");
+    const [protocol] = useState<string>("https://");
 
-
-    const handleProtocolChange = (value: string) => {
-        setProtocol(value);
-    };
+    // const handleProtocolChange = (value: string) => {
+    //     setProtocol(value);
+    // };
 
     // useEffect(() => {
     //     console.log(form.current);
     //     form.current?.reset();
     // }, [])
 
-    const protocolSelect = (
-        <Select defaultValue={protocol} onChange={handleProtocolChange}>
-            <Option value="http://">http://</Option>
-            <Option value="https://">https://</Option>
-        </Select>
-    );
+    // const protocolSelect = (
+    //     <Select defaultValue={protocol} onChange={handleProtocolChange}>
+    //         <Option value="http://">http://</Option>
+    //         <Option value="https://">https://</Option>
+    //     </Select>
+    // );
 
     const handleSubmit = (event: React.SyntheticEvent): void => {
         event.preventDefault();
@@ -54,21 +53,8 @@ export function NewFeed({ onSubmit }) {
             }
 
         }
-        // console.log(form.current?.elements[0].nodeValue);
-        // console.log(event);s
-        // console.log(input);
-        // const form = event.target as HTMLFormElement;
-        // // console.log(form);
-        // console.log(form.current);
-
-        // a.querySelector("")
-        // send form to backend
     };
-    // const handleInput = (event: React.FormEvent<HTMLInputElement>) => {
-    //     console.log(event);
-    //     setInput(event.currentTarget.value);
 
-    // }
     return (
         <div className="NewFeed-wrapper">
             <div className="NewFeed-content">
@@ -86,10 +72,7 @@ export function NewFeed({ onSubmit }) {
             </div>
         </div >
     );
-}
-
-
-
+};
 
 
 export default NewFeed;

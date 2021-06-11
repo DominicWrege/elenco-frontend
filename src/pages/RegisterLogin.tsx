@@ -1,8 +1,7 @@
-import { Card } from "antd";
-import React, { ReactElement } from "react";
+import React from "react";
 import styled from "styled-components";
 import MiddleCenter from "../components/Styles/shared.css";
-import Login from "./Login./Login";
+import Login from "./Login/Login";
 import Register from "./Register/Register";
 
 export const RegisterLoginForm = styled.div`

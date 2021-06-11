@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Preview.css";
-import { FeedModel, FeedPreview, TopCategory } from "../../models/feeds";
+import { FeedModel, TopCategory } from "../../models/feeds";
 import { http } from "../../functions/http";
 import { API_URL } from "../../env";
 import { ArrowLeftOutlined } from '@ant-design/icons';
@@ -16,7 +16,7 @@ const Preview: React.FC = () => {
 
     const [feed, setFeed] = useState<FeedModel | null>(null);
     const [feedExist, setFeedExists] = useState<boolean>(false);
-    const [_, setLocation] = useLocation();
+    const setLocation = useLocation()[1];
     const [feedUrl, setFeedUrl] = useState<string | null>(null);
     const [error, setError] = useState<ApiError | null>(null);
 
@@ -30,7 +30,7 @@ const Preview: React.FC = () => {
 
     const castCategories = (categories: Map<string, Array<string>>): TopCategory[] => {
         let newCategories: TopCategory[] = [];
-        let i = 0;
+        let i: number = 0;
         for (const [topCategory, subCategory] of Object.entries(categories)) {
             // console.log(topCategory, subCategory);
             newCategories.push({
@@ -38,12 +38,12 @@ const Preview: React.FC = () => {
                 description: topCategory,
                 children: subCategory.map(description => {
                     return {
-                        id: ++i,
+                        id: i++,
                         description: description
                     }
                 })
             });
-            i += 1;
+            i++;
         }
         return newCategories;
     };
@@ -141,7 +141,7 @@ const Preview: React.FC = () => {
                             error.message
                         }
                         extra={
-                            <Button type="primary" key="consoldjasjd4e">
+                            <Button type="primary" key="extra-b876565">
                                 Go Back
                             </Button>
                         }

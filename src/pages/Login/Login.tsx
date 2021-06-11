@@ -3,6 +3,7 @@ import { useContext, useRef, useState } from "react";
 import { useLocation } from "wouter";
 import { auth } from "../../functions/auth";
 import { UserContext } from "../../contexts/UserContext";
+// eslint-disable-next-line
 import { http } from "../../functions/http";
 
 
@@ -11,9 +12,9 @@ const Login: React.FC = () => {
 
     const form = useRef<FormInstance | null>(null);
     const userContext = useContext(UserContext);
-    
+
     const [formValid, setFormValid] = useState<boolean>(false);
-    const [_, setLocation] = useLocation();
+    const setLocation = useLocation()[1];
     const [istLoading, setIsLoading] = useState<boolean>(false);
 
     const onFinish = async (values: auth.LoginFields) => {

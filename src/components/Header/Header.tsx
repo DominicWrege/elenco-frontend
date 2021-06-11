@@ -11,7 +11,7 @@ import { UserContext } from '../../contexts/UserContext';
 function AppHeader(): JSX.Element {
 
     const userContext = useContext(UserContext);
-    const [_a, setLocation] = useLocation();
+    const setLocation = useLocation()[1];
 
     const handleLogout = async () => {
         try {

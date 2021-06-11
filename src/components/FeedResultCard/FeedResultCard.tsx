@@ -1,4 +1,4 @@
-import { Card, Image, Tag } from "antd";
+import { Card, Tag } from "antd";
 import React from "react";
 import { Link } from 'wouter';
 import { TagFilled } from '@ant-design/icons';

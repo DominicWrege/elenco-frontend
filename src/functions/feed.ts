@@ -6,13 +6,9 @@ export async function getByName(name: string): Promise<FeedModel> {
     const url = encodeURI(`${API_URL}/api/feed/${name}`);
     // const url = `${API_URL}/api/feed/${name}`;
     // console.log(url);
-
     const resp = await http.get(url);
-    if (resp.status === 400) {
-        throw "Feed was not found";
-    }
     return resp.json();
 }
 
 
-export default {}
+export default getByName;

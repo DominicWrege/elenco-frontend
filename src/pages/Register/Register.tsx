@@ -1,12 +1,6 @@
 import { Button, Divider, Form, Input } from "antd";
 import React from "react";
 
-
-const layout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
-};
-
 const Register: React.FC = () => {
     return (
         <Form

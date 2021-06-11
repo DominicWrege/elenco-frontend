@@ -1,15 +1,15 @@
 import "./EpisodeItem.css";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import Episode from "../../models/episode";
 import { Typography, List } from 'antd';
 import { formatDate, formatDuration } from "../../functions/util";
 import { stripHtml } from "string-strip-html";
 import { PlayCircleFilled, PauseCircleFilled } from '@ant-design/icons';
-import { PodcastPlayerContext } from "../../contexts/PlayerContext";
-import { PlayerAction, PlayerStatus, toPlayerEpisode } from "../PodcastPlayer/PodcastPlayer";
+import { PlayerContext } from "../../contexts/PlayerContext";
 import { FeedShort } from "../../models/feeds";
+import { toPlayerEpisode } from "../PodcastPlayer/PodcastPlayer";
+import { PlayerAction, PlayerStatus } from "../PodcastPlayer/types";
 const { Title } = Typography;
-
 
 
 interface Properties {
@@ -21,7 +21,7 @@ interface Properties {
 
 const EpisodeItem: React.FC<Properties> = ({ episode, feedMeta, status = PlayerStatus.Init }) => {
 
-    const player = useContext(PodcastPlayerContext);
+    const player = useContext(PlayerContext);
     // const [guide, setguide] = useState(episode.guid.slice());
     const handlePlay = (_event): void => {
         if (player?.episode === null || player?.episode.guid !== episode.guid) {

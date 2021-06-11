@@ -1,5 +1,5 @@
-import { Button, Dropdown, Empty, Select, Typography } from "antd";
-import React, { useEffect, useState } from "react";
+import { Empty, Select, Typography } from "antd";
+import React, { useCallback, useEffect, useState } from "react";
 import { DefaultParams, RouteComponentProps, useRoute } from "wouter";
 import { API_URL } from "../../env";
 import { http } from "../../functions/http";
@@ -15,11 +15,9 @@ export interface SearchProperties extends DefaultParams {
 const SearchResults: React.FC<RouteComponentProps<DefaultParams>> = () => {
     let [feeds, setResult] = useState<FeedModel[]>([]);
 
-    const [_match, params] = useRoute<SearchProperties>("/search/:query");
+    const params = useRoute<SearchProperties>("/search/:query")[1];
     const [categoriesList, setCategoriesList] = useState<string[]>([]);
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-
-    // const providerValue = useMemo(() => ({ feeds, setFeeds }), [feeds, setFeeds]);
 
 
     const header = (): JSX.Element => {
@@ -48,7 +46,7 @@ const SearchResults: React.FC<RouteComponentProps<DefaultParams>> = () => {
         const list = feeds
             .sort(compareByDescription)
             .filter((item: FeedModel) => {
-                if (selectedCategories.length == 0) {
+                if (selectedCategories.length === 0) {
                     return true;
                 } else {
                     return item.categories.some(cat => selectedCategories.includes(cat.description));
@@ -63,14 +61,18 @@ const SearchResults: React.FC<RouteComponentProps<DefaultParams>> = () => {
             </>);
     };
 
-    const doSearch = async (searchTerm: string): Promise<void> => {
-        setCategoriesList([]);
-        setSelectedCategories([]);
-        const resp = await http.get(encodeURI(`${API_URL}/api/feeds/search?term=${searchTerm}`));
-        const feeds_json: FeedModel[] = await resp.json();
-        intoCategoriesList(feeds_json);
-        setResult(feeds_json);
-    };
+    const doSearch = useCallback(
+        async (): Promise<void> => {
+            if (params?.query) {
+                setCategoriesList([]);
+                setSelectedCategories([]);
+                const resp = await http.get(encodeURI(`${API_URL}/api/feeds/search?term=${params?.query}`));
+                const feeds_json: FeedModel[] = await resp.json();
+                intoCategoriesList(feeds_json);
+                setResult(feeds_json);
+            }
+        }, [params?.query]
+    );
 
     const intoCategoriesList = (feeds: FeedModel[]): void => {
         const categories = new Set<string>();
@@ -90,10 +92,8 @@ const SearchResults: React.FC<RouteComponentProps<DefaultParams>> = () => {
     };
 
     useEffect(() => {
-        if (params?.query) {
-            doSearch(params.query);
-        }
-    }, [params?.query]);
+        doSearch();
+    }, [doSearch]);
 
     return (
         <div className="SearchResults">

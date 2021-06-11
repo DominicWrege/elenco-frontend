@@ -1,11 +1,10 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import Episode from "../../models/episode";
 import EpisodeItem from "../EpisodeItem/EpisodeItem";
 import { Typography, List } from 'antd';
 import { FeedShort } from "../../models/feeds";
-import { EpisodeContext, PodcastPlayerContext } from "../../contexts/PlayerContext";
-import { PlayerStatus } from "../PodcastPlayer/PodcastPlayer";
-import { title } from "process";
+import { EpisodeContext, PlayerContext } from "../../contexts/PlayerContext";
+import { PlayerStatus } from "../PodcastPlayer/types";
 
 const { Title } = Typography;
 
@@ -17,7 +16,7 @@ interface Properties {
 
 const EpisodeList: React.FC<Properties> = ({ episodes, feedMeta }) => {
 
-    const player = useContext(PodcastPlayerContext);
+    const player = useContext(PlayerContext);
 
 
     const setEpisodeStatus = (episode: Episode, playingEpisode: EpisodeContext | null | undefined): PlayerStatus => {

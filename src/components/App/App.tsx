@@ -3,7 +3,7 @@ import "./App.css";
 import { Content, Footer } from "antd/lib/layout/layout";
 import AppHeader from "../Header/Header";
 import { Button, Layout } from "antd";
-import { Redirect, Route, Switch } from "wouter";
+import { Route, Switch } from "wouter";
 import RegisterLogin, { ComponentType } from "../../pages/RegisterLogin";
 
 import { User } from "../../models/user";
@@ -12,12 +12,12 @@ import { UserContext } from "../../contexts/UserContext";
 import SubmitFeed from "../../pages/SubmitFeed/SubmitFeed";
 import { auth } from "../../functions/auth";
 import Guard from "../Guard/Guard";
-import PodcastPlayer, { PlayerAction, PlayerStatus } from "../PodcastPlayer/PodcastPlayer";
+import PodcastPlayer from "../PodcastPlayer/PodcastPlayer";
 import { Feed } from "../Feed/Feed";
 import Preview from "../../pages/Preview/Preview";
-import { EpisodeContext, PodcastPlayerContext } from "../../contexts/PlayerContext";
-import Episode, { PlayerEpisode } from "../../models/episode";
-import EpisodeItem from "../EpisodeItem/EpisodeItem";
+import { EpisodeContext, PlayerContext } from "../../contexts/PlayerContext";
+import { PlayerAction, PlayerStatus } from "../PodcastPlayer/types";
+
 
 
 const App: React.FC = () => {
@@ -69,7 +69,7 @@ const App: React.FC = () => {
     return (
         <div className="App">
             <UserContext.Provider value={userProviderValue}>
-                <PodcastPlayerContext.Provider value={playerProvideValue} >
+                <PlayerContext.Provider value={playerProvideValue} >
                     <Layout key="dsss">
                         <AppHeader key="fuck" />
                         <Content
@@ -117,7 +117,7 @@ const App: React.FC = () => {
                         </Footer>
 
                     </Layout>
-                </PodcastPlayerContext.Provider>
+                </PlayerContext.Provider>
             </UserContext.Provider>
         </div >
     );

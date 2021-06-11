@@ -1,5 +1,5 @@
 import React from "react";
-import { PlayerAction, PlayerStatus } from "../components/PodcastPlayer/PodcastPlayer";
+import { PlayerAction, PlayerStatus } from "../components/PodcastPlayer/types";
 import { PlayerEpisode } from "../models/episode";
 
 
@@ -20,4 +20,4 @@ export interface PodcastPlayerContext {
 }
 
 
-export const PodcastPlayerContext = React.createContext<PodcastPlayerContext | null>(null);
+export const PlayerContext = React.createContext<PodcastPlayerContext | null>(null);

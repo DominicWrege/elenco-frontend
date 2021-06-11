@@ -1,5 +1,4 @@
 import "./FeedDetail.css";
-import React, { useEffect } from "react"
 
 import type { FeedModel } from "../../models/feeds";
 import { Card, Typography } from 'antd';

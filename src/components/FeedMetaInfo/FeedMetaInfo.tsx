@@ -1,12 +1,9 @@
-import { Card, Divider, Tree } from "antd";
+import { Card } from "antd";
 import "./FeedMetaInfo.css";
-import { Link } from "wouter";
 import { Category, Meta, TopCategory } from "../../models/feeds";
 import { languageCode } from "../../functions/util";
-import React, { useEffect } from "react";
-import { TagFilled } from '@ant-design/icons';
-import { DataNode } from "rc-tree/lib/interface";
-import { SmileOutlined, MehOutlined, DownOutlined } from '@ant-design/icons';
+import { useEffect } from "react";
+
 
 interface Properties {
     feed: Meta
@@ -50,13 +47,13 @@ export function FeedMetaInfo({ feed }: Properties) {
             <div className="FeedMetaInfo-inner" >
                 <div className="FeedMetaInfo-svg-text">
                     <img src="/icons/public.svg" />
-                    <a target="_blank" href={feed.linkWeb ?? "fix me"} >
+                    <a target="_blank" rel="noreferrer" href={feed.linkWeb ?? "fix me"} >
                         Website
                     </a>
                 </div>
                 <div className="FeedMetaInfo-svg-text">
                     <img src="/icons/rss_feed_black.svg" />
-                    <a target="_blank" href={feed.rss_url} >
+                    <a target="_blank" rel="noreferrer" href={feed.rss_url} >
                         RSS-Feed
                     </a>
                 </div>

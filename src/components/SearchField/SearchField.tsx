@@ -1,4 +1,4 @@
-import { AutoComplete, Input, Select, Typography } from "antd";
+import { AutoComplete, Input, Typography } from "antd";
 import "./SearchField.css";
 import React, { useState } from "react";
 import { useLocation, useRoute } from "wouter";
@@ -20,9 +20,8 @@ interface Option {
 
 const SearchField: React.FC = () => {
 
-    const [_location, setLocation] = useLocation();
-    // @ts-ignore
-    const [_match, params] = useRoute<SearchProperties>("/search/:query");
+    const setLocation = useLocation()[1];
+    const params = useRoute<SearchProperties>("/search/:query")[1];
     const [completions, setCompletions] = useState<Option[]>([]);
     const uri = params?.query ? decodeURI(params.query) : ""
     const [value, setValue] = useState<string>(uri);
