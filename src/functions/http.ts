@@ -48,6 +48,7 @@ export namespace http {
     export async function makeRequest<T>(url: string, method: Method, ctx: Context<T>): Promise<Response> {
         const options = {
             method: method,
+            mode: "cors" as RequestMode,
             credentials: ctx.credentials === WithCredentials.Yes ? "include" as RequestCredentials : undefined,
             headers: {
                 "Content-Type": "application/json",
