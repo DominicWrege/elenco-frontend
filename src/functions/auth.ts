@@ -4,11 +4,17 @@ import { User } from "../models/user";
 import Cookies from 'js-cookie';
 
 export namespace auth {
+
     export interface LoginFields {
-        email: string | undefined,
-        password: string | undefined
+        email: string,
+        password: string
     }
 
+    export interface RegisterFields {
+        email: string,
+        password: string,
+        passwordCheck: string
+    }
 
     export async function login(fields: LoginFields): Promise<User> {
         const resp = await http.post(`${API_URL}/auth/login`, fields, http.WithCredentials.Yes);
@@ -43,9 +49,9 @@ export namespace auth {
         }
     }
 
-    // TODO
-    export async function register(fields: unknown): Promise<boolean> {
-        return false;
+    export async function register(fields: RegisterFields): Promise<void> {
+        const resp = await http.post(`${API_URL}/auth/register`, fields, http.WithCredentials.No);
+        console.log(resp);
     }
 
     export async function logout(): Promise<void> {

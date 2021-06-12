@@ -1,22 +1,53 @@
 import { Button, Divider, Form, Input } from "antd";
-import React from "react";
+import React, { useState } from "react";
+import { useLocation } from "wouter";
+import { auth } from "../../functions/auth";
 import { RegisterLoginChildProps } from "../RegisterLogin";
 
 const Register: React.FC<RegisterLoginChildProps> = ({ onError }) => {
 
+    const [form] = Form.useForm();
+    const [formValid, setFormValid] = useState<boolean>(true);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const setLocation = useLocation()[1];
 
-    // onError -> when register failed
+
+    const onFinish = async (values: auth.RegisterFields) => {
+        try {
+            console.log(values);
+            setIsLoading(true);
+            setFormValid(true);
+            await auth.register(values);
+            setLocation("/login");
+
+        } catch (err: any) {
+            setIsLoading(false);
+            setFormValid(false);
+            console.log(err);
+
+            // console.log(err.json.message);
+            // onError(err.json.message);
+        }
+    };
+
+    const onFinishFailed = (_: any) => {
+        // setFormValid(false);
+        console.log("fail");
+    };
 
     return (
         <Form
+            form={form}
             name="Register"
-            initialValues={{ remember: true }}
+            onFinish={onFinish}
+            // onFieldsChange={onCheck}
+            onFinishFailed={onFinishFailed}
         >
 
             <Form.Item
                 label="Username"
                 name="username"
-                rules={[{ required: true, message: 'Please input your username!' }]}
+                rules={[{ required: true, message: "Please input your username" }]}
             >
                 <Input />
             </Form.Item>
@@ -24,7 +55,12 @@ const Register: React.FC<RegisterLoginChildProps> = ({ onError }) => {
             <Form.Item
                 label="Email"
                 name="email"
-                rules={[{ required: true, message: 'Please input your email!' }]}
+                rules={[
+                    {
+                        required: true,
+                        message: "Please enter your email",
+                        type: "email"
+                    }]}
             >
                 <Input type="email" />
             </Form.Item>
@@ -32,26 +68,46 @@ const Register: React.FC<RegisterLoginChildProps> = ({ onError }) => {
             <Form.Item
                 label="Password"
                 name="password"
-                rules={[{ required: true, message: 'Please input your password!' }]}
+                rules={[
+                    {
+                        required: true,
+                        message: "Please input your password",
+                        type: "string",
+                    }
+                ]}
             >
                 <Input.Password />
             </Form.Item>
 
             <Form.Item
                 label="Repeat Password"
-                name="password-repeat"
-                rules={[{ required: true, message: 'Please input your password!' }]}
+                name="passwordCheck"
+                rules={[
+                    {
+                        required: true,
+                        message: "Please reenter your password",
+                        type: "string"
+                    },
+                    ({ getFieldValue }) => ({
+                        validator(_, value) {
+                            if (getFieldValue("password") === value) {
+                                return Promise.resolve();
+                            }
+                            return Promise.resolve();
+                            // return Promise.reject(new Error("The two passwords that you entered do not match"));
+                        },
+                    })
+                ]}
             >
                 <Input.Password />
             </Form.Item>
 
-
             <Form.Item >
-                <Button type="primary" htmlType="submit">
-                    Submit
-          </Button>
+                <Button type="primary" htmlType="submit" disabled={!formValid} loading={isLoading}>
+                    Register
+                </Button>
             </Form.Item>
-        </Form>
+        </Form >
     );
 }
 

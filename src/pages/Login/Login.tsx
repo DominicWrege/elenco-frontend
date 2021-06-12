@@ -5,16 +5,18 @@ import { auth } from "../../functions/auth";
 import { UserContext } from "../../contexts/UserContext";
 import { User } from "../../models/user";
 import { RegisterLoginChildProps } from "../RegisterLogin";
+import { type } from "os";
 
 
 
 const Login: React.FC<RegisterLoginChildProps> = ({ onError }) => {
 
-    const form = useRef<FormInstance | null>(null);
+    const [form] = Form.useForm();
     const userContext = useContext(UserContext);
-
     const [formValid, setFormValid] = useState<boolean>(false);
+
     const setLocation = useLocation()[1];
+
     const [istLoading, setIsLoading] = useState<boolean>(false);
 
     const onFinish = async (values: auth.LoginFields) => {
@@ -32,41 +34,53 @@ const Login: React.FC<RegisterLoginChildProps> = ({ onError }) => {
     };
 
     const onFinishFailed = (errorInfo: any) => {
-        console.log('Failed:', errorInfo);
         setFormValid(false);
     };
-    const onCaptures = () => {
-        form.current?.validateFields(["email", "password"]).then((fields: auth.LoginFields) => {
-            setFormValid(fields.email !== undefined && fields.password !== undefined);
-        }).catch(() => {
+
+    const onCheck = async () => {
+        try {
+            await form.validateFields();
+            setFormValid(true);
+        } catch (errorInfo) {
             setFormValid(false);
-        });
+        }
     };
+
     return (
 
         <div className="Login-form-wrapper">
             <Form
-                ref={form}
+                form={form}
                 className="Login-form-wrapper"
                 name="Login"
-                onChange={onCaptures}
+                onChange={onCheck}
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
             >
                 <Form.Item
-                    className="das"
                     label="Email"
                     name="email"
-                    rules={[{ required: true, message: 'Please input your Email!' }]}
+                    rules={[
+                        {
+                            required: true,
+                            message: "Please input your email",
+                            type: "email"
+                        }
+                    ]}
                 >
                     <Input type="email" />
                 </Form.Item>
 
                 <Form.Item
-                    className="das"
                     label="Password"
                     name="password"
-                    rules={[{ required: true, message: 'Please input your password!' }]}
+                    rules={[
+                        {
+                            required: true,
+                            message: "Please input your password",
+                            type: "string"
+                        }
+                    ]}
                 >
                     <Input.Password />
                 </Form.Item>
@@ -74,17 +88,13 @@ const Login: React.FC<RegisterLoginChildProps> = ({ onError }) => {
                 <Form.Item >
                     <Button type="primary" htmlType="submit" disabled={!formValid} loading={istLoading}>
                         Submit
-                </Button >
+                    </Button >
                 </Form.Item>
             </Form>
             <Link href="/register">
                 Need to Register?
             </Link>
-            {/* {// copy from githu msg} */}
         </div>
-
-
-
     );
 };
 
