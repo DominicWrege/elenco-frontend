@@ -1,4 +1,4 @@
-import { Alert, Card, message } from "antd";
+import { Alert, Card } from "antd";
 import React, { useState } from "react";
 import styled from "styled-components";
 import MiddleCenter from "../components/Styles/shared.css";

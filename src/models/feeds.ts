@@ -39,6 +39,13 @@ export enum FeedStatus {
     Queued = "Queued",
 }
 
+export interface SubmittedFeeds{
+     blocked: UserFeedModel[],
+     online: UserFeedModel[],
+     offline: UserFeedModel[],
+     queued: UserFeedModel[]
+}
+
 export interface FeedPreview {
     title: string,
     id: number,

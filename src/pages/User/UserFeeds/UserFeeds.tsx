@@ -1,4 +1,4 @@
-import { Card, Descriptions, Radio, RadioChangeEvent, Typography } from "antd";
+import { Card, Descriptions, Empty, Radio, RadioChangeEvent, Typography } from "antd";
 import "./UserFeeds.css";
 import { useCallback } from "react";
 import { useState } from "react";
@@ -7,7 +7,7 @@ import styled from "styled-components";
 import Artwork from "../../../components/Artwork/Artwork";
 import { API_URL } from "../../../env";
 import { user } from "../../../functions/user";
-import { FeedStatus, UserFeedModel } from "../../../models/feeds";
+import { FeedStatus, SubmittedFeeds, UserFeedModel } from "../../../models/feeds";
 const { Title, Link } = Typography;
 
 const GridCard = styled.div`
@@ -21,36 +21,33 @@ const GridCard = styled.div`
 
 `;
 
-function renderRadioButtons(): JSX.Element[] {
-    const initRadio = [<Radio.Button value={null}>All</Radio.Button>];
-    const radios: JSX.Element[] = Object.keys(FeedStatus).map(status =>
-        <Radio.Button value={status}>{status}</Radio.Button>
-    );
-    return initRadio.concat(radios);
-}
+function renderRadioButtons(submittedFeeds: SubmittedFeeds | null): JSX.Element[] {
+    return Object.keys(FeedStatus).map(status => {
+        let count = 0;
+        if (submittedFeeds && submittedFeeds[status.toLowerCase()]){
+            count = submittedFeeds[status.toLowerCase()].length;
+        }
+        return (
+            <Radio.Button key={status} value={status.toLowerCase()}>
+                {status} ({count})
+            </Radio.Button>);
 
-function compareBystatus(feed: UserFeedModel, filterBy: FeedStatus | null): boolean {
-
-    if (!filterBy) {
-        return true;
     }
-
-    return feed.status === filterBy;
+  
+    );
 }
 
 export const UserFeeds: React.FC = () => {
 
-    const [feeds, setFeeds] = useState<UserFeedModel[]>([]);
-
-    const [filter, setFilter] = useState<FeedStatus | null>(null);
+    const [feedsList, setFeedsList] = useState<UserFeedModel[]>([]);
+    const [submittedFeeds, setSubmittedFeeds] = useState<SubmittedFeeds | null>(null);
+    const [filter, setFilter] = useState<FeedStatus>(FeedStatus.Online);
 
     const getFeeds = useCallback(async () => {
         try {
-            const feeds: UserFeedModel[] = await user.getSubmittedFeeds();
-            console.log(feeds);
-
-            setFeeds(feeds);
-
+            const feeds: SubmittedFeeds = await user.getSubmittedFeeds();
+            setSubmittedFeeds(feeds);
+            setFeedsList(feeds.online);
         } catch (err) {
             console.log(err);
         }
@@ -62,16 +59,18 @@ export const UserFeeds: React.FC = () => {
 
     const handelFilterChange = (event: RadioChangeEvent): void => {
         event.preventDefault();
-        setFilter(event.target.value);
+        const filter = event.target.value ?? "online";
+        setFilter(filter);
+        if (submittedFeeds){
+            setFeedsList(submittedFeeds[filter] ?? []);
+        }else{
+            setFeedsList([]);
+        }
     }
 
-    const renderCards = (): JSX.Element[] | null => {
-        if (feeds.length === 0) {
-            return null;
-        }
 
-        return feeds
-            .filter(feed => compareBystatus(feed, filter))
+    const renderCards = (): JSX.Element[]  => {
+        return feedsList
             .map((feed: UserFeedModel) => {
                 return (
                     <Card
@@ -81,9 +80,7 @@ export const UserFeeds: React.FC = () => {
                                 <Artwork src={`${API_URL}/img/${feed.img}`} width="100%" />
                             </Link>
                         }
-                        actions={[
-
-                        ]}
+                        actions={[]}
                     >
                         <Link href={`/feed/${feed.title}`} >
                             <Title level={4} >
@@ -97,21 +94,21 @@ export const UserFeeds: React.FC = () => {
             });
 
     };
-
+    // show loading
     return (
         <div className="UserFeeds">
-            
-               
             <Descriptions title="" size="default">
-
                 <Descriptions.Item label="Filter">
-                <Radio.Group defaultValue={filter} buttonStyle="solid" onChange={handelFilterChange}>
-                        {renderRadioButtons()}
+                <Radio.Group defaultValue={filter.toLowerCase()} buttonStyle="solid" onChange={handelFilterChange}>
+                        {renderRadioButtons(submittedFeeds)}
                     </Radio.Group>
                 </Descriptions.Item>
             </Descriptions>
             <GridCard>
                 {renderCards()}
+                {feedsList.length === 0 &&
+                    <Empty />
+                }
             </GridCard>
         </div >
     );
