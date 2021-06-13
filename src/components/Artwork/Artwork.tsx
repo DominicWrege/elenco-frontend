@@ -3,19 +3,20 @@ import { Image } from 'antd';
 import "./Artwork.css";
 
 interface Properties {
-    height?: number
+    width?: number | string
     src?: string
     className?: string
 }
 
 //TOD placeholder
-export function Artwork({ height = 250, src }: Properties) {
+export function Artwork({ width = 250, src }: Properties) {
     return (
         <div className="Artwork">
             <Image
-                height={height}
-                width={height}
+                height={width}
+                width={width}
                 src={src}
+                preview={false} // TODO think about it
                 fallback="https://placeholder.com/"
             />
         </div>

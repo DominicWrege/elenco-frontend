@@ -12,5 +12,8 @@
     /* background: #C6DDF0 !important; */
     /* background: #D8DBE2!important; */
     /* background: #fff !important; */
-    
+}
+
+.Header-menu div.ant-image-preview-content > div > ul > li{
+    display: none !important;
 }

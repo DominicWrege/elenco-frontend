@@ -24,19 +24,24 @@ function AppHeader(): JSX.Element {
     };
 
     const menu = (
-        <Menu >
-            <Menu.Item key="1" icon={<UserOutlined />}>
+        <Menu className="Header-menu">
+            <Menu.Item key="Menu1" icon={<UserOutlined />}>
                 Signed in as {userContext?.user?.username}
             </Menu.Item>
             <Menu.Divider />
-            <Menu.Item key="2">
-                <Link href="/new-feed">
-                    Submit a new RSS-Feed
+            <Menu.Item key="Menu2">
+                <Link href="/user/feeds">
+                    My Submitted Podcasts
                 </Link>
             </Menu.Item>
-            <Menu.Item key="3" onClick={handleLogout}>
-                Logout
-          </Menu.Item>
+            <Menu.Item key="Menu3">
+                <Link href="/new-feed">
+                    Submit a new Podcast
+                </Link>
+            </Menu.Item>
+            <Menu.Item key="Menu4" onClick={handleLogout}>
+                    Logout 
+            </Menu.Item> 
         </Menu>
     );
 

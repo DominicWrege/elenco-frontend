@@ -48,10 +48,7 @@ const FeedResultCard: React.FC<Props> = (props: Props) => {
         >
 
             <div className="FeedResultCard-content">
-
-
-                <Artwork src={`${API_URL}/img/${props.feed.imgCache}`} height={200} />
-
+                <Artwork src={`${API_URL}/img/${props.feed.imgCache}`} width={200} />
                 <div className="FeedResultCard-meta">
                     {renderSubtitle(props.feed.subtitle)}
                     <p className="FeedResultCard-description" >{props.feed.description}</p>

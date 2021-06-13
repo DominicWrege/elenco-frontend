@@ -17,6 +17,7 @@ import { Feed } from "../Feed/Feed";
 import Preview from "../../pages/Preview/Preview";
 import { EpisodeContext, PlayerContext } from "../../contexts/PlayerContext";
 import { PlayerAction, PlayerStatus } from "../PodcastPlayer/types";
+import UserFeeds from "../../pages/User/UserFeeds/UserFeeds";
 
 
 
@@ -111,10 +112,12 @@ const App: React.FC = () => {
                                 </Route>
                                 <Route path="/preview" component={Preview}></Route>
                                 <Route path="/feed/:name" component={Feed}></Route>
+                                <Route path="/user/feeds" component={UserFeeds}>
+                                </Route>
                                 <Route>
                                     <h2>
                                         404: nothing found!
-                                </h2>
+                                    </h2>
                                 </Route>
                             </Switch>
                         </Content>

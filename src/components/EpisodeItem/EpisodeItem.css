@@ -2,13 +2,13 @@
 .EpisodeItem{
     display: flex;
     gap: 1.5em;
-
+    height: 10rem;
 }
+    
 .EpisodeItem-text-body h2, h3, h4{
     margin-bottom: 0 !important;
     line-height: 1.2em !important
 }
-
 
 .EpisodeItem-text-body p{
     margin-bottom: 0 !important;
@@ -17,12 +17,6 @@
     width: 100%;
 }
 .EpisodeItem-text-small{
-    /* color: #52585c;
-    display: flex;
-    /* grid-template-columns: max-content max-content;
-    grid-column-gap: 1.5em; */
-    /* width: max-content; */
-    /* margin-bottom: 1em; */ 
 
     color: #52585c;
     display: flex;

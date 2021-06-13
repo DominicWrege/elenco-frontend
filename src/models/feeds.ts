@@ -23,6 +23,22 @@ export interface FeedModel {
     episodes: Episode[]
 }
 
+export interface UserFeedModel{
+    title: string,
+    subtitle?: string,
+    description: string,
+    img?: string,
+    author_name: string,
+    status?: FeedStatus,
+}
+
+export enum FeedStatus {
+    Online = "Online",
+    Offline = "Offline",
+    Blocked = "Blocked",
+    Queued = "Queued",
+}
+
 export interface FeedPreview {
     title: string,
     id: number,

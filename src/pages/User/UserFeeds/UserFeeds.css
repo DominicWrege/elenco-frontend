@@ -1,0 +1,10 @@
+.UserFeeds {
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+}
+
+.UserFeeds span.ant-descriptions-item-label {
+    font-size: 1.3em;
+    margin-right: 0.75em;
+}

@@ -5,9 +5,6 @@ import { auth } from "../../functions/auth";
 import { UserContext } from "../../contexts/UserContext";
 import { User } from "../../models/user";
 import { RegisterLoginChildProps } from "../RegisterLogin";
-import { type } from "os";
-
-
 
 const Login: React.FC<RegisterLoginChildProps> = ({ onError }) => {
 
@@ -23,12 +20,10 @@ const Login: React.FC<RegisterLoginChildProps> = ({ onError }) => {
         try {
             setIsLoading(true);
             const resp: User = await auth.login(values);
-            // console.log(resp);
             userContext?.setUser(resp);
             setLocation("/");
         } catch (err: any) {
             setIsLoading(false);
-            // console.log(err.json.message);
             onError(err.json.message);
         }
     };

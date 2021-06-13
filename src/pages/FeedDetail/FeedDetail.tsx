@@ -37,7 +37,7 @@ export function FeedDetail({ feed }: Properties): JSX.Element {
                 </header>
                 <section className="FeedDetail-main">
                     <aside className="FeedDetail-sidebar">
-                        <Artwork src={feed.img} height={270} />
+                        <Artwork src={feed.img} width={270} />
                         <FeedMetaInfo feed={{
                             rss_url: feed.url,
                             language: feed.language,
