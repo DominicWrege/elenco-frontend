@@ -1,8 +1,10 @@
+import { Card } from "antd";
 import React, { useEffect, useState } from "react";
 import { DefaultParams, useRoute } from "wouter";
 import { getByName } from "../../functions/feed";
 import type { FeedModel } from "../../models/feeds";
 import { FeedDetail } from "../../pages/FeedDetail/FeedDetail";
+import { FlexCenter } from "../Styles/shared.css";
 
 interface FeedRouterProperties extends DefaultParams {
     name: string,
@@ -35,8 +37,8 @@ export function Feed(): React.ReactElement<void> {
     }, [params?.name]);
 
     return (
-        <div className="Feed">
+        <FlexCenter className="Feed">
             <FeedDetail feed={feed} />
-        </div>
+        </FlexCenter>
     );
 }

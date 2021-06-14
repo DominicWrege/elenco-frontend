@@ -8,3 +8,8 @@
     font-size: 1.3em;
     margin-right: 0.75em;
 }
+.UserFeeds-header{
+    display: inherit;
+    justify-content: space-between;
+    align-items: center;
+}

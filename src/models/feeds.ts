@@ -24,19 +24,20 @@ export interface FeedModel {
 }
 
 export interface UserFeedModel{
+    id: number,
     title: string,
     subtitle?: string,
     description: string,
     img?: string,
-    author_name: string,
+    authorName: string,
     status?: FeedStatus,
 }
 
 export enum FeedStatus {
     Online = "Online",
+    Queued = "Queued",
     Offline = "Offline",
     Blocked = "Blocked",
-    Queued = "Queued",
 }
 
 export interface SubmittedFeeds{
