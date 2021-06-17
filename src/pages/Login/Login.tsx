@@ -1,5 +1,5 @@
-import { Button, Form, FormInstance, Input } from "antd";
-import { useContext, useRef, useState } from "react";
+import { Button, Form, Input } from "antd";
+import { useContext, useState } from "react";
 import { useLocation, Link } from "wouter";
 import { auth } from "../../functions/auth";
 import { UserContext } from "../../contexts/UserContext";

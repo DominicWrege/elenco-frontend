@@ -5,7 +5,7 @@ import { http } from "../../functions/http";
 import { API_URL } from "../../env";
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { Button, Card, Result, Skeleton, Typography } from "antd";
-import { FeedDetail } from "../FeedDetail/FeedDetail";
+import { FeedDetail } from "../../components/FeedDetail/FeedDetail";
 import { useLocation } from "wouter";
 import ApiError, { FormBody, PreviewJson } from "../../models/api";
 const { Title, Text } = Typography;

@@ -56,7 +56,7 @@ export namespace http {
             body: ctx.data ? JSON.stringify(ctx.data) : undefined
         };
         let resp = await fetch(url, options);
-        if (resp.status !== 200) {
+        if (resp.status >= 400) {
             throw new HttpError(resp, await resp.json());
         }
         return resp;

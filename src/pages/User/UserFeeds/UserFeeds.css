@@ -1,15 +1,22 @@
+.UserFeeds,
+.UserFeeds-body {
+  display: flex;
+}
 .UserFeeds {
-    display: flex;
-    gap: 2rem;
-    flex-direction: column;
+  justify-content: center;
+}
+.UserFeeds-body {
+  gap: 2rem;
+  width: 76rem;
+  flex-direction: column;
 }
 
 .UserFeeds span.ant-descriptions-item-label {
-    font-size: 1.3em;
-    margin-right: 0.75em;
+  font-size: 1.3em;
+  margin-right: 0.75em;
 }
-.UserFeeds-header{
-    display: inherit;
-    justify-content: space-between;
-    align-items: center;
+.UserFeeds-header {
+  display: inherit;
+  justify-content: space-between;
+  align-items: center;
 }

@@ -13,7 +13,7 @@ import SubmitFeed from "../../pages/SubmitFeed/SubmitFeed";
 import { auth } from "../../functions/auth";
 import Guard from "../Guard/Guard";
 import PodcastPlayer from "../PodcastPlayer/PodcastPlayer";
-import { Feed } from "../Feed/Feed";
+import { Feed } from "../../pages/Feed/Feed";
 import Preview from "../../pages/Preview/Preview";
 import { EpisodeContext, PlayerContext } from "../../contexts/PlayerContext";
 import { PlayerAction, PlayerStatus } from "../PodcastPlayer/types";
