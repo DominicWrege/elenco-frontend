@@ -16,6 +16,7 @@ const MiddleCenter = styled.div`
 export const FlexCenter = styled.div`
     display: flex;
     justify-content: center;
+    flex-direction: column;
 `;
 
 export const RegisterLoginForm = styled.div`

@@ -20,7 +20,8 @@ export namespace http {
         Post = "POST",
         Get = "GET",
         Put = "PUT",
-        Patch = "PATCH"
+        Patch = "PATCH",
+        Delete = "DELETE"
     }
 
     export async function post<T>(url: string, data?: T, credentials = WithCredentials.Yes): Promise<Response> {
@@ -30,7 +31,15 @@ export namespace http {
             credentials: credentials,
         };
         return makeRequest(url, Method.Post, context);
-    };
+    }
+
+    export async function delete_<T>(url: string, data?: T, credentials = WithCredentials.Yes) {
+        const context: Context<T> = {
+            data: data,
+            credentials: credentials,
+        };
+        return makeRequest(url, Method.Delete, context);
+    }
 
     export async function get<T>(url: string, credentials = WithCredentials.No): Promise<Response> {
         const context: Context<T> = {

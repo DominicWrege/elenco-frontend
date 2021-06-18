@@ -14,14 +14,16 @@ export namespace user{
         const payload = {
             feedId: feedId
         };
-        await http.post(`${API_URL}/api/feed/subscribe`, payload, http.WithCredentials.Yes);
+        await http.post(`${API_URL}/api/subscription`, payload, http.WithCredentials.Yes);
     }
+
     export async function unsubscribe(feedId: number): Promise<void> {
         const payload = {
             feedId: feedId
         };
-        await http.post(`${API_URL}/api/feed/unsubscribe`, payload, http.WithCredentials.Yes);
+        await http.delete_(`${API_URL}/api/subscription`, payload, http.WithCredentials.Yes);
     }
+
     export async function has_subscription(feedId: number): Promise<boolean> {
         const payload = {
             feedId: feedId

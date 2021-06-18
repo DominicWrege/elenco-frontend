@@ -1,9 +1,9 @@
-import { Card } from "antd";
 import React, { useContext, useEffect, useState } from "react";
 import { DefaultParams, useRoute } from "wouter";
 import { getByName } from "../../functions/feed";
 import type { FeedModel } from "../../models/feeds";
 import { FeedDetail } from "../../components/FeedDetail/FeedDetail";
+import { Comment } from "../../components/Comment/Comment";
 import { FlexCenter } from "../../components/Styles/shared.css";
 import { useCallback } from "react";
 import { UserContext } from "../../contexts/UserContext";
@@ -44,6 +44,7 @@ export function Feed(): React.ReactElement<void> {
         feed={feed}
         showSubscribeButton={userContext?.user !== null}
       />
+      {feed && <Comment feedId={feed.id} />}
     </FlexCenter>
   );
 }

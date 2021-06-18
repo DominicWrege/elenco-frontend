@@ -50,7 +50,7 @@ export const SubscribeButton: FC<Property> = ({ feedId }) => {
     return (
       <>
         <Button
-          className="primary-accent-color"
+          id="Subscribe-primary-accent"
           type="primary"
           loading={isloading}
           onClick={subscribe}
@@ -63,8 +63,8 @@ export const SubscribeButton: FC<Property> = ({ feedId }) => {
     return (
       <>
         <Button
+          id="Subscribe-primary-accent-ghost"
           type="primary"
-          ghost
           icon={<CheckOutlined />}
           loading={isloading}
           onClick={unsubscribe}

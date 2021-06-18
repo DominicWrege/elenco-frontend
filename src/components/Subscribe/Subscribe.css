@@ -1,4 +1,19 @@
-.primary-accent-color {
+#Subscribe-primary-accent {
   background: #001970 !important;
   border-color: #001970 !important;
 }
+
+#Subscribe-primary-accent-ghost {
+  background: #f0f2f5d9 !important;
+  border-color: #3f51b5 !important;
+  color: #3f51b5;
+  /* col */
+  /* color: red !important; */
+}
+
+/* #Subscribe-primary-accent-ghost {
+  background: #f0f2f5d9 !important;
+  color: #000;
+  border-color: #f0f2f5d9 !important;
+  /* border-color: #3f51b5 !important; */
+/* color: red !important; */
