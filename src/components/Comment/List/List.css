@@ -1,0 +1,12 @@
+span.ant-comment-content-author-time {
+    color: #888787;
+}
+
+span.ant-comment-content-author-name {
+    font-size: 1.05em;
+    color: black;
+}
+
+.ant-comment-content-detail{
+    max-width: 36rem;
+}

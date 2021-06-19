@@ -7,18 +7,22 @@ import FeedMetaInfo from "../FeedMetaInfo/FeedMetaInfo";
 import { Link } from "wouter";
 import EpisodeList from "../EpisodeList/EpisodeList";
 import { SubscribeButton } from "../Subscribe/Subscribe";
+import { Comment } from "../../components/Comment/Comment";
+import React from "react";
 
 const { Title, Paragraph } = Typography;
 
 interface Properties {
   feed: FeedModel | null;
   showSubscribeButton?: boolean;
+  showComments?: boolean
 }
 
-export function FeedDetail({
+export const FeedDetail: React.FC<Properties> = ({
   feed,
   showSubscribeButton = false,
-}: Properties): JSX.Element {
+  showComments = false
+}) => {
   const renderSubtitle = (subtitle?: string) => {
     if (!subtitle) {
       return null;
@@ -69,6 +73,7 @@ export function FeedDetail({
                 }}
               />
             </div>
+            {(feed && showComments) && <Comment feedId={feed.id} />}
           </section>
         </section>
       </div>
@@ -76,4 +81,4 @@ export function FeedDetail({
   };
 
   return <>{render()}</>;
-}
+};

@@ -7,7 +7,7 @@ import { Comment } from "../../components/Comment/Comment";
 import { FlexCenter } from "../../components/Styles/shared.css";
 import { useCallback } from "react";
 import { UserContext } from "../../contexts/UserContext";
-
+import "./Feed.css";
 interface FeedRouterProperties extends DefaultParams {
   name: string;
 }
@@ -19,32 +19,33 @@ export function Feed(): React.ReactElement<void> {
   const params = useRoute<FeedRouterProperties>("/feed/:name")[1];
 
   const loadFeed = useCallback(async () => {
-    try {
-      const json_feed = await getByName(params?.name ?? "");
-      setFeed(json_feed);
-    } catch (err) {
-      console.log(err);
+    if (params?.name) {
+      try {
+        const json_feed = await getByName(params?.name ?? "");
+        setFeed(json_feed);
+      } catch (err) {
+        console.log(err);
+      }
     }
   }, [params?.name]);
 
   useEffect(() => {
-    if (params?.name) {
-      // const a = new URLSearchParams(window.location.search);
-      // console.log(window.location.search);
-      // console.log("page", a.get("page"));
-      // console.log("name", a.get("name"));
-      // setFeed(decodeURI(params.name));
-      loadFeed();
-    }
+
+    // const a = new URLSearchParams(window.location.search);
+    // console.log(window.location.search);
+    // console.log("page", a.get("page"));
+    // console.log("name", a.get("name"));
+    // setFeed(decodeURI(params.name));
+    loadFeed();
   }, [loadFeed]);
 
   return (
     <FlexCenter className="Feed">
       <FeedDetail
         feed={feed}
+        showComments
         showSubscribeButton={userContext?.user !== null}
       />
-      {feed && <Comment feedId={feed.id} />}
     </FlexCenter>
   );
 }

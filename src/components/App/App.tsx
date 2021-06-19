@@ -77,8 +77,8 @@ const App: React.FC = () => {
         <div className="App">
             <UserContext.Provider value={userProviderValue}>
                 <PlayerContext.Provider value={playerProvideValue} >
-                    <Layout key="dsss">
-                        <AppHeader key="fuck" />
+                    <Layout >
+                        <AppHeader />
                         <Content
                             className="App-pages"
                         >

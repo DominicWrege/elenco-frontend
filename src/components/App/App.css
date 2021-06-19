@@ -1,8 +1,10 @@
 
 .App-pages{
+    display: flex;
     width: 100vw;
     max-width: 100%;
     background: #c1d5cdd1 !important;
+    justify-content: center;
     /* background: #f0f2f5; */
     /* background: #b0bec5; */
     /* background: #4b636e; */
@@ -12,8 +14,12 @@
     background: linear-gradient(180deg, rgba(138,172,200,1) 14%, rgba(187,222,251,1) 95%); */
     /* background: rgb(138,172,200);
     background: radial-gradient(circle, rgba(138,172,200,1) 2%, rgba(187,222,251,1) 95%); */
-    padding: 2.5em;
+    padding: 2em;
     box-sizing: inherit;
+}
+
+.App-pages > div {
+  width:  70rem !important;
 }
 
 /* .App-link {

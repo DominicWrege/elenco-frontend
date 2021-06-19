@@ -1,7 +1,7 @@
 import { UserShort } from "./user";
 
 
-export interface Comment {
+export interface CommentModel {
     id: number,
     feedId: number,
     content:string,
@@ -15,4 +15,4 @@ export interface NewComment{
     content: string
 }
 
-export default Comment;
+export default CommentModel;

@@ -1,7 +1,6 @@
 .FeedDetail {
   display: grid;
   gap: 2em;
-  max-width: 80rem;
 }
 
 .FeedDetail-main {

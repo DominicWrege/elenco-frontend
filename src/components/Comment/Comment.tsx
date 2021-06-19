@@ -1,56 +1,39 @@
-import { Button, Card, Form, Input } from "antd";
-import { useCallback, useContext } from "react";
-import { UserContext } from "../../contexts/UserContext";
+import { Card, Typography } from "antd";
+import { useEffect } from "react";
+import "./Comment.css";
+import { useCallback, useState } from "react";
 import comment from "../../functions/comment";
-import { NewComment } from "../../models/comment";
-
-interface FormData {
-  content: string;
-}
+import CommentModel from "../../models/comment";
+import CommentForm from "./Form/Form";
+import CommentList from "./List/List";
+const { Title } = Typography;
 
 interface Properties {
   feedId: number;
 }
 
 export const Comment: React.FC<Properties> = ({ feedId }) => {
-  const userContext = useContext(UserContext);
 
-  const handlePost = useCallback(async (form: FormData) => {
-    if (userContext?.user?.id) {
-      const newCommentBody: NewComment = {
-        userId: userContext?.user?.id,
-        feedId: feedId,
-        content: form.content,
-      };
+  const [comments, setComments] = useState<CommentModel[]>([]);
 
-      console.log(newCommentBody);
-      try {
-        const createdComment = await comment.post(newCommentBody);
-        console.log(createdComment);
-      } catch (err) {
-        console.log(err);
-      }
-    }
-  }, []);
+  const handleNewComment = (comment: CommentModel): void => {
+    setComments([comment, ...comments]);
+  };
+
+  const fetchComments = useCallback(async () => {
+    setComments(await comment.get_for_feed(feedId));
+  }, [feedId]);
+
+  useEffect(() => {
+    fetchComments();
+  }, [fetchComments]);
+
 
   return (
-    <Card title="Comments">
-      <Form name="comment" onFinish={handlePost}>
-        <Form.Item
-          label="Content"
-          name="content"
-          rules={[{ required: true, message: "enter some text" }]}
-        >
-          <Input.TextArea />
-        </Form.Item>
-
-        <Form.Item>
-          <Button type="primary" htmlType="submit">
-            Post
-          </Button>
-        </Form.Item>
-      </Form>
-    </Card>
+    <Card className="Comment" title={<Title level={3}>Comments</Title>}>
+      <CommentForm feedId={feedId} newComment={handleNewComment} />
+      <CommentList comments={comments} />
+    </Card >
   );
 };
 

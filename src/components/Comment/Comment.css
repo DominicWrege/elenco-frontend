@@ -1,0 +1,7 @@
+.CommentsList .ant-list-item{
+    padding: 0;
+}
+
+.Comment .ant-card-body{
+    padding: 1.25rem;
+}
