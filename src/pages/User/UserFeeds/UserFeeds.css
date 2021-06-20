@@ -1,14 +1,16 @@
 .UserFeeds,
 .UserFeeds-body {
-  display: flex;
   width: 100%;
 }
+
+
 .UserFeeds {
   justify-content: center;
 }
 .UserFeeds-body {
   gap: 2rem;
   flex-direction: column;
+  display: flex;
 }
 
 .UserFeeds span.ant-descriptions-item-label {

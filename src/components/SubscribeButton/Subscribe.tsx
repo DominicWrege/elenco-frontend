@@ -13,7 +13,7 @@ export const SubscribeButton: FC<Property> = ({ feedId }) => {
   const [isloading, setIsLoading] = useState<boolean>(false);
 
   const load = useCallback(async () => {
-    setIsSubscribed(await user.has_subscription(feedId));
+    setIsSubscribed(await user.hasSubscription(feedId));
   }, [feedId]);
 
   useEffect(() => {

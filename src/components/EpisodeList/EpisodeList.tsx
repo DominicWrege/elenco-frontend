@@ -6,9 +6,6 @@ import { FeedShort } from "../../models/feeds";
 import { EpisodeContext, PlayerContext } from "../../contexts/PlayerContext";
 import { PlayerStatus } from "../PodcastPlayer/types";
 
-const { Title } = Typography;
-
-
 interface Properties {
     episodes: Episode[]
     feedMeta: FeedShort
@@ -46,6 +43,7 @@ const EpisodeList: React.FC<Properties> = ({ episodes, feedMeta }) => {
     return (
         <List
             size="large"
+            rowKey={episode => episode.title}
             dataSource={episodes}
             renderItem={episode =>
                 <EpisodeItem

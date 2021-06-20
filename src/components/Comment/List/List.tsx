@@ -12,7 +12,6 @@ interface Properties {
 
 export const CommentList: React.FC<Properties> = ({ comments }) => {
 
-
     const renderListItem = (comment: CommentModel): JSX.Element => {
         return (
             <List.Item key={comment.id}>
@@ -27,16 +26,18 @@ export const CommentList: React.FC<Properties> = ({ comments }) => {
                     content={<p>{comment.content}</p>} />
             </List.Item>);
     };
+
     return (
         <>
             <List
                 className="CommentsList"
+                rowKey={comment => comment.id.toString()}
                 dataSource={comments}
                 itemLayout="horizontal"
                 renderItem={renderListItem}
             />
         </>
-    )
+    );
 };
 
 

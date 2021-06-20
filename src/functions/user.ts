@@ -1,9 +1,9 @@
 import { API_URL } from "../env";
-import { SubmittedFeeds } from "../models/feeds";
+import { SubmittedFeeds, UserFeedModel } from "../models/feeds";
 import { http } from "./http";
 
 
-export namespace user{
+export namespace user {
     export async function getSubmittedFeeds(): Promise<SubmittedFeeds> {
         const resp = await http.get(`${API_URL}/user/feeds`, http.WithCredentials.Yes);
         const feeds: SubmittedFeeds = await resp.json();
@@ -24,7 +24,13 @@ export namespace user{
         await http.delete_(`${API_URL}/api/subscription`, payload, http.WithCredentials.Yes);
     }
 
-    export async function has_subscription(feedId: number): Promise<boolean> {
+    export async function getSubscriptions(): Promise<UserFeedModel[]> {
+        const resp = await http.get(`${API_URL}/user/subscriptions`, http.WithCredentials.Yes);
+        const feeds = await resp.json();
+        return feeds;
+    }
+
+    export async function hasSubscription(feedId: number): Promise<boolean> {
         const payload = {
             feedId: feedId
         };

@@ -4,6 +4,7 @@ import {
 	Radio,
 	RadioChangeEvent,
 	Select,
+	Typography,
 } from "antd";
 import "./UserFeeds.css";
 import { useCallback } from "react";
@@ -15,10 +16,10 @@ import {
 	SubmittedFeeds,
 	UserFeedModel,
 } from "../../../models/feeds";
-import { LabeledValue } from "antd/lib/select";
 import { Link } from "wouter";
-import FeedGridList, { sortBy, SortByType, SortByValue } from "../../../components/FeedGridList/FeedGridList";
-
+import FeedGridList from "../../../components/FeedGridList/FeedGridList";
+import FeedFilter, { sortBy, SortByType, SortByValue } from "../../../components/FeedFilter/FeedFilter";
+const { Title } = Typography;
 
 function renderRadioButtons(
 	submittedFeeds: SubmittedFeeds | null
@@ -29,6 +30,7 @@ function renderRadioButtons(
 			count = submittedFeeds[status.toLowerCase()].length;
 		}
 		return (
+
 			<Radio.Button key={status} value={status.toLowerCase()}>
 				{status} ({count})
 			</Radio.Button>
@@ -51,7 +53,9 @@ let submittedFeeds: SubmittedFeeds | null = null;
 export const UserFeeds: React.FC = () => {
 	const [feedsList, setFeedsList] = useState<UserFeedModel[]>([]);
 	const [filter, setFilter] = useState<FeedStatus>(FeedStatus.Online);
+
 	const [currentSortBy, setCurrentSortBy] = useState<SortByValue>(sortBy.title);
+
 	const getFeeds = useCallback(async () => {
 		try {
 			const feeds: SubmittedFeeds = await user.getSubmittedFeeds();
@@ -77,12 +81,15 @@ export const UserFeeds: React.FC = () => {
 		}
 	};
 
-	const handelSortChange = (
-		value: string | number | LabeledValue,
-		_option: any
-	): void => {
-		setCurrentSortBy(sortBy[value.toString()]);
-	};
+	// const handelSortChange = (
+	// 	value: string | number | LabeledValue,
+	// 	_option: any
+	// ): void => {
+	// 	// setCurrentSortBy(sortBy[value.toString()]);
+	// };
+	const onChangeFilter = (value: SortByValue) => {
+		setCurrentSortBy(value);
+	}
 
 	if (feedsList.length === 0) {
 		return (
@@ -95,6 +102,9 @@ export const UserFeeds: React.FC = () => {
 	// show loading
 	return (
 		<div className="UserFeeds">
+			<header>
+				<Title>Submitted Feeds</Title>
+			</header>
 			<section className="UserFeeds-body">
 				<section className="UserFeeds-header">
 					<Radio.Group
@@ -104,14 +114,7 @@ export const UserFeeds: React.FC = () => {
 					>
 						{renderRadioButtons(submittedFeeds)}
 					</Radio.Group>
-
-					<Select
-						defaultValue="title"
-						onSelect={handelSortChange}
-						style={{ width: "8rem" }}
-					>
-						{renderSortByOptions(sortBy)}
-					</Select>
+					<FeedFilter onChange={onChangeFilter} />
 				</section>
 				<FeedGridList feeds={feedsList} sortedBy={currentSortBy} />
 			</section>

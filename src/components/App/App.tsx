@@ -18,6 +18,7 @@ import Preview from "../../pages/Preview/Preview";
 import { EpisodeContext, PlayerContext } from "../../contexts/PlayerContext";
 import { PlayerAction, PlayerStatus } from "../PodcastPlayer/types";
 import UserFeeds from "../../pages/User/UserFeeds/UserFeeds";
+import Subscription from "../../pages/Subscription/Subscription";
 
 
 
@@ -113,6 +114,11 @@ const App: React.FC = () => {
                                 <Route path="/preview" component={Preview}></Route>
                                 <Route path="/feed/:name" component={Feed}></Route>
                                 <Route path="/user/feeds" component={UserFeeds}>
+                                </Route>
+                                <Route path="/user/subscriptions">
+                                    <Guard>
+                                        <Subscription />
+                                    </Guard>
                                 </Route>
                                 <Route>
                                     <h2>

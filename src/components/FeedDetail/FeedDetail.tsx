@@ -6,7 +6,7 @@ import Artwork from "../Artwork/Artwork";
 import FeedMetaInfo from "../FeedMetaInfo/FeedMetaInfo";
 import { Link } from "wouter";
 import EpisodeList from "../EpisodeList/EpisodeList";
-import { SubscribeButton } from "../Subscribe/Subscribe";
+import { SubscribeButton } from "../SubscribeButton/Subscribe";
 import { Comment } from "../../components/Comment/Comment";
 import React from "react";
 

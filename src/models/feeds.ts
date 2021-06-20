@@ -23,15 +23,16 @@ export interface FeedModel {
     episodes: Episode[]
 }
 
-export interface UserFeedModel{
+export interface UserFeedModel {
     id: number,
     title: string,
     subtitle?: string,
-    description: string,
     img?: string,
     authorName: string,
     status?: FeedStatus,
+    submitted: string
 }
+
 
 export enum FeedStatus {
     Online = "Online",
@@ -40,11 +41,11 @@ export enum FeedStatus {
     Blocked = "Blocked",
 }
 
-export interface SubmittedFeeds{
-     blocked: UserFeedModel[],
-     online: UserFeedModel[],
-     offline: UserFeedModel[],
-     queued: UserFeedModel[]
+export interface SubmittedFeeds {
+    blocked: UserFeedModel[],
+    online: UserFeedModel[],
+    offline: UserFeedModel[],
+    queued: UserFeedModel[]
 }
 
 export interface FeedPreview {

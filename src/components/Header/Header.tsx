@@ -30,18 +30,23 @@ function AppHeader(): JSX.Element {
             </Menu.Item>
             <Menu.Divider />
             <Menu.Item key="Menu2">
+                <Link href="/user/subscriptions">
+                    My Subscriptions
+                </Link>
+            </Menu.Item>
+            <Menu.Item key="Menu3">
                 <Link href="/user/feeds">
                     My Submitted Podcasts
                 </Link>
             </Menu.Item>
-            <Menu.Item key="Menu3">
+            <Menu.Item key="Menu4">
                 <Link href="/new-feed">
                     Submit a new Podcast
                 </Link>
             </Menu.Item>
-            <Menu.Item key="Menu4" onClick={handleLogout}>
-                    Logout 
-            </Menu.Item> 
+            <Menu.Item key="Menu5" onClick={handleLogout}>
+                Logout
+            </Menu.Item>
         </Menu>
     );
 
