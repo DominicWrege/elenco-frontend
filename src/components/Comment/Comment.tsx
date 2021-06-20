@@ -1,4 +1,3 @@
-import { Card, Typography } from "antd";
 import { useEffect } from "react";
 import "./Comment.css";
 import { useCallback, useState } from "react";
@@ -6,7 +5,6 @@ import comment from "../../functions/comment";
 import CommentModel from "../../models/comment";
 import CommentForm from "./Form/Form";
 import CommentList from "./List/List";
-const { Title } = Typography;
 
 interface Properties {
   feedId: number;
@@ -30,10 +28,11 @@ export const Comment: React.FC<Properties> = ({ feedId }) => {
 
 
   return (
-    <Card className="Comment" title={<Title level={3}>Comments</Title>}>
+    // <Card className="Comment" title={<Title level={3}>Comments</Title>}>
+    <>
       <CommentForm feedId={feedId} newComment={handleNewComment} />
       <CommentList comments={comments} />
-    </Card >
+    </ >
   );
 };
 

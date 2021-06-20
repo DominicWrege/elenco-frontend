@@ -3,7 +3,6 @@ import { DefaultParams, useRoute } from "wouter";
 import { getByName } from "../../functions/feed";
 import type { FeedModel } from "../../models/feeds";
 import { FeedDetail } from "../../components/FeedDetail/FeedDetail";
-import { Comment } from "../../components/Comment/Comment";
 import { FlexCenter } from "../../components/Styles/shared.css";
 import { useCallback } from "react";
 import { UserContext } from "../../contexts/UserContext";

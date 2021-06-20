@@ -5,6 +5,7 @@ import { UserContext } from "../../../contexts/UserContext";
 import { comment } from "../../../functions/comment";
 import CommentModel, { NewComment } from "../../../models/comment";
 import { useState } from "react";
+import { Link } from "wouter";
 
 interface FormData {
     message: string;
@@ -38,7 +39,7 @@ export const CommentForm: React.FC<Properties> = ({ feedId, newComment }) => {
                 newComment(createdComment);
                 message.success("Comment succefuly posted!");
             } catch (err) {
-                message.error(err.json);
+                message.error(err.json.message);
                 console.log(err);
             } finally {
                 setIsLoading(false);
@@ -46,6 +47,14 @@ export const CommentForm: React.FC<Properties> = ({ feedId, newComment }) => {
         }
     }, [feedId, userContext?.user?.id, form, newComment]);
 
+
+    if (userContext?.user !== null) {
+        return (
+            <p>
+                Want to write a comment? <Link href="/login">Login in.</Link>
+            </p>
+        );
+    }
 
     return (
         <Form name="comment" onFinish={handlePost} className="Comment-form" form={form}>

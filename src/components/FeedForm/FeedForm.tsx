@@ -56,20 +56,18 @@ export const NewFeed: React.FC<Properties> = ({ onSubmit }) => {
     };
 
     return (
-        <div className="NewFeed-wrapper">
-            <div className="NewFeed-content">
-                <header className="NewFeed-header">
-                    <Title level={3}>Submit New RSS-Feed</Title>
-                </header>
-                <form method="post" onSubmit={handleSubmit} className="NewFeed-form" ref={form}>
-                    {/* {protocolSelect} */}
-                    <Input name="feed-url" autoFocus required ref={inputElement}
-                        className="NewFeed-input" placeholder="site.com/feed" type="url" />
-                    <Button type="primary" htmlType="submit">
-                        Preview
-                    </Button>
-                </form>
-            </div>
+        <div className="NewFeed">
+            <header className="NewFeed-header">
+                <Title level={3}>Submit New RSS-Feed</Title>
+            </header>
+            <form method="post" onSubmit={handleSubmit} className="NewFeed-form" ref={form}>
+                {/* {protocolSelect} */}
+                <Input name="feed-url" autoFocus required ref={inputElement}
+                    className="NewFeed-input" placeholder="site.com/feed" type="url" />
+                <Button type="primary" htmlType="submit">
+                    Preview
+                </Button>
+            </form>
         </div >
     );
 };

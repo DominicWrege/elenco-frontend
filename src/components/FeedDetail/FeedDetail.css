@@ -1,6 +1,18 @@
 .FeedDetail {
   display: grid;
-  gap: 2em;
+  column-gap: 1rem;
+  row-gap: 0.6rem;
+  width: 100%;
+}
+
+
+.FeedDetail-main-card .ant-card-body{
+    padding-top: 2px;
+
+}
+
+.FeedDetail-main-card {
+  height: fit-content;
 }
 
 .FeedDetail-main {

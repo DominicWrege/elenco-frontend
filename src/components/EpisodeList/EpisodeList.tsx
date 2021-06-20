@@ -46,8 +46,6 @@ const EpisodeList: React.FC<Properties> = ({ episodes, feedMeta }) => {
     return (
         <List
             size="large"
-            header={<Title level={5}>Episodes</Title>}
-            bordered
             dataSource={episodes}
             renderItem={episode =>
                 <EpisodeItem
