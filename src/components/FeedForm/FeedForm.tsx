@@ -65,7 +65,7 @@ export const NewFeed: React.FC<Properties> = ({ onSubmit }) => {
                 <Input name="feed-url" autoFocus required ref={inputElement}
                     className="NewFeed-input" placeholder="site.com/feed" type="url" />
                 <Button type="primary" htmlType="submit">
-                    Preview
+                    Submit Feed
                 </Button>
             </form>
         </div >

@@ -1,6 +1,6 @@
 import "./FeedDetail.css";
 
-import type { FeedModel } from "../../models/feeds";
+import type { FeedModel, UserFeedModel } from "../../models/feeds";
 import { Card, Tabs, Typography } from "antd";
 import Artwork from "../Artwork/Artwork";
 import FeedMetaInfo from "../FeedMetaInfo/FeedMetaInfo";
@@ -9,6 +9,7 @@ import EpisodeList from "../EpisodeList/EpisodeList";
 import { SubscribeButton } from "../SubscribeButton/Subscribe";
 import { Comment } from "../../components/Comment/Comment";
 import React from "react";
+import FeedSmallList from "../FeedSmallList/FeedSmallList";
 
 const { Title, Paragraph } = Typography;
 
@@ -16,12 +17,14 @@ interface Properties {
 	feed: FeedModel | null;
 	showSubscribeButton?: boolean;
 	showComments?: boolean
+	relatedFeeds?: UserFeedModel[]
 }
 
 export const FeedDetail: React.FC<Properties> = ({
 	feed,
 	showSubscribeButton = false,
-	showComments = false
+	showComments = false,
+	relatedFeeds
 }) => {
 	const renderSubtitle = (subtitle?: string) => {
 		if (!subtitle) {
@@ -44,7 +47,7 @@ export const FeedDetail: React.FC<Properties> = ({
 				</header>
 				<section className="FeedDetail-main">
 					<aside className="FeedDetail-sidebar">
-						<Artwork src={feed.img} width={270} />
+						<Artwork src={feed.img} width={"100%"} />
 						{showSubscribeButton && <SubscribeButton feedId={feed.id} />}
 						<FeedMetaInfo
 							feed={{
@@ -60,7 +63,7 @@ export const FeedDetail: React.FC<Properties> = ({
 							<Tabs defaultActiveKey="tb1" size="large">
 								<Tabs.TabPane tab="Description" key="tbd1">
 									{renderSubtitle(feed.subtitle)}
-									<Paragraph>{feed.description}</Paragraph>
+									<Paragraph 	>{feed.description}</Paragraph>
 								</Tabs.TabPane>
 								<Tabs.TabPane tab="Episodes" key="tbe1">
 									<EpisodeList
@@ -81,6 +84,12 @@ export const FeedDetail: React.FC<Properties> = ({
 							</Tabs>
 						</Card>
 					</section>
+					{relatedFeeds &&
+						<Card title="Related">
+							<FeedSmallList feeds={relatedFeeds} title="Related" />
+						</Card>
+					}
+
 				</section>
 			</div>
 		);

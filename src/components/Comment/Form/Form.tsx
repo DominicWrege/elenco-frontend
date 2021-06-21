@@ -48,7 +48,7 @@ export const CommentForm: React.FC<Properties> = ({ feedId, newComment }) => {
     }, [feedId, userContext?.user?.id, form, newComment]);
 
 
-    if (userContext?.user !== null) {
+    if (userContext?.user === null) {
         return (
             <p>
                 Want to write a comment? <Link href="/login">Login in.</Link>

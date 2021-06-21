@@ -33,7 +33,7 @@ enum Compare {
 
 export const sortBy: SortByType = {
     title: {
-        name: "Titel",
+        name: "Title",
         compareFn: (feedA: UserFeedModel, feedB: UserFeedModel): number => {
             return feedA.title.localeCompare(feedB.title);
         },

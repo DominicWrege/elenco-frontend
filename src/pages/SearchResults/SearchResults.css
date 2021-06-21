@@ -1,9 +1,12 @@
 .SearchResults-list{
+    min-width: 250px;
     display: flex;
     flex-direction: column;
     /* row-gap: 1.25em;    */
     align-items: center;
-    row-gap: 2em
+    row-gap: 2em;
+    width: 100%;
+    /* max-width: 60rem; */
 }
 .SearchResults-categories-list{
     min-width: 250px;
@@ -17,7 +20,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    row-gap: 2em
+    row-gap: 2em;
+    max-width: 60rem;
 }
 .SearchResults header{
     align-self: flex-start;

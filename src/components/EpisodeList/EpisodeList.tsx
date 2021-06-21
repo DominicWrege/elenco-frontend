@@ -43,11 +43,11 @@ const EpisodeList: React.FC<Properties> = ({ episodes, feedMeta }) => {
     return (
         <List
             size="large"
-            rowKey={episode => episode.title}
+            rowKey={episode => episode.guid ?? "key"}
             dataSource={episodes}
             renderItem={episode =>
                 <EpisodeItem
-                    key={episode.title}
+                    key={episode.guid ?? "key"}
                     episode={episode}
                     feedMeta={feedMeta}
                     status={setEpisodeStatus(episode, player?.episode)}

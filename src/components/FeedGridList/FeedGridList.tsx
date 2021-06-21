@@ -53,7 +53,6 @@ export const FeedGridList: React.FC<Properties> = ({ feeds, sortedBy = sortBy.ti
                         <Title style={{ cursor: "pointer" }} level={4}>{feed.title}</Title>
                     </Link>
                     <small>{feed.authorName}</small>
-                    <small>{Date.parse(feed.submitted)}</small>
                 </Card>
             );
         });

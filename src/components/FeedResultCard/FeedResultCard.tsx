@@ -44,11 +44,10 @@ const FeedResultCard: React.FC<Props> = (props: Props) => {
                 </ div>
 
             }
-            extra={<a href="#">Subscribe</a>}
         >
 
             <div className="FeedResultCard-content">
-                <Artwork src={`${API_URL}/img/${props.feed.imgCache}`} width={200} />
+                <Artwork src={`${API_URL}/img/${props.feed.imgCache}`} width={"100%"} />
                 <div className="FeedResultCard-meta">
                     {renderSubtitle(props.feed.subtitle)}
                     <p className="FeedResultCard-description" >{props.feed.description}</p>

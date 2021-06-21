@@ -97,9 +97,9 @@ const SearchResults: React.FC<RouteComponentProps<DefaultParams>> = () => {
 
     return (
         <div className="SearchResults">
-            <main className="SearchResults-list">
+            <section className="SearchResults-list">
                 {renderResults()}
-            </main>
+            </section>
         </div>
     );
 };

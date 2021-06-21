@@ -17,9 +17,9 @@
     padding: 2em;
     box-sizing: inherit;
 }
-
+/* TODO  */
 .App-pages > div {
-  width:  70rem !important;
+  width:  80rem !important;
 }
 
 /* .App-link {

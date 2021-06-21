@@ -1,32 +1,40 @@
 import React, { useContext, useEffect, useState } from "react";
 import { DefaultParams, useRoute } from "wouter";
-import { getByName } from "../../functions/feed";
-import type { FeedModel } from "../../models/feeds";
+import { getByName, getRelated } from "../../functions/feed";
+import type { FeedModel, UserFeedModel } from "../../models/feeds";
 import { FeedDetail } from "../../components/FeedDetail/FeedDetail";
 import { FlexCenter } from "../../components/Styles/shared.css";
 import { useCallback } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import "./Feed.css";
+import FeedSmallList from "../../components/FeedSmallList/FeedSmallList";
+import { Card } from "antd";
 interface FeedRouterProperties extends DefaultParams {
   name: string;
 }
 
+
 export function Feed(): React.ReactElement<void> {
   const [feed, setFeed] = useState<FeedModel | null>(null);
+  const [relatedFeeds, setRelatedFeeds] = useState<UserFeedModel[]>([]);
   const userContext = useContext(UserContext);
 
   const params = useRoute<FeedRouterProperties>("/feed/:name")[1];
 
+  // TODO do loading
   const loadFeed = useCallback(async () => {
     if (params?.name) {
       try {
-        const json_feed = await getByName(params?.name ?? "");
+        const json_feed: FeedModel = await getByName(params?.name ?? "");
         setFeed(json_feed);
+        setRelatedFeeds(await getRelated(json_feed.id));
       } catch (err) {
         console.log(err);
       }
     }
   }, [params?.name]);
+
+
 
   useEffect(() => {
 
@@ -43,6 +51,7 @@ export function Feed(): React.ReactElement<void> {
       <FeedDetail
         feed={feed}
         showComments
+        relatedFeeds={relatedFeeds}
         showSubscribeButton={userContext?.user !== null}
       />
     </FlexCenter>
