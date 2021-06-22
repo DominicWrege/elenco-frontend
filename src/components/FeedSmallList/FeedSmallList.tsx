@@ -16,8 +16,7 @@ export const FeedSmallList: React.FC<Properties> = ({ feeds = [], title }) => {
 
     const listItem = (feed: UserFeedModel): JSX.Element => {
 
-        return <List.Item>
-            <div >
+        return <List.Item className="FeedSmallList-item">
                 <Link href={`/feed/${feed.title}`}>
                     <Artwork src={`${API_URL}/img/${feed.img}`} width="100%" />
                 </Link>
@@ -34,21 +33,16 @@ export const FeedSmallList: React.FC<Properties> = ({ feeds = [], title }) => {
                         {feed.title}</Typography.Title>
                 </Link>
                 <small>{feed.authorName}</small>
-            </div>
-
         </List.Item>
     };
 
     return (
         <div className="FeedSmallList">
-            <section>
-                <List
+                <List 
                     rowKey={feed => feed.id.toString()}
                     dataSource={feeds}
                     renderItem={listItem}
                 />
-
-            </section>
         </div>
     );
 };

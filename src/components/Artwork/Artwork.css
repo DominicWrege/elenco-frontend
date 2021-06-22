@@ -1,8 +1,10 @@
 .Artwork img {
-    object-fit: scale-down;
-    display: block;
+  object-fit: scale-down;
+  display: block;
+  max-width: 20rem;
+  aspect-ratio: 1/1;
 }
-.Artwork{
-    display: block;
-    height: max-content;
+.Artwork {
+  display: block;
+  height: max-content;
 }

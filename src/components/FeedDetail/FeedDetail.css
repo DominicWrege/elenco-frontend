@@ -3,6 +3,7 @@
   column-gap: 1rem;
   row-gap: 0.6rem;
   width: 100%;
+  --side-row-width: 17rem;
 }
 
 .FeedDetail-main-card .ant-card-body {
@@ -15,9 +16,17 @@
 
 .FeedDetail-main {
   display: grid;
-  grid-template-columns: 17rem minmax(300px, 1fr) 17rem;
   gap: 1.5em;
 }
+
+.FeedDetail-main-three-columns{
+	grid-template-columns: var(--side-row-width) minmax(var(--side-row-width), 1fr) var(--side-row-width);
+}
+
+.FeedDetail-main-two-columns{
+  grid-template-columns: var(--side-row-width) 1fr;
+}
+
 
 .FeedDetail-sidebar {
   display: flex;
@@ -38,4 +47,26 @@
 }
 .FeedDetail-header a {
   font-size: 1.175em;
+}
+
+.FeedDetail-related{
+	overflow: hidden;
+}
+
+@media(max-width: 1200px){
+	.FeedDetail-main {
+		grid-template-columns: 17rem 1fr;
+		grid-template-areas: "sidebar tabs"
+							 "sidebar related";
+	}
+	.FeedDetail-sidebar{
+		grid-area: sidebar;
+	}
+
+	.FeedDetail-body {
+		grid: tabs;
+	}
+	.FeedDetail-related{
+		grid-area: related;
+	}
 }

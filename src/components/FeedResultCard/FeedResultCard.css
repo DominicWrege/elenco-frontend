@@ -16,6 +16,8 @@
 .FeedResultCard-author{
     font-size: 0.9em;
 }
+
+/* TODO copy and pate code */
 .FeedResultCard-description{
     display: -webkit-box;
     -webkit-line-clamp: 3;

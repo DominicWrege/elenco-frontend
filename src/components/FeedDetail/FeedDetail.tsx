@@ -45,7 +45,7 @@ export const FeedDetail: React.FC<Properties> = ({
 						{feed.author}
 					</Link>
 				</header>
-				<section className="FeedDetail-main">
+				<section className={["FeedDetail-main", relatedFeeds ? "FeedDetail-main-three-columns" : "FeedDetail-main-two-columns" ].join(" ")}>
 					<aside className="FeedDetail-sidebar">
 						<Artwork src={feed.img} width={"100%"} />
 						{showSubscribeButton && <SubscribeButton feedId={feed.id} />}
@@ -85,7 +85,7 @@ export const FeedDetail: React.FC<Properties> = ({
 						</Card>
 					</section>
 					{relatedFeeds &&
-						<Card title="Related">
+						<Card title="Related" className="FeedDetail-related">
 							<FeedSmallList feeds={relatedFeeds} title="Related" />
 						</Card>
 					}

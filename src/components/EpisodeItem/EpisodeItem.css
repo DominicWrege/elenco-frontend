@@ -1,8 +1,10 @@
 
-.EpisodeItem{
-    display: flex;
-    gap: 1.5em;
-    height: 10rem;
+li.EpisodeItem{
+    display: flex !important;
+    padding: 0.9em 0 0.9em 0 !important;
+    column-gap: 1rem;
+    max-height: 10rem;
+
 }
     
 .EpisodeItem-text-body h2, h3, h4{
@@ -10,11 +12,21 @@
     line-height: 1.2em !important
 }
 
+
 .EpisodeItem-text-body p{
     margin-bottom: 0 !important;
+ 
 }
+
+/* TODO copy and pate code */
+
 .EpisodeItem-text-body{
     width: 100%;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .EpisodeItem-text-small{
 

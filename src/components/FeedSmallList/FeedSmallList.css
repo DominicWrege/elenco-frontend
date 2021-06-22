@@ -1,0 +1,19 @@
+
+.FeedSmallList-item{
+    display: block !important;
+}
+.FeedSmallList{
+    width: 100%;
+}
+
+@media(max-width: 1200px){
+	.FeedSmallList ul.ant-list-items{
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        gap: 1.5rem;
+    }
+    .FeedSmallList-item{
+        min-width: 14rem;
+    }
+}
