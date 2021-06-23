@@ -3,7 +3,7 @@ import { FeedModel, UserFeedModel } from "../models/feeds";
 import { http } from "./http"
 
 export async function getByName(name: string): Promise<FeedModel> {
-    const url = encodeURI(`${API_URL}/api/feed/${name}`);
+    const url = encodeURI(`${API_URL}/feed/${name}`);
     // const url = `${API_URL}/api/feed/${name}`;
     // console.log(url);
     const resp = await http.get(url, http.WithCredentials.Yes);
@@ -12,7 +12,7 @@ export async function getByName(name: string): Promise<FeedModel> {
 
 
 export async function getRelated(feedId: number): Promise<UserFeedModel[]> {
-    const resp = await http.get(`${API_URL}/api/feed/${feedId}/related`);
+    const resp = await http.get(`${API_URL}/feed/${feedId}/related`);
     return resp.json();
 }
 

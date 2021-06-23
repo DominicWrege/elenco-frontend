@@ -9,100 +9,105 @@ import { compareByDescription, FeedModel } from "../../models/feeds";
 const { Title } = Typography;
 
 export interface SearchProperties extends DefaultParams {
-    query: string
+  query: string;
 }
 
 const SearchResults: React.FC<RouteComponentProps<DefaultParams>> = () => {
-    let [feeds, setResult] = useState<FeedModel[]>([]);
+  let [feeds, setResult] = useState<FeedModel[]>([]);
 
-    const params = useRoute<SearchProperties>("/search/:query")[1];
-    const [categoriesList, setCategoriesList] = useState<string[]>([]);
-    const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const params = useRoute<SearchProperties>("/search/:query")[1];
+  const [categoriesList, setCategoriesList] = useState<string[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
-
-    const header = (): JSX.Element => {
-        return (<header >
-            <Select
-                className="SearchResults-categories-list"
-                mode="multiple"
-                placeholder="Filter by Categories"
-                value={selectedCategories}
-                onChange={handleChange}
-                size="middle"
-                options={filteredOptions}
-            ></Select>
-        </header>)
-    }
-
-    const renderResults = (): JSX.Element[] | JSX.Element => {
-        if (feeds.length === 0) {
-            return (
-                <div className="SearchResults-list SearchResults-list-empty">
-                    <Title level={2}>No Results for query: {decodeURI(params?.query ?? "")}</Title>
-                    <Empty description={false} />
-                </div>
-            );
-        }
-        const list = feeds
-            .sort(compareByDescription)
-            .filter((item: FeedModel) => {
-                if (selectedCategories.length === 0) {
-                    return true;
-                } else {
-                    return item.categories.some(cat => selectedCategories.includes(cat.description));
-                };
-            })
-            .map((item: FeedModel) => <FeedResultCard key={item.id} feed={item} ></FeedResultCard>);
-
-        return (
-            <>
-                {header()}
-                {list}
-            </>);
-    };
-
-    const doSearch = useCallback(
-        async (): Promise<void> => {
-            if (params?.query) {
-                setCategoriesList([]);
-                setSelectedCategories([]);
-                const resp = await http.get(encodeURI(`${API_URL}/api/feeds/search?term=${params?.query}`));
-                const feeds_json: FeedModel[] = await resp.json();
-                intoCategoriesList(feeds_json);
-                setResult(feeds_json);
-            }
-        }, [params?.query]
+  const header = (): JSX.Element => {
+    return (
+      <header>
+        <Select
+          className="SearchResults-categories-list"
+          mode="multiple"
+          placeholder="Filter by Categories"
+          value={selectedCategories}
+          onChange={handleChange}
+          size="middle"
+          options={filteredOptions}
+        ></Select>
+      </header>
     );
+  };
 
-    const intoCategoriesList = (feeds: FeedModel[]): void => {
-        const categories = new Set<string>();
-        feeds.forEach(feed => {
-            feed.categories.forEach(category => {
-                categories.add(
-                    category.description
-                )
-            })
-        })
-        setCategoriesList(Array.from(categories));
-    };
-    const filteredOptions = categoriesList.filter(opt => !selectedCategories.includes(opt)).map(s => ({ value: s }));
-
-    const handleChange = (selected: string[]): void => {
-        setSelectedCategories(selected);
-    };
-
-    useEffect(() => {
-        doSearch();
-    }, [doSearch]);
+  const renderResults = (): JSX.Element[] | JSX.Element => {
+    if (feeds.length === 0) {
+      return (
+        <div className="SearchResults-list SearchResults-list-empty">
+          <Title level={2}>
+            No Results for query: {decodeURI(params?.query ?? "")}
+          </Title>
+          <Empty description={false} />
+        </div>
+      );
+    }
+    const list = feeds
+      .sort(compareByDescription)
+      .filter((item: FeedModel) => {
+        if (selectedCategories.length === 0) {
+          return true;
+        } else {
+          return item.categories.some((cat) =>
+            selectedCategories.includes(cat.description)
+          );
+        }
+      })
+      .map((item: FeedModel) => (
+        <FeedResultCard key={item.id} feed={item}></FeedResultCard>
+      ));
 
     return (
-        <div className="SearchResults">
-            <section className="SearchResults-list">
-                {renderResults()}
-            </section>
-        </div>
+      <>
+        {header()}
+        {list}
+      </>
     );
-};
+  };
 
+  const doSearch = useCallback(async (): Promise<void> => {
+    if (params?.query) {
+      setCategoriesList([]);
+      setSelectedCategories([]);
+      const resp = await http.get(
+        encodeURI(`${API_URL}/feeds/search?term=${params?.query}`)
+      );
+      const feeds_json: FeedModel[] = await resp.json();
+      intoCategoriesList(feeds_json);
+      setResult(feeds_json);
+    }
+  }, [params?.query]);
+
+  const intoCategoriesList = (feeds: FeedModel[]): void => {
+    const categories = new Set<string>();
+    feeds.forEach((feed) => {
+      feed.categories.forEach((category) => {
+        categories.add(category.description);
+      });
+    });
+    setCategoriesList(Array.from(categories));
+  };
+  const filteredOptions = categoriesList
+    .filter((opt) => !selectedCategories.includes(opt))
+    .map((s) => ({ value: s }));
+
+  const handleChange = (selected: string[]): void => {
+    setSelectedCategories(selected);
+  };
+
+  useEffect(() => {
+    doSearch();
+  }, [doSearch]);
+
+  return (
+    <div className="SearchResults">
+      <section className="SearchResults-list">{renderResults()}</section>
+    </div>
+  );
+};
 
 export default SearchResults;

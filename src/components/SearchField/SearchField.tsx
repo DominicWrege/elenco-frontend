@@ -39,7 +39,7 @@ const SearchField: React.FC = () => {
     }
 
     const fetchCompletion = async (query: string) => {
-        const uri = `${API_URL}/api/completion/${query}`;
+        const uri = `${API_URL}/completion/${query}`;
         let resp = await http.get(encodeURI(uri));
         let completions: Completion[] = await resp.json();
         setCompletions(renderOptions(completions));

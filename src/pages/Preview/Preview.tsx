@@ -24,7 +24,7 @@ const Preview: React.FC = () => {
         const body: FormBody = {
             feedUrl: url
         };
-        const resp = await http.post(`${API_URL}/api/feed/preview`, body, http.WithCredentials.Yes);
+        const resp = await http.post(`${API_URL}/feed/preview`, body, http.WithCredentials.Yes);
         return resp.json();
     };
 
@@ -55,7 +55,7 @@ const Preview: React.FC = () => {
                 feedUrl: feedUrl
             };
             try {
-                const resp = await http.post(`${API_URL}/api/feed/new`, body, http.WithCredentials.Yes);
+                const resp = await http.post(`${API_URL}/feed/new`, body, http.WithCredentials.Yes);
                 console.log(resp);
                 setLocation("/new-feed");
             } catch (err: http.HttpError | any) {
