@@ -1,3 +1,4 @@
+import { TopCategory } from "./category";
 import { Episode } from "./episode";
 
 export interface Meta {
@@ -75,18 +76,6 @@ export interface Show {
     subtitle?: string,
     summary: string,
     link?: string
-}
-
-export interface TopCategory {
-    id: number,
-    description: string,
-    children: Category[]
-}
-
-
-export interface Category {
-    id: number,
-    description: string,
 }
 
 export function compareByDescription(a: FeedModel, b: FeedModel): number {

@@ -1,4 +1,4 @@
-import { Card, Empty, Radio, RadioChangeEvent, Select, Typography } from "antd";
+import { Radio, RadioChangeEvent, Select, Typography } from "antd";
 import "./UserFeeds.css";
 import { useCallback } from "react";
 import { useState } from "react";
@@ -9,7 +9,6 @@ import {
   SubmittedFeeds,
   UserFeedModel,
 } from "../../../models/feeds";
-import { Link } from "wouter";
 import FeedGridList from "../../../components/FeedGridList/FeedGridList";
 import FeedFilter, {
   sortBy,
