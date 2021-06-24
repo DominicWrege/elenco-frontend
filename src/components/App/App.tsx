@@ -26,7 +26,9 @@ import { PlayerAction, PlayerStatus } from "../PodcastPlayer/types";
 import UserFeeds from "../../pages/User/UserFeeds/UserFeeds";
 import Subscription from "../../pages/Subscription/Subscription";
 import { Explore } from "../../pages/Explore/Explore";
-import FeedsByAuthorOrCategory from "../../pages/FeedsByAuthorOrCategory/FeedsByAuthorOrCategory";
+import FeedsByAuthorOrCategory, {
+  FeedsBy,
+} from "../../pages/FeedsByAuthorOrCategory/FeedsByAuthorOrCategory";
 
 const App: React.FC = () => {
   let userCache: User | null = auth.getSession();
@@ -128,7 +130,14 @@ const App: React.FC = () => {
                 <Route path="/preview" component={Preview}></Route>
                 <Route path="/feed/:name" component={Feed}></Route>
                 <Route path="/category/:category">
-                  <FeedsByAuthorOrCategory name="Category"></FeedsByAuthorOrCategory>
+                  <FeedsByAuthorOrCategory
+                    config={FeedsBy.Category}
+                  ></FeedsByAuthorOrCategory>
+                </Route>
+                <Route path="/author/:author">
+                  <FeedsByAuthorOrCategory
+                    config={FeedsBy.Author}
+                  ></FeedsByAuthorOrCategory>
                 </Route>
                 <Route path="/user/feeds" component={UserFeeds}></Route>
                 <Route path="/user/subscriptions">

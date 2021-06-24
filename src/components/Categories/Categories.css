@@ -25,10 +25,10 @@
 .Categories-list .ant-list-items {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.25rem;
+  gap: 1.2rem;
 }
 
 .Categories-list span.ant-tag {
-  font-size: 1.15em;
+  font-size: 1.2em;
   padding: 0.3em;
 }

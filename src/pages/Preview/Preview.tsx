@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Preview.css";
-import { FeedModel } from "../../models/feeds";
+import { FeedEpisodeModel } from "../../models/feeds";
 import { http } from "../../functions/http";
 import { API_URL } from "../../env";
 import { ArrowLeftOutlined } from "@ant-design/icons";
@@ -13,7 +13,7 @@ import category from "../../functions/category";
 const { Title, Text } = Typography;
 
 const Preview: React.FC = () => {
-  const [feed, setFeed] = useState<FeedModel | null>(null);
+  const [feed, setFeed] = useState<FeedEpisodeModel | null>(null);
   const [feedExist, setFeedExists] = useState<boolean>(false);
   const setLocation = useLocation()[1];
   const [feedUrl, setFeedUrl] = useState<string | null>(null);

@@ -14,7 +14,23 @@ export interface FeedModel {
     url: string,
     img?: string,
     imgCache?: string,
-    author: string,
+    authorName: string,
+    linkWeb?: string,
+    description: string,
+    subtitle?: string,
+    language?: string,
+    lastModified: string, // Datetime UTC
+    categories: TopCategory[],
+}
+
+
+export interface FeedEpisodeModel {
+    title: string,
+    id: number,
+    url: string,
+    img?: string,
+    imgCache?: string,
+    authorName: string,
     linkWeb?: string,
     description: string,
     subtitle?: string,
@@ -54,7 +70,7 @@ export interface FeedPreview {
     id: number,
     url: string,
     img?: string,
-    author: string,
+    authorName: string,
     linkWeb?: string,
     description: string,
     subtitle?: string,
@@ -78,7 +94,7 @@ export interface Show {
     link?: string
 }
 
-export function compareByDescription(a: FeedModel, b: FeedModel): number {
+export function compareByDescription(a: FeedEpisodeModel, b: FeedEpisodeModel): number {
     return a.description.localeCompare(b.description) ? 1 : -1;
 }
 

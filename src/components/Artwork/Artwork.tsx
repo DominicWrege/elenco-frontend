@@ -1,10 +1,12 @@
 import { Image } from "antd";
+import { CSSProperties } from "react";
 import "./Artwork.css";
 
 interface Properties {
   width?: number | string;
   src?: string;
   className?: string;
+  style?: CSSProperties;
 }
 
 //TOD placeholder

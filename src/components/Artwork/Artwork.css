@@ -3,6 +3,11 @@
   display: block;
   max-width: 20rem;
   aspect-ratio: 1/1;
+  border: none !important;
+}
+.Artwork .ant-card-cover img {
+  border: none !important;
+  border-radius: unset !important;
 }
 .Artwork {
   display: block;

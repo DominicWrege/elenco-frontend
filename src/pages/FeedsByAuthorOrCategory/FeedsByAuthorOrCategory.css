@@ -1,0 +1,8 @@
+.FeedsByAuthorOrCategory header {
+  margin-bottom: 1.5rem;
+}
+
+.FeedsByAuthorOrCategory .Artwork,
+.FeedsByAuthorOrCategory .ant-typography {
+  cursor: pointer;
+}

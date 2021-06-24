@@ -19,14 +19,15 @@
   gap: 1.5em;
 }
 
-.FeedDetail-main-three-columns{
-	grid-template-columns: var(--side-row-width) minmax(var(--side-row-width), 1fr) var(--side-row-width);
+.FeedDetail-main-three-columns {
+  grid-template-columns:
+    var(--side-row-width) minmax(var(--side-row-width), 1fr)
+    var(--side-row-width);
 }
 
-.FeedDetail-main-two-columns{
+.FeedDetail-main-two-columns {
   grid-template-columns: var(--side-row-width) 1fr;
 }
-
 
 .FeedDetail-sidebar {
   display: flex;
@@ -49,24 +50,34 @@
   font-size: 1.175em;
 }
 
-.FeedDetail-related{
-	overflow: hidden;
+.FeedDetail-related {
+  overflow: hidden;
 }
 
-@media(max-width: 1200px){
-	.FeedDetail-main {
-		grid-template-columns: 17rem 1fr;
-		grid-template-areas: "sidebar tabs"
-							 "sidebar related";
-	}
-	.FeedDetail-sidebar{
-		grid-area: sidebar;
-	}
+@media (max-width: 1200px) {
+  .FeedDetail-main {
+    grid-template-columns: 17rem 1fr;
+    grid-template-areas:
+      "sidebar tabs"
+      "sidebar related";
+  }
+  .FeedDetail-sidebar {
+    grid-area: sidebar;
+  }
 
-	.FeedDetail-body {
-		grid: tabs;
-	}
-	.FeedDetail-related{
-		grid-area: related;
-	}
+  .FeedDetail-body {
+    grid: tabs;
+  }
+  .FeedDetail-related {
+    grid-area: related;
+  }
+  .FeedDetail-related ul.ant-list-items {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 1.5rem;
+  }
+  .FeedDetail-related .FeedSmallList-item {
+    min-width: 14rem;
+  }
 }

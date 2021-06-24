@@ -5,11 +5,11 @@ import { TagFilled } from "@ant-design/icons";
 import "./FeedResultCard.css";
 import Artwork from "../Artwork/Artwork";
 import { API_URL } from "../../env";
-import { FeedModel } from "../../models/feeds";
+import { FeedEpisodeModel } from "../../models/feeds";
 import { Category, TopCategory } from "../../models/category";
 
 interface Props {
-  feed: FeedModel;
+  feed: FeedEpisodeModel;
 }
 const FeedResultCard: React.FC<Props> = (props: Props) => {
   const renderSubtitle = (subtitle?: string): JSX.Element | null => {
@@ -47,7 +47,11 @@ const FeedResultCard: React.FC<Props> = (props: Props) => {
           <Link href={`/feed/${props.feed.title}`} className="active">
             {props.feed.title}
           </Link>
-          <div className="FeedResultCard-author">{props.feed.author}</div>
+          <div className="FeedResultCard-author">
+            <Link href={`/author/${props.feed.authorName}`} className="active">
+              {props.feed.authorName}
+            </Link>
+          </div>
         </div>
       }
     >

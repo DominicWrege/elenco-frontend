@@ -5,7 +5,7 @@ import { API_URL } from "../../env";
 import { http } from "../../functions/http";
 import "./SearchResults.css";
 import FeedResultCard from "../../components/FeedResultCard/FeedResultCard";
-import { compareByDescription, FeedModel } from "../../models/feeds";
+import { compareByDescription, FeedEpisodeModel } from "../../models/feeds";
 const { Title } = Typography;
 
 export interface SearchProperties extends DefaultParams {
@@ -13,7 +13,7 @@ export interface SearchProperties extends DefaultParams {
 }
 
 const SearchResults: React.FC<RouteComponentProps<DefaultParams>> = () => {
-  let [feeds, setResult] = useState<FeedModel[]>([]);
+  let [feeds, setResult] = useState<FeedEpisodeModel[]>([]);
 
   const params = useRoute<SearchProperties>("/search/:query")[1];
   const [categoriesList, setCategoriesList] = useState<string[]>([]);
@@ -48,7 +48,7 @@ const SearchResults: React.FC<RouteComponentProps<DefaultParams>> = () => {
     }
     const list = feeds
       .sort(compareByDescription)
-      .filter((item: FeedModel) => {
+      .filter((item: FeedEpisodeModel) => {
         if (selectedCategories.length === 0) {
           return true;
         } else {
@@ -57,7 +57,7 @@ const SearchResults: React.FC<RouteComponentProps<DefaultParams>> = () => {
           );
         }
       })
-      .map((item: FeedModel) => (
+      .map((item: FeedEpisodeModel) => (
         <FeedResultCard key={item.id} feed={item}></FeedResultCard>
       ));
 
@@ -76,13 +76,13 @@ const SearchResults: React.FC<RouteComponentProps<DefaultParams>> = () => {
       const resp = await http.get(
         encodeURI(`${API_URL}/feeds/search?term=${params?.query}`)
       );
-      const feeds_json: FeedModel[] = await resp.json();
+      const feeds_json: FeedEpisodeModel[] = await resp.json();
       intoCategoriesList(feeds_json);
       setResult(feeds_json);
     }
   }, [params?.query]);
 
-  const intoCategoriesList = (feeds: FeedModel[]): void => {
+  const intoCategoriesList = (feeds: FeedEpisodeModel[]): void => {
     const categories = new Set<string>();
     feeds.forEach((feed) => {
       feed.categories.forEach((category) => {

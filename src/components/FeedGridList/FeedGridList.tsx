@@ -1,67 +1,97 @@
-import { Card, Empty, Typography } from "antd";
+import { Anchor, Card, Divider, Empty, Typography } from "antd";
+import "./FeedGridList.css";
 import React from "react";
 import styled from "styled-components";
 import { Link } from "wouter";
 import { API_URL } from "../../env";
+import { Spin } from "antd";
+import { Loading3QuartersOutlined } from "@ant-design/icons";
 import { UserFeedModel } from "../../models/feeds";
 import Artwork from "../Artwork/Artwork";
-import { sortBy, SortByValue } from "../FeedFilter/FeedFilter";
+import { SortByValue } from "../FeedFilter/FeedFilter";
+import MiddleCenter from "../Styles/shared.css";
+import AnchorLink from "antd/lib/anchor/AnchorLink";
 const { Title } = Typography;
 
 interface Properties {
   feeds: UserFeedModel[];
+  loading: boolean;
   sortedBy?: SortByValue;
 }
 
 const GridCard = styled.div`
   display: grid;
   justify-content: center;
-  grid-template-columns: repeat(auto-fit, 15rem);
-  gap: 1.5em;
+  grid-template-columns: repeat(auto-fit, 13.5rem);
+  gap: 1.5rem;
   .ant-card-body {
-    padding: 0.75em;
+    padding: 0.25em 0.75em 0.75em 0.75em;
     height: 6.5rem;
   }
 `;
 
+const goToFeed = (event: any): void => {
+  event.preventDefault();
+  console.log(event.target.parent);
+};
+
+function renderCard(feed: UserFeedModel) {
+  return (
+    <Card
+      key={feed.title}
+      cover={
+        <a href={`/feed/${feed.title}`}>
+          <Artwork
+            src={`${API_URL}/img/${feed["imgCache"] ?? feed.img}`}
+            width="100%"
+          />
+        </a>
+      }
+    >
+      <Link href={`/feed/${feed.title}`}>
+        <Title level={4}>{feed.title}</Title>
+      </Link>
+      <Link href={`/author/${feed.authorName}`}>
+        <small>{feed.authorName}</small>
+      </Link>
+    </Card>
+  );
+}
+
 export const FeedGridList: React.FC<Properties> = ({
   feeds,
-  sortedBy = sortBy.title,
+  loading,
+  sortedBy,
 }) => {
-  if (feeds.length === 0) {
+  if (loading) {
     return (
-      <>
-        <Empty />
-      </>
+      <MiddleCenter>
+        <Spin
+          className="FeedGridList-loading"
+          tip="loading..."
+          indicator={<Loading3QuartersOutlined spin />}
+        />
+      </MiddleCenter>
     );
   }
 
-  const list = feeds
-    .sort((a: UserFeedModel, b: UserFeedModel): number => {
-      return sortedBy.compareFn(a, b);
-    })
-    .map((feed: UserFeedModel) => {
-      return (
-        <Card
-          key={feed.title}
-          cover={
-            <Link href={`/feed/${feed.title}`}>
-              <Artwork src={`${API_URL}/img/${feed.img}`} width="100%" />
-            </Link>
-          }
-          actions={[]}
-        >
-          <Link href={`/feed/${feed.title}`}>
-            <Title style={{ cursor: "pointer" }} level={4}>
-              {feed.title}
-            </Title>
-          </Link>
-          <small>{feed.authorName}</small>
-        </Card>
-      );
-    });
-
-  return <GridCard>{list}</GridCard>;
+  if (feeds.length === 0) {
+    return (
+      <>
+        <Empty description="No Feeds" />
+      </>
+    );
+  }
+  if (sortedBy) {
+    const list = feeds
+      .sort((a: UserFeedModel, b: UserFeedModel): number => {
+        return sortedBy.compareFn(a, b);
+      })
+      .map(renderCard);
+    return <GridCard>{list}</GridCard>;
+  } else {
+    return <GridCard>{feeds.map(renderCard)}</GridCard>;
+  }
 };
 
 export default FeedGridList;

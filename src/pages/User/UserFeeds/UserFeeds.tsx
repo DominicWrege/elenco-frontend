@@ -48,7 +48,7 @@ let submittedFeeds: SubmittedFeeds | null = null;
 export const UserFeeds: React.FC = () => {
   const [feedsList, setFeedsList] = useState<UserFeedModel[]>([]);
   const [filter, setFilter] = useState<FeedStatus>(FeedStatus.Online);
-
+  const [loading, setLoading] = useState(true);
   const [currentSortBy, setCurrentSortBy] = useState<SortByValue>(sortBy.title);
 
   const getFeeds = useCallback(async () => {
@@ -58,6 +58,8 @@ export const UserFeeds: React.FC = () => {
       setFeedsList(feeds.online);
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   }, []);
 
@@ -111,7 +113,11 @@ export const UserFeeds: React.FC = () => {
           </Radio.Group>
           <FeedFilter onChange={onChangeFilter} />
         </section>
-        <FeedGridList feeds={feedsList} sortedBy={currentSortBy} />
+        <FeedGridList
+          feeds={feedsList}
+          sortedBy={currentSortBy}
+          loading={loading}
+        />
       </section>
     </div>
   );
