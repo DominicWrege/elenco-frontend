@@ -1,7 +1,24 @@
-.CommentsList .ant-list-item{
-    padding: 0;
+.CommentsList .ant-list-item {
+  padding: 0;
+  animation: fadeIn 1.2s;
 }
 
-.Comment .ant-card-body{
-    padding: 1.25rem;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 0.25;
+  }
+  75% {
+    opacity: 0.75;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.Comment .ant-card-body {
+  padding: 1.25rem;
 }

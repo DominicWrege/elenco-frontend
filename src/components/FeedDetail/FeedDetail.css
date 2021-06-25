@@ -48,10 +48,12 @@
 }
 .FeedDetail-header a {
   font-size: 1.175em;
+  color: black;
 }
 
 .FeedDetail-related {
   overflow: hidden;
+  height: fit-content;
 }
 
 @media (max-width: 1200px) {

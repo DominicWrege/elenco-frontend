@@ -1,27 +1,31 @@
-.FeedResultCard{
-    /* max-width: 820px; */
-    width: 100%;
+.FeedResultCard {
+  /* max-width: 820px; */
+  width: 100%;
 }
 
 .ant-card.ant-card-bordered.FeedResultCard {
-    width: 100%;
+  width: 100%;
 }
 
 .FeedResultCard-content {
-    display: grid;
-    grid-template-columns: minmax(8rem, 12rem) 1fr;
-    gap: 1.5em;
+  display: grid;
+  grid-template-columns: minmax(8rem, 12rem) 1fr;
+  gap: 1.5em;
 }
 
-.FeedResultCard-author{
-    font-size: 0.9em;
+.FeedResultCard-author {
+  font-size: 0.9em;
+}
+
+.FeedResultCard-author a {
+  color: black;
 }
 
 /* TODO copy and pate code */
-.FeedResultCard-description{
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.FeedResultCard-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

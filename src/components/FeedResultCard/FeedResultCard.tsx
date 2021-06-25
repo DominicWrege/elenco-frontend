@@ -48,7 +48,7 @@ const FeedResultCard: React.FC<Props> = (props: Props) => {
             {props.feed.title}
           </Link>
           <div className="FeedResultCard-author">
-            <Link href={`/author/${props.feed.authorName}`} className="active">
+            <Link href={`/author/${props.feed.authorName}`}>
               {props.feed.authorName}
             </Link>
           </div>

@@ -1,50 +1,46 @@
-
-li.EpisodeItem{
-    display: flex !important;
-    padding: 0.9em 0 0.9em 0 !important;
-    column-gap: 1rem;
-    max-height: 10rem;
-
-}
-    
-.EpisodeItem-text-body h2, h3, h4{
-    margin-bottom: 0 !important;
-    line-height: 1.2em !important
+li.EpisodeItem {
+  display: flex !important;
+  padding: 0.9em 0 0.9em 0 !important;
+  column-gap: 1rem;
 }
 
+.EpisodeItem-text-body h2,
+h3,
+h4 {
+  margin-bottom: 0 !important;
+  line-height: 1.2em !important;
+}
 
-.EpisodeItem-text-body p{
-    margin-bottom: 0 !important;
- 
+.EpisodeItem-text-body p {
+  margin-bottom: 0 !important;
 }
 
 /* TODO copy and pate code */
 
-.EpisodeItem-text-body{
-    width: 100%;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.EpisodeItem-text-body {
+  width: 100%;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.EpisodeItem-text-small{
-
-    color: #52585c;
-    display: flex;
-    /* width: max-content; */
-    margin-bottom: 0.5em;
-    justify-content: space-between;
-}
-
-.EpisodeItem-explicit:After {
-    content: '[E]';
-    margin-left: 0.5em;
-    font-weight: normal;
+.EpisodeItem-text-small {
+  color: #52585c;
+  display: flex;
+  /* width: max-content; */
+  margin-bottom: 0.5em;
+  justify-content: space-between;
 }
 
-.EpisodeItem-play-pause{
-    cursor: pointer;
-    color: #3f51b5;
-    font-size: 3.2rem;
+.EpisodeItem-explicit:after {
+  content: "[E]";
+  margin-left: 0.5em;
+  font-weight: normal;
+}
+
+.EpisodeItem-play-pause {
+  cursor: pointer;
+  color: #3f51b5;
+  font-size: 3.2rem;
 }

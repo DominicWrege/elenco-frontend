@@ -1,7 +1,7 @@
 import "./FeedDetail.css";
 
 import type { FeedEpisodeModel, UserFeedModel } from "../../models/feeds";
-import { Card, Tabs, Typography } from "antd";
+import { BackTop, Card, Tabs, Typography } from "antd";
 import Artwork from "../Artwork/Artwork";
 import FeedMetaInfo from "../FeedMetaInfo/FeedMetaInfo";
 import { Link } from "wouter";
@@ -41,9 +41,7 @@ export const FeedDetail: React.FC<Properties> = ({
       <div className="FeedDetail">
         <header className="FeedDetail-header">
           <Title level={3}>{feed.title}</Title>
-          <Link href={`/author/${feed.authorName}`} className="active">
-            {feed.authorName}
-          </Link>
+          <Link href={`/author/${feed.authorName}`}>{feed.authorName}</Link>
         </header>
         <section
           className={[
@@ -97,6 +95,7 @@ export const FeedDetail: React.FC<Properties> = ({
             </Card>
           )}
         </section>
+        <BackTop />
       </div>
     );
   };
