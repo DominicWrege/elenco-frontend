@@ -25,6 +25,7 @@ export const FeedsByAuthorOrCategory: React.FC<Property> = ({ config }) => {
   const params = useRoute<SearchProperties>(`/${pathName}/:query`)[1];
   const [feeds, setFeeds] = useState<SmallFeed[]>([]);
   const [loading, setLoading] = useState(true);
+
   const fetchData = useCallback(async () => {
     if (params?.query) {
       try {

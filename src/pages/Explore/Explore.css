@@ -1,0 +1,6 @@
+.Explore{
+    display: flex;
+    row-gap: 1rem;
+    flex-direction: column;
+    max-width: 100%;
+}

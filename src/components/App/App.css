@@ -20,6 +20,7 @@
 /* TODO  */
 .App-pages > div {
   width:  80rem !important;
+  max-width: 100%;
 }
 
 /* .App-link {

@@ -4,3 +4,12 @@
 .FeedSmallList {
   width: 100%;
 }
+.FeedSmallList li.ant-list-item.FeedSmallList-item.noBorder {
+  border: none !important;
+}
+
+.FeedSmallList ul.ant-list-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}

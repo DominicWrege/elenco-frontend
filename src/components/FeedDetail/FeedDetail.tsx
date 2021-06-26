@@ -8,7 +8,7 @@ import { Link } from "wouter";
 import EpisodeList from "../EpisodeList/EpisodeList";
 import { SubscribeButton } from "../SubscribeButton/Subscribe";
 import { Comment } from "../../components/Comment/Comment";
-import React from "react";
+import React, { useState } from "react";
 import FeedSmallList from "../FeedSmallList/FeedSmallList";
 
 const { Title, Paragraph } = Typography;
@@ -18,6 +18,8 @@ interface Properties {
   showSubscribeButton?: boolean;
   showComments?: boolean;
   relatedFeeds?: SmallFeed[];
+  loadingFeed?: boolean
+  loadingRelated?: boolean
 }
 
 export const FeedDetail: React.FC<Properties> = ({
@@ -25,7 +27,10 @@ export const FeedDetail: React.FC<Properties> = ({
   showSubscribeButton = false,
   showComments = false,
   relatedFeeds,
+  loadingFeed = true,
+  loadingRelated = true
 }) => {
+
   const renderSubtitle = (subtitle?: string) => {
     if (!subtitle) {
       return null;
@@ -91,7 +96,7 @@ export const FeedDetail: React.FC<Properties> = ({
           </section>
           {relatedFeeds && (
             <Card title="Related" className="FeedDetail-related">
-              <FeedSmallList feeds={relatedFeeds} title="Related" />
+              <FeedSmallList feeds={relatedFeeds} loading={loadingRelated} />
             </Card>
           )}
         </section>

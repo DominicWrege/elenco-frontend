@@ -7,8 +7,7 @@ import { FlexCenter } from "../../components/Styles/shared.css";
 import { useCallback } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import "./Feed.css";
-import FeedSmallList from "../../components/FeedSmallList/FeedSmallList";
-import { Card } from "antd";
+
 interface FeedRouterProperties extends DefaultParams {
   name: string;
 }
@@ -17,6 +16,8 @@ export function Feed(): React.ReactElement<void> {
   const [feedValue, setFeedValue] = useState<FeedEpisodeModel | null>(null);
   const [relatedFeeds, setRelatedFeeds] = useState<SmallFeed[]>([]);
   const userContext = useContext(UserContext);
+
+  const [loadingRelated, setLoadingRelated] = useState(true);
 
   const params = useRoute<FeedRouterProperties>("/feed/:name")[1];
 
@@ -27,8 +28,11 @@ export function Feed(): React.ReactElement<void> {
         const json_feed: FeedEpisodeModel = await feed.getByName(params?.name ?? "");
         setFeedValue(json_feed);
         setRelatedFeeds(await feed.getRelated(json_feed.id));
+        setLoadingRelated(false);
       } catch (err) {
         console.log(err);
+      } finally {
+        setLoadingRelated(false);
       }
     }
   }, [params?.name]);
@@ -49,6 +53,7 @@ export function Feed(): React.ReactElement<void> {
         showComments
         relatedFeeds={relatedFeeds}
         showSubscribeButton={userContext?.user !== null}
+        loadingRelated={loadingRelated}
       />
     </FlexCenter>
   );
