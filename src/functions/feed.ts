@@ -1,5 +1,5 @@
 import { API_URL } from "../env"
-import { FeedEpisodeModel, UserFeedModel } from "../models/feeds";
+import { FeedEpisodeModel, FeedModel, UserFeedModel } from "../models/feeds";
 import { http } from "./http"
 
 
@@ -30,6 +30,13 @@ export namespace feed {
         const resp = await http.get(uri);
         return resp.json();
     }
+
+    // export function intoSmallFeed(feed: FeedModel): UserFeedModel {
+
+    //     return {
+
+    //     }
+    // }
 
 }
 

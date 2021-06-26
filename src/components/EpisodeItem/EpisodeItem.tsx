@@ -51,7 +51,7 @@ const EpisodeItem: React.FC<Properties> = React.memo(
         <section className="EpisodeItem-body-wrapper">
           <Title
             className={episode.explicit ? "EpisodeItem-explicit" : ""}
-            level={3}
+            level={4}
           >
             {episode.title}
           </Title>
