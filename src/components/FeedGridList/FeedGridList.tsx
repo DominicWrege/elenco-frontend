@@ -6,7 +6,7 @@ import { Link } from "wouter";
 import { API_URL } from "../../env";
 import { Spin } from "antd";
 import { Loading3QuartersOutlined } from "@ant-design/icons";
-import { UserFeedModel } from "../../models/feeds";
+import { SmallFeed } from "../../models/feeds";
 import Artwork from "../Artwork/Artwork";
 import { SortByValue } from "../FeedFilter/FeedFilter";
 import MiddleCenter from "../Styles/shared.css";
@@ -14,7 +14,7 @@ import AnchorLink from "antd/lib/anchor/AnchorLink";
 const { Title } = Typography;
 
 interface Properties {
-  feeds: UserFeedModel[];
+  feeds: SmallFeed[];
   loading: boolean;
   sortedBy?: SortByValue;
 }
@@ -35,7 +35,7 @@ const goToFeed = (event: any): void => {
   console.log(event.target.parent);
 };
 
-function renderCard(feed: UserFeedModel) {
+function renderCard(feed: SmallFeed) {
   return (
     <Card
       key={feed.title}
@@ -84,7 +84,7 @@ export const FeedGridList: React.FC<Properties> = ({
   }
   if (sortedBy) {
     const list = feeds
-      .sort((a: UserFeedModel, b: UserFeedModel): number => {
+      .sort((a: SmallFeed, b: SmallFeed): number => {
         return sortedBy.compareFn(a, b);
       })
       .map(renderCard);

@@ -7,7 +7,7 @@ import { user } from "../../../functions/user";
 import {
   FeedStatus,
   SubmittedFeeds,
-  UserFeedModel,
+  SmallFeed,
 } from "../../../models/feeds";
 import FeedGridList from "../../../components/FeedGridList/FeedGridList";
 import FeedFilter, {
@@ -46,7 +46,7 @@ function renderSortByOptions(sortBy: SortByType): JSX.Element[] {
 let submittedFeeds: SubmittedFeeds | null = null;
 
 export const UserFeeds: React.FC = () => {
-  const [feedsList, setFeedsList] = useState<UserFeedModel[]>([]);
+  const [feedsList, setFeedsList] = useState<SmallFeed[]>([]);
   const [filter, setFilter] = useState<FeedStatus>(FeedStatus.Online);
   const [loading, setLoading] = useState(true);
   const [currentSortBy, setCurrentSortBy] = useState<SortByValue>(sortBy.title);

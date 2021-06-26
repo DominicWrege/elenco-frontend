@@ -1,6 +1,6 @@
 import "./FeedDetail.css";
 
-import type { FeedEpisodeModel, UserFeedModel } from "../../models/feeds";
+import type { FeedEpisodeModel, SmallFeed } from "../../models/feeds";
 import { BackTop, Card, Tabs, Typography } from "antd";
 import Artwork from "../Artwork/Artwork";
 import FeedMetaInfo from "../FeedMetaInfo/FeedMetaInfo";
@@ -17,7 +17,7 @@ interface Properties {
   feed: FeedEpisodeModel | null;
   showSubscribeButton?: boolean;
   showComments?: boolean;
-  relatedFeeds?: UserFeedModel[];
+  relatedFeeds?: SmallFeed[];
 }
 
 export const FeedDetail: React.FC<Properties> = ({

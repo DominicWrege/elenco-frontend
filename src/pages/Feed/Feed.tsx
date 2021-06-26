@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { DefaultParams, useRoute } from "wouter";
 import { feed } from "../../functions/feed";
-import type { FeedEpisodeModel, UserFeedModel } from "../../models/feeds";
+import type { FeedEpisodeModel, SmallFeed } from "../../models/feeds";
 import { FeedDetail } from "../../components/FeedDetail/FeedDetail";
 import { FlexCenter } from "../../components/Styles/shared.css";
 import { useCallback } from "react";
@@ -15,7 +15,7 @@ interface FeedRouterProperties extends DefaultParams {
 
 export function Feed(): React.ReactElement<void> {
   const [feedValue, setFeedValue] = useState<FeedEpisodeModel | null>(null);
-  const [relatedFeeds, setRelatedFeeds] = useState<UserFeedModel[]>([]);
+  const [relatedFeeds, setRelatedFeeds] = useState<SmallFeed[]>([]);
   const userContext = useContext(UserContext);
 
   const params = useRoute<FeedRouterProperties>("/feed/:name")[1];

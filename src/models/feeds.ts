@@ -19,7 +19,7 @@ export interface FeedModel {
     description: string,
     subtitle?: string,
     language?: string,
-    lastModified: string, // Datetime UTC
+    submitted: string, // Datetime UTC
     categories: TopCategory[],
 }
 
@@ -35,12 +35,12 @@ export interface FeedEpisodeModel {
     description: string,
     subtitle?: string,
     language?: string,
-    lastModified: string, // Datetime UTC
+    submitted: string, // Datetime UTC
     categories: TopCategory[],
     episodes: Episode[]
 }
 
-export interface UserFeedModel {
+export interface SmallFeed {
     id: number,
     title: string,
     subtitle?: string,
@@ -59,10 +59,10 @@ export enum FeedStatus {
 }
 
 export interface SubmittedFeeds {
-    blocked: UserFeedModel[],
-    online: UserFeedModel[],
-    offline: UserFeedModel[],
-    queued: UserFeedModel[]
+    blocked: SmallFeed[],
+    online: SmallFeed[],
+    offline: SmallFeed[],
+    queued: SmallFeed[]
 }
 
 export interface FeedPreview {
@@ -75,7 +75,7 @@ export interface FeedPreview {
     description: string,
     subtitle?: string,
     language?: string,
-    lastModified: string, // Datetime UTC
+    submitted: string, // Datetime UTC
     categories: Map<string, Array<string>>
     episodes: Episode[]
 }

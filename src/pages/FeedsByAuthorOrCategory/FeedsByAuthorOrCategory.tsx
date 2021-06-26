@@ -4,8 +4,8 @@ import React, { useCallback, useEffect, useState } from "react";
 import { DefaultParams, useRoute } from "wouter";
 import FeedGridList from "../../components/FeedGridList/FeedGridList";
 import feed from "../../functions/feed";
-import { UserFeedModel } from "../../models/feeds";
 import api from "../../functions/api";
+import { SmallFeed } from "../../models/feeds";
 
 export enum FeedsBy {
   Author = 0,
@@ -23,26 +23,20 @@ export interface SearchProperties extends DefaultParams {
 export const FeedsByAuthorOrCategory: React.FC<Property> = ({ config }) => {
   const pathName = config === FeedsBy.Category ? "category" : "author";
   const params = useRoute<SearchProperties>(`/${pathName}/:query`)[1];
-  const [feeds, setFeeds] = useState<UserFeedModel[]>([]);
+  const [feeds, setFeeds] = useState<SmallFeed[]>([]);
   const [loading, setLoading] = useState(true);
   const fetchData = useCallback(async () => {
     if (params?.query) {
       try {
-        if (config === FeedsBy.Category) {
-          const json = await feed.getByCategory(params?.query);
-          setFeeds(json as any); // cast to small Feed
-        } else {
-          const json = await feed.getByAuthor(params?.query);
-          setFeeds(json as any);
-        }
-        console.log(params?.query);
+        const json = config === FeedsBy.Category ? await feed.getByCategory(params?.query) : await feed.getByAuthor(params?.query);
+        setFeeds(json);
       } catch (err) {
         console.log(err);
       } finally {
         setLoading(false);
       }
     }
-  }, [params?.query]);
+  }, [params?.query, config]);
 
   useEffect(() => {
     fetchData();

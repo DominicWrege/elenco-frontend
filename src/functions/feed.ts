@@ -1,5 +1,6 @@
 import { API_URL } from "../env"
-import { FeedEpisodeModel, FeedModel, UserFeedModel } from "../models/feeds";
+import { Author } from "../models/api";
+import { FeedEpisodeModel, FeedModel, SmallFeed as SmallFeed } from "../models/feeds";
 import { http } from "./http"
 
 
@@ -14,29 +15,36 @@ export namespace feed {
     }
 
 
-    export async function getRelated(feedId: number): Promise<UserFeedModel[]> {
+    export async function getRelated(feedId: number): Promise<SmallFeed[]> {
         const resp = await http.get(`${API_URL}/feed/${feedId}/related`);
         return resp.json();
     }
 
-    export async function getByCategory(categoryName: string): Promise<FeedEpisodeModel> {
+    export async function getByCategory(categoryName: string): Promise<SmallFeed[]> {
         const uri = decodeURI(`${API_URL}/category/${categoryName}/feeds`);
         const resp = await http.get(uri);
-        return resp.json();
+        const json = await resp.json();
+        return json.map(intoSmallFeed);
     }
 
-    export async function getByAuthor(name: string) {
+    export async function getByAuthor(name: string): Promise<SmallFeed[]> {
         const uri = decodeURI(`${API_URL}/author/${name}/feeds`);
         const resp = await http.get(uri);
-        return resp.json();
+        const json = await resp.json();
+        return json.map(intoSmallFeed);
     }
 
-    // export function intoSmallFeed(feed: FeedModel): UserFeedModel {
+    export function intoSmallFeed(feed: FeedModel): SmallFeed {
 
-    //     return {
-
-    //     }
-    // }
+        return {
+            id: feed.id,
+            title: feed.title,
+            subtitle: feed.subtitle,
+            img: feed.imgCache,
+            authorName: feed.authorName,
+            submitted: feed.submitted
+        }
+    }
 
 }
 

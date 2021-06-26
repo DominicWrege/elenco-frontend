@@ -1,18 +1,18 @@
 import { List, Typography } from "antd";
 import { Link } from "wouter";
 import { API_URL } from "../../env";
-import { UserFeedModel } from "../../models/feeds";
+import { SmallFeed } from "../../models/feeds";
 import Artwork from "../Artwork/Artwork";
 import "./FeedSmallList.css";
 import { BackTop } from "antd";
 
 interface Properties {
-  feeds?: UserFeedModel[];
+  feeds?: SmallFeed[];
   title: string;
 }
 
 export const FeedSmallList: React.FC<Properties> = ({ feeds = [], title }) => {
-  const listItem = (feed: UserFeedModel): JSX.Element => {
+  const listItem = (feed: SmallFeed): JSX.Element => {
     return (
       <List.Item className="FeedSmallList-item">
         <Link href={`/feed/${feed.title}`}>

@@ -6,12 +6,12 @@ import FeedFilter, {
 } from "../../components/FeedFilter/FeedFilter";
 import FeedGridList from "../../components/FeedGridList/FeedGridList";
 import { user } from "../../functions/user";
-import { UserFeedModel } from "../../models/feeds";
+import { SmallFeed } from "../../models/feeds";
 import { Typography } from "antd";
 const { Title } = Typography;
 
 export const Subscription = () => {
-  const [feeds, setFeeds] = useState<UserFeedModel[]>([]);
+  const [feeds, setFeeds] = useState<SmallFeed[]>([]);
   const [currentSortBy, setCurrentSortBy] = useState<SortByValue>(sortBy.title);
   const [loading, setLoading] = useState(true);
 
