@@ -29,6 +29,7 @@ import { Explore } from "../../pages/Explore/Explore";
 import FeedsByAuthorOrCategory, {
   FeedsBy,
 } from "../../pages/FeedsByAuthorOrCategory/FeedsByAuthorOrCategory";
+import NewFeed from "../../pages/NewFeed/NewFeed";
 
 const App: React.FC = () => {
   let userCache: User | null = auth.getSession();
@@ -122,12 +123,13 @@ const App: React.FC = () => {
                   <RegisterLogin component={ComponentType.Register} />
                 </Route>
                 <Route path="/search/:query" component={SearchResults}></Route>
-                <Route path="/new-feed">
+                {/* <Route path="/new-feed">
                   <Guard>
                     <SubmitFeed />
                   </Guard>
-                </Route>
-                <Route path="/preview" component={Preview}></Route>
+                </Route> */}
+                <Route path="/new/:path" component={NewFeed}></Route>
+                {/* <Route path="/preview" component={Preview}></Route> */}
                 <Route path="/feed/:name" component={Feed}></Route>
                 <Route path="/category/:category">
                   <FeedsByAuthorOrCategory

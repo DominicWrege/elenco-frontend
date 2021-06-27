@@ -34,7 +34,7 @@ function AppHeader(): JSX.Element {
         <Link href="/user/feeds">My Submitted Podcasts</Link>
       </Menu.Item>
       <Menu.Item key="Menu4">
-        <Link href="/new-feed">Submit a new Podcast</Link>
+        <Link href="/new/feed">Submit a new Podcast</Link>
       </Menu.Item>
       <Menu.Item key="Menu5" onClick={handleLogout}>
         Logout

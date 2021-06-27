@@ -15,6 +15,9 @@ import FeedFilter, {
   SortByType,
   SortByValue,
 } from "../../../components/FeedFilter/FeedFilter";
+import util from "../../../functions/util";
+import { Feed } from "../../Feed/Feed";
+import useLocation from "wouter/use-location";
 const { Title } = Typography;
 
 function renderRadioButtons(
@@ -33,29 +36,43 @@ function renderRadioButtons(
   });
 }
 
-function renderSortByOptions(sortBy: SortByType): JSX.Element[] {
-  return Object.entries(sortBy).map(([key, prop]: [string, any]) => {
-    return (
-      <Select.Option key={prop.name} value={key}>
-        {prop.name}
-      </Select.Option>
-    );
-  });
+function initFilter(): FeedStatus {
+  // console.log(util.urlParameter("select"));
+  const selection = util.urlParameter("select")?.toLocaleLowerCase();
+  if (selection?.localeCompare(FeedStatus.Queued.toLocaleLowerCase()) === 0) {
+    return FeedStatus.Queued;
+  } else if (selection?.localeCompare(FeedStatus.Offline.toLocaleLowerCase()) === 0) {
+    return FeedStatus.Offline;
+  } else if (selection?.localeCompare(FeedStatus.Blocked.toLocaleLowerCase()) === 0) {
+    return FeedStatus.Blocked;
+  }
+  return FeedStatus.Online;
 }
+
+// function renderSortByOptions(sortBy: SortByType): JSX.Element[] {
+//   return Object.entries(sortBy).map(([key, prop]: [string, any]) => {
+//     return (
+//       <Select.Option key={prop.name} value={key}>
+//         {prop.name}
+//       </Select.Option>
+//     );
+//   });
+// }
 
 let submittedFeeds: SubmittedFeeds | null = null;
 
 export const UserFeeds: React.FC = () => {
   const [feedsList, setFeedsList] = useState<SmallFeed[]>([]);
-  const [filter, setFilter] = useState<FeedStatus>(FeedStatus.Online);
+  const [filter, setFilter] = useState<FeedStatus>(initFilter());
   const [loading, setLoading] = useState(true);
+  const setLocation = useLocation()[1];
   const [currentSortBy, setCurrentSortBy] = useState<SortByValue>(sortBy.title);
 
   const getFeeds = useCallback(async () => {
     try {
       const feeds: SubmittedFeeds = await user.getSubmittedFeeds();
       submittedFeeds = feeds;
-      setFeedsList(feeds.online);
+      setFeedsList(feeds[filter.toLowerCase()]);
     } catch (err) {
       console.log(err);
     } finally {
@@ -65,11 +82,14 @@ export const UserFeeds: React.FC = () => {
 
   useEffect(() => {
     getFeeds();
+    const select = util.urlParameter("select");
+    console.log(select);
   }, [getFeeds]);
 
   const handelFilterChange = (event: RadioChangeEvent): void => {
     event.preventDefault();
     const filter = event.target.value ?? "online";
+    setLocation(encodeURI(`feeds?select=${filter}`), { replace: false });
     setFilter(filter);
     if (submittedFeeds) {
       setFeedsList(submittedFeeds[filter] ?? []);
@@ -88,15 +108,6 @@ export const UserFeeds: React.FC = () => {
     setCurrentSortBy(value);
   };
 
-  // if (feedsList.length === 0) {
-  // 	return (
-  // 		<Card size="small" style={{ height: "fit-content" }} >
-  // 			<p style={{ textAlign: "center" }}>It seems, that you have zero submitted Podcasts yet. <br></br>Here you can a < Link href="/new-feed" >submit new Podcast.</Link >
-  // 			</p >
-  // 			<Empty description="No Podcasts" />
-  // 		</Card >);
-  // }
-  // show loading
   return (
     <div className="UserFeeds">
       <header>

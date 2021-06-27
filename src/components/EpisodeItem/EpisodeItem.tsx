@@ -2,7 +2,7 @@ import "./EpisodeItem.css";
 import React, { PropsWithChildren, useContext } from "react";
 import Episode from "../../models/episode";
 import { Typography, List } from "antd";
-import { formatDate, formatDuration } from "../../functions/util";
+import { util } from "../../functions/util";
 import { stripHtml } from "string-strip-html";
 import { PlayCircleFilled, PauseCircleFilled } from "@ant-design/icons";
 import { PlayerContext } from "../../contexts/PlayerContext";
@@ -59,8 +59,8 @@ const EpisodeItem: React.FC<Properties> = React.memo(
           <div className="EpisodeItem-text-body">
             {/* <Paragraph ellipsis> */}
             <div className="EpisodeItem-text-small">
-              <p>{formatDuration(episode.duration)}</p>
-              <p>{formatDate(episode.published)}</p>
+              <p>{util.formatDuration(episode.duration)}</p>
+              <p>{util.formatDate(episode.published)}</p>
             </div>
             <p>{stripHtml(episode.description ?? "").result}...</p>
             {/* </Paragraph> */}

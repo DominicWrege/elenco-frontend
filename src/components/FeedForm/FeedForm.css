@@ -1,18 +1,18 @@
-.NewFeed{
+.FeedForm{
     display: flex;
     flex-direction: column;
     row-gap: 1rem;
 }
 
-.NewFeed-input{
+.FeedForm-input{
     max-width: 70vw;
 }
-.NewFeed-content{
+.FeedForm-content{
     width: 100%;
     max-width: 850px;
 }
 
-.NewFeed-form{
+.FeedForm-form{
     min-width: 350px;
     width: 100%;
     display: flex;
@@ -20,7 +20,7 @@
 }
 
 @media(min-width: 640px) {
-    .NewFeed-form{
+    .FeedForm-form{
         min-width: 640px;
     }
 }

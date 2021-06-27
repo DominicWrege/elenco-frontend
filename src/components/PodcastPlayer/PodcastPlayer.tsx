@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import "./PodcastPlayer.css";
 import { config } from "./config";
 import Episode, { PlayerEpisode as PodloveEpisode, Audio } from "../../models/episode";
-import { formatDuration } from "../../functions/util";
+import util from "../../functions/util";
 import { FeedShort } from "../../models/feeds";
 import { PlayerContext, PodcastPlayerContext } from "../../contexts/PlayerContext";
 
@@ -61,7 +61,7 @@ export function toPlayerEpisode(episode: Episode, feed: FeedShort): PodloveEpiso
         subtitle: episode.description,
         summary: "",
         publicationDate: episode.published ?? Date.now().toLocaleString(), //ISO 8601 DateTime
-        duration: formatDuration(episode.duration), // ISO 8601 Duration format ([hh]:[mm]:[ss].[sss]
+        duration: util.formatDuration(episode.duration), // ISO 8601 Duration format ([hh]:[mm]:[ss].[sss]
         poster: feed.img ?? "", //use img cache
         link: episode.webLink,
         audio: audio,

@@ -9,9 +9,8 @@ export function SubmitFeed(): JSX.Element {
 
     const handleSubmit = (event: SubmitEvent): void => {
         const urlParam = event.url;
-        const uri = encodeURI(`/preview?url=${urlParam}`);
+        const uri = encodeURI(`/new/preview?url=${urlParam}`);
         setLocation(uri);
-
     };
 
     return (

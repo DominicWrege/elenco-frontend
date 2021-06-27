@@ -1,6 +1,8 @@
 .Preview {
     display: flex;
     justify-content: center; 
+    flex-direction: column;
+    row-gap: 1.5rem;
     min-width: 300px !important;  
 }
 

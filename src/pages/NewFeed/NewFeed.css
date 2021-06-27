@@ -1,0 +1,9 @@
+.NewFeed{
+    display: flex;
+    flex-direction: column;
+    row-gap: 2rem;
+}
+
+.NewFeed > div {
+    width: 100%;
+}

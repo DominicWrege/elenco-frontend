@@ -16,7 +16,7 @@ export interface SubmitEvent {
     url: URL
 }
 
-export const NewFeed: React.FC<Properties> = ({ onSubmit }) => {
+export const FeedForm: React.FC<Properties> = ({ onSubmit }) => {
 
     const form = useRef<HTMLFormElement>(null); //TODO Fix me rm any
 
@@ -56,14 +56,14 @@ export const NewFeed: React.FC<Properties> = ({ onSubmit }) => {
     };
 
     return (
-        <div className="NewFeed">
-            <header className="NewFeed-header">
+        <div className="FeedForm">
+            <header className="FeedForm-header">
                 <Title level={3}>Submit New RSS-Feed</Title>
             </header>
-            <form method="post" onSubmit={handleSubmit} className="NewFeed-form" ref={form}>
+            <form method="post" onSubmit={handleSubmit} className="FeedForm-form" ref={form}>
                 {/* {protocolSelect} */}
                 <Input name="feed-url" autoFocus required ref={inputElement}
-                    className="NewFeed-input" placeholder="site.com/feed" type="url" />
+                    className="FeedForm-input" placeholder="site.com/feed" type="url" />
                 <Button type="primary" htmlType="submit">
                     Submit Feed
                 </Button>
@@ -73,4 +73,4 @@ export const NewFeed: React.FC<Properties> = ({ onSubmit }) => {
 };
 
 
-export default NewFeed;
+export default FeedForm;
