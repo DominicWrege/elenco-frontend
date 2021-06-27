@@ -27,17 +27,17 @@ export const FeedSmallList: React.FC<Properties> = (
   }
 ) => {
 
-  const sekelations = useMemo(() => new Array(6).fill(<Skeleton.Image style={{ width: sekelationSize, height: sekelationSize }} />), [sekelationSize]);
+  const sekelations = useMemo(() => Array(6).fill(<Skeleton.Image style={{ width: sekelationSize, height: sekelationSize }} />), [sekelationSize]);
 
   const listItem = (feed: SmallFeed): JSX.Element => {
 
-    const artwork = <Link href={`/feed/${feed.title}`}>
+    const artwork =
       <Artwork
+        href={`/feed/${feed.title}`}
         src={`${API_URL}/img/${feed.img}`}
         width="100%"
       />
-      <div hidden>link</div>
-    </Link>;
+      ;
 
     if (onlyArtwork) {
       return (
@@ -63,8 +63,9 @@ export const FeedSmallList: React.FC<Properties> = (
             <Typography.Title level={4}>
               {feed.title}
             </Typography.Title>
-
-            <small>{feed.authorName}</small>
+            <Link href={`/author/${feed.authorName}`} >
+              <small>{feed.authorName}</small>
+            </Link>
           </>
         </Link>
       </List.Item>

@@ -7,22 +7,18 @@ import { RegisterLoginChildProps } from "../RegisterLogin";
 const Register: React.FC<RegisterLoginChildProps> = ({ onError }) => {
 
     const [form] = Form.useForm();
-    const [formValid, setFormValid] = useState<boolean>(true);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const setLocation = useLocation()[1];
 
 
     const onFinish = async (values: auth.RegisterFields) => {
         try {
-            console.log(values);
             setIsLoading(true);
-            setFormValid(true);
             await auth.register(values);
             setLocation("/login");
 
         } catch (err: any) {
             setIsLoading(false);
-            setFormValid(false);
             console.log(err);
 
             // console.log(err.json.message);
@@ -103,7 +99,7 @@ const Register: React.FC<RegisterLoginChildProps> = ({ onError }) => {
             </Form.Item>
 
             <Form.Item >
-                <Button type="primary" htmlType="submit" disabled={!formValid} loading={isLoading}>
+                <Button type="primary" htmlType="submit" loading={isLoading}>
                     Register
                 </Button>
             </Form.Item>

@@ -10,7 +10,6 @@ const Login: React.FC<RegisterLoginChildProps> = ({ onError }) => {
 
     const [form] = Form.useForm();
     const userContext = useContext(UserContext);
-    const [formValid, setFormValid] = useState<boolean>(false);
 
     const setLocation = useLocation()[1];
 
@@ -25,21 +24,14 @@ const Login: React.FC<RegisterLoginChildProps> = ({ onError }) => {
         } catch (err: any) {
             setIsLoading(false);
             onError(err.json.message);
+
         }
     };
 
-    const onFinishFailed = (errorInfo: any) => {
-        setFormValid(false);
-    };
+    // const onFinishFailed = (errorInfo: any) => {
+    //     setFormValid(false);
+    // };
 
-    const onCheck = async () => {
-        try {
-            await form.validateFields();
-            setFormValid(true);
-        } catch (errorInfo) {
-            setFormValid(false);
-        }
-    };
 
     return (
 
@@ -48,9 +40,7 @@ const Login: React.FC<RegisterLoginChildProps> = ({ onError }) => {
                 form={form}
                 className="Login-form-wrapper"
                 name="Login"
-                onChange={onCheck}
                 onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
             >
                 <Form.Item
                     label="Email"
@@ -81,7 +71,7 @@ const Login: React.FC<RegisterLoginChildProps> = ({ onError }) => {
                 </Form.Item>
 
                 <Form.Item >
-                    <Button type="primary" htmlType="submit" disabled={!formValid} loading={istLoading}>
+                    <Button type="primary" htmlType="submit" loading={istLoading}>
                         Submit
                     </Button >
                 </Form.Item>

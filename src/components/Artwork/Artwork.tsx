@@ -1,5 +1,6 @@
 import { Image } from "antd";
 import { CSSProperties } from "react";
+import { Link } from "wouter";
 import "./Artwork.css";
 
 interface Properties {
@@ -7,23 +8,40 @@ interface Properties {
   src?: string;
   className?: string;
   style?: CSSProperties;
+  href?: string
 }
+const className = "Artwork";
 
 //TOD placeholder
-export function Artwork({ width = "100%", src }: Properties) {
+export function Artwork({ width = "100%", src, href }: Properties) {
   const fallback = "/img/podcast_placeholder.jpg";
-  return (
-    <div className="Artwork">
-      <Image
-        alt="Podcast Artwork Image"
-        height={width}
-        width={width}
-        src={src ?? fallback}
-        preview={false} // TODO think about it
-        fallback={fallback}
-      />
-    </div>
-  );
+
+  const img = <Image
+    alt="Podcast Artwork Image"
+    height={width}
+    width={width}
+    loading="lazy"
+    src={src ?? fallback}
+    preview={false} // TODO think about it
+    fallback={fallback}
+    placeholder="/img/placeholder.svg"
+  />;
+
+  if (href) {
+    return (
+      <div className={className}>
+        <Link href={href}>
+          {img}
+          <div hidden>link</div>
+        </Link>
+      </div>);
+  } else {
+    return (
+      <div className={className}>
+        {img}
+      </div>
+    );
+  }
 }
 
 export default Artwork;

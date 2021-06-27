@@ -11,6 +11,7 @@ export namespace feed {
         // const url = `${API_URL}/api/feed/${name}`;
         // console.log(url);
         const resp = await http.get(url, http.WithCredentials.Yes);
+        
         return resp.json();
     }
 

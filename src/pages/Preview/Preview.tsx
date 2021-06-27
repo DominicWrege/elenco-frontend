@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import "./Preview.css";
 import { FeedEpisodeModel } from "../../models/feeds";
 import { http } from "../../functions/http";
@@ -12,13 +12,27 @@ import { TopCategory } from "../../models/category";
 import category from "../../functions/category";
 const { Title, Text } = Typography;
 
+
+async function getPreview(url: string): Promise<PreviewJson> {
+  const body: FormBody = {
+    feedUrl: url,
+  };
+  const resp = await http.post(
+    `${API_URL}/feed/preview`,
+    body,
+    http.WithCredentials.Yes
+  );
+  return resp.json();
+};
+
+
 const Preview: React.FC = () => {
   const [feed, setFeed] = useState<FeedEpisodeModel | null>(null);
   const [feedExist, setFeedExists] = useState<boolean>(false);
   const setLocation = useLocation()[1];
   const [feedUrl, setFeedUrl] = useState<string | null>(null);
   const [error, setError] = useState<ApiError | null>(null);
-
+  const [loading, setloading] = useState(true);
   const getPreview = async (url: string): Promise<PreviewJson> => {
     const body: FormBody = {
       feedUrl: url,
@@ -28,6 +42,7 @@ const Preview: React.FC = () => {
       body,
       http.WithCredentials.Yes
     );
+
     return resp.json();
   };
 
@@ -37,16 +52,14 @@ const Preview: React.FC = () => {
         feedUrl: feedUrl,
       };
       try {
-        const resp = await http.post(
+        await http.post(
           `${API_URL}/feed/new`,
           body,
           http.WithCredentials.Yes
         );
-        console.log(resp);
         setLocation("/new-feed");
       } catch (err: http.HttpError | any) {
         console.log(err.c);
-        // console.log(await err.json())
         setError(err.json);
       }
     }
@@ -76,11 +89,62 @@ const Preview: React.FC = () => {
     );
   };
 
-  const renderPreview = (): JSX.Element | null => {
-    if (!feed) {
-      return null;
-    }
+
+  const init = useCallback(
+    async () => {
+      const params = new URLSearchParams(window.location.search);
+      const paramsUrl = params.get("url");
+      console.log(paramsUrl);
+      if (paramsUrl) {
+        setFeedUrl(paramsUrl);
+        try {
+          const preview = await getPreview(paramsUrl);
+          setFeed({
+            ...preview.feed,
+            categories: category.castCategories(preview.feed.categories),
+          });
+          setFeedExists(preview.exists);
+          setloading(false);
+        } catch (err: http.HttpError | any) {
+          console.log(err);
+          setError(err.json);
+        }
+      }
+    },
+    [],
+  )
+
+  useEffect(() => {
+    init();
+  }, [init]);
+
+  if (error) {
     return (
+      <Card>
+        <Result
+          status="error"
+          title={<div>Error Code: {error.statusCode}</div>}
+          subTitle={error.message}
+          extra={
+            <Button type="primary" key="extra-b876565">
+              Go Back
+            </Button>
+          }
+        />
+      </Card>
+    );
+  }
+
+  if (loading) {
+    return (
+      <Card className="Preview-loading">
+        <Skeleton active avatar paragraph={{ rows: 12 }} />
+      </Card>
+    );
+  }
+
+  return (
+    <div className="Preview">
       <Card
         id="Preview-card"
         title={
@@ -97,54 +161,6 @@ const Preview: React.FC = () => {
       >
         <FeedDetail feed={feed} />
       </Card>
-    );
-  };
-
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const paramsUrl = params.get("url");
-    console.log(paramsUrl);
-    if (paramsUrl) {
-      setFeedUrl(paramsUrl);
-      getPreview(paramsUrl)
-        .then((preview: PreviewJson) => {
-          setFeed({
-            ...preview.feed,
-            categories: category.castCategories(preview.feed.categories),
-          });
-          setFeedExists(preview.exists);
-        })
-        .catch((err: http.HttpError) => {
-          console.log(err);
-          // console.log(err.message);
-          // console.log(err.statusCode);
-        });
-    }
-  }, []);
-
-  return (
-    <div className="Preview">
-      {!error && renderPreview()}
-
-      {error && (
-        <Card>
-          <Result
-            status="error"
-            title={<div>Error Code: {error.statusCode}</div>}
-            subTitle={error.message}
-            extra={
-              <Button type="primary" key="extra-b876565">
-                Go Back
-              </Button>
-            }
-          />
-        </Card>
-      )}
-      {!feed && !error && (
-        <Card className="Preview-loading">
-          <Skeleton active avatar paragraph={{ rows: 12 }} />
-        </Card>
-      )}
     </div>
   );
 };

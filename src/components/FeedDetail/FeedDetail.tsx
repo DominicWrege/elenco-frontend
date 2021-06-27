@@ -8,8 +8,9 @@ import { Link } from "wouter";
 import EpisodeList from "../EpisodeList/EpisodeList";
 import { SubscribeButton } from "../SubscribeButton/Subscribe";
 import { Comment } from "../../components/Comment/Comment";
-import React, { useState } from "react";
+import React from "react";
 import FeedSmallList from "../FeedSmallList/FeedSmallList";
+import { API_URL } from "../../env";
 
 const { Title, Paragraph } = Typography;
 
@@ -57,7 +58,7 @@ export const FeedDetail: React.FC<Properties> = ({
           ].join(" ")}
         >
           <aside className="FeedDetail-sidebar">
-            <Artwork src={feed.img} width={"100%"} />
+            <Artwork src={feed.img ?? `${API_URL}/img/${feed.imgCache}`}/>
             {showSubscribeButton && <SubscribeButton feedId={feed.id} />}
             <FeedMetaInfo
               feed={{

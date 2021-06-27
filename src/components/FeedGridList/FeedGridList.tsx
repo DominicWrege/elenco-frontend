@@ -30,22 +30,18 @@ const GridCard = styled.div`
   }
 `;
 
-const goToFeed = (event: any): void => {
-  event.preventDefault();
-  console.log(event.target.parent);
-};
 
 function renderCard(feed: SmallFeed) {
   return (
+
     <Card
       key={feed.title}
       cover={
-        <a href={`/feed/${feed.title}`}>
-          <Artwork
-            src={`${API_URL}/img/${feed["imgCache"] ?? feed.img}`}
-            width="100%"
-          />
-        </a>
+        <Artwork
+          src={`${API_URL}/img/${feed.img}`}
+          width="100%"
+          href={`/feed/${feed.title}`}
+        />
       }
     >
       <Link href={`/feed/${feed.title}`}>
