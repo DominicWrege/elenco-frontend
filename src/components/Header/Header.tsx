@@ -54,7 +54,7 @@ function AppHeader(): JSX.Element {
       );
     } else {
       return (
-        <Link key="dhsaudhasuo" href="/login" className="active">
+        <Link key="link771" href="/login" className="active">
           <Button>Login</Button>
         </Link>
       );
@@ -63,20 +63,19 @@ function AppHeader(): JSX.Element {
 
   return (
     <PageHeader
-      key="aaasdsadsada"
-      className="Header-background"
+      className="Header"
       title={<Link href=" /"> Elenco</Link>}
       tags={
-        <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-          <Col span={16}>
+        <Row gutter={8}>
+          <Col md={16} xs={20}>
             <SearchField />
           </Col>
-          <Col span={8} className="Header-links">
-            <a href="/explore" className="active">
+          <Col md={8} xs={2} className="Header-links">
+            <Link href="/explore" className="active">
               <Button type="primary" ghost>
                 Explore
               </Button>
-            </a>
+            </Link>
           </Col>
           {/* <Dropdown overlay={menu2} placement="bottomCenter" arrow>
                             <Button>Explore</Button>

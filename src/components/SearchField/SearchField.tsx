@@ -103,7 +103,7 @@ const SearchField: React.FC = () => {
       <Input.Search
         placeholder="input search text"
         allowClear
-        enterButton="Search"
+        enterButton
         onSearch={handleSearch}
         onChange={handleOnChange}
         size="middle"

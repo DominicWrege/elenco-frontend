@@ -55,11 +55,10 @@
 .FeedDetail-related {
   overflow: hidden;
   height: fit-content;
-
 }
 
-.FeedDetail-related .Artwork  .ant-image{
-  max-width:  10.5rem !important;
+.FeedDetail-related .Artwork .ant-image {
+  max-width: 10.5rem !important;
 }
 
 @media (max-width: 1200px) {
