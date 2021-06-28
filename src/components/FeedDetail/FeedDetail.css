@@ -11,8 +11,13 @@
   margin-bottom: 1rem;
 }
 
-.FeedDetail-main-card .ant-card-body {
+.FeedDetail .FeedDetail-main-card .ant-card-body {
   padding-top: 2px;
+}
+
+.ant-skeleton-content .ant-skeleton-paragraph > li,
+.ant-skeleton-title {
+  background: rgba(190, 190, 190, 0.75) !important;
 }
 
 .FeedDetail-main-card {

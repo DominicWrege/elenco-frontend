@@ -6,11 +6,12 @@ import { Category, TopCategory } from "../../models/category";
 import util from "../../functions/util";
 
 interface Properties {
+  loading?: boolean;
   feed: Meta;
   className?: string;
 }
 
-export function FeedMetaInfo({ feed }: Properties) {
+export function FeedMetaInfo({ feed, loading }: Properties) {
   const renderCategories = (categories: TopCategory[]) => {
     const ret = categories.map((category: TopCategory) => {
       if (category.children.length === 0) {
@@ -32,13 +33,10 @@ export function FeedMetaInfo({ feed }: Properties) {
     return <ul>{ret}</ul>;
   };
 
-  useEffect(() => { }, [feed]);
+  useEffect(() => {}, [feed]);
 
   return (
     <Card title="Information" className="FeedMeta-wrapper">
-      {/* <Divider orientation="left" plain>
-
-            </Divider> */}
       <div className="FeedMetaInfo-inner">
         <div className="FeedMetaInfo-svg-text">
           <img src="/icons/public.svg" alt="Fee Website Link Icon" />

@@ -18,6 +18,7 @@ export function Feed(): React.ReactElement<void> {
   const userContext = useContext(UserContext);
 
   const [loadingRelated, setLoadingRelated] = useState(true);
+  const [loadingFeed, setLoadingFeed] = useState(true);
 
   const params = useRoute<FeedRouterProperties>("/feed/:name")[1];
 
@@ -25,10 +26,13 @@ export function Feed(): React.ReactElement<void> {
   const loadFeed = useCallback(async () => {
     if (params?.name) {
       try {
-        const json_feed: FeedEpisodeModel = await feed.getByName(params?.name ?? "");
+        const json_feed: FeedEpisodeModel = await feed.getByName(
+          params?.name ?? ""
+        );
         console.log(json_feed);
         setFeedValue(json_feed);
         setRelatedFeeds(await feed.getRelated(json_feed.id));
+        setLoadingFeed(false);
         setLoadingRelated(false);
       } catch (err) {
         console.log(err);
@@ -54,6 +58,7 @@ export function Feed(): React.ReactElement<void> {
         showComments
         relatedFeeds={relatedFeeds}
         showSubscribeButton={userContext?.user !== null}
+        loadingFeed={loadingFeed}
         loadingRelated={loadingRelated}
       />
     </FlexCenter>
