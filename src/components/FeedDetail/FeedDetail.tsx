@@ -11,7 +11,7 @@ import { Comment } from "../../components/Comment/Comment";
 import React from "react";
 import FeedSmallList from "../FeedSmallList/FeedSmallList";
 import { API_URL } from "../../env";
-import { stripHtml } from "string-strip-html";
+import util from "../../functions/util";
 
 const { Title, Paragraph } = Typography;
 
@@ -67,13 +67,17 @@ export const FeedDetail: React.FC<Properties> = ({
           ].join(" ")}
         >
           <aside className="FeedDetail-sidebar">
+            {/* TODO FIX this */}
             {!feed && (
               <Skeleton.Image
                 style={{ width: "100%", background: "#fff", height: "14rem" }}
               />
             )}
+            {/* TODO FIX this */}
+
             {feed && (
               <>
+                {/* img placholder??  not working*/}
                 <Artwork src={feed.img ?? `${API_URL}/img/${feed.imgCache}`} />
                 {showSubscribeButton && <SubscribeButton feedId={feed.id} />}
               </>
@@ -83,6 +87,8 @@ export const FeedDetail: React.FC<Properties> = ({
                 <Skeleton loading={loadingFeed}></Skeleton>
               </Card>
             )}
+            {/* TODO FIX this */}
+
             {feed && (
               <FeedMetaInfo
                 feed={{
@@ -97,13 +103,15 @@ export const FeedDetail: React.FC<Properties> = ({
           <section className="FeedDetail-body">
             <Card className="FeedDetail-main-card">
               <Skeleton loading={loadingFeed} paragraph={{ rows: 8 }}>
+                {/* TODO FIX this */}
+
                 {feed && (
                   <>
                     <Tabs defaultActiveKey="tb1" size="large">
                       <Tabs.TabPane tab="Description" key="tbd1">
                         {renderSubtitle(feed.subtitle)}
                         <Paragraph>
-                          {stripHtml(feed.description ?? "").result}
+                          {util.removeHtml(feed.description)}
                         </Paragraph>
                       </Tabs.TabPane>
                       <Tabs.TabPane tab="Episodes" key="tbe1">

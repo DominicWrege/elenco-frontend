@@ -3,7 +3,6 @@ import React, { PropsWithChildren, useContext } from "react";
 import Episode from "../../models/episode";
 import { Typography, List } from "antd";
 import { util } from "../../functions/util";
-import { stripHtml } from "string-strip-html";
 import { PlayCircleFilled, PauseCircleFilled } from "@ant-design/icons";
 import { PlayerContext } from "../../contexts/PlayerContext";
 import { FeedShort } from "../../models/feeds";
@@ -62,7 +61,7 @@ const EpisodeItem: React.FC<Properties> = React.memo(
               <p>{util.formatDuration(episode.duration)}</p>
               <p>{util.formatDate(episode.published)}</p>
             </div>
-            <p>{stripHtml(episode.description ?? "").result}...</p>
+            <p>{util.removeHtml(episode.description)}...</p>
             {/* </Paragraph> */}
             {/* <Text type="secondary">{episode.keywords?.map(item => item).join(", ")}</Text> */}
           </div>

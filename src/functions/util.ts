@@ -1,4 +1,5 @@
 import ISO6391 from 'iso-639-1';
+import { stripHtml } from 'string-strip-html';
 
 export namespace util {
 
@@ -54,6 +55,13 @@ export namespace util {
 
         return formatter.format(date);
 
+    }
+
+    export function removeHtml(text?: string) {
+        if (!text) {
+            return "";
+        }
+        return stripHtml(text ?? "").result;
     }
 }
 
