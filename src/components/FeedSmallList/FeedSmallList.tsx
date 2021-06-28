@@ -8,47 +8,55 @@ import "./FeedSmallList.css";
 
 interface Properties {
   feeds?: SmallFeed[];
-  onlyArtwork?: boolean
-  noBorder?: boolean,
-  loading?: boolean
-  sekelationSize?: string
+  onlyArtwork?: boolean;
+  noBorder?: boolean;
+  loading?: boolean;
+  sekelationSize?: string;
 }
-
 
 const className = "FeedSmallList";
 
-export const FeedSmallList: React.FC<Properties> = (
-  {
-    feeds = [],
-    onlyArtwork = false,
-    noBorder,
-    loading = true,
-    sekelationSize = "11rem"
-  }
-) => {
-
-  const sekelations = useMemo(() => Array(6).fill(<Skeleton.Image style={{ width: sekelationSize, height: sekelationSize }} />), [sekelationSize]);
+export const FeedSmallList: React.FC<Properties> = ({
+  feeds = [],
+  onlyArtwork = false,
+  noBorder,
+  loading = true,
+  sekelationSize = "11rem",
+}) => {
+  const sekelations = useMemo(
+    () =>
+      Array(6).fill(
+        <Skeleton.Image
+          style={{ width: sekelationSize, height: sekelationSize }}
+        />
+      ),
+    [sekelationSize]
+  );
 
   const listItem = (feed: SmallFeed): JSX.Element => {
-
-    const artwork =
+    const artwork = (
       <Artwork
         href={`/feed/${feed.title}`}
         src={`${API_URL}/img/${feed.img}`}
         width="100%"
       />
-      ;
-
+    );
     if (onlyArtwork) {
       return (
-        <List.Item className={["FeedSmallList-item", noBorder ? "noBorder" : ""].join(" ")}>
+        <List.Item
+          className={["FeedSmallList-item", noBorder ? "noBorder" : ""].join(
+            " "
+          )}
+        >
           {artwork}
         </List.Item>
       );
     }
 
     return (
-      <List.Item className={["FeedSmallList-item", noBorder ? "noBorder" : ""].join(" ")}>
+      <List.Item
+        className={["FeedSmallList-item", noBorder ? "noBorder" : ""].join(" ")}
+      >
         {artwork}
         <Link
           href={`/feed/${feed.title}`}
@@ -57,16 +65,12 @@ export const FeedSmallList: React.FC<Properties> = (
               document.body.scrollTop = 0;
               document.documentElement.scrollTop = 0;
             }
-          }}>
-
-          <>
-            <Typography.Title level={4}>
-              {feed.title}
-            </Typography.Title>
-            <Link href={`/author/${feed.authorName}`} >
-              <small>{feed.authorName}</small>
-            </Link>
-          </>
+          }}
+        >
+          <Typography.Title level={4}>{feed.title}</Typography.Title>
+        </Link>
+        <Link href={`/author/${feed.authorName}`}>
+          <small>{feed.authorName}</small>
         </Link>
       </List.Item>
     );
@@ -75,11 +79,8 @@ export const FeedSmallList: React.FC<Properties> = (
   if (loading) {
     return (
       <div className={className}>
-        <List
-          dataSource={sekelations}
-          renderItem={item => item}
-        />
-      </div >
+        <List dataSource={sekelations} renderItem={(item) => item} />
+      </div>
     );
   }
 
@@ -90,7 +91,7 @@ export const FeedSmallList: React.FC<Properties> = (
         dataSource={feeds}
         renderItem={listItem}
       />
-    </div >
+    </div>
   );
 };
 

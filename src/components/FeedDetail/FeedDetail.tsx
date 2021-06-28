@@ -19,8 +19,8 @@ interface Properties {
   showSubscribeButton?: boolean;
   showComments?: boolean;
   relatedFeeds?: SmallFeed[];
-  loadingFeed?: boolean
-  loadingRelated?: boolean
+  loadingFeed?: boolean;
+  loadingRelated?: boolean;
 }
 
 export const FeedDetail: React.FC<Properties> = ({
@@ -29,9 +29,8 @@ export const FeedDetail: React.FC<Properties> = ({
   showComments = false,
   relatedFeeds,
   loadingFeed = true,
-  loadingRelated = true
+  loadingRelated = true,
 }) => {
-
   const renderSubtitle = (subtitle?: string) => {
     if (!subtitle) {
       return null;
@@ -58,7 +57,7 @@ export const FeedDetail: React.FC<Properties> = ({
           ].join(" ")}
         >
           <aside className="FeedDetail-sidebar">
-            <Artwork src={feed.img ?? `${API_URL}/img/${feed.imgCache}`}/>
+            <Artwork src={feed.img ?? `${API_URL}/img/${feed.imgCache}`} />
             {showSubscribeButton && <SubscribeButton feedId={feed.id} />}
             <FeedMetaInfo
               feed={{
