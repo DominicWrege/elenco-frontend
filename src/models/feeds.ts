@@ -80,6 +80,19 @@ export interface FeedPreview {
     episodes: Episode[]
 }
 
+export interface FeedModerator {
+    id: number,
+    url: string,
+    title: string,
+    authorName: string,
+    linkWeb?: string,
+    status: string,
+    submitted: string,
+    lastModified: string,
+    language: string,
+    username: string,
+}
+
 export interface FeedShort {
     img?: string
     title: string,

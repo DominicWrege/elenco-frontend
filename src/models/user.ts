@@ -8,7 +8,7 @@ export enum Permission {
     Admin = "Admin",
 }
 
-export interface UserShort{
+export interface UserShort {
     id: number,
     username; string
 }

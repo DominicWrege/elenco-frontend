@@ -103,8 +103,6 @@ export const FeedDetail: React.FC<Properties> = ({
           <section className="FeedDetail-body">
             <Card className="FeedDetail-main-card">
               <Skeleton loading={loadingFeed} paragraph={{ rows: 8 }}>
-                {/* TODO FIX this */}
-
                 {feed && (
                   <>
                     <Tabs defaultActiveKey="tb1" size="large">

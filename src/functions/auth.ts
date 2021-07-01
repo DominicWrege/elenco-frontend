@@ -1,7 +1,7 @@
 import { API_URL, AUTH_COOKIE, LOCALE_USER_CACHE } from "../env";
 import { http } from "./http";
-import { User } from "../models/user";
-import Cookies from 'js-cookie';
+import { Permission, User } from "../models/user";
+import Cookies from "js-cookie";
 
 export namespace auth {
 
@@ -37,6 +37,10 @@ export namespace auth {
     export function hasSession(): boolean {
         const cookie = Cookies.get("auth");
         return cookie !== null && cookie !== undefined;
+    }
+
+    export function isAdmin(user?: User | null): boolean {
+        return user?.permission === Permission.Admin;
     }
 
     export async function fetchUser(): Promise<User | null> {

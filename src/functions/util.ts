@@ -46,7 +46,7 @@ export namespace util {
         const date = Date.parse(dateStr)
         const formatter = new Intl.DateTimeFormat(navigator.language, {
             weekday: 'long',
-            year: 'numeric',
+            year: '2-digit',
             month: 'numeric',
             day: 'numeric',
             hour12: false,
