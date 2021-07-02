@@ -88,8 +88,6 @@ export interface FeedModerator {
     linkWeb?: string,
     status: string,
     submitted: string,
-    lastModified: string,
-    language: string,
     username: string,
 }
 
