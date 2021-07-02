@@ -39,7 +39,7 @@ function AppHeader(): JSX.Element {
 			<Menu.Divider />
 			{auth.isAdmin(userContext?.user) && (
 				<Menu.Item key="Menu5">
-					<Link href="/manage">Manage</Link>
+					<Link href="/manage/new-feeds">Manage</Link>
 				</Menu.Item>
 			)}
 			<Menu.Divider />

@@ -1,104 +1,106 @@
 .FeedDetail {
-  display: block;
-  width: 100%;
-  height: 100%;
-  --side-row-width: 17rem;
+	display: block;
+	width: 100%;
+	height: 100%;
+	--side-row-width: 17rem;
 }
 
 .FeedDetail header {
-  display: block;
-  height: fit-content;
-  margin-bottom: 1rem;
+	display: block;
+	height: fit-content;
+	margin-bottom: 1rem;
 }
 
 .FeedDetail .FeedDetail-main-card .ant-card-body {
-  padding-top: 2px;
+	padding-top: 2px;
 }
 
 .ant-skeleton-content .ant-skeleton-paragraph > li,
 .ant-skeleton-title {
-  background: rgba(190, 190, 190, 0.85) !important;
+	background: rgba(190, 190, 190, 0.85) !important;
 }
 
 .FeedDetail-main-card {
-  height: fit-content;
+	height: fit-content;
 }
 
 .FeedDetail-main {
-  display: grid;
-  gap: 1.5em;
+	display: grid;
+	gap: 1.5em;
 }
 
 .FeedDetail-main-three-columns {
-  grid-template-columns:
-    var(--side-row-width) minmax(var(--side-row-width), 1fr)
-    var(--side-row-width);
+	grid-template-columns:
+		var(--side-row-width) minmax(var(--side-row-width), 1fr)
+		var(--side-row-width);
 }
 
 .FeedDetail-main-two-columns {
-  grid-template-columns: var(--side-row-width) 1fr;
+	grid-template-columns: var(--side-row-width) 1fr;
 }
-
+.FeedDetail .Artwork {
+	width: 100%;
+}
 .FeedDetail-sidebar {
-  display: flex;
-  row-gap: 1.5em;
-  flex-direction: column;
+	display: flex;
+	row-gap: 1.5em;
+	flex-direction: column;
 }
 
 .FeedDetail-body {
-  display: inherit;
-  height: fit-content;
-  gap: 1.5em;
+	display: inherit;
+	height: fit-content;
+	gap: 1.5em;
 }
 
 .FeedDetail-body .ant-typography {
-  line-height: 2em;
+	line-height: 2em;
 }
 .FeedDetail-header h2 {
-  margin-bottom: 0em !important;
+	margin-bottom: 0em !important;
 }
 .FeedDetail-header a {
-  font-size: 1.175em;
-  color: black;
+	font-size: 1.175em;
+	color: black;
 }
 
 .FeedDetail-related {
-  overflow: hidden;
-  height: fit-content;
+	overflow: hidden;
+	height: fit-content;
 }
 
 .FeedDetail-related .Artwork .ant-image {
-  max-width: 10.5rem !important;
+	max-width: 10.5rem !important;
 }
 
 @media (max-width: 1200px) {
-  .FeedDetail-main {
-    grid-template-columns: 17rem 1fr;
-    grid-template-areas:
-      "sidebar tabs"
-      "sidebar related";
-  }
-  .FeedDetail-sidebar {
-    grid-area: sidebar;
-  }
+	.FeedDetail-main {
+		grid-template-columns: 17rem 1fr;
+		grid-template-areas:
+			"sidebar tabs"
+			"sidebar related";
+	}
+	.FeedDetail-sidebar {
+		grid-area: sidebar;
+	}
 
-  .FeedDetail-body {
-    grid: tabs;
-  }
-  .FeedDetail-related {
-    grid-area: related;
-    top: -1rem;
-  }
-  .FeedDetail-related ul.ant-list-items {
-    display: flex;
-    flex-direction: row !important;
-    overflow-x: auto !important;
-    gap: 1em !important;
-  }
-  .FeedDetail-related .FeedSmallList-item {
-    min-width: 11.5rem;
-  }
-  .FeedDetail-related .ant-list-split .ant-list-item {
-    border: none !important;
-  }
+	.FeedDetail-body {
+		grid: tabs;
+	}
+	.FeedDetail-related {
+		grid-area: related;
+		top: -1rem;
+	}
+	.FeedDetail-related ul.ant-list-items {
+		display: flex;
+		flex-direction: row !important;
+		overflow-x: auto !important;
+		gap: 1em !important;
+	}
+	.FeedDetail-related .FeedSmallList-item {
+		min-width: 11.5rem;
+	}
+	.FeedDetail-related .ant-list-split .ant-list-item {
+		border: none !important;
+	}
 }

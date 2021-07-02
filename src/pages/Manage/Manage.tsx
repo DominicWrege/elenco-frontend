@@ -1,11 +1,12 @@
 import "./Manage.css";
-import NewFeeds from "../../components/NewFeedsTable/NewFeedsTable";
 import { Menu } from "antd";
 import { Link, Route, Switch, useLocation } from "wouter";
+import NewFeedOverview from "../../components/NewFeedOverview/NewFeedOverview";
+import ModeratorInbox from "../../components/ModeratorInbox/ModeratorInbox";
 
 const menuItems = [
 	{
-		key: "newFeeds",
+		key: "new-feeds",
 		label: "New Feeds",
 	},
 	{
@@ -29,7 +30,7 @@ export const Manage: React.FC = () => {
 			<Menu
 				className="Manage-menu"
 				style={{ width: "100%" }}
-				defaultSelectedKeys={["newFeeds"]}
+				defaultSelectedKeys={["new-feeds"]}
 				mode="horizontal"
 				onSelect={handleOnSelect}
 			>
@@ -42,13 +43,13 @@ export const Manage: React.FC = () => {
 				})}
 			</Menu>
 			<Switch>
-				<Route path={`${pathPrefix}/newFeeds`}>
-					<NewFeeds />
+				<Route path={`${pathPrefix}/new-feeds`}>
+					<NewFeedOverview />
 				</Route>
 				<Route path={`${pathPrefix}/inbox`}>
-					<h2>comming sooooooooooooooooooooooonnnnnnnnnnnnnn.....</h2>
+					<ModeratorInbox />
 				</Route>
-				<Route>das</Route>
+				<Route>404</Route>
 			</Switch>
 		</div>
 	);

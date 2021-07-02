@@ -1,5 +1,6 @@
 import ISO6391 from 'iso-639-1';
 import { stripHtml } from 'string-strip-html';
+import { FeedModerator } from '../models/feeds';
 
 export namespace util {
 
@@ -55,6 +56,16 @@ export namespace util {
 
         return formatter.format(date);
 
+    }
+
+
+    export function removeRows(selectedRows: number[], feeds: FeedModerator[]): FeedModerator[] {
+
+        for (const id of selectedRows) {
+            const index = feeds.findIndex((feed: FeedModerator) => feed.id === id);
+            feeds.splice(index, 1);
+        }
+        return [...feeds];
     }
 
     export function removeHtml(text?: string) {

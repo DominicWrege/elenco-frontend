@@ -4,6 +4,7 @@ import { API_IP, API_URL } from "../../env";
 import { admin } from "../../functions/admin";
 import util from "../../functions/util";
 import { FeedModerator } from "../../models/feeds";
+import FeedTable from "../FeedTable/FeedTable";
 
 const columns = [
 	{
@@ -65,13 +66,13 @@ const columns = [
 	},
 ];
 
-export const FeedInbox: React.FC = () => {
+export const NewFeedOverview: React.FC = () => {
 	const [selectedRows, setSelectedRows] = useState<number[]>([]);
 	const [loadingButton, setLoadingButton] = useState(false);
 	const [feeds, setFeeds] = useState<FeedModerator[]>([]);
 
 	const initData = useCallback(async () => {
-		let feedJson = await admin.getInbox();
+		let feedJson = await admin.newFeeds();
 		console.log(feedJson);
 		setFeeds(feedJson);
 	}, []);
@@ -99,43 +100,37 @@ export const FeedInbox: React.FC = () => {
 		};
 	}, [initData]);
 
-	const rowSelection = {
-		onChange: (keys: number[] | any, rows: FeedModerator[]) => {
-			// console.log(rows);
-			setSelectedRows(keys);
-		},
+	const onChange = (keys: number[] | any, rows: FeedModerator[]): void => {
+		console.log(rows);
+		setSelectedRows(keys);
 	};
 
-	const handleButtonClick = async () => {
-		console.log(selectedRows);
-		if (selectedRows.length > 0) {
-			try {
-				setLoadingButton(true);
-				await admin.assignFeeds(selectedRows);
-				for (const id of selectedRows) {
-					const index = feeds.findIndex(
-						(feed: FeedModerator) => feed.id === id
-					);
-					feeds.splice(index, 1);
-				}
-				setFeeds([...feeds]);
-				message.success("success");
-			} catch (err) {
-				console.log(err);
-			} finally {
-				setLoadingButton(false);
-				setSelectedRows([]);
-			}
+	const handleButtonClick = async (): Promise<void> => {
+		if (selectedRows.length === 0) {
+			message.warning("Please select at least any rows.");
+			return;
+		}
+		try {
+			setLoadingButton(true);
+			await admin.assignFeeds(selectedRows);
+			setFeeds(util.removeRows(selectedRows, feeds));
+			message.success("success");
+		} catch (err) {
+			console.log(err);
+		} finally {
+			setLoadingButton(false);
+			setSelectedRows([]);
 		}
 	};
 
 	return (
-		<div className="FeedInbox">
+		<div className="NewFeedOverview">
 			<PageHeader
-				style={{ background: "#fff" }}
-				title="Inbox"
+				className="PageHeader"
+				title="Incoming Feeds"
 				extra={
 					<Button
+						disabled={selectedRows.length == 0}
 						loading={loadingButton}
 						type="primary"
 						onClick={handleButtonClick}
@@ -144,18 +139,9 @@ export const FeedInbox: React.FC = () => {
 					</Button>
 				}
 			/>
-			<Table
-				bordered
-				showHeader
-				rowSelection={rowSelection}
-				loading={feeds.length === 0}
-				columns={columns}
-				dataSource={feeds}
-				rowKey={(feed) => feed.id}
-				size="small"
-				pagination={{ pageSize: 25 }}
-			/>
+
+			<FeedTable feeds={feeds} onChange={onChange} />
 		</div>
 	);
 };
-export default FeedInbox;
+export default NewFeedOverview;

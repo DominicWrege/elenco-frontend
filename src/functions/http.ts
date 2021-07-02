@@ -41,6 +41,16 @@ export namespace http {
         return makeRequest(url, Method.Delete, context);
     }
 
+
+    export async function patch<T>(url: string, data?: T, credentials = WithCredentials.No): Promise<Response> {
+        const context: Context<T> = {
+            data: data,
+            credentials: credentials,
+        };
+        return makeRequest(url, Method.Patch, context);
+    }
+
+
     export async function get<T>(url: string, credentials = WithCredentials.No): Promise<Response> {
         const context: Context<T> = {
             credentials: credentials,
