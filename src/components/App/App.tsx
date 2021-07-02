@@ -146,7 +146,7 @@ const App: React.FC = () => {
 										<Subscription />
 									</Guard>
 								</Route>
-								<Route path="/manage">
+								<Route path="/manage/:path">
 									<Guard adminOnly>
 										<Manage />
 									</Guard>

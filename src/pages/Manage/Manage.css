@@ -1,3 +1,7 @@
 div.Manage {
 	width: 100%;
 }
+.Manage *[href]:hover {
+	text-decoration: unset !important;
+	color: red;
+}

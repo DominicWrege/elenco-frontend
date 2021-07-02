@@ -32,6 +32,7 @@ export const FeedDetail: React.FC<Properties> = ({
   loadingFeed = true,
   loadingRelated = true,
 }) => {
+
   const renderSubtitle = (subtitle?: string) => {
     if (!subtitle) {
       return null;

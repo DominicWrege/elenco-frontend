@@ -99,28 +99,6 @@ export const FeedInbox: React.FC = () => {
 		};
 	}, [initData]);
 
-	// useEffect(() => {
-	// 	console.log("dasd");
-
-	// 	const feedSocket = new WebSocket(`ws://${API_IP}/admin/fedd-live-update`);
-
-	// 	feedSocket.addEventListener("open", (e) => {
-	// 		if (feedSocket.readyState === 1) {
-	// 			feedSocket.addEventListener("message", (event) => {
-	// 				// console.log(event);
-	// 				if (event?.data) {
-	// 					console.log(event.data);
-
-	// 					setFeeds([event.data, ...feeds]);
-	// 				}
-	// 			});
-	// 		}
-	// 	});
-	// 	return () => {
-	// 		feedSocket.close();
-	// 	};
-	// }, []);
-
 	const rowSelection = {
 		onChange: (keys: number[] | any, rows: FeedModerator[]) => {
 			// console.log(rows);
