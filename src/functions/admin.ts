@@ -2,11 +2,15 @@ import { API_URL } from "../env";
 import { FeedModerator, FeedStatus } from "../models/feeds";
 import { http } from "./http";
 
+
+const basePath = `${API_URL}/admin`;
+
+
 export namespace admin {
 
     export async function newFeeds(): Promise<FeedModerator[]> {
 
-        const resp = await http.get(`${API_URL}/admin/all-unassigned`, http.WithCredentials.Yes);
+        const resp = await http.get(`${basePath}/review/unassigned`, http.WithCredentials.Yes);
         return resp.json();
     }
 
@@ -14,12 +18,12 @@ export namespace admin {
         const body = {
             feedIds: feedIds
         };
-        await http.post(`${API_URL}/admin/assign-for-review`, body, http.WithCredentials.Yes)
+        await http.patch(`${basePath}/review/assign`, body, http.WithCredentials.Yes)
 
     }
 
     export async function moderatorInbox(): Promise<FeedModerator[]> {
-        const resp = await http.get(`${API_URL}/admin/inbox`, http.WithCredentials.Yes);
+        const resp = await http.get(`${basePath}/review/inbox`, http.WithCredentials.Yes);
         return resp.json();
     }
 
@@ -28,7 +32,7 @@ export namespace admin {
             action: action,
             feedIds: feedIds
         };
-        await http.patch(`${API_URL}/admin/review`, body, http.WithCredentials.Yes);
+        await http.patch(`${basePath}/review`, body, http.WithCredentials.Yes);
     }
 
 }
