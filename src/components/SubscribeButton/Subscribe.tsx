@@ -5,75 +5,78 @@ import { FC, useCallback, useEffect, useState } from "react";
 import { user } from "../../functions/user";
 
 interface Property {
-  feedId: number;
+	feedId: number;
+	className?: string,
 }
 
 export const SubscribeButton: FC<Property> = ({ feedId }) => {
-  const [isSubscribed, setIsSubscribed] = useState<boolean | null>(null);
-  const [isloading, setIsLoading] = useState<boolean>(false);
+	const [isSubscribed, setIsSubscribed] = useState<boolean | null>(null);
+	const [isloading, setIsLoading] = useState<boolean>(false);
 
-  const load = useCallback(async () => {
-    setIsSubscribed(await user.hasSubscription(feedId));
-  }, [feedId]);
+	const load = useCallback(async () => {
+		setIsSubscribed(await user.hasSubscription(feedId));
+	}, [feedId]);
 
-  useEffect(() => {
-    load();
-  }, [load]);
+	useEffect(() => {
+		load();
+	}, [load]);
 
-  const subscribe = async (): Promise<void> => {
-    try {
-      setIsLoading(true);
-      await user.subscribe(feedId);
-      setIsSubscribed(true);
-      message.success("This is a success message");
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+	const subscribe = async (): Promise<void> => {
+		try {
+			setIsLoading(true);
+			await user.subscribe(feedId);
+			setIsSubscribed(true);
+			message.success("This is a success message");
+		} catch (err) {
+			console.log(err);
+		} finally {
+			setIsLoading(false);
+		}
+	};
 
-  const unsubscribe = async (): Promise<void> => {
-    try {
-      setIsLoading(true);
-      await user.unsubscribe(feedId);
-      setIsSubscribed(false);
-      message.success("This is a success message");
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+	const unsubscribe = async (): Promise<void> => {
+		try {
+			setIsLoading(true);
+			await user.unsubscribe(feedId);
+			setIsSubscribed(false);
+			message.success("This is a success message");
+		} catch (err) {
+			console.log(err);
+		} finally {
+			setIsLoading(false);
+		}
+	};
 
-  if (isSubscribed === false) {
-    return (
-      <>
-        <Button
-          id="Subscribe-primary-accent"
-          type="primary"
-          loading={isloading}
-          onClick={subscribe}
-        >
-          Subscribe
-        </Button>
-      </>
-    );
-  } else if (isSubscribed === true) {
-    return (
-      <>
-        <Button
-          id="Subscribe-primary-accent-ghost"
-          type="primary"
-          icon={<CheckOutlined />}
-          loading={isloading}
-          onClick={unsubscribe}
-        >
-          Subscribed
-        </Button>
-      </>
-    );
-  } else {
-    return <></>;
-  }
+	if (isSubscribed === false) {
+		return (
+			<>
+				<Button
+					id="Subscribe-primary-accent"
+					className="Subscribe"
+					type="primary"
+					loading={isloading}
+					onClick={subscribe}
+				>
+					Subscribe
+				</Button>
+			</>
+		);
+	} else if (isSubscribed === true) {
+		return (
+			<>
+				<Button
+					id="Subscribe-primary-accent-ghost"
+					className="Subscribe"
+					type="primary"
+					icon={<CheckOutlined />}
+					loading={isloading}
+					onClick={unsubscribe}
+				>
+					Subscribed
+				</Button>
+			</>
+		);
+	} else {
+		return <></>;
+	}
 };

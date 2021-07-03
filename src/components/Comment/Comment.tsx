@@ -29,10 +29,10 @@ export const Comment: React.FC<Properties> = ({ feedId }) => {
 
   return (
     // <Card className="Comment" title={<Title level={3}>Comments</Title>}>
-    <>
+    <div className="Comments">
       <CommentForm feedId={feedId} newComment={handleNewComment} />
       <CommentList comments={comments} />
-    </ >
+    </div>
   );
 };
 

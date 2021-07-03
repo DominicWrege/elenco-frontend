@@ -80,7 +80,7 @@ export const FeedDetail: React.FC<Properties> = ({
               <>
                 {/* img placholder??  not working*/}
                 <Artwork src={feed.img ?? `${API_URL}/img/${feed.imgCache}`} />
-                {showSubscribeButton && <SubscribeButton feedId={feed.id} />}
+                {showSubscribeButton && <SubscribeButton className="FeedDetails-Subscribe" feedId={feed.id} />}
               </>
             )}
             {!feed && (
@@ -101,8 +101,8 @@ export const FeedDetail: React.FC<Properties> = ({
               />
             )}
           </aside>
-          <section className="FeedDetail-body">
-            <Card className="FeedDetail-main-card">
+          {/* <section className="FeedDetail-body"> */}
+            <Card className="FeedDetail-main-card FeedDetail-body">
               <Skeleton loading={loadingFeed} paragraph={{ rows: 8 }}>
                 {feed && (
                   <>
@@ -134,7 +134,7 @@ export const FeedDetail: React.FC<Properties> = ({
                 )}
               </Skeleton>
             </Card>
-          </section>
+          {/* </section> */}
           {relatedFeeds && (
             <Card title="Related" className="FeedDetail-related">
               <FeedSmallList feeds={relatedFeeds} loading={loadingRelated} />

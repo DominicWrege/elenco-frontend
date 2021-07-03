@@ -63,7 +63,7 @@ export const CommentForm: React.FC<Properties> = ({ feedId, newComment }) => {
                 name="message"
                 rules={[{ required: true, message: "Please enter some text." }]}
             >
-                <Input.TextArea style={{ width: "32rem" }} rows={4} />
+                <Input.TextArea className="Comment-Textarea" rows={4} />
             </Form.Item>
 
             <Form.Item>

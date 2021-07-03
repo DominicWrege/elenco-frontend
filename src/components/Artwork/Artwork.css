@@ -1,7 +1,7 @@
 .Artwork img {
   object-fit: scale-down;
   display: block;
-  max-width: 20rem;
+  max-height: 20rem;
   aspect-ratio: 1/1;
   border: none !important;
 }

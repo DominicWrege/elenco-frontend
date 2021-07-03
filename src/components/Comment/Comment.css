@@ -1,3 +1,10 @@
+.Comment{
+  height: fit-content;
+}
+.Comment .ant-list-empty-text{
+  padding: 0;
+}
+
 .CommentsList .ant-list-item {
   padding: 0;
 }

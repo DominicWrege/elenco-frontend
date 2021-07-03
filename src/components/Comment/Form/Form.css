@@ -1,5 +1,25 @@
 .Comment-form{
     display: flex;
-    gap: 2em;
+    gap: 1rem;
     flex-wrap: wrap;
 }
+
+.Comment-Textarea{
+    /* max-width: 100% !important; */
+    width: 100%;
+}
+
+@media(max-width: 1200px){
+    .Comment-form{
+        flex-direction: column;
+        gap: 0.75rem;
+    } 
+
+}
+
+/* @media(max-width: 650px){
+    .Comment-form{
+        flex-direction: column;
+        gap: 0.75rem;
+    } 
+} */

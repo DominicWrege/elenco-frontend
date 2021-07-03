@@ -11,6 +11,10 @@
   /* color: red !important; */
 }
 
+.Subscribe {
+  max-width: 20rem;
+}
+
 /* #Subscribe-primary-accent-ghost {
   background: #f0f2f5d9 !important;
   color: #000;
