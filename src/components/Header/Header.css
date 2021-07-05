@@ -1,41 +1,92 @@
 .Header-links {
-  display: flex !important;
-  align-items: center;
-  font-size: 1.25em;
-  justify-content: center;
+	display: flex !important;
+	align-items: center;
+	font-size: 1.25em;
+	justify-content: center;
+}
+header {
+	display: flex;
+	justify-content: center;
 }
 
-.Header {
-  background: cfd8dc !important;
-  /* background: #C6DDF0 !important; */
-  /* background: #D8DBE2!important; */
-  /* background: #fff !important; */
+.Header-inner {
+	display: flex;
+	width: 100%;
+	max-width: 80rem;
+	justify-content: space-between;
+	flex-wrap: nowrap;
+	background: cfd8dc;
+	column-gap: 1em;
+	padding: 1rem 0;
+	/* background: #C6DDF0 !important; */
+	/* background: #D8DBE2!important; */
+	/* background: #fff !important; */
 }
 
-.Header-menu div.ant-image-preview-content > div > ul > li {
-  display: none !important;
+header h1.ant-typography {
+	margin: 0;
+}
+
+#Header-menu div.ant-image-preview-content > div > ul > li {
+	display: none !important;
+}
+
+#Header-search {
+	width: 36rem;
+}
+
+@media (max-width: 1200px) {
+	.Header-inner {
+		padding: 1em;
+	}
 }
 
 @media (max-width: 700px) {
-  .Header .ant-page-header-heading-left {
-    display: grid;
-    grid-template-columns: 1fr;
-    row-gap: 1em;
-  }
-  .Header span.ant-page-header-heading-tags {
-    width: 95%;
-  }
-  .Header span.ant-page-header-heading-title a {
-    min-width: fit-content;
-    text-overflow: unset;
-  }
-  .Header {
-    padding: 8px 14px !important;
-  }
+	.Header-inner {
+		display: grid;
+		grid-template-columns: 1fr 1fr max-content;
+		grid-template-areas:
+			"title  btns menu"
+			"search search search";
+		row-gap: 1em;
+	}
+	#Header-title {
+		grid-area: title;
+	}
+	.Header-inner .ant-select-auto-complete {
+		max-width: 100%;
+	}
+	#Header-menu {
+		grid-area: menu;
+	}
+	#Header-search {
+		grid-area: search;
+		width: 100%;
+		align-self: center;
+	}
+	#Header-search
+		.ant-select.ant-select-auto-complete.ant-select-single.ant-select-customize-input.ant-select-show-search {
+		width: 100%;
+	}
+
+	#Header-btn {
+		grid-area: btns;
+		justify-self: end;
+	}
+	/* header.Header span.ant-page-header-heading-tags {
+		width: 95%;
+	}
+	.Header span.ant-page-header-heading-title a {
+		min-width: fit-content;
+		text-overflow: unset;
+	}
+	.Header {
+		padding: 8px 14px !important;
+	} */
 }
 
 @media (max-width: 360px) {
-  Header .ant-page-header-heading-left {
-    width: 78%;
-  }
+	Header .ant-page-header-heading-left {
+		width: 78%;
+	}
 }

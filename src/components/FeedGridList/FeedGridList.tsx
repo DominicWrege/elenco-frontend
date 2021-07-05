@@ -25,7 +25,7 @@ const GridCard = styled.div`
 	gap: 1.5rem;
 	.ant-card-body {
 		padding: 0.25em 0.75em 0.75em 0.75em;
-		height: 6.5rem;
+		max-height: 8rem;
 	}
 `;
 
