@@ -4,7 +4,17 @@
 	flex-direction: column;
 	--side-row-width: 10rem;
 }
+.Home header {
+	text-align: center;
+	display: block;
+}
 
+.Home header h2 {
+	font-size: 2em;
+}
+.Home header .ant-typography {
+	margin: 0 !important;
+}
 .Home h1.ant-typography {
 	text-align: center;
 	font-size: 3em;

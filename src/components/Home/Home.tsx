@@ -43,10 +43,12 @@ export const Home: React.FC = () => {
 
 	return (
 		<div className="Home">
-			<Typography.Title level={1}>
-				Welcome to Elenco!<br></br> An independent open source podcast
-				directory.
-			</Typography.Title>
+			<header>
+				<Typography.Title level={1}>Welcome to Elenco!</Typography.Title>
+				<Typography.Title level={2}>
+					An independent open source podcast directory.
+				</Typography.Title>
+			</header>
 			<section>
 				<Card>
 					<div
