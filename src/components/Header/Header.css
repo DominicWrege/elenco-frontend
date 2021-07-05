@@ -1,12 +1,17 @@
-.Header-links {
+/* .Header-links {
 	display: flex !important;
 	align-items: center;
 	font-size: 1.25em;
-	justify-content: center;
-}
+	justify-content: center; */
+/* } */
 header {
 	display: flex;
 	justify-content: center;
+	letter-spacing: 0.1em;
+}
+#Header-title .ant-typography {
+	letter-spacing: 0.15em;
+	font-weight: 900;
 }
 
 .Header-inner {
@@ -31,8 +36,8 @@ header h1.ant-typography {
 	display: none !important;
 }
 
-#Header-search {
-	width: 36rem;
+#Header-search .ant-select-auto-complete {
+	width: 32rem;
 }
 
 @media (max-width: 1200px) {
@@ -83,10 +88,4 @@ header h1.ant-typography {
 	.Header {
 		padding: 8px 14px !important;
 	} */
-}
-
-@media (max-width: 360px) {
-	Header .ant-page-header-heading-left {
-		width: 78%;
-	}
 }

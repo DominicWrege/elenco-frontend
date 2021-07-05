@@ -22,9 +22,9 @@ export const Home: React.FC = () => {
 			// setMeta(json);
 			// const feeds = await feed.getTop25();
 			const [topFeedsJson, metaJson, recentFeedJson] = await Promise.all([
-				await feed.getTop25(),
-				await api.getMeta(),
-				await feed.getRecent(),
+				feed.getTop25(),
+				api.getMeta(),
+				feed.getRecent(),
 			]);
 
 			setTopFeeds(topFeedsJson);
@@ -49,36 +49,28 @@ export const Home: React.FC = () => {
 					An independent open source podcast directory.
 				</Typography.Title>
 			</header>
-			<section>
+			<section className="Home-meta">
 				<Card>
-					<div
-						style={{
-							display: "flex",
-							gap: "2em",
-							justifyContent: "space-around",
-						}}
-					>
-						{meta && (
-							<>
-								<Statistic
-									label="Total Podcasts"
-									value={meta.countFeeds}
-								></Statistic>
-								<Statistic
-									label="Total Episodes"
-									value={meta.countEpisodes}
-								></Statistic>
-								<Statistic
-									label="Total Hours"
-									value={Math.round(meta.episodesDuration / 3600)}
-								></Statistic>
-								<Statistic
-									label="Total Authors"
-									value={meta.countAuthors}
-								></Statistic>
-							</>
-						)}
-					</div>
+					{meta && (
+						<>
+							<Statistic
+								label="Total Podcasts"
+								value={meta.countFeeds}
+							></Statistic>
+							<Statistic
+								label="Total Episodes"
+								value={meta.countEpisodes}
+							></Statistic>
+							<Statistic
+								label="Total Hours"
+								value={Math.round(meta.episodesDuration / 3600)}
+							></Statistic>
+							<Statistic
+								label="Total Authors"
+								value={meta.countAuthors}
+							></Statistic>
+						</>
+					)}
 				</Card>
 			</section>
 			<section>
