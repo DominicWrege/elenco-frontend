@@ -6,14 +6,14 @@ import { Link } from "wouter";
 import { API_URL } from "../../env";
 import { Spin } from "antd";
 import { Loading3QuartersOutlined } from "@ant-design/icons";
-import { SmallFeed } from "../../models/feeds";
+import { FeedSmall } from "../../models/feeds";
 import Artwork from "../Artwork/Artwork";
 import { SortByValue } from "../FeedFilter/FeedFilter";
 import MiddleCenter from "../Styles/shared.css";
 const { Title } = Typography;
 
 interface Properties {
-	feeds: SmallFeed[];
+	feeds: FeedSmall[];
 	loading: boolean;
 	sortedBy?: SortByValue;
 }
@@ -29,7 +29,7 @@ const GridCard = styled.div`
 	}
 `;
 
-function renderCard(feed: SmallFeed) {
+function renderCard(feed: FeedSmall) {
 	return (
 		<Card
 			key={feed.title}
@@ -77,7 +77,7 @@ export const FeedGridList: React.FC<Properties> = ({
 	}
 	if (sortedBy) {
 		const list = feeds
-			.sort((a: SmallFeed, b: SmallFeed): number => {
+			.sort((a: FeedSmall, b: FeedSmall): number => {
 				return sortedBy.compareFn(a, b);
 			})
 			.map(renderCard);

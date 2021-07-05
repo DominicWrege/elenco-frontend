@@ -7,7 +7,7 @@ import { user } from "../../../functions/user";
 import {
   FeedStatus,
   SubmittedFeeds,
-  SmallFeed,
+  FeedSmall,
 } from "../../../models/feeds";
 import FeedGridList from "../../../components/FeedGridList/FeedGridList";
 import FeedFilter, {
@@ -62,7 +62,7 @@ function initFilter(): FeedStatus {
 let submittedFeeds: SubmittedFeeds | null = null;
 
 export const UserFeeds: React.FC = () => {
-  const [feedsList, setFeedsList] = useState<SmallFeed[]>([]);
+  const [feedsList, setFeedsList] = useState<FeedSmall[]>([]);
   const [filter, setFilter] = useState<FeedStatus>(initFilter());
   const [loading, setLoading] = useState(true);
   const setLocation = useLocation()[1];

@@ -1,6 +1,6 @@
 import { Select } from "antd";
 import { LabeledValue } from "antd/lib/select";
-import { SmallFeed } from "../../models/feeds";
+import { FeedSmall } from "../../models/feeds";
 
 
 
@@ -23,7 +23,7 @@ export interface SortByType {
 
 export interface SortByValue {
     name: string;
-    compareFn: (feedA: SmallFeed, feedB: SmallFeed) => number;
+    compareFn: (feedA: FeedSmall, feedB: FeedSmall) => number;
 }
 
 enum Compare {
@@ -34,32 +34,32 @@ enum Compare {
 export const sortBy: SortByType = {
     title: {
         name: "Title",
-        compareFn: (feedA: SmallFeed, feedB: SmallFeed): number => {
+        compareFn: (feedA: FeedSmall, feedB: FeedSmall): number => {
             return feedA.title.localeCompare(feedB.title);
         },
     },
     author: {
         name: "Author",
-        compareFn: (feedA: SmallFeed, feedB: SmallFeed): number => {
+        compareFn: (feedA: FeedSmall, feedB: FeedSmall): number => {
             return feedA.authorName.localeCompare(feedB.authorName);
         },
     },
     oldest: {
         name: "Oldest",
-        compareFn: (feedA: SmallFeed, feedB: SmallFeed): number => {
+        compareFn: (feedA: FeedSmall, feedB: FeedSmall): number => {
             return compareDate(feedA, feedB, Compare.Bigger)
         }
     },
     newest: {
         name: "Newest",
-        compareFn: (feedA: SmallFeed, feedB: SmallFeed): number => {
+        compareFn: (feedA: FeedSmall, feedB: FeedSmall): number => {
             return compareDate(feedA, feedB, Compare.Less);
         }
     }
 };
 
 
-function compareDate(feedA: SmallFeed, feedB: SmallFeed, compare: Compare): number {
+function compareDate(feedA: FeedSmall, feedB: FeedSmall, compare: Compare): number {
     const dateA = Date.parse(feedA.submitted);
     const dateB = Date.parse(feedB.submitted);
 

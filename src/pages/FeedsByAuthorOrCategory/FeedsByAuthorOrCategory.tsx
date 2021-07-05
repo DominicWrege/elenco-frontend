@@ -5,7 +5,7 @@ import { DefaultParams, useRoute } from "wouter";
 import FeedGridList from "../../components/FeedGridList/FeedGridList";
 import feed from "../../functions/feed";
 import api from "../../functions/api";
-import { SmallFeed } from "../../models/feeds";
+import { FeedSmall } from "../../models/feeds";
 
 export enum FeedsBy {
   Author = 0,
@@ -23,7 +23,7 @@ export interface SearchProperties extends DefaultParams {
 export const FeedsByAuthorOrCategory: React.FC<Property> = ({ config }) => {
   const pathName = config === FeedsBy.Category ? "category" : "author";
   const params = useRoute<SearchProperties>(`/${pathName}/:query`)[1];
-  const [feeds, setFeeds] = useState<SmallFeed[]>([]);
+  const [feeds, setFeeds] = useState<FeedSmall[]>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchData = useCallback(async () => {

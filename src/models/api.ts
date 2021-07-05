@@ -20,5 +20,11 @@ export interface Author {
     name: string
 }
 
+export interface MetaStatistic {
+    episodesDuration: number,
+    countEpisodes: number,
+    countAuthors: number,
+    countFeeds: number,
+}
 
 export default ApiError;

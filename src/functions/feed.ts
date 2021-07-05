@@ -1,6 +1,5 @@
 import { API_URL } from "../env"
-import { Author } from "../models/api";
-import { FeedEpisodeModel, FeedModel, SmallFeed as SmallFeed } from "../models/feeds";
+import { FeedEpisodeModel, FeedModel, FeedSmall as FeedSmall } from "../models/feeds";
 import { http } from "./http"
 
 
@@ -11,31 +10,40 @@ export namespace feed {
         // const url = `${API_URL}/api/feed/${name}`;
         // console.log(url);
         const resp = await http.get(url, http.WithCredentials.Yes);
-        
+
         return resp.json();
     }
 
+    export async function getRecent(): Promise<FeedSmall[]> {
+        const resp = await http.get(`${API_URL}/feeds/recent`);
+        return resp.json();
+    }
 
-    export async function getRelated(feedId: number): Promise<SmallFeed[]> {
+    export async function getTop25(): Promise<FeedSmall[]> {
+        const resp = await http.get(`${API_URL}/feeds/top`);
+        return resp.json();
+    }
+
+    export async function getRelated(feedId: number): Promise<FeedSmall[]> {
         const resp = await http.get(`${API_URL}/feed/${feedId}/related`);
         return resp.json();
     }
 
-    export async function getByCategory(categoryName: string): Promise<SmallFeed[]> {
+    export async function getByCategory(categoryName: string): Promise<FeedSmall[]> {
         const uri = decodeURI(`${API_URL}/category/${categoryName}/feeds`);
         const resp = await http.get(uri);
         const json = await resp.json();
         return json.map(intoSmallFeed);
     }
 
-    export async function getByAuthor(name: string): Promise<SmallFeed[]> {
+    export async function getByAuthor(name: string): Promise<FeedSmall[]> {
         const uri = decodeURI(`${API_URL}/author/${name}/feeds`);
         const resp = await http.get(uri);
         const json = await resp.json();
         return json.map(intoSmallFeed);
     }
 
-    export function intoSmallFeed(feed: FeedModel): SmallFeed {
+    export function intoSmallFeed(feed: FeedModel): FeedSmall {
 
         return {
             id: feed.id,

@@ -1,6 +1,6 @@
 import "./FeedDetail.css";
 
-import type { FeedEpisodeModel, SmallFeed } from "../../models/feeds";
+import type { FeedEpisodeModel, FeedSmall } from "../../models/feeds";
 import { BackTop, Card, Skeleton, Tabs, Typography } from "antd";
 import Artwork from "../Artwork/Artwork";
 import FeedMetaInfo from "../FeedMetaInfo/FeedMetaInfo";
@@ -19,7 +19,7 @@ interface Properties {
   feed: FeedEpisodeModel | null;
   showSubscribeButton?: boolean;
   showComments?: boolean;
-  relatedFeeds?: SmallFeed[];
+  relatedFeeds?: FeedSmall[];
   loadingFeed?: boolean;
   loadingRelated?: boolean;
 }

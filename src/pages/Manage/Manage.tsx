@@ -3,34 +3,50 @@ import { Menu } from "antd";
 import { Link, Route, Switch, useLocation } from "wouter";
 import NewFeedOverview from "../../components/NewFeedOverview/NewFeedOverview";
 import ModeratorInbox from "../../components/ModeratorInbox/ModeratorInbox";
-
-const menuItems = [
-	{
-		key: "new-feeds",
-		label: "New Feeds",
-	},
-	{
-		key: "inbox",
-		label: "My Inbox",
-	},
-];
+import { FeedReviewed } from "../../components/FeedReviewed/FeedReviewed";
 
 const pathPrefix = "/manage";
 
+interface Item {
+	key: string;
+	label: string;
+	child: JSX.Element;
+}
+
+const menuItems: Item[] = [
+	{
+		key: `${pathPrefix}/new-feeds`,
+		label: "New Feeds",
+		child: <NewFeedOverview />,
+	},
+	{
+		key: `${pathPrefix}/inbox`,
+		label: "My Inbox",
+		child: <ModeratorInbox />,
+	},
+	{
+		key: `${pathPrefix}/reviewed`,
+		label: "All Reviewed",
+		child: <FeedReviewed />,
+	},
+];
+
 export const Manage: React.FC = () => {
-	const setLocation = useLocation()[1];
+	const [location, setLocation] = useLocation();
+
 	const handleOnSelect = ({ item, key }) => {
-		console.log(item);
-		console.log(key);
-		setLocation(`${pathPrefix}/${key}`);
+		setLocation(key);
 	};
+
+	// useEffect(() => {
+	// }, [location])
 
 	return (
 		<div className="Manage">
 			<Menu
 				className="Manage-menu"
 				style={{ width: "100%" }}
-				defaultSelectedKeys={["new-feeds"]}
+				defaultSelectedKeys={[location]}
 				mode="horizontal"
 				onSelect={handleOnSelect}
 			>
@@ -43,16 +59,22 @@ export const Manage: React.FC = () => {
 				})}
 			</Menu>
 			<Switch>
-				<Route path={`${pathPrefix}/new-feeds`}>
-					<NewFeedOverview />
-				</Route>
-				<Route path={`${pathPrefix}/inbox`}>
-					<ModeratorInbox />
-				</Route>
-				<Route>404</Route>
+				{menuItems.map((item) => {
+					return (
+						<Route key={item.key} path={item.key}>
+							{item.child}
+						</Route>
+					);
+				})}
 			</Switch>
 		</div>
 	);
 };
 
 export default Manage;
+// {/* <Route path={`${pathPrefix}/new-feeds`}>
+// 	<NewFeedOverview />
+// </Route>
+// <Route path={`${pathPrefix}/inbox`}>
+// 	<ModeratorInbox />
+// // </Route> */}

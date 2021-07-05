@@ -79,7 +79,7 @@ export const NewFeedOverview: React.FC = () => {
 
 	useEffect(() => {
 		initData();
-		const feedSocket = new WebSocket(`ws://${API_IP}/admin/fedd-live-update`);
+		const feedSocket = new WebSocket(`ws://${API_IP}/admin/socket/unassigned`);
 
 		feedSocket.addEventListener("open", (e) => {
 			if (feedSocket.readyState === 1) {

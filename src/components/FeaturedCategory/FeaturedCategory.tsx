@@ -2,7 +2,7 @@ import "./FeaturedCategory.css";
 import { Card } from "antd";
 import { useCallback, useEffect, useState } from "react";
 import feed from "../../functions/feed";
-import { SmallFeed } from "../../models/feeds";
+import { FeedSmall } from "../../models/feeds";
 import FeedSmallList from "../FeedSmallList/FeedSmallList";
 
 
@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const FeaturedCategory: React.FC<Props> = ({ name }) => {
-    const [feeds, setFeeds] = useState<SmallFeed[]>([]);
+    const [feeds, setFeeds] = useState<FeedSmall[]>([]);
     const [loading, setLoading] = useState(true);
 
     const init = useCallback(

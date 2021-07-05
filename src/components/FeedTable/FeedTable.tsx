@@ -1,7 +1,5 @@
 import { Table } from "antd";
-import { useState } from "react";
 import { Link } from "wouter";
-import { API_URL } from "../../env";
 import util from "../../functions/util";
 import { FeedModerator } from "../../models/feeds";
 
@@ -78,7 +76,7 @@ const columns = [
 
 interface Props {
 	feeds: FeedModerator[];
-	onChange: (keys: number[] | any, rows: FeedModerator[]) => void;
+	onChange?: (keys: number[] | any, rows: FeedModerator[]) => void;
 }
 
 export const FeedTable: React.FC<Props> = ({ feeds, onChange }) => {

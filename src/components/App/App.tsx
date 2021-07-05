@@ -29,6 +29,7 @@ import FeedsByAuthorOrCategory, {
 } from "../../pages/FeedsByAuthorOrCategory/FeedsByAuthorOrCategory";
 import NewFeed from "../../pages/NewFeed/NewFeed";
 import Manage from "../../pages/Manage/Manage";
+import { Home } from "../Home/Home";
 
 const App: React.FC = () => {
 	let userCache: User | null = auth.getSession();
@@ -69,9 +70,9 @@ const App: React.FC = () => {
 	const checkUserStatus = useCallback(async () => {
 		if (auth.hasSession()) {
 			try {
-				const user = await auth.fetchUser();
-				setUser(user);
-				window.location["user"] = JSON.stringify(user);
+				const userJson = await auth.fetchUser();
+				setUser(userJson);
+				window.location["user"] = JSON.stringify(userJson);
 			} catch (err) {
 				//TODO
 				//- show popup message
@@ -86,17 +87,6 @@ const App: React.FC = () => {
 		checkUserStatus();
 	}, [checkUserStatus]);
 
-	const showUserInfo = () => {
-		if (!user) {
-			return "";
-		}
-		return (
-			<p>
-				Hello {user?.username}, {user.permission}
-			</p>
-		);
-	};
-
 	return (
 		<div className="App">
 			<UserContext.Provider value={userProviderValue}>
@@ -106,10 +96,7 @@ const App: React.FC = () => {
 						<Content className="App-pages">
 							<Switch>
 								<Route path="/">
-									<h2>Home</h2>
-									{showUserInfo()}
-									<Button> fish</Button>
-									{userContext}
+									<Home />
 								</Route>
 								<Route path="/authors">
 									<h2>Authors</h2>

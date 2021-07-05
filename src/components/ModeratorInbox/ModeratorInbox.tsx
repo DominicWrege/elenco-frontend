@@ -15,6 +15,8 @@ export const ModeratorInbox = (props) => {
 
 	const initData = useCallback(async () => {
 		try {
+			console.log("ddd");
+			
 			const feedJson = await admin.moderatorInbox();
 			console.log(feedJson);
 			setFeeds(feedJson);

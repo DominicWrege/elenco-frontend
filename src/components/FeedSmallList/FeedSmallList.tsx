@@ -2,12 +2,12 @@ import { List, Skeleton, Typography } from "antd";
 import { useMemo } from "react";
 import { Link } from "wouter";
 import { API_URL } from "../../env";
-import { SmallFeed } from "../../models/feeds";
+import { FeedSmall } from "../../models/feeds";
 import Artwork from "../Artwork/Artwork";
 import "./FeedSmallList.css";
 
 interface Properties {
-  feeds?: SmallFeed[];
+  feeds?: FeedSmall[];
   onlyArtwork?: boolean;
   noBorder?: boolean;
   loading?: boolean;
@@ -33,7 +33,7 @@ export const FeedSmallList: React.FC<Properties> = ({
     [sekelationSize]
   );
 
-  const listItem = (feed: SmallFeed): JSX.Element => {
+  const listItem = (feed: FeedSmall): JSX.Element => {
     const artwork = (
       <Artwork
         href={`/feed/${feed.title}`}

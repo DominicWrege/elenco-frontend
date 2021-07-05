@@ -1,5 +1,5 @@
 import { API_URL } from "../env";
-import { SubmittedFeeds, SmallFeed } from "../models/feeds";
+import { SubmittedFeeds, FeedSmall } from "../models/feeds";
 import { http } from "./http";
 
 
@@ -24,7 +24,7 @@ export namespace user {
         await http.delete_(`${API_URL}/subscription`, payload, http.WithCredentials.Yes);
     }
 
-    export async function getSubscriptions(): Promise<SmallFeed[]> {
+    export async function getSubscriptions(): Promise<FeedSmall[]> {
         const resp = await http.get(`${API_URL}/user/subscriptions`, http.WithCredentials.Yes);
         const feeds = await resp.json();
         return feeds;

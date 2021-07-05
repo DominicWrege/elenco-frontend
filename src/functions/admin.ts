@@ -22,6 +22,11 @@ export namespace admin {
 
     }
 
+    export async function getReviewed(): Promise<FeedModerator[]> {
+        const resp = await http.get(`${basePath}/review/reviewed`, http.WithCredentials.Yes)
+        return resp.json();
+    }
+
     export async function moderatorInbox(): Promise<FeedModerator[]> {
         const resp = await http.get(`${basePath}/review/inbox`, http.WithCredentials.Yes);
         return resp.json();
