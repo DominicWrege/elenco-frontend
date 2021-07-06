@@ -35,3 +35,22 @@
 	min-width: var(--side-row-width);
 	max-width: var(--side-row-width);
 }
+
+.Home-meta .ant-card-body {
+	display: flex;
+	justify-content: space-around;
+	gap: 1rem;
+}
+
+.Home-meta .ant-card-body::after,
+.Home-meta .ant-card-body::before {
+	content: unset;
+	display: inherit;
+}
+
+@media (max-width: 600px) {
+	.Home-meta .ant-card-body {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+	}
+}
