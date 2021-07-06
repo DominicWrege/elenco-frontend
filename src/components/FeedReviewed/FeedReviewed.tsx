@@ -1,10 +1,9 @@
 import { PageHeader } from "antd";
-import { ColumnsType } from "antd/lib/table";
 import { useCallback, useEffect, useState } from "react";
 import { admin } from "../../functions/admin";
 import util from "../../functions/util";
 import ApiError from "../../models/api";
-import { FeedModerator } from "../../models/feeds";
+import { FeedModerator, FeedStatus } from "../../models/feeds";
 import FeedTable, {
 	defaultColumns,
 	sortByDate,
@@ -17,13 +16,16 @@ const columns = [
 		title: "Reviewer",
 		dataIndex: "reviewerName",
 		key: "reviewer",
-		// width: "11em",
+		sorter: sortByString("reviewer"),
 	},
 	{
 		title: "Status",
 		dataIndex: "status",
 		key: "status",
 		sorter: sortByString("status"),
+		filters: Object.keys(FeedStatus).map((item) => {
+			return { text: item, value: item };
+		}),
 	},
 	{
 		title: "Reviewed",
@@ -42,8 +44,6 @@ export const FeedReviewed: React.FC = () => {
 	const initData = useCallback(async () => {
 		try {
 			const feedJson = await admin.getReviewed();
-			console.log(feedJson);
-
 			setFeeds(feedJson);
 		} catch (err: any | ApiError) {
 			console.log(err);
