@@ -1,4 +1,3 @@
-
 /* .Player-wrapper iframe{
     width: min-max(300px, 600px);
     background: #e8eaf6;
@@ -6,8 +5,14 @@
     /* width: max-content; 
 } */
 
-
-#Player-wrapper iframe{
-    width: 100%;
+#Player-wrapper iframe {
+	width: 100%;
 }
 
+.PodcastPlayer-close {
+	/* display: flex; */
+	/* justify-content: f; */
+	position: absolute;
+	top: 0.75rem;
+	right: 0.5rem;
+}

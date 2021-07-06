@@ -144,7 +144,7 @@ const App: React.FC = () => {
 							</Switch>
 						</Content>
 						<Footer>
-							<PodcastPlayer hidden={playingEpisode === null} />
+							<PodcastPlayer />
 						</Footer>
 					</Layout>
 				</PlayerContext.Provider>
