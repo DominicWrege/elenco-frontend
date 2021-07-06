@@ -53,7 +53,7 @@ function AppHeader(): JSX.Element {
 		if (userContext?.user) {
 			return (
 				<Dropdown.Button
-					key="dbgasi21"
+					key="btn-8861"
 					overlay={menu}
 					placement="bottomLeft"
 					icon={<UserOutlined />}
@@ -81,9 +81,7 @@ function AppHeader(): JSX.Element {
 				</div>
 				<div id="Header-btn">
 					<Link href="/explore" className="active">
-						<Button type="primary" ghost>
-							Explore
-						</Button>
+						<Button type="default">Explore</Button>
 					</Link>
 				</div>
 				<div id="Header-menu">{userMenu()}</div>

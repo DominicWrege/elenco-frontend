@@ -5,106 +5,103 @@ import { auth } from "../../functions/auth";
 import { RegisterLoginChildProps } from "../RegisterLogin";
 
 const Register: React.FC<RegisterLoginChildProps> = ({ onError }) => {
+	const [form] = Form.useForm();
+	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const setLocation = useLocation()[1];
 
-    const [form] = Form.useForm();
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-    const setLocation = useLocation()[1];
+	const onFinish = async (values: auth.RegisterFields) => {
+		try {
+			setIsLoading(true);
+			await auth.register(values);
+			setLocation("/login");
+		} catch (err: any) {
+			setIsLoading(false);
+			console.log(err);
 
+			// console.log(err.json.message);
+			// onError(err.json.message);
+		}
+	};
 
-    const onFinish = async (values: auth.RegisterFields) => {
-        try {
-            setIsLoading(true);
-            await auth.register(values);
-            setLocation("/login");
+	const onFinishFailed = (_: any) => {
+		// setFormValid(false);
+		console.log("fail");
+	};
 
-        } catch (err: any) {
-            setIsLoading(false);
-            console.log(err);
+	return (
+		<Form
+			form={form}
+			name="Register"
+			onFinish={onFinish}
+			// onFieldsChange={onCheck}
+			onFinishFailed={onFinishFailed}
+		>
+			<Form.Item
+				label="Username"
+				name="username"
+				rules={[{ required: true, message: "Please input your username" }]}
+			>
+				<Input />
+			</Form.Item>
 
-            // console.log(err.json.message);
-            // onError(err.json.message);
-        }
-    };
+			<Form.Item
+				label="Email"
+				name="email"
+				rules={[
+					{
+						required: true,
+						message: "Please enter your email",
+						type: "email",
+					},
+				]}
+			>
+				<Input type="email" />
+			</Form.Item>
 
-    const onFinishFailed = (_: any) => {
-        // setFormValid(false);
-        console.log("fail");
-    };
+			<Form.Item
+				label="Password"
+				name="password"
+				rules={[
+					{
+						required: true,
+						message: "Please input your password",
+						type: "string",
+					},
+				]}
+			>
+				<Input.Password />
+			</Form.Item>
 
-    return (
-        <Form
-            form={form}
-            name="Register"
-            onFinish={onFinish}
-            // onFieldsChange={onCheck}
-            onFinishFailed={onFinishFailed}
-        >
+			<Form.Item
+				label="Repeat Password"
+				name="passwordCheck"
+				rules={[
+					{
+						required: true,
+						message: "Please reenter your password",
+						type: "string",
+					},
+					({ getFieldValue }) => ({
+						validator(_, value) {
+							if (getFieldValue("password") === value) {
+								return Promise.resolve();
+							}
+							return Promise.resolve();
+							// return Promise.reject(new Error("The two passwords that you entered do not match"));
+						},
+					}),
+				]}
+			>
+				<Input.Password />
+			</Form.Item>
 
-            <Form.Item
-                label="Username"
-                name="username"
-                rules={[{ required: true, message: "Please input your username" }]}
-            >
-                <Input />
-            </Form.Item>
-
-            <Form.Item
-                label="Email"
-                name="email"
-                rules={[
-                    {
-                        required: true,
-                        message: "Please enter your email",
-                        type: "email"
-                    }]}
-            >
-                <Input type="email" />
-            </Form.Item>
-
-            <Form.Item
-                label="Password"
-                name="password"
-                rules={[
-                    {
-                        required: true,
-                        message: "Please input your password",
-                        type: "string",
-                    }
-                ]}
-            >
-                <Input.Password />
-            </Form.Item>
-
-            <Form.Item
-                label="Repeat Password"
-                name="passwordCheck"
-                rules={[
-                    {
-                        required: true,
-                        message: "Please reenter your password",
-                        type: "string"
-                    },
-                    ({ getFieldValue }) => ({
-                        validator(_, value) {
-                            if (getFieldValue("password") === value) {
-                                return Promise.resolve();
-                            }
-                            return Promise.resolve();
-                            // return Promise.reject(new Error("The two passwords that you entered do not match"));
-                        },
-                    })
-                ]}
-            >
-                <Input.Password />
-            </Form.Item>
-
-            <Form.Item >
-                <Button type="primary" htmlType="submit" loading={isLoading}>
-                    Register
-                </Button>
-            </Form.Item>
-        </Form >
-    );
-}
+			<Form.Item>
+				<Button type="primary" htmlType="submit" loading={isLoading}>
+					Register
+				</Button>
+			</Form.Item>
+		</Form>
+	);
+};
 
 export default Register;

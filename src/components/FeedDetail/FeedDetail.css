@@ -40,6 +40,7 @@
 }
 .FeedDetail .Artwork {
 	width: 100%;
+	height: var(--side-row-width);
 }
 .FeedDetail-sidebar {
 	display: flex;
@@ -53,8 +54,7 @@
 	gap: 1.5em;
 } */
 
-
-.FeedDetails-Subscribe{
+.FeedDetails-Subscribe {
 	max-width: 1rem;
 }
 
@@ -75,7 +75,7 @@
 	height: fit-content;
 }
 
-.FeedDetail-sidebar .Subscribe{
+.FeedDetail-sidebar .Subscribe {
 	align-self: center;
 	width: 100%;
 	max-width: 18rem;
@@ -116,13 +116,13 @@
 		border: none !important;
 	}
 }
-@media (max-width: 600px){
+@media (max-width: 600px) {
 	.FeedDetail-main {
 		grid-template-columns: 1fr;
 		grid-template-areas:
-		"sidebar"
-		"tabs"
-		"related";
+			"sidebar"
+			"tabs"
+			"related";
 	}
 	.FeedDetail-related {
 		top: unset;

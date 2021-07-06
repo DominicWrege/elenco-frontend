@@ -6,10 +6,6 @@ const MiddleCenter = styled.div`
     justify-content: center;
     align-items: center;
     height: 73vh;
-    form{
-        width: 100%;
-        max-width: 440px;
-    }
 
 `;
 
