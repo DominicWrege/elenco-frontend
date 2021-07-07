@@ -1,3 +1,4 @@
+import "./Home.css";
 import { Card, Typography } from "antd";
 import Statistic from "../Statistic/Statistic";
 import { Link } from "wouter";
