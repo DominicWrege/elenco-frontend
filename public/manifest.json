@@ -1,15 +1,28 @@
 {
   "short_name": "Elenco",
   "name": "Elenco Podcast Directory",
+  "description": "An independent open source podcast directory",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "icons/v1_favicon-16x16.ico",
+      "sizes": "16x16"
+    },
+    {
+      "src": "icons/v1_favicon-32x32.ico",
+      "sizes": "32x32"
+    },
+    {
+      "src": "icons/v1_favicon-96x96.ico",
+      "sizes": "96x96"
+    },
+        {
+      "src": "icons/v1_favicon-192x192.ico",
+      "sizes": "192x192",
+      "purpose": "maskable"
     }
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#3f51b5",
+  "background_color": "#c1d5cdb4"
 }
