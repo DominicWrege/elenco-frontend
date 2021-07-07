@@ -23,24 +23,27 @@ function AppHeader(): JSX.Element {
 
 	const menu = (
 		<Menu>
-			<Menu.Item key="Menu1" icon={<UserOutlined />}>
-				Signed in as {userContext?.user?.username}
+			<Menu.Item key="Menu1" style={{ cursor: "default" }}>
+				Signed in as:<br></br>
+				{userContext?.user?.username}
 			</Menu.Item>
 			<Menu.Divider />
 			<Menu.Item key="Menu2">
-				<Link href="/user/subscriptions">My Subscriptions</Link>
+				<Link href="/user/subscriptions">Subscriptions</Link>
 			</Menu.Item>
 			<Menu.Item key="Menu3">
-				<Link href="/user/feeds">My Submitted Podcasts</Link>
+				<Link href="/user/feeds">Submitted podcasts</Link>
 			</Menu.Item>
 			<Menu.Item key="Menu4">
-				<Link href="/new/feed">Submit a new Podcast</Link>
+				<Link href="/new/feed">Submit a new podcast</Link>
 			</Menu.Item>
-			<Menu.Divider />
 			{auth.isAdmin(userContext?.user) && (
-				<Menu.Item key="Menu5">
-					<Link href="/manage/new-feeds">Manage</Link>
-				</Menu.Item>
+				<>
+					<Menu.Divider />
+					<Menu.Item key="Menu5">
+						<Link href="/manage/new-feeds">Manage Feeds</Link>
+					</Menu.Item>
+				</>
 			)}
 			<Menu.Divider />
 			<Menu.Item key="Menu6" onClick={handleLogout}>

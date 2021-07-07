@@ -1,15 +1,15 @@
 .Artwork img {
-  object-fit: scale-down;
-  display: block;
-  max-height: 20rem;
-  aspect-ratio: 1/1;
-  border: none !important;
+	object-fit: fill;
+	display: block;
+	max-height: 20rem;
+	aspect-ratio: 1/1;
+	border: none !important;
 }
 .Artwork .ant-card-cover img {
-  border: none !important;
-  border-radius: unset !important;
+	border: none !important;
+	border-radius: unset !important;
 }
 .Artwork {
-  display: block;
-  height: max-content;
+	display: block;
+	height: max-content;
 }

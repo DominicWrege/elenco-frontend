@@ -7,22 +7,22 @@ import ApiError from "../../models/api";
 import { FeedModerator, FeedStatus } from "../../models/feeds";
 import FeedTable from "../FeedTable/FeedTable";
 
-export const ModeratorInbox = (props) => {
+export const ModeratorInbox = () => {
 	const [feeds, setFeeds] = useState<FeedModerator[]>([]);
-
+	const [loading, setLoading] = useState(true);
 	const [selectedRows, setSelectedRows] = useState<number[]>([]);
 	const [approveLoadingButton, setApproveLoadingButton] = useState(false);
 	const [blockLoadingButton, setBlockLoadingButton] = useState(false);
 
 	const initData = useCallback(async () => {
 		try {
-			console.log("ddd");
-
 			const feedJson = await admin.moderatorInbox();
-			console.log(feedJson);
+			console.log();
 			setFeeds(feedJson);
 		} catch (err: any | ApiError) {
 			console.log(err);
+		} finally {
+			setLoading(false);
 		}
 	}, []);
 
@@ -80,7 +80,7 @@ export const ModeratorInbox = (props) => {
 						<Button
 							type="primary"
 							onClick={handleBlock}
-							loading={blockLoadingButton}
+							loading={loading}
 							disabled={selectedRows.length === 0}
 							danger
 						>

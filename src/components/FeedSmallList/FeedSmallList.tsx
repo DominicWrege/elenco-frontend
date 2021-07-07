@@ -52,7 +52,7 @@ export const FeedSmallList: React.FC<Properties> = ({
 				<Link href={`/feed/${feed.title}`} onClick={util.scrollTop}>
 					<Typography.Title level={4}>{feed.title}</Typography.Title>
 				</Link>
-				<Link href={`/author/${feed.authorName}`}>
+				<Link href={`/author/${feed.authorName}`} onClick={util.scrollTop}>
 					<small>{feed.authorName}</small>
 				</Link>
 			</List.Item>

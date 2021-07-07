@@ -1,9 +1,15 @@
-.NewFeed{
-    display: flex;
-    flex-direction: column;
-    row-gap: 2rem;
+.NewFeed {
+	display: flex;
+	flex-direction: column;
+	row-gap: 2rem;
 }
 
 .NewFeed > div {
-    width: 100%;
+	width: 100%;
+}
+
+.NewFeed .ant-result-extra {
+	display: flex;
+	justify-content: center;
+	gap: 0.7rem;
 }

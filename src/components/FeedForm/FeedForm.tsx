@@ -18,9 +18,9 @@ export interface SubmitEvent {
 
 export const FeedForm: React.FC<Properties> = ({ onSubmit }) => {
 
-    const form = useRef<HTMLFormElement>(null); //TODO Fix me rm any
+    const form = useRef<HTMLFormElement>(null); 
 
-    const inputElement = useRef<Input>(null); //TODO Fix me rm any
+    const inputElement = useRef<Input>(null); 
     const [protocol] = useState<string>("https://");
 
     // const handleProtocolChange = (value: string) => {

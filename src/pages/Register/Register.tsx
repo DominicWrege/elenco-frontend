@@ -17,7 +17,6 @@ const Register: React.FC<RegisterLoginChildProps> = ({ onError }) => {
 		} catch (err: any) {
 			setIsLoading(false);
 			console.log(err);
-
 			// console.log(err.json.message);
 			// onError(err.json.message);
 		}

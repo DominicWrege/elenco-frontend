@@ -1,6 +1,7 @@
 import { Alert, Card } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { Route, useLocation, useRoute } from "wouter";
 import MiddleCenter from "../components/Styles/shared.css";
 import Login from "./Login/Login";
 import Register from "./Register/Register";
@@ -55,10 +56,17 @@ export interface RegisterLoginChildProps {
 
 const RegisterLogin: React.FC<Props> = ({ component }) => {
 	const [errorMsg, setErrorMsg] = useState<null | string>(null);
+	const [location] = useRoute("/register");
+	const [location2] = useRoute("/login");
 
 	const onError = (message: string): void => {
 		setErrorMsg(message);
 	};
+
+	useEffect(() => {
+		setErrorMsg(null);
+	}, [location, location2]);
+
 	const renderChild = (): JSX.Element => {
 		if (component === ComponentType.Login) {
 			return <Login onError={onError} />;

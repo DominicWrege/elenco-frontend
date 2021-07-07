@@ -1,6 +1,7 @@
 import { Image } from "antd";
 import { CSSProperties } from "react";
 import { Link } from "wouter";
+import util from "../../functions/util";
 import "./Artwork.css";
 
 interface Properties {
@@ -37,7 +38,7 @@ export function Artwork({ width = "100%", src, href }: Properties) {
 	if (href) {
 		return (
 			<div className={className}>
-				<Link href={href}>
+				<Link href={href} onClick={util.scrollTop}>
 					{img}
 					<div hidden>link</div>
 				</Link>
