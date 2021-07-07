@@ -4,13 +4,28 @@
 .FeedSmallList {
 	width: 100%;
 }
-.FeedSmallList li.ant-list-item.FeedSmallList-item.noBorder {
+.FeedSmallList-horizontal li.ant-list-item.FeedSmallList-item {
 	border: none !important;
 }
 
-.FeedSmallList ul.ant-list-items {
+.FeedSmallList-vertical ul.ant-list-items {
 	display: flex;
 	flex-direction: column;
 	gap: 1.5em;
 	/* max-width: 24rem; */
+}
+
+.FeedSmallList-horizontal li.ant-list-item.FeedSmallList-item {
+	/* flex-basis: 10rem !important; */
+	min-width: 10rem;
+	max-width: 10rem;
+}
+
+.FeedSmallList-horizontal ul.ant-list-items {
+	display: flex;
+	/* flex: 1 0 90px; */
+	flex-direction: row;
+	/* overflow-x: scroll; */
+	overflow-x: auto;
+	column-gap: 1.2rem;
 }

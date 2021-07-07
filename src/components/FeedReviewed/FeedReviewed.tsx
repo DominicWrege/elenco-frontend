@@ -19,7 +19,7 @@ const columns = [
 		key: "reviewer",
 		sorter: sortByString("reviewer"),
 	},
-	{
+	{// eslint-disable-next-line
 		title: "Status",
 		dataIndex: "status",
 		key: "status",

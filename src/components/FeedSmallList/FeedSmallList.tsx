@@ -1,4 +1,5 @@
 import { List, Skeleton, Typography } from "antd";
+import { type } from "os";
 import { useMemo } from "react";
 import { Link } from "wouter";
 import { API_URL } from "../../env";
@@ -6,23 +7,24 @@ import { FeedSmall } from "../../models/feeds";
 import Artwork from "../Artwork/Artwork";
 import "./FeedSmallList.css";
 
+type Orientation = "horizontal" | "vertical";
+
 interface Properties {
 	feeds?: FeedSmall[];
 	onlyArtwork?: boolean;
-	noBorder?: boolean;
 	loading?: boolean;
 	skeletonSize?: string;
+	orientation?: Orientation;
 }
-
-const className = "FeedSmallList";
 
 export const FeedSmallList: React.FC<Properties> = ({
 	feeds = [],
 	onlyArtwork = false,
-	noBorder,
 	loading = true,
 	skeletonSize = "11rem",
+	orientation = "vertical",
 }) => {
+	const className = ["FeedSmallList", `FeedSmallList-${orientation}`].join(" ");
 	const skeletons = useMemo(
 		() =>
 			Array(6).fill(
@@ -40,21 +42,11 @@ export const FeedSmallList: React.FC<Properties> = ({
 			/>
 		);
 		if (onlyArtwork) {
-			return (
-				<List.Item
-					className={["FeedSmallList-item", noBorder ? "noBorder" : ""].join(
-						" "
-					)}
-				>
-					{artwork}
-				</List.Item>
-			);
+			return <List.Item className="FeedSmallList-item">{artwork}</List.Item>;
 		}
 
 		return (
-			<List.Item
-				className={["FeedSmallList-item", noBorder ? "noBorder" : ""].join(" ")}
-			>
+			<List.Item className="FeedSmallList-item">
 				{artwork}
 				<Link
 					href={`/feed/${feed.title}`}

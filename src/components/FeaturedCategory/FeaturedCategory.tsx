@@ -34,7 +34,6 @@ export const FeaturedCategory: React.FC<Props> = ({ name }) => {
 			<FeedSmallList
 				feeds={feeds}
 				onlyArtwork
-				noBorder
 				skeletonSize="7.5rem"
 				loading={loading}
 			/>

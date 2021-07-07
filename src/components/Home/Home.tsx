@@ -77,7 +77,7 @@ export const Home: React.FC = () => {
 				<Card title="Top Podcasts">
 					<FeedSmallList
 						loading={loadFeeds}
-						noBorder
+						orientation="horizontal"
 						feeds={topFeeds}
 					></FeedSmallList>
 				</Card>
@@ -86,7 +86,7 @@ export const Home: React.FC = () => {
 				<Card title="Most Recent Podcasts">
 					<FeedSmallList
 						loading={loadFeeds}
-						noBorder
+						orientation="horizontal"
 						feeds={recentFeeds}
 					></FeedSmallList>
 				</Card>
