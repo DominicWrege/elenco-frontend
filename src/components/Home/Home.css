@@ -20,7 +20,7 @@
 	font-weight: bold;
 }
 
-*/ .Home-meta .ant-card-body {
+.Home-meta .ant-card-body {
 	display: flex;
 	justify-content: space-around;
 	gap: 1rem;
