@@ -1,4 +1,4 @@
-import { Empty, Select, Typography } from "antd";
+import { Empty, List, Select, Typography } from "antd";
 import React, { useCallback, useEffect, useState } from "react";
 import { DefaultParams, RouteComponentProps, useRoute } from "wouter";
 import { API_URL } from "../../env";
@@ -14,6 +14,7 @@ export interface SearchProperties extends DefaultParams {
 
 const SearchResults: React.FC<RouteComponentProps<DefaultParams>> = () => {
 	let [feeds, setResult] = useState<FeedEpisodeModel[]>([]);
+	const [loading, setLoading] = useState(true);
 
 	const params = useRoute<SearchProperties>("/search/:query")[1];
 	const [categoriesList, setCategoriesList] = useState<string[]>([]);
@@ -36,7 +37,7 @@ const SearchResults: React.FC<RouteComponentProps<DefaultParams>> = () => {
 	};
 
 	const renderResults = (): JSX.Element[] | JSX.Element => {
-		if (feeds.length === 0) {
+		if (!loading && feeds.length === 0) {
 			return (
 				<div className="SearchResults-list SearchResults-list-empty">
 					<Title level={2}>
@@ -46,25 +47,30 @@ const SearchResults: React.FC<RouteComponentProps<DefaultParams>> = () => {
 				</div>
 			);
 		}
-		const list = feeds
-			.sort(compareByDescription)
-			.filter((item: FeedEpisodeModel) => {
-				if (selectedCategories.length === 0) {
-					return true;
-				} else {
-					return item.categories.some((cat) =>
-						selectedCategories.includes(cat.description)
-					);
-				}
-			})
-			.map((item: FeedEpisodeModel) => (
-				<FeedResultCard key={item.id} feed={item}></FeedResultCard>
-			));
 
 		return (
 			<>
 				{header()}
-				{list}
+				<List
+					loading={loading}
+					rowKey={(feed) => feed.id.toString()}
+					dataSource={feeds
+						.sort(compareByDescription)
+						.filter((item: FeedEpisodeModel) => {
+							if (selectedCategories.length === 0) {
+								return true;
+							} else {
+								return item.categories.some((cat) =>
+									selectedCategories.includes(cat.description)
+								);
+							}
+						})}
+					renderItem={(item) => (
+						<List.Item>
+							<FeedResultCard key={item.id} feed={item}></FeedResultCard>
+						</List.Item>
+					)}
+				/>
 			</>
 		);
 	};
@@ -73,10 +79,12 @@ const SearchResults: React.FC<RouteComponentProps<DefaultParams>> = () => {
 		if (params?.query) {
 			setCategoriesList([]);
 			setSelectedCategories([]);
+			setLoading(true);
 			const resp = await http.get(
 				encodeURI(`${API_URL}/feeds/search?term=${params?.query}`)
 			);
 			const feeds_json: FeedEpisodeModel[] = await resp.json();
+			setLoading(false);
 			intoCategoriesList(feeds_json);
 			setResult(feeds_json);
 		}

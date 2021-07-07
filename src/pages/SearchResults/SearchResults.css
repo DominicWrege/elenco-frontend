@@ -4,15 +4,26 @@
 	flex-direction: column;
 	/* row-gap: 1.25em;    */
 	align-items: center;
-	row-gap: 2em;
+	gap: 2em;
 	width: 100%;
 	/* max-width: 60rem; */
 }
+.SearchResults ul {
+	display: flex;
+	flex-direction: column;
+	gap: 2em;
+}
+
 .SearchResults-categories-list {
 	min-width: 250px;
 	justify-self: start;
 	padding: 1em;
 }
+
+.SearchResults .ant-list-item {
+	padding: 0;
+}
+
 .SearchResults.ant-select:not(.ant-select-customize-input)
 	.ant-select-selector {
 	padding: 0.5em;
@@ -34,5 +45,6 @@
 @media (max-width: 650px) {
 	.SearchResults-list {
 		row-gap: 1em;
+		align-items: unset;
 	}
 }

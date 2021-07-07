@@ -1,5 +1,5 @@
 .Artwork img {
-	object-fit: fill;
+	object-fit: scale-down;
 	display: block;
 	max-height: 20rem;
 	aspect-ratio: 1/1;
