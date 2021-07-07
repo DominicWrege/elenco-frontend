@@ -1,23 +1,7 @@
-.FeaturedCategory{
-   --side-row-width: 7rem;
+.FeaturedCategory {
+	--side-row-width: 7rem;
 }
 
-.FeaturedCategory .ant-card-body{
-    padding: 1rem;
-}
-.FeaturedCategory .FeedSmallList ul.ant-list-items {
-  
-    display: flex;
-    /* flex: 1 0 90px; */
-    flex-direction: row;
-    /* overflow-x: scroll; */
-    overflow-x: auto;
-    column-gap: 1rem;
-}
-
-.FeaturedCategory li.ant-list-item.FeedSmallList-item {
-    /* flex-basis: 10rem !important; */
-    min-width: var(--side-row-width);
-    max-width: var(--side-row-width);
-
+.FeaturedCategory .ant-card-body {
+	padding: 1rem;
 }

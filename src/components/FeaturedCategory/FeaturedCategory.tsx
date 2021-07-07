@@ -34,6 +34,7 @@ export const FeaturedCategory: React.FC<Props> = ({ name }) => {
 			<FeedSmallList
 				feeds={feeds}
 				onlyArtwork
+				orientation="horizontal"
 				skeletonSize="7.5rem"
 				loading={loading}
 			/>

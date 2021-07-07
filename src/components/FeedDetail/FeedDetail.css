@@ -38,7 +38,7 @@
 .FeedDetail-main-two-columns {
 	grid-template-columns: var(--side-row-width) 1fr;
 }
-.FeedDetail .Artwork {
+.FeedDetail .FeedDetail-sidebar .Artwork {
 	width: 100%;
 	height: var(--side-row-width);
 }

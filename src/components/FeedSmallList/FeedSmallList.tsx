@@ -3,6 +3,7 @@ import { type } from "os";
 import { useMemo } from "react";
 import { Link } from "wouter";
 import { API_URL } from "../../env";
+import util from "../../functions/util";
 import { FeedSmall } from "../../models/feeds";
 import Artwork from "../Artwork/Artwork";
 import "./FeedSmallList.css";
@@ -48,15 +49,7 @@ export const FeedSmallList: React.FC<Properties> = ({
 		return (
 			<List.Item className="FeedSmallList-item">
 				{artwork}
-				<Link
-					href={`/feed/${feed.title}`}
-					onClick={(e) => {
-						if (window.scrollY > 60) {
-							document.body.scrollTop = 0;
-							document.documentElement.scrollTop = 0;
-						}
-					}}
-				>
+				<Link href={`/feed/${feed.title}`} onClick={util.scrollTop}>
 					<Typography.Title level={4}>{feed.title}</Typography.Title>
 				</Link>
 				<Link href={`/author/${feed.authorName}`}>
