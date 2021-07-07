@@ -1,59 +1,61 @@
-import React, { useCallback, useContext, useEffect } from "react";
+import React, { useCallback, useContext } from "react";
 import Episode from "../../models/episode";
 import EpisodeItem from "../EpisodeItem/EpisodeItem";
-import { Typography, List } from 'antd';
+import { List } from "antd";
 import { FeedShort } from "../../models/feeds";
 import { EpisodeContext, PlayerContext } from "../../contexts/PlayerContext";
 import { PlayerStatus } from "../PodcastPlayer/types";
 
 interface Properties {
-    episodes: Episode[]
-    feedMeta: FeedShort
+	episodes: Episode[];
+	feedMeta: FeedShort;
 }
 
 const EpisodeList: React.FC<Properties> = ({ episodes, feedMeta }) => {
+	const player = useContext(PlayerContext);
 
-    const player = useContext(PlayerContext);
+	const setEpisodeStatus = useCallback(
+		(
+			episode: Episode,
+			playingEpisode: EpisodeContext | null | undefined
+		): PlayerStatus => {
+			// let ref = useRef(null);
+			if (player && episode.guid === playingEpisode?.guid) {
+				return player?.status ?? PlayerStatus.Pause;
+			}
 
+			return PlayerStatus.Pause;
+		},
+		[player?.status]
+	);
+	// const setEpisodeStatus = (episode: Episode, playingEpisode: EpisodeContext | null | undefined): PlayerStatus => {
+	//     // let ref = useRef(null);
+	//     if (player && episode.guid === playingEpisode?.guid) {
+	//         return player?.status ?? PlayerStatus.Pause;
+	//     }
 
-    const setEpisodeStatus = useCallback(
-        (episode: Episode, playingEpisode: EpisodeContext | null | undefined): PlayerStatus => {
-            // let ref = useRef(null);
-            if (player && episode.guid === playingEpisode?.guid) {
-                return player?.status ?? PlayerStatus.Pause;
-            }
+	//     return PlayerStatus.Pause;
+	// };
 
-            return PlayerStatus.Pause;
-        },
-        [player?.status],
-    );
-    // const setEpisodeStatus = (episode: Episode, playingEpisode: EpisodeContext | null | undefined): PlayerStatus => {
-    //     // let ref = useRef(null);
-    //     if (player && episode.guid === playingEpisode?.guid) {
-    //         return player?.status ?? PlayerStatus.Pause;
-    //     }
+	// useEffect(() => {
+	//     // console.log("list", player?.status)
+	// }, [player?.status]);
 
-    //     return PlayerStatus.Pause;
-    // };
-
-    // useEffect(() => {
-    //     // console.log("list", player?.status)
-    // }, [player?.status]);
-
-    return (
-        <List
-            size="large"
-            rowKey={episode => episode.guid ?? "key"}
-            dataSource={episodes}
-            renderItem={episode =>
-                <EpisodeItem
-                    key={episode.guid ?? "key"}
-                    episode={episode}
-                    feedMeta={feedMeta}
-                    status={setEpisodeStatus(episode, player?.episode)}
-                ></EpisodeItem>}
-        />
-    );
-}
+	return (
+		<List
+			size="large"
+			rowKey={(episode) => episode.guid ?? "key"}
+			dataSource={episodes}
+			renderItem={(episode) => (
+				<EpisodeItem
+					key={episode.guid ?? "key"}
+					episode={episode}
+					feedMeta={feedMeta}
+					status={setEpisodeStatus(episode, player?.episode)}
+				></EpisodeItem>
+			)}
+		/>
+	);
+};
 
 export default EpisodeList;

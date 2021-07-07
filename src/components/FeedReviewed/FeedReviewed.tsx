@@ -2,6 +2,7 @@ import { PageHeader } from "antd";
 import { useCallback, useEffect, useState } from "react";
 import { admin } from "../../functions/admin";
 import util from "../../functions/util";
+// eslint-disable-next-line
 import ApiError from "../../models/api";
 import { FeedModerator, FeedStatus } from "../../models/feeds";
 import FeedTable, {

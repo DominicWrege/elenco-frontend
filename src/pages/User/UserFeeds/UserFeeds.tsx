@@ -1,52 +1,50 @@
-import { Radio, RadioChangeEvent, Select, Typography } from "antd";
+import { Radio, RadioChangeEvent, Typography } from "antd";
 import "./UserFeeds.css";
 import { useCallback } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { user } from "../../../functions/user";
-import {
-  FeedStatus,
-  SubmittedFeeds,
-  FeedSmall,
-} from "../../../models/feeds";
+import { FeedStatus, SubmittedFeeds, FeedSmall } from "../../../models/feeds";
 import FeedGridList from "../../../components/FeedGridList/FeedGridList";
 import FeedFilter, {
-  sortBy,
-  SortByType,
-  SortByValue,
+	sortBy,
+	SortByValue,
 } from "../../../components/FeedFilter/FeedFilter";
 import util from "../../../functions/util";
-import { Feed } from "../../Feed/Feed";
 import useLocation from "wouter/use-location";
 const { Title } = Typography;
 
 function renderRadioButtons(
-  submittedFeeds: SubmittedFeeds | null
+	submittedFeeds: SubmittedFeeds | null
 ): JSX.Element[] {
-  return Object.keys(FeedStatus).map((status) => {
-    let count = 0;
-    if (submittedFeeds && submittedFeeds[status.toLowerCase()]) {
-      count = submittedFeeds[status.toLowerCase()].length;
-    }
-    return (
-      <Radio.Button key={status} value={status.toLowerCase()}>
-        {status} ({count})
-      </Radio.Button>
-    );
-  });
+	return Object.keys(FeedStatus).map((status) => {
+		let count = 0;
+		if (submittedFeeds && submittedFeeds[status.toLowerCase()]) {
+			count = submittedFeeds[status.toLowerCase()].length;
+		}
+		return (
+			<Radio.Button key={status} value={status.toLowerCase()}>
+				{status} ({count})
+			</Radio.Button>
+		);
+	});
 }
 
 function initFilter(): FeedStatus {
-  // console.log(util.urlParameter("select"));
-  const selection = util.urlParameter("select")?.toLocaleLowerCase();
-  if (selection?.localeCompare(FeedStatus.Queued.toLocaleLowerCase()) === 0) {
-    return FeedStatus.Queued;
-  } else if (selection?.localeCompare(FeedStatus.Offline.toLocaleLowerCase()) === 0) {
-    return FeedStatus.Offline;
-  } else if (selection?.localeCompare(FeedStatus.Blocked.toLocaleLowerCase()) === 0) {
-    return FeedStatus.Blocked;
-  }
-  return FeedStatus.Online;
+	// console.log(util.urlParameter("select"));
+	const selection = util.urlParameter("select")?.toLocaleLowerCase();
+	if (selection?.localeCompare(FeedStatus.Queued.toLocaleLowerCase()) === 0) {
+		return FeedStatus.Queued;
+	} else if (
+		selection?.localeCompare(FeedStatus.Offline.toLocaleLowerCase()) === 0
+	) {
+		return FeedStatus.Offline;
+	} else if (
+		selection?.localeCompare(FeedStatus.Blocked.toLocaleLowerCase()) === 0
+	) {
+		return FeedStatus.Blocked;
+	}
+	return FeedStatus.Online;
 }
 
 // function renderSortByOptions(sortBy: SortByType): JSX.Element[] {
@@ -62,76 +60,76 @@ function initFilter(): FeedStatus {
 let submittedFeeds: SubmittedFeeds | null = null;
 
 export const UserFeeds: React.FC = () => {
-  const [feedsList, setFeedsList] = useState<FeedSmall[]>([]);
-  const [filter, setFilter] = useState<FeedStatus>(initFilter());
-  const [loading, setLoading] = useState(true);
-  const setLocation = useLocation()[1];
-  const [currentSortBy, setCurrentSortBy] = useState<SortByValue>(sortBy.title);
+	const [feedsList, setFeedsList] = useState<FeedSmall[]>([]);
+	const [filter, setFilter] = useState<FeedStatus>(initFilter());
+	const [loading, setLoading] = useState(true);
+	const setLocation = useLocation()[1];
+	const [currentSortBy, setCurrentSortBy] = useState<SortByValue>(sortBy.title);
 
-  const getFeeds = useCallback(async () => {
-    try {
-      const feeds: SubmittedFeeds = await user.getSubmittedFeeds();
-      submittedFeeds = feeds;
-      setFeedsList(feeds[filter.toLowerCase()]);
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+	const getFeeds = useCallback(async () => {
+		try {
+			const feeds: SubmittedFeeds = await user.getSubmittedFeeds();
+			submittedFeeds = feeds;
+			setFeedsList(feeds[filter.toLowerCase()]);
+		} catch (err) {
+			console.log(err);
+		} finally {
+			setLoading(false);
+		}
+	}, [filter]);
 
-  useEffect(() => {
-    getFeeds();
-    const select = util.urlParameter("select");
-    console.log(select);
-  }, [getFeeds]);
+	useEffect(() => {
+		getFeeds();
+		const select = util.urlParameter("select");
+		console.log(select);
+	}, [getFeeds]);
 
-  const handelFilterChange = (event: RadioChangeEvent): void => {
-    event.preventDefault();
-    const filter = event.target.value ?? "online";
-    setLocation(encodeURI(`feeds?select=${filter}`), { replace: false });
-    setFilter(filter);
-    if (submittedFeeds) {
-      setFeedsList(submittedFeeds[filter] ?? []);
-    } else {
-      setFeedsList([]);
-    }
-  };
+	const handelFilterChange = (event: RadioChangeEvent): void => {
+		event.preventDefault();
+		const filter = event.target.value ?? "online";
+		setLocation(encodeURI(`feeds?select=${filter}`), { replace: false });
+		setFilter(filter);
+		if (submittedFeeds) {
+			setFeedsList(submittedFeeds[filter] ?? []);
+		} else {
+			setFeedsList([]);
+		}
+	};
 
-  // const handelSortChange = (
-  // 	value: string | number | LabeledValue,
-  // 	_option: any
-  // ): void => {
-  // 	// setCurrentSortBy(sortBy[value.toString()]);
-  // };
-  const onChangeFilter = (value: SortByValue) => {
-    setCurrentSortBy(value);
-  };
+	// const handelSortChange = (
+	// 	value: string | number | LabeledValue,
+	// 	_option: any
+	// ): void => {
+	// 	// setCurrentSortBy(sortBy[value.toString()]);
+	// };
+	const onChangeFilter = (value: SortByValue) => {
+		setCurrentSortBy(value);
+	};
 
-  return (
-    <div className="UserFeeds">
-      <header>
-        <Title>Submitted Feeds</Title>
-      </header>
-      <section className="UserFeeds-body">
-        <section className="UserFeeds-header">
-          <Radio.Group
-            defaultValue={filter.toLowerCase()}
-            buttonStyle="solid"
-            onChange={handelFilterChange}
-          >
-            {renderRadioButtons(submittedFeeds)}
-          </Radio.Group>
-          <FeedFilter onChange={onChangeFilter} />
-        </section>
-        <FeedGridList
-          feeds={feedsList}
-          sortedBy={currentSortBy}
-          loading={loading}
-        />
-      </section>
-    </div>
-  );
+	return (
+		<div className="UserFeeds">
+			<header>
+				<Title>Submitted Feeds</Title>
+			</header>
+			<section className="UserFeeds-body">
+				<section className="UserFeeds-header">
+					<Radio.Group
+						defaultValue={filter.toLowerCase()}
+						buttonStyle="solid"
+						onChange={handelFilterChange}
+					>
+						{renderRadioButtons(submittedFeeds)}
+					</Radio.Group>
+					<FeedFilter onChange={onChangeFilter} />
+				</section>
+				<FeedGridList
+					feeds={feedsList}
+					sortedBy={currentSortBy}
+					loading={loading}
+				/>
+			</section>
+		</div>
+	);
 };
 
 export default UserFeeds;

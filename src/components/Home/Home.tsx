@@ -39,7 +39,7 @@ export const Home: React.FC = () => {
 
 	useEffect(() => {
 		loadMeta();
-	}, []);
+	}, [loadMeta]);
 
 	return (
 		<div className="Home">

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import "./Header.css";
-import { Row, Col, PageHeader, Button, Dropdown, Menu, Typography } from "antd";
+import { Button, Dropdown, Menu, Typography } from "antd";
 import { Link, useLocation } from "wouter";
 import { UserOutlined } from "@ant-design/icons";
 import { auth } from "../../functions/auth";

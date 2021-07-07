@@ -21,7 +21,7 @@ export const FeedSmallList: React.FC<Properties> = ({
 	onlyArtwork = false,
 	noBorder,
 	loading = true,
-	skeletonSize: skeletonSize = "11rem",
+	skeletonSize = "11rem",
 }) => {
 	const skeletons = useMemo(
 		() =>

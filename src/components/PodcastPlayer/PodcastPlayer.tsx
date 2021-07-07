@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useState } from "react";
-import { CloseOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import { CloseCircleOutlined } from "@ant-design/icons";
 import { useEffect } from "react";
 import "./PodcastPlayer.css";
 import { config } from "./config";
@@ -19,7 +19,7 @@ import {
 	READY,
 	REQUEST_PAUSE,
 	REQUEST_PLAY,
-	STOP,
+	// STOP,
 } from "@podlove/player-actions/types";
 import { requestPlay, requestPause } from "@podlove/player-actions/play";
 import { PlayerAction, PlayerStatus, StoreType } from "./types";

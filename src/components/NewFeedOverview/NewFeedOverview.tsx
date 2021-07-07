@@ -1,70 +1,10 @@
-import { Button, message, PageHeader, Space, Table } from "antd";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { API_IP, API_URL } from "../../env";
+import { Button, message, PageHeader } from "antd";
+import { useCallback, useEffect, useState } from "react";
+import { API_IP } from "../../env";
 import { admin } from "../../functions/admin";
 import util from "../../functions/util";
 import { FeedModerator } from "../../models/feeds";
 import FeedTable from "../FeedTable/FeedTable";
-
-const columns = [
-	{
-		title: "title",
-		dataIndex: "title",
-		key: "title",
-		sorter: {
-			compare: (a, b) => a.title.localeCompare(b.title),
-			multiple: 1,
-		},
-		fixed: false,
-	},
-
-	{
-		title: "Author Name",
-		dataIndex: "authorName",
-		key: "authorName",
-		ellipsis: true,
-		fixed: false,
-		sorter: {
-			compare: (a, b) => a.authorName.localeCompare(b.authorName),
-			multiple: 1,
-		},
-	},
-	{
-		title: "Website",
-		dataIndex: "linkWeb",
-		key: "linkWeb",
-		render: (link) => (
-			<a href={`${link}`} target="_blank" rel="noreferrer">
-				Website
-			</a>
-		),
-		width: "6em",
-		fixed: false,
-	},
-	{
-		title: "submitted",
-		dataIndex: "submitted",
-		key: "submitted",
-		render: (date) => util.formatDate(date),
-		width: "10em",
-		fixed: false,
-	},
-
-	{
-		title: "username",
-		dataIndex: "username",
-		key: "username",
-		ellipsis: true,
-		width: "12em",
-		fixed: false,
-	},
-	{
-		title: "url",
-		dataIndex: "url",
-		key: "url",
-		fixed: false,
-	},
-];
 
 export const NewFeedOverview: React.FC = () => {
 	const [selectedRows, setSelectedRows] = useState<number[]>([]);
@@ -130,7 +70,7 @@ export const NewFeedOverview: React.FC = () => {
 				title="Incoming Feeds"
 				extra={
 					<Button
-						disabled={selectedRows.length == 0}
+						disabled={selectedRows.length === 0}
 						loading={loadingButton}
 						type="primary"
 						onClick={handleButtonClick}

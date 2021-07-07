@@ -1,7 +1,6 @@
 import { API_URL } from "../env"
-import { FeedEpisodeModel, FeedModel, FeedSmall as FeedSmall } from "../models/feeds";
+import { FeedEpisodeModel, FeedModel, FeedSmall } from "../models/feeds";
 import { http } from "./http"
-
 
 
 export namespace feed {

@@ -1,14 +1,8 @@
-import React, {
-	useCallback,
-	useContext,
-	useEffect,
-	useMemo,
-	useState,
-} from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import "./App.css";
 import { Content, Footer } from "antd/lib/layout/layout";
 import AppHeader from "../Header/Header";
-import { Button, Layout } from "antd";
+import { Layout } from "antd";
 import { Route, Switch, useLocation } from "wouter";
 import RegisterLogin, { ComponentType } from "../../pages/RegisterLogin";
 
@@ -34,7 +28,6 @@ import { Home } from "../Home/Home";
 const App: React.FC = () => {
 	let userCache: User | null = auth.getSession();
 
-	const userContext = useContext(UserContext);
 	const setLocation = useLocation()[1];
 
 	const [playingEpisode, setPlayingEpisode] = useState<EpisodeContext | null>(
@@ -81,7 +74,7 @@ const App: React.FC = () => {
 				console.error(err);
 			}
 		}
-	}, []);
+	}, [setLocation]);
 
 	useEffect(() => {
 		checkUserStatus();

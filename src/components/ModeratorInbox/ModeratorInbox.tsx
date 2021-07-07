@@ -1,7 +1,8 @@
-import { Button, Divider, message, PageHeader, Space } from "antd";
+import { Button, message, PageHeader, Space } from "antd";
 import { useCallback, useEffect, useState } from "react";
 import { admin } from "../../functions/admin";
 import util from "../../functions/util";
+// eslint-disable-next-line
 import ApiError from "../../models/api";
 import { FeedModerator, FeedStatus } from "../../models/feeds";
 import FeedTable from "../FeedTable/FeedTable";
@@ -16,7 +17,7 @@ export const ModeratorInbox = (props) => {
 	const initData = useCallback(async () => {
 		try {
 			console.log("ddd");
-			
+
 			const feedJson = await admin.moderatorInbox();
 			console.log(feedJson);
 			setFeeds(feedJson);

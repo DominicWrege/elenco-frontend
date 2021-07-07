@@ -1,4 +1,4 @@
-import { Card, List, Tag, Typography, Input } from "antd";
+import { Card, List, Tag, Input } from "antd";
 import "./Categories.css";
 import { useCallback, useEffect, useState } from "react";
 import { Link } from "wouter";
@@ -16,7 +16,7 @@ export const Categories: React.FC = () => {
 		} finally {
 			setLoading(false);
 		}
-	}, [filter]);
+	}, []);
 
 	useEffect(() => {
 		fetchAll();

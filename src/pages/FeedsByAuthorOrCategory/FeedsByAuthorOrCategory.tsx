@@ -4,7 +4,6 @@ import React, { useCallback, useEffect, useState } from "react";
 import { DefaultParams, useRoute } from "wouter";
 import FeedGridList from "../../components/FeedGridList/FeedGridList";
 import feed from "../../functions/feed";
-import api from "../../functions/api";
 import { FeedSmall } from "../../models/feeds";
 
 export enum FeedsBy {
