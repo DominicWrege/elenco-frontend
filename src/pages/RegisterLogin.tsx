@@ -1,7 +1,7 @@
 import { Alert, Card } from "antd";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Route, useLocation, useRoute } from "wouter";
+import { useRoute } from "wouter";
 import MiddleCenter from "../components/Styles/shared.css";
 import Login from "./Login/Login";
 import Register from "./Register/Register";
