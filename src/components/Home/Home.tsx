@@ -1,4 +1,3 @@
-import "./Home.css";
 import { Card, Typography } from "antd";
 import Statistic from "../Statistic/Statistic";
 import { Link } from "wouter";
@@ -115,7 +114,15 @@ export const Home: React.FC = () => {
 
 					<Text strong>Where can I contribute?</Text>
 					<p>
-						You can find it on <a href="https://github.com">Github.com</a>.
+						You can find it on{" "}
+						<a
+							href="https://github.com/DominicWrege/elenco"
+							target="_blank"
+							rel="noreferrer"
+						>
+							Github.com
+						</a>
+						.
 					</p>
 				</Card>
 			</section>

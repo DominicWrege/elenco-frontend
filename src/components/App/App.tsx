@@ -102,11 +102,7 @@ const App: React.FC = () => {
 									<RegisterLogin component={ComponentType.Register} />
 								</Route>
 								<Route path="/search/:query" component={SearchResults}></Route>
-								{/* <Route path="/new-feed">
-                  <Guard>
-                    <SubmitFeed />
-                  </Guard>
-                </Route> */}
+	
 								<Route path="/new/:path" component={NewFeed}></Route>
 								{/* <Route path="/preview" component={Preview}></Route> */}
 								<Route path="/feed/:name" component={Feed}></Route>
