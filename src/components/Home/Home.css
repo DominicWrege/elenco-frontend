@@ -37,6 +37,11 @@
 	border-radius: 0.25em;
 }
 
+.swagger-ui .info {
+	/* pa */
+	margin: 1.25rem 0 !important;
+}
+
 @media (max-width: 600px) {
 	.Home-meta .ant-card-body {
 		display: grid;
