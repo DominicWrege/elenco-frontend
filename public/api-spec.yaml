@@ -1,0 +1,310 @@
+openapi: 3.0.0
+info:
+  title: Eleenco Backend API
+  description: Optional multiline or single-line description in
+    [CommonMark](http://commonmark.org/help/) or HTML.
+  version: "1.0"
+servers:
+  - url: http://localhost:8080
+paths:
+  /auth/register:
+    post:
+      tags:
+        - "auth"
+      description: Register a new user with user permissions.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Register"
+      responses:
+        200: # status code
+          description: User was successfully created.
+  /auth/login:
+    post:
+      tags:
+        - "auth"
+      responses:
+        200:
+          description: Log in as an existing user by creating a new session.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+  /auth/logout:
+    post:
+      security:
+        - cookieAuth: []
+      tags:
+        - auth
+      responses:
+        200:
+          description: Logs the current user out and ends the session.
+  /auth/has-subscription:
+    post:
+      tags:
+        - auth
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                feedId:
+                  type: integer
+      responses:
+        200:
+          description: Return if the user has Subscripted to this podcast.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  isSubscripted:
+                    type: boolean
+
+  /feeds/top:
+    get:
+      tags:
+        - feeds
+      responses:
+        200:
+          description: Returns the top 25 feeds as a list.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TinyFeed"
+
+  /feeds/recent:
+    get:
+      tags:
+        - feeds
+      responses:
+        200:
+          description: Returns the most recent submitted feeds as a list.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TinyFeed"
+  /feeds:
+    get:
+      tags:
+        - feeds
+      responses:
+        200:
+          description: Returns all feeds.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TinyFeed"
+  /feeds/search:
+    get:
+      tags:
+        - feeds
+      parameters:
+        - in: query
+          name: term
+          description: The search term.
+          schema:
+            type: string
+          required: true
+        - in: query
+          name: lang
+          description: The language code [de, en, pl] as a filter.
+          schema:
+            type: string
+        - in: query
+          name: category
+          description: The feed category as a filter.
+          schema:
+            type: number
+      responses:
+        200:
+          description: Return the search result as list.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Feed"
+
+  /feed/{feedId}:
+    get:
+      tags:
+        - feed
+      responses:
+        200:
+          description: test11
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Feed"
+  # /auth
+components:
+  schemas:
+    Register:
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+          minLength: 4
+        password_check:
+          type: string
+      required:
+        - username
+        - email
+        - password
+        - password_check
+    User:
+      type: object
+      properties:
+        username:
+          type: string
+        id:
+          type: integer
+        email:
+          type: string
+        permission:
+          type: string
+          enum: ["User", "Admin"]
+      required:
+        - username
+        - id
+        - email
+        - permission
+    TinyFeed:
+      type: object
+      properties:
+        id:
+          type: number
+        title:
+          type: string
+        subtitle:
+          type: string
+          nullable: true
+        authorName:
+          type: string
+        status:
+          type: string
+          enum: ["Online", "Offline", "Queued", "Blocked"]
+        submitted:
+          type: string
+          format: date-time
+    Feed:
+      type: object
+      properties:
+        id:
+          type: number
+        title:
+          type: string
+        subtitle:
+          type: string
+          nullable: true
+        authorName:
+          type: string
+        language:
+          type: string
+        description:
+          type: string
+        linkWeb:
+          type: string
+          format: uri
+        img:
+          type: string
+        imgCache:
+          type: string
+        submitted:
+          type: string
+          format: date-time
+        categories:
+          type: array
+          items:
+            $ref: "#/components/schemas/TopCatgory"
+        epsiodes:
+          type: array
+          items:
+            $ref: "#/components/schemas/Episode"
+
+    TopCatgory:
+      type: object
+      properties:
+        id:
+          type: number
+        description:
+          type: string
+        children:
+          type: array
+          items:
+            $ref: "#/components/schemas/Category"
+
+    Category:
+      type: object
+      properties:
+        id:
+          type: number
+        description:
+          type: string
+    Episode:
+      type: object
+      properties:
+        id:
+          type: number
+        description:
+          type: string
+        explicit:
+          type: boolean
+        duration:
+          type: number
+          nullable: true
+        webLink:
+          type: string
+          format: uri
+          nullable: true
+        showNotes:
+          type: string
+          nullable: true
+        enclosure:
+          $ref: "#/components/schemas/Enclosure"
+        published:
+          type: string
+          format: date-time
+          nullable: true
+        keywords:
+          type: array
+          items:
+            type: string
+          nullable: true
+        guid:
+          type: string
+    Enclosure:
+      type: object
+      properties:
+        mediaUrl:
+          type: string
+          format: uri
+        length:
+          type: number
+        mimeType:
+          type: string
+
+    # SearchQuery:
+
+  securitySchemes:
+    cookieAuth: # arbitrary name for the security scheme; will be used in the "security" key later
+      type: apiKey
+      in: header
+      name: auth

@@ -24,6 +24,7 @@ import FeedsByAuthorOrCategory, {
 import NewFeed from "../../pages/NewFeed/NewFeed";
 import Manage from "../../pages/Manage/Manage";
 import { Home } from "../Home/Home";
+import MainRoutes from "./Routes";
 
 const App: React.FC = () => {
 	let userCache: User | null = auth.getSession();
@@ -87,50 +88,7 @@ const App: React.FC = () => {
 					<Layout>
 						<AppHeader />
 						<Content className="App-pages">
-							<Switch>
-								<Route path="/">
-									<Home />
-								</Route>
-								<Route path="/authors">
-									<h2>Authors</h2>
-								</Route>
-								<Route path="/explore" component={Explore}></Route>
-								<Route path="/login">
-									<RegisterLogin component={ComponentType.Login} />
-								</Route>
-								<Route path="/register">
-									<RegisterLogin component={ComponentType.Register} />
-								</Route>
-								<Route path="/search/:query" component={SearchResults}></Route>
-	
-								<Route path="/new/:path" component={NewFeed}></Route>
-								{/* <Route path="/preview" component={Preview}></Route> */}
-								<Route path="/feed/:name" component={Feed}></Route>
-								<Route path="/category/:category">
-									<FeedsByAuthorOrCategory
-										config={FeedsBy.Category}
-									></FeedsByAuthorOrCategory>
-								</Route>
-								<Route path="/author/:author">
-									<FeedsByAuthorOrCategory
-										config={FeedsBy.Author}
-									></FeedsByAuthorOrCategory>
-								</Route>
-								<Route path="/user/feeds" component={UserFeeds}></Route>
-								<Route path="/user/subscriptions">
-									<Guard>
-										<Subscription />
-									</Guard>
-								</Route>
-								<Route path="/manage/:path">
-									<Guard adminOnly>
-										<Manage />
-									</Guard>
-								</Route>
-								<Route>
-									<h2>404: nothing found!</h2>
-								</Route>
-							</Switch>
+							{MainRoutes}
 						</Content>
 						<Footer>
 							<PodcastPlayer />

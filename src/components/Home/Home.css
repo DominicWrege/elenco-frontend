@@ -32,6 +32,11 @@
 	display: inherit;
 }
 
+.swagger-ui {
+	background: #fff;
+	border-radius: 0.25em;
+}
+
 @media (max-width: 600px) {
 	.Home-meta .ant-card-body {
 		display: grid;
