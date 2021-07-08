@@ -7,6 +7,8 @@
 
 #Player-wrapper iframe {
 	width: 100%;
+	padding: 0 0.75rem;
+	margin-bottom: 0.25rem;
 }
 
 .PodcastPlayer-close {
@@ -14,5 +16,5 @@
 	/* justify-content: f; */
 	position: absolute;
 	top: 0.75rem;
-	right: 0.5rem;
+	right: 1rem;
 }
