@@ -42,7 +42,7 @@ header h1.ant-typography {
 
 @media (max-width: 1200px) {
 	.Header-inner {
-		padding: 1em;
+		padding: 1rem;
 	}
 }
 

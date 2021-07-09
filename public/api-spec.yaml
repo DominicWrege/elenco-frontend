@@ -25,6 +25,12 @@ paths:
     post:
       tags:
         - "auth"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Login"
       responses:
         200:
           description: Log in as an existing user by creating a new session.
@@ -142,14 +148,109 @@ paths:
     get:
       tags:
         - feed
+      parameters:
+        - name: feedId
+          description: The Feed ID.
+          required: true
+          in: path
+          schema:
+            type: number
       responses:
         200:
-          description: test11
+          description: Returns the requested feed.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Feed"
-  # /auth
+  /feed/{feedId}/related:
+    get:
+      tags:
+        - feed
+      parameters:
+        - in: path
+          name: feedId
+          description: The Feed ID.
+          required: true
+          schema:
+            type: number
+      responses:
+        200:
+          description: Returns a list of related feeds, how ha the same category.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Feed"
+  /feed/{feedId}/episodes:
+    get:
+      tags:
+        - feed
+      parameters:
+        - in: path
+          name: feedId
+          description: The Feed ID.
+          required: true
+          schema:
+            type: number
+      responses:
+        200:
+          description: Returns a list of epsiodes for a given feed.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Episode"
+  /subscription:
+    post:
+      tags:
+        - subscription
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                feedId:
+                  $ref: number
+      responses:
+        201:
+          description: User has successfuly subscriped to a feed.
+      security:
+        - cookieAuth: []
+  /categories:
+    get:
+      tags:
+        - categories
+      responses:
+        200:
+          description: A list of all top categories and including there children.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TopCategory"
+  /category:
+    get:
+      tags:
+        - categories
+      parameters:
+        - in: path
+          name: category_id_name
+          required: true
+          schema:
+            oneOf:
+              - type: number
+              - type: string
+      responses:
+        200:
+          description: Return the requested category.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TopCategory"
 components:
   schemas:
     Register:
@@ -159,11 +260,15 @@ components:
           type: string
         email:
           type: string
+          format: email
         password:
           type: string
           minLength: 4
+          format: password
         password_check:
           type: string
+          format: password
+          minLength: 4
       required:
         - username
         - email
@@ -178,6 +283,7 @@ components:
           type: integer
         email:
           type: string
+          format: email
         permission:
           type: string
           enum: ["User", "Admin"]
@@ -233,13 +339,12 @@ components:
         categories:
           type: array
           items:
-            $ref: "#/components/schemas/TopCatgory"
+            $ref: TopCategory
         epsiodes:
           type: array
           items:
-            $ref: "#/components/schemas/Episode"
-
-    TopCatgory:
+            $ref: Episode
+    TopCategory:
       type: object
       properties:
         id:
@@ -249,7 +354,7 @@ components:
         children:
           type: array
           items:
-            $ref: "#/components/schemas/Category"
+            $ref: Category
 
     Category:
       type: object
@@ -278,7 +383,7 @@ components:
           type: string
           nullable: true
         enclosure:
-          $ref: "#/components/schemas/Enclosure"
+          $ref: Enclosure
         published:
           type: string
           format: date-time
@@ -300,6 +405,15 @@ components:
           type: number
         mimeType:
           type: string
+    Login:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
 
     # SearchQuery:
 
