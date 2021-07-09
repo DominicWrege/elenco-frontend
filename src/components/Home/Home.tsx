@@ -8,6 +8,7 @@ import { MetaStatistic } from "../../models/api";
 import { FeedSmall } from "../../models/feeds";
 import FeedSmallList from "../FeedSmallList/FeedSmallList";
 import feed from "../../functions/feed";
+import { LOGO } from "../../env";
 
 export const Home: React.FC = () => {
 	const [meta, setMeta] = useState<MetaStatistic | null>(null);
@@ -41,10 +42,7 @@ export const Home: React.FC = () => {
 		<div className="Home">
 			<header>
 
-				{/* <img src="img/elenco_one.png" height={320} alt="" /> */}
-				<img src="img/logo.png" height={320} alt="logo" />
-				{/* <img src="img/elenco_three.png" height={320} alt="" />
-				<img src="img/elenco_four.png" height={320} alt="" /> */}
+				<img src={LOGO} height={270} alt="logo" />
 				<Typography.Title level={4}>
 					An independent open source podcast directory
 				</Typography.Title>

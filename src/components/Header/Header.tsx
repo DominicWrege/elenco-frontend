@@ -7,6 +7,7 @@ import { UserOutlined } from "@ant-design/icons";
 import { auth } from "../../functions/auth";
 import SearchField from "../SearchField/SearchField";
 import { UserContext } from "../../contexts/UserContext";
+import { LOGO } from "../../env";
 
 const dropMenu =
 	<Menu >
@@ -95,8 +96,8 @@ function AppHeader(): JSX.Element {
 		<header>
 			<div className="Header-inner">
 				<div id="Header-title" >
-					<Link href="/" style={{ display: "flex", gap: "1rem"}}>
-						<img style={{ height: "2.8em" }} src="/img/logo.png" alt="logo" />
+					<Link href="/">
+						<img style={{ height: "2.8em" }} src={LOGO} alt="logo" />
 						<Typography.Title level={1}>Elenco</Typography.Title>
 					</Link>
 				</div>
