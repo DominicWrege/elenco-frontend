@@ -1,11 +1,31 @@
 import React, { useContext } from "react";
 import "./Header.css";
+import { DownOutlined } from '@ant-design/icons';
 import { Button, Dropdown, Menu, Typography } from "antd";
 import { Link, useLocation } from "wouter";
 import { UserOutlined } from "@ant-design/icons";
 import { auth } from "../../functions/auth";
 import SearchField from "../SearchField/SearchField";
 import { UserContext } from "../../contexts/UserContext";
+
+const dropMenu =
+	<Menu >
+		<Menu.Item key="mexplore">
+			<Link href="/explore" className="active">
+				Explore
+			</Link>
+		</Menu.Item >
+		<Menu.Item key="mfaq">
+			<Link href="/faq" >
+				FAQ
+			</Link>
+		</Menu.Item>
+		<Menu.Item key="mexplore">
+			<Link href="/api">
+				API
+			</Link>
+		</Menu.Item>
+	</Menu >
 
 function AppHeader(): JSX.Element {
 	const userContext = useContext(UserContext);
@@ -74,18 +94,37 @@ function AppHeader(): JSX.Element {
 	return (
 		<header>
 			<div className="Header-inner">
-				<div id="Header-title">
-					<Link href="/" id="Header-title">
+				<div id="Header-title" >
+					<Link href="/" style={{ display: "flex", gap: "1rem"}}>
+						<img style={{ height: "2.8em" }} src="/img/logo.png" alt="logo" />
 						<Typography.Title level={1}>Elenco</Typography.Title>
 					</Link>
 				</div>
 				<div id="Header-search">
 					<SearchField />
 				</div>
-				<div id="Header-btn">
-					<Link href="/explore" className="active">
-						<Button type="default">Explore</Button>
-					</Link>
+
+
+				<div id="Header-btns">
+					<div className="Header-dropdown-more">
+						<Dropdown overlay={dropMenu} >
+							<Button>
+								More <DownOutlined />
+							</Button>
+						</Dropdown>
+					</div>
+
+					<div className="Header-btns-group">
+						<Link href="/explore" className="active">
+							<Button type="default">Explore</Button>
+						</Link>
+						<Link href="/faq" >
+							<Button type="default">FAQ</Button>
+						</Link>
+						<Link href="/api">
+							<Button type="default">API</Button>
+						</Link>
+					</div>
 				</div>
 				<div id="Header-menu">{userMenu()}</div>
 			</div>

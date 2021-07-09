@@ -4,15 +4,15 @@
 	flex-direction: column;
 }
 .Home header {
-	text-align: center;
 	display: block;
+	text-align: center;
 }
 
 .Home header h2 {
 	font-size: 2em;
 }
 .Home header .ant-typography {
-	margin: 0.25em 0 !important;
+	margin: 1rem 0;
 }
 .Home h1.ant-typography {
 	text-align: center;

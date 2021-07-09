@@ -8,7 +8,6 @@ import { MetaStatistic } from "../../models/api";
 import { FeedSmall } from "../../models/feeds";
 import FeedSmallList from "../FeedSmallList/FeedSmallList";
 import feed from "../../functions/feed";
-const { Text } = Typography;
 
 export const Home: React.FC = () => {
 	const [meta, setMeta] = useState<MetaStatistic | null>(null);
@@ -18,9 +17,6 @@ export const Home: React.FC = () => {
 	const [loadFeeds, setLoadFeeds] = useState(true);
 	const loadMeta = useCallback(async () => {
 		try {
-			// const json: MetaStatistic = await api.getMeta();
-			// setMeta(json);
-			// const feeds = await feed.getTop25();
 			const [topFeedsJson, metaJson, recentFeedJson] = await Promise.all([
 				feed.getTop25(),
 				api.getMeta(),
@@ -44,9 +40,13 @@ export const Home: React.FC = () => {
 	return (
 		<div className="Home">
 			<header>
-				<Typography.Title level={1}>Welcome to Elenco!</Typography.Title>
-				<Typography.Title level={2}>
-					An independent open source podcast directory.
+
+				{/* <img src="img/elenco_one.png" height={320} alt="" /> */}
+				<img src="img/logo.png" height={320} alt="logo" />
+				{/* <img src="img/elenco_three.png" height={320} alt="" />
+				<img src="img/elenco_four.png" height={320} alt="" /> */}
+				<Typography.Title level={4}>
+					An independent open source podcast directory
 				</Typography.Title>
 			</header>
 			<section className="Home-meta">
@@ -89,42 +89,6 @@ export const Home: React.FC = () => {
 						orientation="horizontal"
 						feeds={recentFeeds}
 					></FeedSmallList>
-				</Card>
-			</section>
-			<section>
-				<Card title="FAQ">
-					<Text strong>What is Elenco?</Text>
-					<p>
-						Elenco is an open source independent Podcast Index where you can
-						find or discover your favorite podcast.
-					</p>
-					<Text strong>How can I use it?</Text>
-					<p>
-						You can listen, discover new Podcasts and read comments from other
-						users.
-					</p>
-					<Text strong>For which purpose do I need an account?</Text>
-					<p>
-						Only if you want to subscribe or provide feedback to your favorite
-						Podcasts, you need to
-						<Link href="/register"> sign up</Link> for an account.
-					</p>
-
-					<Text strong>How much costs Elenco?</Text>
-					<p>Elenco is totally free.</p>
-
-					<Text strong>Where can I contribute?</Text>
-					<p>
-						You can find it on{" "}
-						<a
-							href="https://github.com/DominicWrege/elenco"
-							target="_blank"
-							rel="noreferrer"
-						>
-							Github.com
-						</a>
-						.
-					</p>
 				</Card>
 			</section>
 		</div>

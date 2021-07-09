@@ -232,7 +232,7 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/TopCategory"
-  /category:
+  /category/{category_id_name}:
     get:
       tags:
         - categories
