@@ -1,116 +1,132 @@
 import { AutoComplete, Input, Typography } from "antd";
 import "./SearchField.css";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useLocation, useRoute } from "wouter";
 import { API_URL } from "../../env";
 import { http } from "../../functions/http";
 import { SearchProperties } from "../../pages/SearchResults/SearchResults";
 import type { Completion } from "../../models/feeds";
+import { useHotkeys } from "react-hotkeys-hook";
 const { Paragraph } = Typography;
 
 // TODO get para an set the field
 type InputEvent =
-  | React.ChangeEvent<HTMLInputElement>
-  | React.MouseEvent<HTMLElement>
-  | React.KeyboardEvent<HTMLInputElement>;
+	| React.ChangeEvent<HTMLInputElement>
+	| React.MouseEvent<HTMLElement>
+	| React.KeyboardEvent<HTMLInputElement>;
 
 interface Option {
-  value: string;
-  label: string | JSX.Element;
+	value: string;
+	label: string | JSX.Element;
 }
 
 const SearchField: React.FC = () => {
-  const setLocation = useLocation()[1];
-  const params = useRoute<SearchProperties>("/search/:query")[1];
-  const [completions, setCompletions] = useState<Option[]>([]);
-  const uri = params?.query ? decodeURI(params.query) : "";
-  const [value, setValue] = useState<string>(uri);
+	const setLocation = useLocation()[1];
+	const params = useRoute<SearchProperties>("/search/:query")[1];
 
-  const updateLocation = (searchTerm: string) => {
-    const uri = `/search/${searchTerm}`;
-    setLocation(uri);
-  };
+	const [completions, setCompletions] = useState<Option[]>([]);
 
-  const handleSearch = (searchTerm: string, _event?: InputEvent) => {
-    if (searchTerm && searchTerm.trim().length > 0) {
-      updateLocation(searchTerm.trim());
-    }
-  };
+	const uri = params?.query ? decodeURI(params.query) : "";
+	const [value, setValue] = useState<string>(uri);
 
-  const fetchCompletion = async (query: string) => {
-    const uri = `${API_URL}/completion/${query}`;
-    let resp = await http.get(encodeURI(uri));
-    let completions: Completion[] = await resp.json();
-    setCompletions(renderOptions(completions));
-  };
-  const renderOptions = (completions: Completion[]): Option[] => {
-    const ret = completions.map((completion) => {
-      return {
-        value: completion.title,
-        label: (
-          <div className="SearchField-option">
-            <Paragraph ellipsis>{completion.title}</Paragraph>
-            <small>{completion.authorName}</small>
-          </div>
-        ),
-      };
-    });
-    return ret;
-  };
+	const inputField = useRef<Input>(null);
 
-  // const debounce = (fn: any, delay: number) => {
-  //     let timeOut;
-  //     console.log(timeOut);
-  //     return function (...args) {
-  //         // if (timeOut) {
-  //         //     clearTimeout(timeOut);
-  //         // }
-  //         console.log("huodsapi");
-  //         timeOut = setTimeout(() => {
-  //             // await fn((...args);
-  //             console.log(111);
-  //         }, 100);
-  //         console.log(timeOut)
-  //     }
-  // };
+	useHotkeys("ctrl+k", (event: KeyboardEvent) => {
+		if (inputField.current) {
+			event?.preventDefault();
+			console.log(inputField.current);
+			inputField.current.focus();
+		}
+	});
 
-  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    const value = event.target.value;
-    setValue(value);
-    let timeOut;
-    if (timeOut) {
-      clearTimeout(timeOut);
-    }
-    if (value?.trim().length > 1) {
-      timeOut = setTimeout(async () => {
-        await fetchCompletion(value);
-      }, 200);
-    }
-  };
+	const updateLocation = (searchTerm: string) => {
+		const uri = `/search/${searchTerm}`;
+		setLocation(uri);
+	};
 
-  const handleOnSelect = (selected: string): void => {
-    setValue(selected);
-    updateLocation(selected);
-  };
+	const handleSearch = (searchTerm: string, _event?: InputEvent) => {
+		if (searchTerm && searchTerm.trim().length > 0) {
+			updateLocation(searchTerm.trim());
+		}
+	};
 
-  return (
-    <AutoComplete
-      value={value}
-      onSelect={handleOnSelect}
-      options={completions}
-      dropdownClassName="completion-search-dropdown"
-    >
-      <Input.Search
-        placeholder="input search text"
-        allowClear
-        enterButton
-        onSearch={handleSearch}
-        onChange={handleOnChange}
-        size="middle"
-        // ref={input}
-      />
-    </AutoComplete>
-  );
+	const fetchCompletion = async (query: string) => {
+		const uri = `${API_URL}/completion/${query}`;
+		let resp = await http.get(encodeURI(uri));
+		let completions: Completion[] = await resp.json();
+		setCompletions(renderOptions(completions));
+	};
+	const renderOptions = (completions: Completion[]): Option[] => {
+		const ret = completions.map((completion) => {
+			return {
+				value: completion.title,
+				label: (
+					<div className="SearchField-option">
+						<Paragraph ellipsis>{completion.title}</Paragraph>
+						<small>{completion.authorName}</small>
+					</div>
+				),
+			};
+		});
+		return ret;
+	};
+
+	// const debounce = (fn: any, delay: number) => {
+	//     let timeOut;
+	//     console.log(timeOut);
+	//     return function (...args) {
+	//         // if (timeOut) {
+	//         //     clearTimeout(timeOut);
+	//         // }
+	//         console.log("huodsapi");
+	//         timeOut = setTimeout(() => {
+	//             // await fn((...args);
+	//             console.log(111);
+	//         }, 100);
+	//         console.log(timeOut)
+	//     }
+	// };
+
+	const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+		const value = event.target.value;
+		setValue(value);
+		let timeOut;
+		if (timeOut) {
+			clearTimeout(timeOut);
+		}
+		if (value?.trim().length > 1) {
+			timeOut = setTimeout(async () => {
+				await fetchCompletion(value);
+			}, 200);
+		}
+	};
+
+	const handleOnSelect = (selected: string): void => {
+		setValue(selected);
+		updateLocation(selected);
+	};
+
+	return (
+		<AutoComplete
+			className="SearchField"
+			value={value}
+			onSelect={handleOnSelect}
+			options={completions}
+			ref={inputField}
+			dropdownClassName="completion-search-dropdown"
+		>
+			<Input.Search
+				placeholder="input search text"
+				allowClear
+				enterButton
+				onSearch={handleSearch}
+				onChange={handleOnChange}
+				size="middle"
+				suffix="⠀ctrl k"
+				// ref={input}
+			/>
+		</AutoComplete>
+	);
 };
 
 export default SearchField;

@@ -2,7 +2,22 @@
 	display: flex;
 	gap: 2rem;
 	flex-direction: column;
+	animation-duration: 1.1s;
+	animation-timing-function: ease-out;
+	animation-delay: 0s;
+	animation-iteration-count: 1;
+	animation-name: slideUp;
 }
+
+@keyframes slideUp {
+	0% {
+		transform: translateY(400px);
+	}
+	100% {
+		transform: translateY(0);
+	}
+}
+
 .Home header {
 	display: block;
 	text-align: center;
@@ -38,7 +53,6 @@
 }
 
 .swagger-ui .info {
-	/* pa */
 	margin: 1.25rem 0 !important;
 }
 

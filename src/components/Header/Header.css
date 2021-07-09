@@ -30,8 +30,7 @@ header {
 	flex-wrap: nowrap;
 	background: cfd8dc;
 	column-gap: 1em;
-	padding-top: 1rem;
-	padding-bottom: 1rem;
+	padding: 1rem;
 	/* background: #C6DDF0 !important; */
 	/* background: #D8DBE2!important; */
 	/* background: #fff !important; */
@@ -46,7 +45,7 @@ header h1.ant-typography {
 }
 
 #Header-search .ant-select-auto-complete {
-	width: 26rem;
+	width: 27rem;
 	/* max-width: 38rem; */
 }
 .Header-btns-group {

@@ -7,7 +7,10 @@
 .SearchField-option div.ant-typography {
 	margin: 0 !important;
 }
-
+.SearchField span.ant-input-suffix {
+	color: #bebebebe;
+	/* margin-left: 1em;⠀⠀ */
+}
 .completion-search-dropdown .rc-virtual-list-holder {
 	max-height: 470px !important;
 }

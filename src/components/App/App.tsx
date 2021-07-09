@@ -4,27 +4,16 @@ import { Content, Footer } from "antd/lib/layout/layout";
 import AppHeader from "../Header/Header";
 import { Layout } from "antd";
 import { Route, Switch, useLocation } from "wouter";
-import RegisterLogin, { ComponentType } from "../../pages/RegisterLogin";
 
 import { User } from "../../models/user";
-import SearchResults from "../../pages/SearchResults/SearchResults";
 import { UserContext } from "../../contexts/UserContext";
 import { auth } from "../../functions/auth";
-import Guard from "../Guard/Guard";
 import PodcastPlayer from "../PodcastPlayer/PodcastPlayer";
-import { Feed } from "../../pages/Feed/Feed";
 import { EpisodeContext, PlayerContext } from "../../contexts/PlayerContext";
 import { PlayerAction, PlayerStatus } from "../PodcastPlayer/types";
-import UserFeeds from "../../pages/User/UserFeeds/UserFeeds";
-import Subscription from "../../pages/Subscription/Subscription";
-import { Explore } from "../../pages/Explore/Explore";
-import FeedsByAuthorOrCategory, {
-	FeedsBy,
-} from "../../pages/FeedsByAuthorOrCategory/FeedsByAuthorOrCategory";
-import NewFeed from "../../pages/NewFeed/NewFeed";
-import Manage from "../../pages/Manage/Manage";
-import { Home } from "../Home/Home";
+
 import MainRoutes from "./Routes";
+import { useHotkeys } from "react-hotkeys-hook";
 
 const App: React.FC = () => {
 	let userCache: User | null = auth.getSession();
@@ -87,9 +76,7 @@ const App: React.FC = () => {
 				<PlayerContext.Provider value={playerProvideValue}>
 					<Layout>
 						<AppHeader />
-						<Content className="App-pages">
-							{MainRoutes}
-						</Content>
+						<Content className="App-pages">{MainRoutes}</Content>
 						<Footer>
 							<PodcastPlayer />
 						</Footer>
