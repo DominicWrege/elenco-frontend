@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import "./Header.css";
-import { DownOutlined } from '@ant-design/icons';
+import { DownOutlined } from "@ant-design/icons";
 import { Button, Dropdown, Menu, Typography } from "antd";
 import { Link, useLocation } from "wouter";
 import { UserOutlined } from "@ant-design/icons";
@@ -9,24 +9,21 @@ import SearchField from "../SearchField/SearchField";
 import { UserContext } from "../../contexts/UserContext";
 import { LOGO } from "../../env";
 
-const dropMenu =
-	<Menu >
+const dropMenu = (
+	<Menu>
 		<Menu.Item key="mexplore">
 			<Link href="/explore" className="active">
 				Explore
 			</Link>
-		</Menu.Item >
+		</Menu.Item>
 		<Menu.Item key="mfaq">
-			<Link href="/faq" >
-				FAQ
-			</Link>
+			<Link href="/faq">FAQ</Link>
 		</Menu.Item>
 		<Menu.Item key="mexplore">
-			<Link href="/api">
-				API
-			</Link>
+			<Link href="/api">API</Link>
 		</Menu.Item>
-	</Menu >
+	</Menu>
+);
 
 function AppHeader(): JSX.Element {
 	const userContext = useContext(UserContext);
@@ -76,14 +73,11 @@ function AppHeader(): JSX.Element {
 	const userMenu = (): JSX.Element => {
 		if (userContext?.user) {
 			return (
-				<Dropdown.Button
-					key="btn-8861"
-					overlay={menu}
-					placement="bottomLeft"
-					icon={
+				<Dropdown key="btn-8861" overlay={menu} placement="bottomLeft" arrow>
+					<Button>
 						<UserOutlined />
-					}
-				></Dropdown.Button>
+					</Button>
+				</Dropdown>
 			);
 		} else {
 			return (
@@ -95,9 +89,9 @@ function AppHeader(): JSX.Element {
 	};
 
 	return (
-		<header>
+		<header className="Header">
 			<div className="Header-inner">
-				<div id="Header-title" >
+				<div id="Header-title">
 					<Link href="/">
 						<img style={{ height: "2.5em" }} src={LOGO} alt="logo" />
 						<Typography.Title level={1}>Elenco</Typography.Title>
@@ -107,10 +101,9 @@ function AppHeader(): JSX.Element {
 					<SearchField />
 				</div>
 
-
 				<div id="Header-btns">
 					<div className="Header-dropdown-more">
-						<Dropdown overlay={dropMenu} >
+						<Dropdown overlay={dropMenu} arrow>
 							<Button>
 								More <DownOutlined />
 							</Button>
@@ -121,7 +114,7 @@ function AppHeader(): JSX.Element {
 						<Link href="/explore" className="active">
 							<Button type="default">Explore</Button>
 						</Link>
-						<Link href="/faq" >
+						<Link href="/faq">
 							<Button type="default">FAQ</Button>
 						</Link>
 						<Link href="/api">
@@ -136,4 +129,3 @@ function AppHeader(): JSX.Element {
 }
 
 export default AppHeader;
-
