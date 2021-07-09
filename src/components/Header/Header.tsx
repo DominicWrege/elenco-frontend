@@ -103,7 +103,7 @@ function AppHeader(): JSX.Element {
 
 				<div id="Header-btns">
 					<div className="Header-dropdown-more">
-						<Dropdown overlay={dropMenu} arrow>
+						<Dropdown overlay={dropMenu} arrow placement="bottomCenter">
 							<Button>
 								More <DownOutlined />
 							</Button>
