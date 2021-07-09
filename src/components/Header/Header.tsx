@@ -80,7 +80,9 @@ function AppHeader(): JSX.Element {
 					key="btn-8861"
 					overlay={menu}
 					placement="bottomLeft"
-					icon={<UserOutlined />}
+					icon={
+						<UserOutlined />
+					}
 				></Dropdown.Button>
 			);
 		} else {
@@ -97,7 +99,7 @@ function AppHeader(): JSX.Element {
 			<div className="Header-inner">
 				<div id="Header-title" >
 					<Link href="/">
-						<img style={{ height: "2.8em" }} src={LOGO} alt="logo" />
+						<img style={{ height: "2.5em" }} src={LOGO} alt="logo" />
 						<Typography.Title level={1}>Elenco</Typography.Title>
 					</Link>
 				</div>
@@ -134,23 +136,4 @@ function AppHeader(): JSX.Element {
 }
 
 export default AppHeader;
-// {/* className="Header" */}
-// {/* title={<Link href=" /"> Elenco</Link>} */}
-// {/* tags={
-// 	<Row gutter={8}>
-// 		<Col md={16} xs={20}>
-// 			<SearchField />
-// 		</Col>
-// 		<Col md={8} xs={2} className="Header-links">
-// 			<Link href="/explore" className="active">
-// 				<Button type="primary" ghost>
-// 					Explore
-// 				</Button>
-// 			</Link>
-// 		</Col>
-// 		{/* <Dropdown overlay={menu2} placement="bottomCenter" arrow>
-//                 <Button>Explore</Button>
-//             </Dropdown> */}
-// 	{/* </Row>
-// }
-// extra={[userMenu()]} */} */}
+
