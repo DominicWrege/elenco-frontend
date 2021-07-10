@@ -5,6 +5,7 @@
   "dependencies": {
     "@craco/craco": "^6.1.2",
     "@podlove/player-actions": "^5.5.0",
+    "@podlove/web-player": "^5.6.4",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -31,7 +32,7 @@
     "wouter": "^2.7.4"
   },
   "scripts": {
-    "start": "BROWSER=none sh cp_public.sh && craco start start",
+    "start": "sh cp_public.sh && BROWSER=none craco start start",
     "build": "sh cp_public.sh && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

@@ -26,7 +26,7 @@ import { PlayerAction, PlayerStatus, StoreType } from "./types";
 import { Button } from "antd";
 
 const PODCAST_PLAYER_SCRIPT = "podcast-player";
-const PODLOVE_FILE = "/js/podlove-webplayer_v5_6.js";
+const PODLOVE_FILE = "/public/podlove.js";
 
 const playerWrapperDiv = "Player-wrapper";
 

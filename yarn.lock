@@ -1610,6 +1610,11 @@
   resolved "https://registry.yarnpkg.com/@podlove/utils/-/utils-5.5.0.tgz#77c5ab63c57ef633a554e9ea5a3a995c497eff54"
   integrity sha512-Wh5BOH3Qvnyckq7ew/B5Qx9+kvjsix4eCQDdBmsBaDbH1jJUbkA7m61DA9gP3a2xDgvnxSdPnhoYfx5wN5aGgQ==
 
+"@podlove/web-player@^5.6.4":
+  version "5.6.4"
+  resolved "https://registry.yarnpkg.com/@podlove/web-player/-/web-player-5.6.4.tgz#0c6955c939ac031b04cfd83c1f17e4fae4e8c613"
+  integrity sha512-QTlx+Z4JCfcTieiDLj+CcW3UowIONioNRttk7trqPrqXDC5VwWQojSzQdL6ipegZYMbWWO3vh2D3UB4AWafFvw==
+
 "@rollup/plugin-node-resolve@^7.1.1":
   version "7.1.3"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-node-resolve/-/plugin-node-resolve-7.1.3.tgz#80de384edfbd7bfc9101164910f86078151a3eca"
