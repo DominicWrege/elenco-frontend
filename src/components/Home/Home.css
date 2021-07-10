@@ -2,19 +2,19 @@
 	display: flex;
 	gap: 2rem;
 	flex-direction: column;
-	animation-duration: 1.1s;
+	animation-duration: 1.4s;
 	animation-timing-function: ease-out;
 	animation-delay: 0s;
 	animation-iteration-count: 1;
-	animation-name: slideUp;
+	animation-name: appear;
 }
 
-@keyframes slideUp {
+@keyframes appear {
 	0% {
-		transform: translateY(400px);
+		opacity: 0;
 	}
 	100% {
-		transform: translateY(0);
+		transform: 1;
 	}
 }
 

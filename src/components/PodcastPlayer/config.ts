@@ -1,19 +1,8 @@
 
 const config = {
     version: 5,
-
-    // player asset base path, falls back to ./
-    base: "/",
-
-    activeTab: "playlist", // default active tab, can be set to [chapters, files, share, playlist]
-
+    base: "/web-player/",
     theme: {
-        /**
-         * Tokens
-         * - if defined the player defaults are dropped
-         * - rgba as well as hex values are allowed
-         * - use this generator to get a direct visual feedback:
-         */
         tokens: {
             brand: "#3f51b5",
             brandDark: "#3f51b5",
@@ -82,26 +71,7 @@ const config = {
 
     "subscribe-button": null,
     playlist: [],
-
-    share: {
-        /**
-         * Share Channels:
-         * - list of available channels in share tab
-         */
-        channels: [
-            // "facebook",
-            "twitter",
-            // "whats-app",
-            // "linkedin",
-            // "pinterest",
-            // "xing",
-            "mail",
-            "link"
-        ],
-        // share outlet, if not provided embed snippet is not available
-        outlet: "/share.html",
-        sharePlaytime: true
-    }
+    share: null,
 };
 
 

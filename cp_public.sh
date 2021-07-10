@@ -1,6 +1,8 @@
 #!/bin/bash
 
-rsync src/components/PodcastPlayer/podloveTemplate.html public
-rsync api-spec.yaml public
-rsync node_modules/@podlove/web-player/embed.js public/podlove.js
-rsync -a icons public/
+out=public
+
+rsync src/components/PodcastPlayer/podloveTemplate.html "$out"
+rsync api-spec.yaml "$out"
+rsync -r node_modules/@podlove/web-player "$out/"
+rsync -a icons "$out/"

@@ -47,6 +47,7 @@ export const Home: React.FC = () => {
 				<Typography.Title level={4}>
 					An independent open source podcast directory
 				</Typography.Title>
+				<p>{process.env.PUBLIC_URL}</p>
 			</header>
 			<section className="Home-meta">
 				<Card>

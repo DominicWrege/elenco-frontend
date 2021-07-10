@@ -24,6 +24,7 @@ yarn-error.log*
 
 public/podloveTemplate.hmtl
 public/api-spec.yaml
-public/podlove.js
 
 public/icons
+
+public/web-player
