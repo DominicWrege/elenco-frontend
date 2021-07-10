@@ -3,7 +3,7 @@ import "./App.css";
 import { Content, Footer } from "antd/lib/layout/layout";
 import AppHeader from "../Header/Header";
 import { Layout } from "antd";
-import { Route, Switch, useLocation } from "wouter";
+import { useLocation } from "wouter";
 
 import { User } from "../../models/user";
 import { UserContext } from "../../contexts/UserContext";
@@ -13,7 +13,6 @@ import { EpisodeContext, PlayerContext } from "../../contexts/PlayerContext";
 import { PlayerAction, PlayerStatus } from "../PodcastPlayer/types";
 
 import MainRoutes from "./Routes";
-import { useHotkeys } from "react-hotkeys-hook";
 
 const App: React.FC = () => {
 	let userCache: User | null = auth.getSession();

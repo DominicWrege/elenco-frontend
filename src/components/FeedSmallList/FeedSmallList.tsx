@@ -1,5 +1,4 @@
 import { List, Skeleton, Typography } from "antd";
-import { type } from "os";
 import { useMemo } from "react";
 import { Link } from "wouter";
 import { API_URL } from "../../env";

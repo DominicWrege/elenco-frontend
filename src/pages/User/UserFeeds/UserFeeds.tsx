@@ -80,8 +80,7 @@ export const UserFeeds: React.FC = () => {
 
 	useEffect(() => {
 		getFeeds();
-		const select = util.urlParameter("select");
-		console.log(select);
+		// const select = util.urlParameter("select");
 	}, [getFeeds]);
 
 	const handelFilterChange = (event: RadioChangeEvent): void => {
@@ -96,12 +95,6 @@ export const UserFeeds: React.FC = () => {
 		}
 	};
 
-	// const handelSortChange = (
-	// 	value: string | number | LabeledValue,
-	// 	_option: any
-	// ): void => {
-	// 	// setCurrentSortBy(sortBy[value.toString()]);
-	// };
 	const onChangeFilter = (value: SortByValue) => {
 		setCurrentSortBy(value);
 	};

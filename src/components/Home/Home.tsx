@@ -1,7 +1,6 @@
 import "./Home.css";
 import { Card, Typography } from "antd";
 import Statistic from "../Statistic/Statistic";
-import { Link } from "wouter";
 import api from "../../functions/api";
 import { useCallback, useEffect, useState } from "react";
 import { MetaStatistic } from "../../models/api";
@@ -36,18 +35,16 @@ export const Home: React.FC = () => {
 
 	useEffect(() => {
 		loadMeta();
+
 	}, [loadMeta]);
 
 	return (
 		<div className="Home">
 			<header>
 				<img src={LOGO} height={270} alt="logo" />
-
-				{/* <img src="/img/newgiffaster.gif" height={270} alt="logo" /> */}
 				<Typography.Title level={4}>
 					An independent open source podcast directory
 				</Typography.Title>
-				<p>{process.env.PUBLIC_URL}</p>
 			</header>
 			<section className="Home-meta">
 				<Card>

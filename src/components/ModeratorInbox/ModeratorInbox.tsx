@@ -9,7 +9,6 @@ import FeedTable from "../FeedTable/FeedTable";
 
 export const ModeratorInbox = () => {
 	const [feeds, setFeeds] = useState<FeedModerator[]>([]);
-	const [loading, setLoading] = useState(true);
 	const [selectedRows, setSelectedRows] = useState<number[]>([]);
 	const [approveLoadingButton, setApproveLoadingButton] = useState(false);
 	const [blockLoadingButton, setBlockLoadingButton] = useState(false);
@@ -17,12 +16,9 @@ export const ModeratorInbox = () => {
 	const initData = useCallback(async () => {
 		try {
 			const feedJson = await admin.moderatorInbox();
-			console.log();
 			setFeeds(feedJson);
 		} catch (err: any | ApiError) {
 			console.log(err);
-		} finally {
-			setLoading(false);
 		}
 	}, []);
 
@@ -80,7 +76,7 @@ export const ModeratorInbox = () => {
 						<Button
 							type="primary"
 							onClick={handleBlock}
-							loading={loading}
+							loading={blockLoadingButton}
 							disabled={selectedRows.length === 0}
 							danger
 						>

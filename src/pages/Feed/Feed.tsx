@@ -29,26 +29,21 @@ export function Feed(): React.ReactElement<void> {
         const json_feed: FeedEpisodeModel = await feed.getByName(
           params?.name ?? ""
         );
-        console.log(json_feed);
         setFeedValue(json_feed);
         setRelatedFeeds(await feed.getRelated(json_feed.id));
-        setLoadingFeed(false);
-        setLoadingRelated(false);
       } catch (err) {
         console.log(err);
       } finally {
+        setLoadingFeed(false);
         setLoadingRelated(false);
       }
     }
   }, [params?.name]);
 
   useEffect(() => {
-    // const a = new URLSearchParams(window.location.search);
-    // console.log(window.location.search);
-    // console.log("page", a.get("page"));
-    // console.log("name", a.get("name"));
-    // setFeed(decodeURI(params.name));
+
     loadFeed();
+    
   }, [loadFeed]);
 
   return (
