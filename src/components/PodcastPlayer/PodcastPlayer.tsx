@@ -26,6 +26,7 @@ import { PlayerAction, PlayerStatus, StoreType } from "./types";
 import { Button } from "antd";
 
 const PODCAST_PLAYER_SCRIPT = "podcast-player";
+const PODLOVE_FILE = "/js/podlove-webplayer_v5_6.js";
 
 const playerWrapperDiv = "Player-wrapper";
 
@@ -56,9 +57,8 @@ export function toPlayerEpisode(
 		{
 			url: episode.enclosure.mediaUrl,
 			size: episode.enclosure.length,
-			title: `${episode.title}.${
-				episode.enclosure.mimeType.split("/")[1] ?? "mp3"
-			}`,
+			title: `${episode.title}.${episode.enclosure.mimeType.split("/")[1] ?? "mp3"
+				}`,
 			mimeType: episode.enclosure.mimeType,
 		},
 	];
@@ -85,6 +85,14 @@ export function toPlayerEpisode(
 		transcripts: "",
 	};
 }
+
+function createScript(): HTMLScriptElement {
+	const scriptElement = document.createElement("script");
+	scriptElement.id = PODCAST_PLAYER_SCRIPT;
+	scriptElement.src = PODLOVE_FILE;
+	return scriptElement;
+}
+
 
 function playEpisode(store: StoreType): void {
 	store?.dispatch(requestPlay());
@@ -191,10 +199,3 @@ export const PodcastPlayer: React.FC = () => {
 };
 
 export default PodcastPlayer;
-
-function createScript() {
-	const scriptElement = document.createElement("script");
-	scriptElement.id = PODCAST_PLAYER_SCRIPT;
-	scriptElement.src = "/podlove-webplayer_v5.js";
-	return scriptElement;
-}
