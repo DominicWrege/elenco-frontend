@@ -31,8 +31,8 @@
     "wouter": "^2.7.4"
   },
   "scripts": {
-    "start": "BROWSER=none craco start start",
-    "build": "react-scripts build",
+    "start": "BROWSER=none sh cp_public.sh && craco start start",
+    "build": "sh cp_public.sh && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
