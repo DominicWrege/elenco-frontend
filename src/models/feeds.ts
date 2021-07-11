@@ -1,5 +1,5 @@
 import { TopCategory } from "./category";
-import { Episode } from "./episode";
+import { Episode, EpisodeNext } from "./episode";
 
 export interface Meta {
     rss_url: string,
@@ -39,7 +39,7 @@ export interface FeedEpisodeModel {
     language?: string,
     submitted: string, // Datetime UTC
     categories: TopCategory[],
-    episodes: Episode[]
+    episodes: EpisodeNext
 }
 
 export interface FeedSmall {

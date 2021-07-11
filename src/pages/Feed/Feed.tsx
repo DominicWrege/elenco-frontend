@@ -22,7 +22,6 @@ export function Feed(): React.ReactElement<void> {
 
   const params = useRoute<FeedRouterProperties>("/feed/:name")[1];
 
-  // TODO do loading
   const loadFeed = useCallback(async () => {
     if (params?.name) {
       try {
@@ -43,7 +42,7 @@ export function Feed(): React.ReactElement<void> {
   useEffect(() => {
 
     loadFeed();
-    
+
   }, [loadFeed]);
 
   return (
@@ -56,6 +55,6 @@ export function Feed(): React.ReactElement<void> {
         loadingFeed={loadingFeed}
         loadingRelated={loadingRelated}
       />
-    </FlexCenter>
+    </FlexCenter >
   );
 }

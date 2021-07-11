@@ -15,9 +15,7 @@ export const FeaturedCategory: React.FC<Props> = ({ name }) => {
 
 	const init = useCallback(async () => {
 		try {
-			const json = await feed.getByCategory(name);
-			console.log(json);
-			setFeeds(json);
+			setFeeds(await feed.getByCategory(name));
 		} catch (err) {
 			console.log(err);
 		} finally {

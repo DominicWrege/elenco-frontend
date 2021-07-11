@@ -40,6 +40,7 @@ interface Properties {
 	loadingRelated?: boolean;
 	tabKey?: SelectedTab
 }
+
 const TAB_Query = "tab";
 
 export const FeedDetail: React.FC<Properties> = ({
@@ -136,7 +137,6 @@ export const FeedDetail: React.FC<Properties> = ({
 						/>
 					)}
 				</aside>
-				{/* <section className="FeedDetail-body"> */}
 				<Card className="FeedDetail-main-card FeedDetail-body">
 					<Skeleton loading={loadingFeed} paragraph={{ rows: 8 }}>
 						{feed && (
@@ -150,6 +150,7 @@ export const FeedDetail: React.FC<Properties> = ({
 									</Tabs.TabPane>
 									<Tabs.TabPane tab="Episodes" key="episode">
 										<EpisodeList
+											feedId={feed.id}
 											episodes={feed.episodes}
 											feedMeta={{
 												img: feed.img,

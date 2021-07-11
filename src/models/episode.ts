@@ -20,6 +20,12 @@ export interface Enclosure {
     mimeType: string
 }
 
+
+export interface EpisodeNext {
+    items: Episode[],
+    offset?: number
+}
+
 // https://docs.podlove.org/podlove-web-player/v5/configuration#config
 export interface PlayerEpisode {
     version: number,

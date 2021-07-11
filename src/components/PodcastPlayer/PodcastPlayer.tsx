@@ -35,14 +35,11 @@ async function insertPlayerScript(): Promise<HTMLScriptElement> {
 	let playerScript = document.querySelector(`#${PODCAST_PLAYER_SCRIPT}`) as
 		| HTMLScriptElement
 		| undefined;
-	console.log("aa");
 	return new Promise((resolve, _reject) => {
 		if (!playerScript || !w.podLovePlayer) {
 			const playerScript = createScript();
 			document.head.appendChild(playerScript);
 			playerScript.addEventListener("load", () => {
-				console.log(playerScript);
-
 				resolve(playerScript);
 			});
 		} else {

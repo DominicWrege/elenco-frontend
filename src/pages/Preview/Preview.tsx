@@ -84,6 +84,10 @@ const Preview: React.FC = () => {
 				const preview = await getPreview(paramsUrl);
 				setFeed({
 					...preview.feed,
+					episodes: {
+						items: preview.feed.episodes,
+						offset: 0
+					},
 					categories: category.castCategories(preview.feed.categories),
 				});
 				setFeedExists(preview.exists);
