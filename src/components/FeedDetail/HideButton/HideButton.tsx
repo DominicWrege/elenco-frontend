@@ -21,7 +21,7 @@ const HideButton: React.FC<Property> = ({ isOwner, status }) => {
 		);
 	} else if (status === FeedStatus.Online) {
 		return (
-			<Button type="primary" className="HideButton" danger>
+			<Button type="primary" className="HideButton" size="small" danger>
 				Hide Feed
 			</Button>
 		);

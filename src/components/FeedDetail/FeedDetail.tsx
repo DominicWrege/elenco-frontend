@@ -6,7 +6,6 @@ import Artwork from "../Artwork/Artwork";
 import FeedMetaInfo from "../FeedMetaInfo/FeedMetaInfo";
 import { Link, useLocation } from "wouter";
 import EpisodeList from "../EpisodeList/EpisodeList";
-import { SubscribeButton } from "./SubscribeButton/Subscribe";
 import { Comment } from "../../components/Comment/Comment";
 import React, { useCallback, useEffect, useState } from "react";
 import FeedSmallList from "../FeedSmallList/FeedSmallList";
@@ -33,7 +32,7 @@ function stringToTab(name?: string): SelectedTab {
 
 interface Properties {
 	feed: FeedEpisodeModel | null;
-	showSubscribeButton?: boolean;
+	showUserActions?: boolean;
 	showComments?: boolean;
 	relatedFeeds?: FeedSmall[];
 	loadingFeed?: boolean;
@@ -45,7 +44,7 @@ const TAB_Query = "tab";
 
 export const FeedDetail: React.FC<Properties> = ({
 	feed,
-	showSubscribeButton = false,
+	showUserActions = false,
 	showComments = false,
 	relatedFeeds,
 	loadingFeed = true,
@@ -69,15 +68,15 @@ export const FeedDetail: React.FC<Properties> = ({
 		}
 	}, []);
 
-	const handleTabSelect = (activekey: string): void => {
+	const handleTabSelect = (activeKey: string): void => {
 		const uriParam = util.urlParameter("url");
 		if (uriParam) {
-			const param = [`url=${uriParam}`, `${TAB_Query}=${activekey}`].join("&");
+			const param = [`url=${uriParam}`, `${TAB_Query}=${activeKey}`].join("&");
 			const location = encodeURI(`${window.location.pathname}?${param}`);
 			setLocation(location);
 		} else {
 			const location = encodeURI(
-				`${window.location.pathname}?${TAB_Query}=${activekey}`
+				`${window.location.pathname}?${TAB_Query}=${activeKey}`
 			);
 			setLocation(location);
 		}
@@ -120,13 +119,7 @@ export const FeedDetail: React.FC<Properties> = ({
 						<>
 							{/* img placholder??  not working*/}
 							<Artwork src={feed.img ?? `${API_URL}/img/${feed.imgCache}`} />
-							{showSubscribeButton && (
-								// <SubscribeButton
-								// 	className="FeedDetails-Subscribe"
-								// 	feedId={feed.id}
-								// />
-								<Action feedId={feed.id}></Action>
-							)}
+							{showUserActions && <Action feedId={feed.id}></Action>}
 						</>
 					)}
 					{!feed && (

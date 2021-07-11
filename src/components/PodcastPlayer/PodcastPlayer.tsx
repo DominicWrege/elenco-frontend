@@ -25,7 +25,6 @@ import {
 import { requestPlay, requestPause } from "@podlove/player-actions/play";
 import { PlayerAction, PlayerStatus, StoreType } from "./types";
 import { Button } from "antd";
-import { type } from "os";
 
 const PODCAST_PLAYER_SCRIPT = "podcast-player";
 const PODLOVE_FILE = "/web-player/embed.js";
@@ -58,8 +57,9 @@ export function toPlayerEpisode(
 		{
 			url: episode.enclosure.mediaUrl,
 			size: episode.enclosure.length,
-			title: `${episode.title}.${episode.enclosure.mimeType.split("/")[1] ?? "mp3"
-				}`,
+			title: `${episode.title}.${
+				episode.enclosure.mimeType.split("/")[1] ?? "mp3"
+			}`,
 			mimeType: episode.enclosure.mimeType,
 		},
 	];
@@ -103,7 +103,6 @@ function pause(current: StoreType): void {
 }
 function stop(current: StoreType): void {
 	current?.dispatch({ type: REQUEST_STOP });
-
 }
 
 function initEpisode(store: StoreType, episode: PodloveEpisode): void {
