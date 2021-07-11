@@ -71,14 +71,19 @@ function AppHeader(): JSX.Element {
 		</Menu>
 	);
 
-	const userMenu = (): JSX.Element => {
+	const userActions = (): JSX.Element => {
 		if (userContext?.user) {
 			return (
-				<Dropdown key="btn-8861" overlay={menu} placement="bottomLeft" arrow>
-					<Button>
-						<UserOutlined />
-					</Button>
-				</Dropdown>
+				<>
+					<Link href="/new/feed"  >
+						<Button type="default" className="Header-menu-plus-feed-btn" icon={<PlusOutlined />} />
+					</Link>
+					<Dropdown key="btn-8861" overlay={menu} placement="bottomLeft" arrow>
+						<Button>
+							<UserOutlined />
+						</Button>
+					</Dropdown>
+				</>
 			);
 		} else {
 			return (
@@ -124,10 +129,7 @@ function AppHeader(): JSX.Element {
 					</div>
 				</div>
 				<div id="Header-menu">
-					<Link href="/new/feed"  >
-						<Button type="default" className="Header-menu-plus-feed-btn" icon={<PlusOutlined />} />
-					</Link>
-					{userMenu()}
+					{userActions()}
 				</div>
 			</div>
 		</header>
