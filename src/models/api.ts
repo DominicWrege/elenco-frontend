@@ -5,7 +5,6 @@ export interface ApiError {
     statusCode: number
 }
 
-
 export interface PreviewJson {
     exists: boolean,
     feed: FeedPreview
@@ -18,6 +17,11 @@ export interface FormBody {
 export interface Author {
     id: number,
     name: string
+}
+
+export interface FeedUserInfo {
+    hasSubscriped: boolean
+    isOwner: boolean
 }
 
 export interface MetaStatistic {

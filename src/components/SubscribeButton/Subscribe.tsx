@@ -14,7 +14,13 @@ export const SubscribeButton: FC<Property> = ({ feedId }) => {
 	const [isloading, setIsLoading] = useState<boolean>(false);
 
 	const load = useCallback(async () => {
-		setIsSubscribed(await user.hasSubscription(feedId));
+
+		// const updateSubscription = (action: boolean) => {
+		// 	if (feedInfo) {
+		// 		setFeedInfo({ isOwner: feedInfo?.isOwner, hasSubscriped: action })
+		// 	}
+		// };
+		// setIsSubscribed(await user.hasSubscription(feedId));
 	}, [feedId]);
 
 	useEffect(() => {
@@ -76,7 +82,5 @@ export const SubscribeButton: FC<Property> = ({ feedId }) => {
 				</Button>
 			</>
 		);
-	} else {
-		return <></>;
 	}
 };

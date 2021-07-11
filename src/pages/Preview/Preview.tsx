@@ -86,7 +86,6 @@ const Preview: React.FC = () => {
 					...preview.feed,
 					episodes: {
 						items: preview.feed.episodes,
-						offset: 0
 					},
 					categories: category.castCategories(preview.feed.categories),
 				});

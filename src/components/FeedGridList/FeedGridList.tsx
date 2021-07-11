@@ -47,7 +47,7 @@ function renderCard(feed: FeedSmall) {
 			<Link href={`/author/${feed.authorName}`}>
 				<small>{feed.authorName}</small>
 			</Link>
-		</Card>
+		</Card >
 	);
 }
 

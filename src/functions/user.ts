@@ -1,4 +1,5 @@
 import { API_URL } from "../env";
+import { FeedUserInfo } from "../models/api";
 import { SubmittedFeeds, FeedSmall } from "../models/feeds";
 import { http } from "./http";
 
@@ -25,18 +26,17 @@ export namespace user {
     }
 
     export async function getSubscriptions(): Promise<FeedSmall[]> {
-        const resp = await http.get(`${API_URL}/user/subscriptions`, http.WithCredentials.Yes);
+        const resp = await http.get(`${API_URL}/subscription/user`, http.WithCredentials.Yes);
         const feeds = await resp.json();
         return feeds;
     }
 
-    export async function hasSubscription(feedId: number): Promise<boolean> {
+    export async function subsscriptionInfo(feedId: number): Promise<FeedUserInfo> {
         const payload = {
             feedId: feedId
         };
-        const resp = await http.post(`${API_URL}/user/has-subscription`, payload, http.WithCredentials.Yes);
-        const json = await resp.json();
-        return json.isSubscripted ?? false;
+        const resp = await http.post(`${API_URL}/subscription/user`, payload, http.WithCredentials.Yes);
+        return resp.json();
     }
 }
 
