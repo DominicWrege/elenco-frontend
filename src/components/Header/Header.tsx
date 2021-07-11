@@ -8,6 +8,7 @@ import { auth } from "../../functions/auth";
 import SearchField from "../SearchField/SearchField";
 import { UserContext } from "../../contexts/UserContext";
 import { LOGO } from "../../env";
+import { PlusOutlined } from '@ant-design/icons';
 
 const dropMenu = (
 	<Menu>
@@ -47,12 +48,12 @@ function AppHeader(): JSX.Element {
 			</Menu.Item>
 			<Menu.Divider />
 			<Menu.Item key="Menu2">
-				<Link href="/user/subscriptions">Subscriptions</Link>
+				<Link href="/user/subscriptions">My Subscriptions</Link>
 			</Menu.Item>
 			<Menu.Item key="Menu3">
-				<Link href="/user/feeds">Submitted podcasts</Link>
+				<Link href="/user/feeds">My Submitted Podcasts</Link>
 			</Menu.Item>
-			<Menu.Item key="Menu4">
+			<Menu.Item key="Menu4" className="Header-meu-plus-feed-item">
 				<Link href="/new/feed">Submit a new podcast</Link>
 			</Menu.Item>
 			{auth.isAdmin(userContext?.user) && (
@@ -122,7 +123,12 @@ function AppHeader(): JSX.Element {
 						</Link>
 					</div>
 				</div>
-				<div id="Header-menu">{userMenu()}</div>
+				<div id="Header-menu">
+					<Link href="/new/feed"  >
+						<Button type="default" className="Header-menu-plus-feed-btn" icon={<PlusOutlined />} />
+					</Link>
+					{userMenu()}
+				</div>
 			</div>
 		</header>
 	);

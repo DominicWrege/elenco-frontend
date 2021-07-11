@@ -2,25 +2,53 @@
     display: flex;
     flex-direction: column;
     row-gap: 1rem;
+    width: 70rem;
+    max-width: 600px;
 }
 
 .FeedForm-input{
-    max-width: 70vw;
-}
-.FeedForm-content{
-    width: 100%;
-    max-width: 850px;
+    width: 70rem;
 }
 
 .FeedForm-form{
-    min-width: 350px;
     width: 100%;
     display: flex;
     gap: 2em;
 }
 
-@media(min-width: 640px) {
-    .FeedForm-form{
-        min-width: 640px;
+.NewFeed .ant-steps{
+    overflow-x: hidden;
+}
+
+@media(max-width: 650px) {
+    .FeedForm{
+        width: 32rem;
     }
 }
+
+@media(max-width: 515px) {
+    .FeedForm{
+        padding-top: 0.75rem;
+        width: 27rem;
+    }
+    .NewFeed .ant-steps{
+        padding-top: 1rem;
+     }
+}
+@media(max-width: 460px) {
+    .FeedForm{
+        width: 25rem;
+    }
+}
+@media(max-width: 420px) {
+    .FeedForm{
+        width: 20rem;
+    }
+    .NewFeed .ant-steps{
+        display: none;
+     }
+}
+
+/* @media screen {
+    
+} */
