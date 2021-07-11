@@ -31,7 +31,7 @@ export namespace user {
         return feeds;
     }
 
-    export async function subsscriptionInfo(feedId: number): Promise<FeedUserInfo> {
+    export async function getSubscriptionInfo(feedId: number): Promise<FeedUserInfo> {
         const payload = {
             feedId: feedId
         };

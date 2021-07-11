@@ -54,10 +54,6 @@
 	gap: 1.5em;
 } */
 
-.FeedDetails-Subscribe {
-	max-width: 1rem;
-}
-
 .FeedDetail-body .ant-typography {
 	line-height: 2em;
 }
@@ -73,12 +69,6 @@
 .FeedDetail-related {
 	overflow: hidden;
 	height: fit-content;
-}
-
-.FeedDetail-sidebar .Subscribe {
-	align-self: center;
-	width: 100%;
-	max-width: 18rem;
 }
 
 .FeedDetail-related .Artwork .ant-image {

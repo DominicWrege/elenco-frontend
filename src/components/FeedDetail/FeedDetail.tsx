@@ -6,20 +6,20 @@ import Artwork from "../Artwork/Artwork";
 import FeedMetaInfo from "../FeedMetaInfo/FeedMetaInfo";
 import { Link, useLocation } from "wouter";
 import EpisodeList from "../EpisodeList/EpisodeList";
-import { SubscribeButton } from "../SubscribeButton/Subscribe";
+import { SubscribeButton } from "./SubscribeButton/Subscribe";
 import { Comment } from "../../components/Comment/Comment";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import FeedSmallList from "../FeedSmallList/FeedSmallList";
 import { API_URL } from "../../env";
 import util from "../../functions/util";
+import Action from "./Action/Action";
 
 const { Title, Paragraph } = Typography;
-
 
 export enum SelectedTab {
 	description = "description",
 	episode = "episode",
-	comments = "comments"
+	comments = "comments",
 }
 
 function stringToTab(name?: string): SelectedTab {
@@ -28,7 +28,7 @@ function stringToTab(name?: string): SelectedTab {
 	} else if (name === "comments") {
 		return SelectedTab.comments;
 	}
-	return SelectedTab.description
+	return SelectedTab.description;
 }
 
 interface Properties {
@@ -38,7 +38,7 @@ interface Properties {
 	relatedFeeds?: FeedSmall[];
 	loadingFeed?: boolean;
 	loadingRelated?: boolean;
-	tabKey?: SelectedTab
+	tabKey?: SelectedTab;
 }
 
 const TAB_Query = "tab";
@@ -50,9 +50,8 @@ export const FeedDetail: React.FC<Properties> = ({
 	relatedFeeds,
 	loadingFeed = true,
 	loadingRelated = true,
-	tabKey = SelectedTab.description
+	tabKey = SelectedTab.description,
 }) => {
-
 	const [selectedTab, setSelectedTab] = useState(tabKey);
 	const setLocation = useLocation()[1];
 
@@ -63,28 +62,26 @@ export const FeedDetail: React.FC<Properties> = ({
 		return <Paragraph>{subtitle}</Paragraph>;
 	};
 
-
 	useEffect(() => {
 		const tab = util.urlParameter(TAB_Query);
 		if (tab) {
 			setSelectedTab(stringToTab(tab));
 		}
-	}, [])
+	}, []);
 
 	const handleTabSelect = (activekey: string): void => {
-
 		const uriParam = util.urlParameter("url");
 		if (uriParam) {
 			const param = [`url=${uriParam}`, `${TAB_Query}=${activekey}`].join("&");
 			const location = encodeURI(`${window.location.pathname}?${param}`);
 			setLocation(location);
 		} else {
-			const location = encodeURI(`${window.location.pathname}?${TAB_Query}=${activekey}`);
+			const location = encodeURI(
+				`${window.location.pathname}?${TAB_Query}=${activekey}`
+			);
 			setLocation(location);
 		}
-
 	};
-
 
 	return (
 		<div className="FeedDetail">
@@ -97,9 +94,7 @@ export const FeedDetail: React.FC<Properties> = ({
 					{feed && (
 						<>
 							<Title level={3}>{feed.title}</Title>
-							<Link href={`/author/${feed.authorName}`}>
-								{feed.authorName}
-							</Link>
+							<Link href={`/author/${feed.authorName}`}>{feed.authorName}</Link>
 						</>
 					)}
 				</Skeleton>
@@ -125,7 +120,13 @@ export const FeedDetail: React.FC<Properties> = ({
 						<>
 							{/* img placholder??  not working*/}
 							<Artwork src={feed.img ?? `${API_URL}/img/${feed.imgCache}`} />
-							{showSubscribeButton && <SubscribeButton className="FeedDetails-Subscribe" feedId={feed.id} />}
+							{showSubscribeButton && (
+								// <SubscribeButton
+								// 	className="FeedDetails-Subscribe"
+								// 	feedId={feed.id}
+								// />
+								<Action feedId={feed.id}></Action>
+							)}
 						</>
 					)}
 					{!feed && (
@@ -150,12 +151,14 @@ export const FeedDetail: React.FC<Properties> = ({
 					<Skeleton loading={loadingFeed} paragraph={{ rows: 8 }}>
 						{feed && (
 							<>
-								<Tabs size="large" defaultActiveKey={selectedTab} onChange={handleTabSelect}>
+								<Tabs
+									size="large"
+									defaultActiveKey={selectedTab}
+									onChange={handleTabSelect}
+								>
 									<Tabs.TabPane tab="Description" key="description">
 										{renderSubtitle(feed.subtitle)}
-										<Paragraph>
-											{util.removeHtml(feed.description)}
-										</Paragraph>
+										<Paragraph>{util.removeHtml(feed.description)}</Paragraph>
 									</Tabs.TabPane>
 									<Tabs.TabPane tab="Episodes" key="episode">
 										<EpisodeList
@@ -186,6 +189,6 @@ export const FeedDetail: React.FC<Properties> = ({
 				)}
 			</section>
 			<BackTop />
-		</div >
+		</div>
 	);
 };

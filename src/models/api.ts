@@ -1,4 +1,4 @@
-import { FeedPreview } from "./feeds";
+import { FeedPreview, FeedStatus } from "./feeds";
 
 export interface ApiError {
     message: string
@@ -20,8 +20,9 @@ export interface Author {
 }
 
 export interface FeedUserInfo {
-    hasSubscriped: boolean
-    isOwner: boolean
+    hasSubscribed: boolean,
+    isOwner: boolean,
+    status: FeedStatus | null
 }
 
 export interface MetaStatistic {

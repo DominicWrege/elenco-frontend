@@ -1,0 +1,12 @@
+.Action {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	align-items: center;
+	row-gap: 1rem;
+}
+
+.Action .ant-btn {
+	width: 100%;
+	max-width: 17rem;
+}
