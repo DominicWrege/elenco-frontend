@@ -19,11 +19,13 @@ import {
 	READY,
 	REQUEST_PAUSE,
 	REQUEST_PLAY,
+	REQUEST_STOP,
 	// STOP,
 } from "@podlove/player-actions/types";
 import { requestPlay, requestPause } from "@podlove/player-actions/play";
 import { PlayerAction, PlayerStatus, StoreType } from "./types";
 import { Button } from "antd";
+import { type } from "os";
 
 const PODCAST_PLAYER_SCRIPT = "podcast-player";
 const PODLOVE_FILE = "/web-player/embed.js";
@@ -92,13 +94,16 @@ function createScript(): HTMLScriptElement {
 	return scriptElement;
 }
 
-
-function playEpisode(store: StoreType): void {
+function play(store: StoreType): void {
 	store?.dispatch(requestPlay());
 }
 
-function pauseEpisode(current: StoreType): void {
+function pause(current: StoreType): void {
 	current?.dispatch(requestPause());
+}
+function stop(current: StoreType): void {
+	current?.dispatch({ type: REQUEST_STOP });
+
 }
 
 function initEpisode(store: StoreType, episode: PodloveEpisode): void {
@@ -106,7 +111,6 @@ function initEpisode(store: StoreType, episode: PodloveEpisode): void {
 		type: INIT,
 		payload: { ...episode },
 	});
-	// store?.dispatch(requestPlay());
 }
 
 async function initPlayer(
@@ -134,7 +138,7 @@ async function initPlayer(
 			}
 			if (lastAction.type === READY) {
 				setHidden(false);
-				playEpisode(store);
+				play(store);
 			}
 		});
 	}
@@ -149,7 +153,7 @@ export const PodcastPlayer: React.FC = () => {
 		if (!store && player?.episode) {
 			initPlayer(setStore, player, setHidden);
 			initEpisode(store, player?.episode.value);
-			playEpisode(store);
+			play(store);
 		}
 		if (player?.episode) {
 			// console.log(player?.episode.value);
@@ -159,15 +163,10 @@ export const PodcastPlayer: React.FC = () => {
 		// eslint-disable-next-line
 	}, [player?.episode]);
 
-	const close = () => {
-		setHidden(true);
-		pauseEpisode(store);
+	const close = (): void => {
+		stop(store);
 		player?.setEpisode(null);
-		console.log(store);
-
-		// store?.dispatch({
-		// 	type: "PLAYER_STOP",
-		// });
+		setHidden(true);
 	};
 
 	useEffect(() => {
@@ -176,9 +175,9 @@ export const PodcastPlayer: React.FC = () => {
 
 	const callBackAction = useCallback(() => {
 		if (player?.action === PlayerAction.Pause) {
-			pauseEpisode(store);
+			pause(store);
 		} else if (player?.action === PlayerAction.Play) {
-			playEpisode(store);
+			play(store);
 		}
 	}, [player?.action]);
 

@@ -1597,23 +1597,23 @@
     schema-utils "^2.6.5"
     source-map "^0.7.3"
 
-"@podlove/player-actions@^5.5.0":
-  version "5.5.0"
-  resolved "https://registry.yarnpkg.com/@podlove/player-actions/-/player-actions-5.5.0.tgz#887a07a1695bd6903072025ae3d80eebc81025b9"
-  integrity sha512-lRZNETDohnAFxKtnPqTCi3DriYi2PlhGL6LFrcSEgRKcs72YeZ54KlJvAoAWbgTgcSvNt0ycMV9uBcQ/LLwieA==
+"@podlove/player-actions@^5.7.0":
+  version "5.7.0"
+  resolved "https://registry.yarnpkg.com/@podlove/player-actions/-/player-actions-5.7.0.tgz#08803ac2987de531dbaf1a35fff844e706b3dc84"
+  integrity sha512-V9Qvs4j9YsOx6n0qxwY+d4xaDQepSMJEeRffQ8q7YG053GD0h2ElFedZwlMoP0u7U2vzDMmRMajY1/lv894Img==
   dependencies:
-    "@podlove/utils" "^5.5.0"
+    "@podlove/utils" "^5.7.0"
     redux-actions "2.6.5"
 
-"@podlove/utils@^5.5.0":
-  version "5.5.0"
-  resolved "https://registry.yarnpkg.com/@podlove/utils/-/utils-5.5.0.tgz#77c5ab63c57ef633a554e9ea5a3a995c497eff54"
-  integrity sha512-Wh5BOH3Qvnyckq7ew/B5Qx9+kvjsix4eCQDdBmsBaDbH1jJUbkA7m61DA9gP3a2xDgvnxSdPnhoYfx5wN5aGgQ==
+"@podlove/utils@^5.7.0":
+  version "5.7.0"
+  resolved "https://registry.yarnpkg.com/@podlove/utils/-/utils-5.7.0.tgz#47f0fb111c304d28d110173a96738bfa19dbafaf"
+  integrity sha512-ckPoSfAad9KANpEBs4cmnFAyd1LpDadfIuLeTIsicTyJB9VugUIgLhUfLuzLduuW+4WC4zeHP/mTTpiKJNPvcg==
 
-"@podlove/web-player@^5.6.4":
-  version "5.6.4"
-  resolved "https://registry.yarnpkg.com/@podlove/web-player/-/web-player-5.6.4.tgz#0c6955c939ac031b04cfd83c1f17e4fae4e8c613"
-  integrity sha512-QTlx+Z4JCfcTieiDLj+CcW3UowIONioNRttk7trqPrqXDC5VwWQojSzQdL6ipegZYMbWWO3vh2D3UB4AWafFvw==
+"@podlove/web-player@^5.7.0":
+  version "5.7.0"
+  resolved "https://registry.yarnpkg.com/@podlove/web-player/-/web-player-5.7.0.tgz#c1f26beb97761b7f582e7539d6dd75e0557c4814"
+  integrity sha512-zoQh1gFEL7E263U69dRQNX/eQHSVYwdOgP6l7VuDP4L2nUma0jCSnpCR+ARyRR4Z4QWM33/C0ltM9LX9NX8GHw==
 
 "@rollup/plugin-node-resolve@^7.1.1":
   version "7.1.3"
