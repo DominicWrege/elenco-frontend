@@ -6,7 +6,7 @@
 	align-items: center;
 	gap: 2em;
 	width: 100%;
-	/* max-width: 60rem; */
+	max-width: 60rem;
 }
 .SearchResults ul {
 	display: flex;

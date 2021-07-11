@@ -12,6 +12,7 @@ interface Properties {
 	episodes: EpisodeNext,
 	feedId?: number,
 	feedMeta: FeedShort;
+	pagination?: boolean,
 }
 
 
@@ -21,7 +22,7 @@ const LoadingButtonWrapper = styled.div`
 		justify-content: center;
 `;
 
-const EpisodeList: React.FC<Properties> = ({ episodes, feedMeta, feedId }) => {
+const EpisodeList: React.FC<Properties> = ({ episodes, feedMeta, feedId, pagination = false }) => {
 	const context = useContext<PodcastPlayerContext | null>(PlayerContext);
 
 	const status = context?.status;
@@ -74,6 +75,9 @@ const EpisodeList: React.FC<Properties> = ({ episodes, feedMeta, feedId }) => {
 	return (
 		<List
 			size="large"
+			pagination={
+				pagination ? { defaultPageSize: 50, hideOnSinglePage: true, simple: true } : undefined
+			}
 			rowKey={(episode) => episode.guid ?? Math.random() * 1000}
 			dataSource={innerEpisodes.items}
 			loadMore={renderNextButton()}

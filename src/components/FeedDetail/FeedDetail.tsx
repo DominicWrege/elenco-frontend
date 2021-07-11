@@ -72,8 +72,17 @@ export const FeedDetail: React.FC<Properties> = ({
 	}, [])
 
 	const handleTabSelect = (activekey: string): void => {
-		const newLocation = encodeURI(`${window.location.pathname}?${TAB_Query}=${activekey}`);
-		setLocation(newLocation);
+
+		const uriParam = util.urlParameter("url");
+		if (uriParam) {
+			const param = [`url=${uriParam}`, `${TAB_Query}=${activekey}`].join("&");
+			const location = encodeURI(`${window.location.pathname}?${param}`);
+			setLocation(location);
+		} else {
+			const location = encodeURI(`${window.location.pathname}?${TAB_Query}=${activekey}`);
+			setLocation(location);
+		}
+
 	};
 
 
