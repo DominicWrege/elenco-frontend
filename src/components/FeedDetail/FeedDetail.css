@@ -41,6 +41,8 @@
 .FeedDetail .FeedDetail-sidebar .Artwork {
 	width: 100%;
 	height: var(--side-row-width);
+	display: flex;
+	justify-content: center;
 }
 .FeedDetail-sidebar {
 	display: flex;

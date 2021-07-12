@@ -1,0 +1,21 @@
+.HideBtn {
+	width: 100%;
+	display: flex;
+	gap: 1.25rem;
+	align-items: baseline;
+	padding-left: 24px;
+	box-sizing: border-box;
+}
+
+.HideBtn div {
+	font-weight: bold;
+	font-size: 1.1em;
+}
+
+@media (max-width: 650px) {
+	.HideBtn {
+		justify-content: center;
+		align-items: center;
+		padding-left: 0;
+	}
+}

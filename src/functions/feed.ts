@@ -1,5 +1,5 @@
 import { API_URL } from "../env"
-import { FeedEpisodeModel, FeedModel, FeedSmall } from "../models/feeds";
+import { FeedEpisodeModel, FeedModel, FeedSmall, FeedStatus } from "../models/feeds";
 import { http } from "./http"
 
 
@@ -51,7 +51,16 @@ export namespace feed {
             img: feed.imgCache,
             authorName: feed.authorName,
             submitted: feed.submitted
-        }
+        };
+    }
+
+    export async function update(feedId: number, action: FeedStatus): Promise<void> {
+        const body = {
+            feedId,
+            action
+        };
+
+        await http.patch(`${API_URL}/feed/update`, body, http.WithCredentials.Yes);
     }
 
 }

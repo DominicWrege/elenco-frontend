@@ -118,7 +118,10 @@ export const FeedDetail: React.FC<Properties> = ({
 					{feed && (
 						<>
 							{/* img placholder??  not working*/}
-							<Artwork src={feed.img ?? `${API_URL}/img/${feed.imgCache}`} />
+							<Artwork
+								src={feed.img ?? `${API_URL}/img/${feed.imgCache}`}
+								width={"17rem"}
+							/>
 							{showUserActions && <Action feedId={feed.id}></Action>}
 						</>
 					)}

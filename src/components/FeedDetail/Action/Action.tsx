@@ -15,10 +15,7 @@ const Action: React.FC<Props> = ({ feedId }) => {
 	const load = useCallback(async () => {
 		if (feedId) {
 			try {
-				let s = await user.getSubscriptionInfo(feedId);
-				console.log(s);
-
-				setUserFeedInfo(s);
+				setUserFeedInfo(await user.getSubscriptionInfo(feedId));
 			} catch (err) {
 				console.log(err);
 			}
@@ -38,6 +35,7 @@ const Action: React.FC<Props> = ({ feedId }) => {
 			<div className="Action">
 				<SubscribeButton feedId={feedId} status={userFeedInfo?.hasSubscribed} />
 				<HideButton
+					feedId={feedId}
 					status={userFeedInfo?.status}
 					isOwner={userFeedInfo?.isOwner}
 				></HideButton>
