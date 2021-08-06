@@ -9,7 +9,7 @@ header {
 	justify-content: center;
 	letter-spacing: 0.1em;
 }
-#Header-title .ant-typography {
+#Header-title {
 	letter-spacing: 0.15em;
 	font-weight: 900;
 }

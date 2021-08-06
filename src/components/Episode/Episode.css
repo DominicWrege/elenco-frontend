@@ -1,0 +1,28 @@
+.Episode .ant-card {
+	max-width: 760px;
+	width: 69rem;
+	padding: 0.75rem 1.5rem;
+}
+
+.Episode {
+	display: flex;
+	justify-content: center;
+}
+
+.Episode-title {
+	margin-top: 0.4rem;
+}
+
+.Episode header {
+	display: flex;
+	gap: 1.5rem;
+	justify-content: flex-start;
+	align-items: center;
+}
+.Episode-show-notes {
+	margin-top: 1.5rem;
+}
+
+.Episode h5.ant-typography {
+	margin-top: 0.25em !important;
+}

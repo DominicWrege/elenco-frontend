@@ -29,6 +29,7 @@ h4 {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .EpisodeItem-text-small {
   color: #52585c;
   display: flex;

@@ -94,10 +94,11 @@ export interface FeedModerator {
 }
 
 export interface FeedShort {
-    img?: string
+    img?: string | null
     title: string,
-    description: string,
+    description?: string,
     linkWeb?: string,
+    id?: number,
 }
 
 export interface Show {
@@ -107,9 +108,6 @@ export interface Show {
     link?: string
 }
 
-export function compareByDescription(a: FeedEpisodeModel, b: FeedEpisodeModel): number {
-    return a.description.localeCompare(b.description) ? 1 : -1;
-}
 
 export interface Completion {
     title: string,

@@ -5,11 +5,18 @@ import { API_URL } from "../../env";
 import { http } from "../../functions/http";
 import "./SearchResults.css";
 import FeedResultCard from "../../components/FeedResultCard/FeedResultCard";
-import { compareByDescription, FeedEpisodeModel } from "../../models/feeds";
+import { FeedEpisodeModel } from "../../models/feeds";
 const { Title } = Typography;
 
 export interface SearchProperties extends DefaultParams {
 	query: string;
+}
+
+export function compareByDescription(
+	a: FeedEpisodeModel,
+	b: FeedEpisodeModel
+): number {
+	return a.description.localeCompare(b.description) ? 1 : -1;
 }
 
 const SearchResults: React.FC<RouteComponentProps<DefaultParams>> = () => {

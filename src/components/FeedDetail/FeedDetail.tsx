@@ -158,13 +158,12 @@ export const FeedDetail: React.FC<Properties> = ({
 									</Tabs.TabPane>
 									<Tabs.TabPane tab="Episodes" key="episode">
 										<EpisodeList
-											feedId={feed.id}
 											episodes={feed.episodes}
 											feedMeta={{
 												img: feed.img,
 												title: feed.title,
 												linkWeb: feed.linkWeb,
-												description: feed.description,
+												id: feed.id,
 											}}
 										/>
 									</Tabs.TabPane>

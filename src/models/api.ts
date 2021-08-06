@@ -19,6 +19,11 @@ export interface Author {
 	name: string
 }
 
+export interface Image {
+	feedId: number,
+	img: string
+}
+
 export interface FeedUserInfo {
 	hasSubscribed: boolean,
 	isOwner: boolean,
