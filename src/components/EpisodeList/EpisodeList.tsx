@@ -36,7 +36,7 @@ const EpisodeList: React.FC<Properties> = ({ episodes, feedMeta, feedId, paginat
 		try {
 			if (feedId && innerEpisodes?.offset) {
 				setisLoadingMore(true);
-				const episodesJson = await api.getMoreEpsiodes(feedId, innerEpisodes.offset);
+				const episodesJson = await api.getMoreEpisodes(feedId, innerEpisodes.offset);
 
 				setInnerEpisodes({ items: [...episodes.items, ...episodesJson.items], offset: episodesJson.offset })
 			}

@@ -1,5 +1,5 @@
 import "./HideButton.css";
-import { Button, message, Switch } from "antd";
+import { message, Switch } from "antd";
 import { useState } from "react";
 import feed from "../../../functions/feed";
 import { FeedStatus } from "../../../models/feeds";
@@ -18,7 +18,7 @@ const HideButton: React.FC<Property> = ({ isOwner, status, feedId }) => {
 	if (!isOwner) {
 		return null;
 	}
-	
+
 	const updateStatus = async (action: FeedStatus): Promise<void> => {
 		try {
 			setLoading(true);

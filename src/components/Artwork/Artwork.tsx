@@ -27,8 +27,8 @@ export function Artwork({ width = "100%", src, href }: Properties) {
 			fallback={fallback}
 			placeholder={
 				<img
-					width={width}
-					src="/img/placeholder.svg"
+					width={"100%"}
+					src="/img/placeholder2.svg"
 					alt="Artwork placeholder"
 				/>
 			}

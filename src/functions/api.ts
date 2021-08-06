@@ -15,9 +15,9 @@ export namespace api {
         return resp.json();
     }
 
-    export async function getMoreEpsiodes(feedId: number, offset: number): Promise<EpisodeNext> {
+    export async function getMoreEpisodes(feedId: number, offset: number): Promise<EpisodeNext> {
         //also supports limit query
-        const resp = await http.get(`${API_URL}/feed/${feedId}/episodes?offset=${offset}`)
+        const resp = await http.get(`${API_URL}/episodes/${feedId}?offset=${offset}`)
         return resp.json();
     }
 }
