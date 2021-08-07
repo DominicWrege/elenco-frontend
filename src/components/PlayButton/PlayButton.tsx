@@ -1,5 +1,5 @@
 import "./PlayButton.css";
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useContext, } from "react";
 import { PlayerContext } from "../../contexts/PlayerContext";
 import { PlayerAction, PlayerStatus } from "../PodcastPlayer/types";
 import { PlayCircleFilled, PauseCircleFilled } from "@ant-design/icons";

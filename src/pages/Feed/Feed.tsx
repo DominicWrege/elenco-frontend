@@ -21,10 +21,8 @@ export function Feed(): React.ReactElement<void> {
 	const [loadingFeed, setLoadingFeed] = useState(true);
 
 	const params = useRoute<FeedRouterProperties>("/feed/:name")[1];
-
 	const loadFeed = useCallback(async () => {
-		if (params?.name) {
-			console.log(params.name);
+		if (params?.name ) {
 			try {
 				const json_feed: FeedEpisodeModel = await feed.getByName(
 					params?.name ?? ""
