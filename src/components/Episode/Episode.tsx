@@ -44,9 +44,7 @@ export const Episode: React.FC = () => {
 		if (params?.episode_id) {
 			try {
 				let id = parseInt(params?.episode_id, 10);
-				const json_episode = await api.getEpisode(id);
-				console.log(json_episode);
-				setEpisode(json_episode);
+				setEpisode(await api.getEpisode(id));
 			} catch (err) {
 				console.error(err);
 			} finally {
@@ -66,22 +64,24 @@ export const Episode: React.FC = () => {
 				{episode && !loading && (
 					<>
 						<header>
-							<Artwork src={image} width="9rem" />
-							<PlayButton
-								feedTitle={feedTitle}
-								episode={episode}
-								image={image}
-							/>
-							<div className="Episode-title">
-								<Title level={3}>{episode?.title}</Title>
-								<Title level={5}>{feedTitle}</Title>
-								<div className="EpisodeItem-text-body">
-									<div className="EpisodeItem-text-small">
-										<p>{util.formatDuration(episode.duration)}</p>
-										<p>{util.formatDate(episode.published)}</p>
+							<Artwork src={image} width="11rem" />
+							<section>
+								<PlayButton
+									feedTitle={feedTitle}
+									episode={episode}
+									image={image}
+								/>
+								<div className="Episode-title">
+									<Title level={3}>{episode?.title}</Title>
+									<Title level={5}>{feedTitle}</Title>
+									<div className="EpisodeItem-text-body">
+										<div className="EpisodeItem-text-small">
+											<p>{util.formatDuration(episode.duration)}</p>
+											<p>{util.formatDate(episode.published)}</p>
+										</div>
 									</div>
 								</div>
-							</div>
+							</section>
 						</header>
 
 						<div
