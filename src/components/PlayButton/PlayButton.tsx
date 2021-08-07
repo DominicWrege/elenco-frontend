@@ -33,7 +33,10 @@ const PlayButton: React.FC<Props> = ({ image, feedTitle, episode }) => {
 		player?.setAction(PlayerAction.Pause);
 	};
 
-	if (player?.status === PlayerStatus.Playing) {
+	if (
+		player?.episode?.guid === episode.guid &&
+		player?.status === PlayerStatus.Playing
+	) {
 		return (
 			<div className="PlayButton">
 				<PauseCircleFilled onClick={handlePause} />
