@@ -60,10 +60,10 @@ export namespace util {
 
 
     export function scrollTop(): void {
-        if (window.scrollY > 60) {
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
-        }
+
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+
     }
 
     export function removeRows(selectedRows: number[], feeds: FeedModerator[]): FeedModerator[] {

@@ -42,16 +42,20 @@ export const FeedSmallList: React.FC<Properties> = ({
 			/>
 		);
 		if (onlyArtwork) {
-			return <List.Item className="FeedSmallList-item">{artwork}</List.Item>;
+			return (
+				<List.Item className="FeedSmallList-item" onClick={util.scrollTop}>
+					{artwork}
+				</List.Item>
+			);
 		}
 
 		return (
-			<List.Item className="FeedSmallList-item">
+			<List.Item className="FeedSmallList-item" onClick={util.scrollTop}>
 				{artwork}
-				<Link href={`/feed/${feed.title}`} onClick={util.scrollTop}>
+				<Link href={`/feed/${feed.title}`}>
 					<Typography.Title level={4}>{feed.title}</Typography.Title>
 				</Link>
-				<Link href={`/author/${feed.authorName}`} onClick={util.scrollTop}>
+				<Link href={`/author/${feed.authorName}`}>
 					<small>{feed.authorName}</small>
 				</Link>
 			</List.Item>
