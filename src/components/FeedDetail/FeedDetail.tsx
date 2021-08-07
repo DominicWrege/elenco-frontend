@@ -72,13 +72,9 @@ export const FeedDetail: React.FC<Properties> = ({
 		const uriParam = util.urlParameter("url");
 		if (uriParam) {
 			const param = [`url=${uriParam}`, `${TAB_Query}=${activeKey}`].join("&");
-			const location = encodeURI(`${window.location.pathname}?${param}`);
-			setLocation(location);
+			setLocation(`${window.location.pathname}?${param}`);
 		} else {
-			const location = encodeURI(
-				`${window.location.pathname}?${TAB_Query}=${activeKey}`
-			);
-			setLocation(location);
+			setLocation(`${window.location.pathname}?${TAB_Query}=${activeKey}`);
 		}
 	};
 
@@ -110,14 +106,18 @@ export const FeedDetail: React.FC<Properties> = ({
 					{/* TODO FIX this */}
 
 					{/* TODO FIX this */}
-
 					<Artwork
-						src={feed?.img ?? `${API_URL}/img/${feed?.imgCache}`}
+						loading={loadingFeed}
+						src={
+							feed?.img ?? feed?.imgCache
+								? `${API_URL}/img/${feed?.imgCache}`
+								: null
+						}
 						width={"17rem"}
 					/>
 
 					{feed && <>{showUserActions && <Action feedId={feed.id}></Action>}</>}
-					
+
 					{!feed && (
 						<Card>
 							<Skeleton loading={loadingFeed}></Skeleton>

@@ -24,6 +24,7 @@ export function Feed(): React.ReactElement<void> {
 
 	const loadFeed = useCallback(async () => {
 		if (params?.name) {
+			console.log(params.name);
 			try {
 				const json_feed: FeedEpisodeModel = await feed.getByName(
 					params?.name ?? ""

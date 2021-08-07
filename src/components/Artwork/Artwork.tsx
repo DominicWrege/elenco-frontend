@@ -14,8 +14,26 @@ interface Properties {
 }
 const className = "Artwork";
 
-export function Artwork({ width = "100%", src, href }: Properties) {
+export function Artwork({ width = "100%", src, href, loading }: Properties) {
 	const fallback = "/img/podcast_placeholder.jpg";
+	const placeholderPath = "/img/placeholder2.svg";
+	const placeholder = (
+		<img width={"100%"} src={placeholderPath} alt="Artwork placeholder" />
+	);
+
+	if (loading) {
+		return (
+			<Image
+				alt="Podcast Artwork Image Placeholder"
+				height={width}
+				width={width}
+				loading="lazy"
+				src={placeholderPath}
+				preview={false}
+				fallback={fallback}
+			/>
+		);
+	}
 
 	const img = (
 		<Image
@@ -26,13 +44,7 @@ export function Artwork({ width = "100%", src, href }: Properties) {
 			src={src ?? fallback}
 			preview={false}
 			fallback={fallback}
-			placeholder={
-				<img
-					width={"100%"}
-					src="/img/placeholder2.svg"
-					alt="Artwork placeholder"
-				/>
-			}
+			placeholder={placeholder}
 		/>
 	);
 
