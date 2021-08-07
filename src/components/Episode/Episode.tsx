@@ -8,6 +8,7 @@ import { Episode as EpisodeModel } from "../../models/episode";
 import sanitizeHtml from "sanitize-html";
 import PlayButton from "../PlayButton/PlayButton";
 import Artwork from "../Artwork/Artwork";
+import util from "../../functions/util";
 // interface Props {
 // 	episode: EpisodeModel;
 // }
@@ -65,7 +66,7 @@ export const Episode: React.FC = () => {
 				{episode && !loading && (
 					<>
 						<header>
-							<Artwork src={image} width="8rem" />
+							<Artwork src={image} width="9rem" />
 							<PlayButton
 								feedTitle={feedTitle}
 								episode={episode}
@@ -74,8 +75,15 @@ export const Episode: React.FC = () => {
 							<div className="Episode-title">
 								<Title level={3}>{episode?.title}</Title>
 								<Title level={5}>{feedTitle}</Title>
+								<div className="EpisodeItem-text-body">
+									<div className="EpisodeItem-text-small">
+										<p>{util.formatDuration(episode.duration)}</p>
+										<p>{util.formatDate(episode.published)}</p>
+									</div>
+								</div>
 							</div>
 						</header>
+
 						<div
 							className="Episode-show-notes"
 							dangerouslySetInnerHTML={{

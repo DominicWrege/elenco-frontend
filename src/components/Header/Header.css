@@ -7,10 +7,10 @@
 header {
 	display: flex;
 	justify-content: center;
-	letter-spacing: 0.1em;
+	letter-spacing: 0.08em !important;
 }
 #Header-title {
-	letter-spacing: 0.15em;
+	letter-spacing: 0.15em !important;
 	font-weight: 900;
 }
 #Header-title a {

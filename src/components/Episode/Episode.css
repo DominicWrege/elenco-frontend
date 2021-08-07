@@ -1,6 +1,5 @@
 .Episode .ant-card {
-	max-width: 760px;
-	width: 70rem;
+	width: 63rem;
 }
 .Episode .ant-card-body {
 	padding: 1.5rem;
@@ -11,20 +10,34 @@
 	justify-content: center;
 }
 
-.Episode-title {
+/* .Episode-title {
 	margin-top: 0.4rem;
-}
+} */
 
 .Episode header {
 	display: flex;
-	gap: 1.25rem;
+	gap: 1em;
 	justify-content: flex-start;
 	align-items: center;
 }
+
 .Episode-show-notes {
 	margin-top: 1.5rem;
 }
 
 .Episode h5.ant-typography {
 	margin-top: 0.25em !important;
+}
+
+@media (max-width: 700px) {
+	.Episode header {
+		flex-direction: column;
+		gap: 0.2em;
+	}
+	.PlayButton.PlayButton {
+		padding: 0;
+	}
+	.Episode-show-notes {
+		margin-top: 0.5rem;
+	}
 }
