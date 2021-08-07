@@ -1,5 +1,5 @@
 import "./PlayButton.css";
-import { useContext, } from "react";
+import { useContext } from "react";
 import { PlayerContext } from "../../contexts/PlayerContext";
 import { PlayerAction, PlayerStatus } from "../PodcastPlayer/types";
 import { PlayCircleFilled, PauseCircleFilled } from "@ant-design/icons";
@@ -32,7 +32,6 @@ const PlayButton: React.FC<Props> = ({ image, feedTitle, episode }) => {
 	const handlePause = (_event): void => {
 		player?.setAction(PlayerAction.Pause);
 	};
-
 	if (
 		player?.episode?.guid === episode.guid &&
 		player?.status === PlayerStatus.Playing
