@@ -11,7 +11,7 @@ export namespace comment {
     }
 
     export async function get_for_feed(feedId: number): Promise<CommentModel[]> {
-        const resp = await http.get(`${API_URL}/comment/${feedId}`, http.WithCredentials.Yes);
+        const resp = await http.get(`${API_URL}/comments/${feedId}`, http.WithCredentials.No);
         const comments: CommentModel[] = await resp.json();
         return comments;
     }

@@ -37,7 +37,7 @@ export const CommentForm: React.FC<Properties> = ({ feedId, newComment }) => {
             try {
                 const createdComment: CommentModel = await comment.post(newCommentBody);
                 newComment(createdComment);
-                message.success("Comment succefuly posted!");
+                message.success("Comment successfully posted!");
             } catch (err) {
                 message.error(err.json.message);
                 console.log(err);
