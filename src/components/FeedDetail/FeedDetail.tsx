@@ -7,7 +7,7 @@ import FeedMetaInfo from "../FeedMetaInfo/FeedMetaInfo";
 import { Link, useLocation } from "wouter";
 import EpisodeList from "../EpisodeList/EpisodeList";
 import { Comment } from "../../components/Comment/Comment";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import FeedSmallList from "../FeedSmallList/FeedSmallList";
 import { API_URL } from "../../env";
 import util from "../../functions/util";
