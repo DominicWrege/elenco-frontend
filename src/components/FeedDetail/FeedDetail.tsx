@@ -108,23 +108,16 @@ export const FeedDetail: React.FC<Properties> = ({
 			>
 				<aside className="FeedDetail-sidebar">
 					{/* TODO FIX this */}
-					{!feed && (
-						<Skeleton.Image
-							style={{ width: "100%", background: "#fff", height: "14rem" }}
-						/>
-					)}
+
 					{/* TODO FIX this */}
 
-					{feed && (
-						<>
-							{/* img placholder??  not working*/}
-							<Artwork
-								src={feed.img ?? `${API_URL}/img/${feed.imgCache}`}
-								width={"17rem"}
-							/>
-							{showUserActions && <Action feedId={feed.id}></Action>}
-						</>
-					)}
+					<Artwork
+						src={feed?.img ?? `${API_URL}/img/${feed?.imgCache}`}
+						width={"17rem"}
+					/>
+
+					{feed && <>{showUserActions && <Action feedId={feed.id}></Action>}</>}
+					
 					{!feed && (
 						<Card>
 							<Skeleton loading={loadingFeed}></Skeleton>

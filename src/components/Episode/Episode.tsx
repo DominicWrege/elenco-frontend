@@ -7,6 +7,7 @@ import api from "../../functions/api";
 import { Episode as EpisodeModel } from "../../models/episode";
 import sanitizeHtml from "sanitize-html";
 import PlayButton from "../PlayButton/PlayButton";
+import Artwork from "../Artwork/Artwork";
 // interface Props {
 // 	episode: EpisodeModel;
 // }
@@ -64,6 +65,7 @@ export const Episode: React.FC = () => {
 				{episode && !loading && (
 					<>
 						<header>
+							<Artwork src={image} width="8rem" />
 							<PlayButton
 								feedTitle={feedTitle}
 								episode={episode}

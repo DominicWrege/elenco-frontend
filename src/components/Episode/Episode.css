@@ -1,7 +1,9 @@
 .Episode .ant-card {
 	max-width: 760px;
-	width: 69rem;
-	padding: 0.75rem 1.5rem;
+	width: 70rem;
+}
+.Episode .ant-card-body {
+	padding: 1.5rem;
 }
 
 .Episode {
@@ -15,7 +17,7 @@
 
 .Episode header {
 	display: flex;
-	gap: 1.5rem;
+	gap: 1.25rem;
 	justify-content: flex-start;
 	align-items: center;
 }

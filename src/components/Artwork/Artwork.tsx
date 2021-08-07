@@ -6,10 +6,11 @@ import "./Artwork.css";
 
 interface Properties {
 	width?: number | string;
-	src?: string;
+	src?: string | null;
 	className?: string;
 	style?: CSSProperties;
 	href?: string;
+	loading?: boolean;
 }
 const className = "Artwork";
 
