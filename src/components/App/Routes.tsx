@@ -11,7 +11,7 @@ import SearchResults from "../../pages/SearchResults/SearchResults";
 import Subscription from "../../pages/Subscription/Subscription";
 import UserFeeds from "../../pages/User/UserFeeds/UserFeeds";
 import Guard from "../Guard/Guard";
-import { Home } from "../Home/Home";
+import { Home } from "../../pages/Home/Home";
 
 import SwaggerUI from "swagger-ui-react";
 import "swagger-ui-react/swagger-ui.css";

@@ -7,11 +7,18 @@
 		{
 			"type": "pwa-chrome",
 			"request": "launch",
-			"name": "Launch Chrome against localhost",
+			"name": "Launch Brave",
 			"url": "http://192.168.2.137:3000",
 			"webRoot": "${workspaceFolder}",
 			"runtimeExecutable": "/usr/bin/brave",
 			"runtimeArgs": ["--force-device-scale-factor=1"],
+		},
+		{
+			"type": "pwa-chrome",
+			"request": "launch",
+			"name": "Launch Chrome",
+			"url": "http://192.168.2.137:3000",
+			"webRoot": "${workspaceFolder}",
 		}
 	]
 }

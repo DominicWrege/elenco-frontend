@@ -1,11 +1,11 @@
 import "./Home.css";
 import { Card, Typography } from "antd";
-import Statistic from "../Statistic/Statistic";
+import Statistic from "../../components/Statistic/Statistic";
 import api from "../../functions/api";
 import { useCallback, useEffect, useState } from "react";
 import { MetaStatistic } from "../../models/api";
 import { FeedSmall } from "../../models/feeds";
-import FeedSmallList from "../FeedSmallList/FeedSmallList";
+import FeedSmallList from "../../components/FeedSmallList/FeedSmallList";
 import feed from "../../functions/feed";
 import { LOGO } from "../../env";
 
