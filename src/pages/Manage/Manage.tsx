@@ -38,9 +38,6 @@ export const Manage: React.FC = () => {
 		setLocation(key);
 	};
 
-	// useEffect(() => {
-	// }, [location])
-
 	return (
 		<div className="Manage">
 			<Menu
@@ -72,9 +69,3 @@ export const Manage: React.FC = () => {
 };
 
 export default Manage;
-// {/* <Route path={`${pathPrefix}/new-feeds`}>
-// 	<NewFeedOverview />
-// </Route>
-// <Route path={`${pathPrefix}/inbox`}>
-// 	<ModeratorInbox />
-// // </Route> */}
