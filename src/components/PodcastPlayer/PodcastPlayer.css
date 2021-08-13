@@ -17,7 +17,3 @@ div.PodcastPlayer iframe {
 	padding: 0 0.75rem;
 	margin-bottom: 0.25rem;
 }
-
-div.PodcastPlayer {
-	min-height: 176px;
-}

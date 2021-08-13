@@ -112,12 +112,11 @@ export const PodcastPlayer: React.FC = () => {
 		});
 	};
 
-	if (!player?.episode) {
-		return null;
-	}
-
 	return (
-		<div className="PodcastPlayer">
+		<div
+			className="PodcastPlayer"
+			hidden={player?.episode === null || player?.episode === undefined}
+		>
 			<div className="PodcastPlayer-close">
 				<Button icon={<CloseCircleOutlined />} onClick={close}></Button>
 				{/* <CloseOutlined onClick={close} /> */}
