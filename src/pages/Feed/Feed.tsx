@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { DefaultParams, useRoute } from "wouter";
+import { DefaultParams, useLocation, useRoute } from "wouter";
 import { feed } from "../../functions/feed";
 import type { FeedEpisodeModel, FeedSmall } from "../../models/feeds";
 import { FeedDetail } from "../../components/FeedDetail/FeedDetail";
@@ -20,23 +20,28 @@ export function Feed(): React.ReactElement<void> {
 	const [loadingRelated, setLoadingRelated] = useState(true);
 	const [loadingFeed, setLoadingFeed] = useState(true);
 
+	const setLocation = useLocation()[1];
+
 	const params = useRoute<FeedRouterProperties>("/feed/:name")[1];
 	const loadFeed = useCallback(async () => {
-		if (params?.name ) {
+		if (params?.name) {
 			try {
 				const json_feed: FeedEpisodeModel = await feed.getByName(
 					params?.name ?? ""
 				);
 				setFeedValue(json_feed);
 				setRelatedFeeds(await feed.getRelated(json_feed.id));
-			} catch (err) {
-				console.log(err);
+			} catch (err: any) {
+				console.error(err);
+				if (err.response.status === 404) {
+					setLocation("/404");
+				}
 			} finally {
 				setLoadingFeed(false);
 				setLoadingRelated(false);
 			}
 		}
-	}, [params?.name]);
+	}, [params?.name, setLocation]);
 
 	useEffect(() => {
 		loadFeed();

@@ -2,7 +2,7 @@ import "./Episode.css";
 import { Card, Skeleton, Typography } from "antd";
 import { useEffect, useState } from "react";
 import { useCallback } from "react";
-import { DefaultParams, useRoute } from "wouter";
+import { DefaultParams, useLocation, useRoute } from "wouter";
 import api from "../../functions/api";
 import { Episode as EpisodeModel } from "../../models/episode";
 import sanitizeHtml from "sanitize-html";
@@ -26,6 +26,7 @@ export const Episode: React.FC = () => {
 	const [episode, setEpisode] = useState<EpisodeModel | null>(null);
 	const [loading, setLoading] = useState(true);
 	const feedTitle = decodeURI(params?.feed_title ?? "");
+	const setLocation = useLocation()[1];
 
 	const [image, setImage] = useState<string | null>(null);
 
@@ -47,11 +48,14 @@ export const Episode: React.FC = () => {
 				setEpisode(await api.getEpisode(id));
 			} catch (err) {
 				console.error(err);
+				if (err.response.status === 404) {
+					setLocation("/404");
+				}
 			} finally {
 				setLoading(false);
 			}
 		}
-	}, [params?.episode_id]);
+	}, [params?.episode_id, setLocation]);
 
 	useEffect(() => {
 		Promise.all([load(), getArtwork()]);

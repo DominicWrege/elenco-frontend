@@ -2,9 +2,10 @@ import ApiError from "../models/api";
 
 export namespace http {
 
-    export class HttpError {
+    export class HttpError extends Error {
 
         constructor(public response: Response, public json: ApiError) {
+            super(response.statusText);
             this.response = response;
             this.json = json;
         }
@@ -65,6 +66,7 @@ export namespace http {
     }
 
     export async function makeRequest<T>(url: string, method: Method, ctx: Context<T>): Promise<Response> {
+
         const options = {
             method: method,
             mode: "cors" as RequestMode,
@@ -78,6 +80,7 @@ export namespace http {
         if (resp.status >= 400) {
             throw new HttpError(resp, await resp.json());
         }
+
         return resp;
     }
 }

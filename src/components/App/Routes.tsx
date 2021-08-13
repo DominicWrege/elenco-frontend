@@ -15,7 +15,7 @@ import { Home } from "../../pages/Home/Home";
 
 import SwaggerUI from "swagger-ui-react";
 import "swagger-ui-react/swagger-ui.css";
-import { Card, Typography } from "antd";
+import { Button, Card, Result, Typography } from "antd";
 import Episode from "../Episode/Episode";
 const { Text } = Typography;
 
@@ -106,7 +106,17 @@ export const MainRoutes = (
 		</Route>
 		<Route path="/faq">{faq}</Route>
 		<Route>
-			<h2>404: nothing found!</h2>
+			<Result
+				status="404"
+				title="404 Not Found"
+				subTitle="Sorry, the resource you visited does not exist."
+				extra={
+					<Link href="/">
+						<Button type="primary">Back Home</Button>
+					</Link>
+				}
+			/>
+			,
 		</Route>
 	</Switch>
 );

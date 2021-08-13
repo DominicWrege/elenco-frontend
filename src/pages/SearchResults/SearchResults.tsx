@@ -1,8 +1,6 @@
 import { Empty, List, Select, Typography } from "antd";
 import React, { useCallback, useEffect, useState } from "react";
 import { DefaultParams, RouteComponentProps, useRoute } from "wouter";
-import { API_URL } from "../../env";
-import { http } from "../../functions/http";
 import "./SearchResults.css";
 import FeedResultCard from "../../components/FeedResultCard/FeedResultCard";
 import { FeedEpisodeModel } from "../../models/feeds";
