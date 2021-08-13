@@ -10,8 +10,17 @@ export enum PlayerAction {
     Pause = "Pause"
 }
 
+
+export interface StoreState {
+    lastAction: LastAction
+}
+
+export interface LastAction {
+    type: string
+}
+
 export interface Store {
-    getState: object,
+    getState: () => StoreState,
     subscribe: (any) => Promise<any>,
     dispatch: (type: any, payload?) => void
 }

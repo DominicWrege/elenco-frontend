@@ -5,16 +5,19 @@
     /* width: max-content; 
 } */
 
-#Player-wrapper iframe {
-	width: 100%;
-	padding: 0 0.75rem;
-	margin-bottom: 0.25rem;
-}
-
 .PodcastPlayer-close {
 	/* display: flex; */
 	/* justify-content: f; */
 	position: absolute;
 	top: 0.75rem;
 	right: 1rem;
+}
+div.PodcastPlayer iframe {
+	width: 100%;
+	padding: 0 0.75rem;
+	margin-bottom: 0.25rem;
+}
+
+div.PodcastPlayer {
+	min-height: 176px;
 }
