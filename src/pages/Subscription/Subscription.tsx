@@ -17,9 +17,7 @@ export const Subscription = () => {
 
   const loadFeeds = useCallback(async () => {
     try {
-      const feedsJson = await user.getSubscriptions();
-      console.log(feedsJson);
-      setFeeds(feedsJson);
+      setFeeds(await user.getSubscriptions());
     } catch (err) {
       console.log(err);
     } finally {

@@ -54,8 +54,7 @@ export namespace auth {
     }
 
     export async function register(fields: RegisterFields): Promise<void> {
-        const resp = await http.post(`${API_URL}/auth/register`, fields, http.WithCredentials.No);
-        console.log(resp);
+        await http.post(`${API_URL}/auth/register`, fields, http.WithCredentials.No);
     }
 
     export async function logout(): Promise<void> {

@@ -32,8 +32,6 @@ export const CommentForm: React.FC<Properties> = ({ feedId, newComment }) => {
                 feedId: feedId,
                 content: formData.message,
             };
-            console.log(formData);
-
             try {
                 const createdComment: CommentModel = await comment.post(newCommentBody);
                 newComment(createdComment);

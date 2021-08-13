@@ -13,7 +13,6 @@ export const NewFeedOverview: React.FC = () => {
 
 	const initData = useCallback(async () => {
 		let feedJson = await admin.newFeeds();
-		console.log(feedJson);
 		setFeeds(feedJson);
 	}, []);
 
@@ -41,7 +40,6 @@ export const NewFeedOverview: React.FC = () => {
 	}, [initData]);
 
 	const onChange = (keys: number[] | any, rows: FeedModerator[]): void => {
-		console.log(rows);
 		setSelectedRows(keys);
 	};
 
