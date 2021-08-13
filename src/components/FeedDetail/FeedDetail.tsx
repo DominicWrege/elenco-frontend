@@ -103,9 +103,6 @@ export const FeedDetail: React.FC<Properties> = ({
 				].join(" ")}
 			>
 				<aside className="FeedDetail-sidebar">
-					{/* TODO FIX this */}
-
-					{/* TODO FIX this */}
 					<Artwork
 						loading={loadingFeed}
 						src={
@@ -123,8 +120,6 @@ export const FeedDetail: React.FC<Properties> = ({
 							<Skeleton loading={loadingFeed}></Skeleton>
 						</Card>
 					)}
-					{/* TODO FIX this */}
-
 					{feed && (
 						<FeedMetaInfo
 							feed={{

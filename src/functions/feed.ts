@@ -42,6 +42,13 @@ export namespace feed {
         return json.map(intoSmallFeed);
     }
 
+    export async function search(term: string): Promise<FeedEpisodeModel[]> {
+        const resp = await http.get(
+            decodeURI(`${API_URL}/feeds/search?term=${term}`)
+        );
+        return resp.json();
+    }
+
     export function intoSmallFeed(feed: FeedModel): FeedSmall {
 
         return {

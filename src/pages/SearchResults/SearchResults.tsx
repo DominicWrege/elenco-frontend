@@ -6,6 +6,7 @@ import { http } from "../../functions/http";
 import "./SearchResults.css";
 import FeedResultCard from "../../components/FeedResultCard/FeedResultCard";
 import { FeedEpisodeModel } from "../../models/feeds";
+import { feed } from "../../functions/feed";
 const { Title } = Typography;
 
 export interface SearchProperties extends DefaultParams {
@@ -87,13 +88,15 @@ const SearchResults: React.FC<RouteComponentProps<DefaultParams>> = () => {
 			setCategoriesList([]);
 			setSelectedCategories([]);
 			setLoading(true);
-			const resp = await http.get(
-				encodeURI(`${API_URL}/feeds/search?term=${params?.query}`)
-			);
-			const feeds_json: FeedEpisodeModel[] = await resp.json();
-			setLoading(false);
-			intoCategoriesList(feeds_json);
-			setResult(feeds_json);
+			try {
+				const feeds_json = await feed.search(params?.query);
+				intoCategoriesList(feeds_json);
+				setResult(feeds_json);
+			} catch (err) {
+				console.error(err);
+			} finally {
+				setLoading(false);
+			}
 		}
 	}, [params?.query]);
 
