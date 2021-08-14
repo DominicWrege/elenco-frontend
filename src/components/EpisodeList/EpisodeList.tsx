@@ -13,6 +13,7 @@ import styled from "styled-components";
 import episode from "../../functions/episode";
 
 interface Properties {
+	episodesList?: Episode[] | null;
 	feedMeta: FeedShort;
 	pagination?: boolean;
 }
@@ -24,6 +25,7 @@ const LoadingButtonWrapper = styled.div`
 `;
 
 const EpisodeList: React.FC<Properties> = ({
+	episodesList,
 	feedMeta,
 	pagination = false,
 }) => {
@@ -35,7 +37,7 @@ const EpisodeList: React.FC<Properties> = ({
 	const [episodes, setEpisodes] = useState<EpisodeNext | null>(null);
 
 	const init = useCallback(async () => {
-		if (feedMeta.id) {
+		if (feedMeta.id && !episodesList) {
 			const episodesJson = await episode.lazyLoad(feedMeta.id, 0);
 			setEpisodes(episodesJson);
 		}
@@ -105,7 +107,7 @@ const EpisodeList: React.FC<Properties> = ({
 					: undefined
 			}
 			rowKey={(episode) => episode.guid ?? episode.id}
-			dataSource={episodes?.items}
+			dataSource={episodesList ?? episodes?.items}
 			loadMore={renderNextButton()}
 			renderItem={(episode) => (
 				<EpisodeItem

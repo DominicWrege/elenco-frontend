@@ -144,6 +144,7 @@ export const FeedDetail: React.FC<Properties> = ({
 									</Tabs.TabPane>
 									<Tabs.TabPane tab="Episodes" key="episode">
 										<EpisodeList
+											episodesList={showComments ? null : feed.episodes.items}
 											feedMeta={{
 												img: feed.img,
 												title: feed.title,
