@@ -20,8 +20,8 @@ const Register: React.FC<RegisterLoginChildProps> = ({ onError }) => {
 				onError(err.json.message);
 			} else if (err instanceof Error) {
 				onError("Something went wrong");
+				console.error(err.message);
 			}
-			console.error(err.message);
 		} finally {
 			setIsLoading(false);
 		}
