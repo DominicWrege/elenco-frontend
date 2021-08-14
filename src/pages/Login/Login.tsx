@@ -6,7 +6,6 @@ import { UserContext } from "../../contexts/UserContext";
 import { User } from "../../models/user";
 import { RegisterLoginChildProps } from "../RegisterLogin";
 import { http } from "../../functions/http";
-import { log } from "console";
 
 const Login: React.FC<RegisterLoginChildProps> = ({ onError }) => {
 	const [form] = Form.useForm();
@@ -26,8 +25,7 @@ const Login: React.FC<RegisterLoginChildProps> = ({ onError }) => {
 			if (err instanceof http.HttpError) {
 				onError(err.json.message);
 			} else if (err instanceof Error) {
-				log(err);
-				onError(err.message);
+				onError("Something went wrong");
 			}
 			console.error(err);
 		} finally {
