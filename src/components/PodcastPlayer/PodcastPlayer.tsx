@@ -87,7 +87,6 @@ export const PodcastPlayer: React.FC = () => {
 		if (player?.action === PlayerAction.Pause) {
 			pause(store);
 		} else if (player?.action === PlayerAction.Play) {
-			console.log(player?.episode);
 			play(store);
 		}
 	}, [player?.action]);

@@ -2,6 +2,7 @@ import { Button, Form, Input } from "antd";
 import React, { useState } from "react";
 import { useLocation } from "wouter";
 import { auth } from "../../functions/auth";
+import { http } from "../../functions/http";
 import { RegisterLoginChildProps } from "../RegisterLogin";
 
 const Register: React.FC<RegisterLoginChildProps> = ({ onError }) => {
@@ -15,26 +16,19 @@ const Register: React.FC<RegisterLoginChildProps> = ({ onError }) => {
 			await auth.register(values);
 			setLocation("/login");
 		} catch (err: any) {
+			if (err instanceof http.HttpError) {
+				onError(err.json.message);
+			} else if (err instanceof Error) {
+				onError(err.message);
+			}
+			console.error(err.message);
+		} finally {
 			setIsLoading(false);
-			console.log(err);
-			// console.log(err.json.message);
-			// onError(err.json.message);
 		}
 	};
 
-	const onFinishFailed = (_: any) => {
-		// setFormValid(false);
-		console.log("fail");
-	};
-
 	return (
-		<Form
-			form={form}
-			name="Register"
-			onFinish={onFinish}
-			// onFieldsChange={onCheck}
-			onFinishFailed={onFinishFailed}
-		>
+		<Form form={form} name="Register" onFinish={onFinish}>
 			<Form.Item
 				label="Username"
 				name="username"

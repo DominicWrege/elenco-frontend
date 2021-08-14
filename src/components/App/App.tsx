@@ -56,11 +56,8 @@ const App: React.FC = () => {
 				setUser(userJson);
 				window.location["user"] = JSON.stringify(userJson);
 			} catch (err) {
-				//TODO
-				//- show popup message
-				//- make route LOGIN.. = "/login"; constants
 				setLocation("/Login");
-				console.error(err);
+				console.error({ ...err });
 			}
 		}
 	}, [setLocation]);

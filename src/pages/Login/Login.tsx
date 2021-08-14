@@ -5,6 +5,8 @@ import { auth } from "../../functions/auth";
 import { UserContext } from "../../contexts/UserContext";
 import { User } from "../../models/user";
 import { RegisterLoginChildProps } from "../RegisterLogin";
+import { http } from "../../functions/http";
+import { log } from "console";
 
 const Login: React.FC<RegisterLoginChildProps> = ({ onError }) => {
 	const [form] = Form.useForm();
@@ -20,11 +22,16 @@ const Login: React.FC<RegisterLoginChildProps> = ({ onError }) => {
 			const resp: User = await auth.login(values);
 			userContext?.setUser(resp);
 			setLocation("/");
-		} catch (err: any) {
-			setIsLoading(false);
-			if (err.json?.message) {
+		} catch (err) {
+			if (err instanceof http.HttpError) {
 				onError(err.json.message);
+			} else if (err instanceof Error) {
+				log(err);
+				onError(err.message);
 			}
+			console.error(err);
+		} finally {
+			setIsLoading(false);
 		}
 	};
 

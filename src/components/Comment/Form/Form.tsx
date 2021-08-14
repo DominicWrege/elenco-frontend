@@ -6,6 +6,7 @@ import { comment } from "../../../functions/comment";
 import CommentModel, { NewComment } from "../../../models/comment";
 import { useState } from "react";
 import { Link } from "wouter";
+import { http } from "../../../functions/http";
 
 interface FormData {
 	message: string;
@@ -38,10 +39,11 @@ export const CommentForm: React.FC<Properties> = ({ feedId, newComment }) => {
 					newComment(createdComment);
 					message.success("Comment successfully posted!");
 				} catch (err) {
-					if (err.json?.message) {
+					if (err instanceof http.HttpError) {
 						message.error(err.json.message);
+					} else {
+						console.log(err);
 					}
-					console.log(err);
 				} finally {
 					setIsLoading(false);
 				}
