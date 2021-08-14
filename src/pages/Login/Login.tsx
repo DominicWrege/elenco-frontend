@@ -22,7 +22,9 @@ const Login: React.FC<RegisterLoginChildProps> = ({ onError }) => {
 			setLocation("/");
 		} catch (err: any) {
 			setIsLoading(false);
-			onError(err.json.message);
+			if (err.json?.message) {
+				onError(err.json.message);
+			}
 		}
 	};
 

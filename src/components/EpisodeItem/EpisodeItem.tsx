@@ -37,7 +37,7 @@ const EpisodeItem: React.FC<Properties> = React.memo(
 			player?.setAction(PlayerAction.Pause);
 		};
 
-		const renderTitle = () => {
+		const renderTitle = (): JSX.Element => {
 			const title = (
 				<Title
 					className={episode.explicit ? "EpisodeItem-explicit" : ""}
@@ -54,6 +54,20 @@ const EpisodeItem: React.FC<Properties> = React.memo(
 			}
 
 			return title;
+		};
+
+		const renderDescription = (episode: Episode): JSX.Element | null => {
+			if (!episode.description) {
+				return null;
+			}
+
+			let description = util.removeHtml(episode.description);
+
+			if (description.trim().length < 2) {
+				return null;
+			}
+
+			return <p>{util.removeHtml(description)}...</p>;
 		};
 
 		return (
@@ -73,7 +87,7 @@ const EpisodeItem: React.FC<Properties> = React.memo(
 							<p>{util.formatDuration(episode.duration)}</p>
 							<p>{util.formatDate(episode.published)}</p>
 						</div>
-						<p>{util.removeHtml(episode.description)}...</p>
+						{renderDescription(episode)}
 					</div>
 				</section>
 			</List.Item>

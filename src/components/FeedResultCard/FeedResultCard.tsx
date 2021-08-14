@@ -12,6 +12,7 @@ import util from "../../functions/util";
 interface Props {
 	feed: FeedEpisodeModel;
 }
+
 const FeedResultCard: React.FC<Props> = ({ feed }) => {
 	const renderCategories = (categories: TopCategory[]): JSX.Element | null => {
 		if (categories.length === 0) {
@@ -38,10 +39,14 @@ const FeedResultCard: React.FC<Props> = ({ feed }) => {
 			className="FeedResultCard"
 			title={
 				<div>
-					<Link href={`/feed/${feed.title}`} className="active">
+					<Link
+						href={`/feed/${feed.title}`}
+						className="active"
+						onClick={util.scrollTop}
+					>
 						{feed.title}
 					</Link>
-					<div className="FeedResultCard-author">
+					<div className="FeedResultCard-author" onClick={util.scrollTop}>
 						<Link href={`/author/${feed.authorName}`}>{feed.authorName}</Link>
 					</div>
 				</div>

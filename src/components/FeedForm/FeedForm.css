@@ -1,52 +1,52 @@
-.FeedForm{
-    display: flex;
-    flex-direction: column;
-    row-gap: 1rem;
-    width: 70rem;
-    max-width: 600px;
+.FeedForm {
+	display: flex;
+	flex-direction: column;
+	row-gap: 1rem;
+	width: 70rem;
+	max-width: 600px;
 }
 
-.FeedForm-input{
-    width: 70rem;
+.FeedForm-input {
+	width: 70rem;
 }
 
-.FeedForm-form{
-    width: 100%;
-    display: flex;
-    gap: 2em;
+.FeedForm-form {
+	width: 100%;
+	display: flex;
+	gap: 2em;
 }
 
-.NewFeed .ant-steps{
-    overflow-x: hidden;
+.NewFeed .ant-steps {
+	overflow-x: hidden;
 }
 
-@media(max-width: 650px) {
-    .FeedForm{
-        width: 32rem;
-    }
+@media (max-width: 650px) {
+	.FeedForm {
+		width: 32rem;
+	}
 }
 
-@media(max-width: 515px) {
-    .FeedForm{
-        padding-top: 0.75rem;
-        width: 27rem;
-    }
-    .NewFeed .ant-steps{
-        padding-top: 1rem;
-     }
+@media (max-width: 515px) {
+	.FeedForm {
+		padding-top: 0.75rem;
+		width: 27rem;
+	}
+	.NewFeed .ant-steps {
+		padding-top: 1rem;
+	}
 }
-@media(max-width: 460px) {
-    .FeedForm{
-        width: 25rem;
-    }
+@media (max-width: 460px) {
+	.FeedForm {
+		width: 25rem;
+	}
 }
-@media(max-width: 420px) {
-    .FeedForm{
-        width: 20rem;
-    }
-    .NewFeed .ant-steps{
-        display: none;
-     }
+@media (max-width: 420px) {
+	.FeedForm {
+		width: 20rem;
+	}
+	.NewFeed .ant-steps {
+		display: none;
+	}
 }
 
 /* @media screen {

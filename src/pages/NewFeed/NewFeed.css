@@ -8,6 +8,10 @@
 	width: 100%;
 }
 
+.NewFeed span.ant-steps-icon-dot {
+	margin-top: 1.5px;
+}
+
 .NewFeed .ant-result-extra {
 	display: flex;
 	justify-content: center;

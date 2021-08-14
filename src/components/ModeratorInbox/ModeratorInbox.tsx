@@ -27,7 +27,6 @@ export const ModeratorInbox = () => {
 	}, [initData]);
 
 	const onChange = (keys: number[] | any, rows: FeedModerator[]): void => {
-		console.log(rows);
 		setSelectedRows(keys);
 	};
 

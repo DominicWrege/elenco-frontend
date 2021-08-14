@@ -78,6 +78,12 @@ export const FeedDetail: React.FC<Properties> = ({
 		}
 	};
 
+	const renderArtwork = () => {
+		const src = feed?.imgCache ? `${API_URL}/img/${feed?.imgCache}` : feed?.img;
+
+		return <Artwork loading={loadingFeed} src={src ?? null} width={"17rem"} />;
+	};
+
 	return (
 		<div className="FeedDetail">
 			<header className="FeedDetail-header">
@@ -103,15 +109,7 @@ export const FeedDetail: React.FC<Properties> = ({
 				].join(" ")}
 			>
 				<aside className="FeedDetail-sidebar">
-					<Artwork
-						loading={loadingFeed}
-						src={
-							feed?.img ?? feed?.imgCache
-								? `${API_URL}/img/${feed?.imgCache}`
-								: null
-						}
-						width={"17rem"}
-					/>
+					{renderArtwork()}
 
 					{feed && <>{showUserActions && <Action feedId={feed.id}></Action>}</>}
 

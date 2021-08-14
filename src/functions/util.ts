@@ -60,6 +60,7 @@ export namespace util {
 
 
     export function scrollTop(): void {
+        console.log("dhashdjoashkjldhisoa");
 
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
