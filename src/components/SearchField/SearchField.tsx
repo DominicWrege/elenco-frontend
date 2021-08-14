@@ -34,7 +34,6 @@ const SearchField: React.FC = () => {
 	useHotkeys("ctrl+k", (event: KeyboardEvent) => {
 		if (inputField.current) {
 			event?.preventDefault();
-			console.log(inputField.current);
 			inputField.current.focus();
 		}
 	});
@@ -70,22 +69,6 @@ const SearchField: React.FC = () => {
 		});
 		return ret;
 	};
-
-	// const debounce = (fn: any, delay: number) => {
-	//     let timeOut;
-	//     console.log(timeOut);
-	//     return function (...args) {
-	//         // if (timeOut) {
-	//         //     clearTimeout(timeOut);
-	//         // }
-	//         console.log("huodsapi");
-	//         timeOut = setTimeout(() => {
-	//             // await fn((...args);
-	//             console.log(111);
-	//         }, 100);
-	//         console.log(timeOut)
-	//     }
-	// };
 
 	const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
 		const value = event.target.value;

@@ -3,12 +3,14 @@ import { Card, Skeleton, Typography } from "antd";
 import { useEffect, useState } from "react";
 import { useCallback } from "react";
 import { DefaultParams, useLocation, useRoute } from "wouter";
-import api from "../../functions/api";
 import { Episode as EpisodeModel } from "../../models/episode";
 import sanitizeHtml from "sanitize-html";
 import PlayButton from "../PlayButton/PlayButton";
 import Artwork from "../Artwork/Artwork";
 import util from "../../functions/util";
+import { episode as episodes } from "../../functions/episode";
+import api from "../../functions/api";
+
 // interface Props {
 // 	episode: EpisodeModel;
 // }
@@ -45,7 +47,7 @@ export const Episode: React.FC = () => {
 		if (params?.episode_id) {
 			try {
 				let id = parseInt(params?.episode_id, 10);
-				setEpisode(await api.getEpisode(id));
+				setEpisode(await episodes.getByID(id));
 			} catch (err) {
 				console.error(err);
 				if (err.response.status === 404) {

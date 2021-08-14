@@ -1,20 +1,23 @@
-.Comment-form{
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
+.Comment-form {
+	display: flex;
+	gap: 1rem;
+	flex-wrap: wrap;
 }
 
-.Comment-Textarea{
-    /* max-width: 100% !important; */
-    width: 100%;
+.Comment-form .ant-row.ant-form-item {
+	width: 100%;
 }
 
-@media(max-width: 1200px){
-    .Comment-form{
-        flex-direction: column;
-        gap: 0.75rem;
-    } 
+.Comment-Textarea {
+	/* max-width: 100% !important; */
+	width: 100%;
+}
 
+@media (max-width: 1200px) {
+	.Comment-form {
+		flex-direction: column;
+		gap: 0.75rem;
+	}
 }
 
 /* @media(max-width: 650px){

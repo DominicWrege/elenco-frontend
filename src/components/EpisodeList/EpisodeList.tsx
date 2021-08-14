@@ -9,8 +9,8 @@ import {
 	PodcastPlayerContext,
 } from "../../contexts/PlayerContext";
 import { PlayerStatus } from "../PodcastPlayer/types";
-import api from "../../functions/api";
 import styled from "styled-components";
+import episode from "../../functions/episode";
 
 interface Properties {
 	feedMeta: FeedShort;
@@ -36,7 +36,7 @@ const EpisodeList: React.FC<Properties> = ({
 
 	const init = useCallback(async () => {
 		if (feedMeta.id) {
-			const episodesJson = await api.getMoreEpisodes(feedMeta.id, 0);
+			const episodesJson = await episode.lazyLoad(feedMeta.id, 0);
 			setEpisodes(episodesJson);
 		}
 	}, [feedMeta]);
@@ -49,7 +49,7 @@ const EpisodeList: React.FC<Properties> = ({
 		try {
 			if (feedMeta.id && episodes?.offset) {
 				setIsLoadingMore(true);
-				const episodesJson = await api.getMoreEpisodes(
+				const episodesJson = await episode.lazyLoad(
 					feedMeta.id,
 					episodes.offset
 				);

@@ -11,13 +11,6 @@ export interface SearchProperties extends DefaultParams {
 	query: string;
 }
 
-export function compareByDescription(
-	a: FeedEpisodeModel,
-	b: FeedEpisodeModel
-): number {
-	return a.description.localeCompare(b.description) ? 1 : -1;
-}
-
 const SearchResults: React.FC<RouteComponentProps<DefaultParams>> = () => {
 	let [feeds, setResult] = useState<FeedEpisodeModel[]>([]);
 	const [loading, setLoading] = useState(true);
@@ -60,17 +53,15 @@ const SearchResults: React.FC<RouteComponentProps<DefaultParams>> = () => {
 				<List
 					loading={loading}
 					rowKey={(feed) => feed.id.toString()}
-					dataSource={feeds
-						.sort(compareByDescription)
-						.filter((item: FeedEpisodeModel) => {
-							if (selectedCategories.length === 0) {
-								return true;
-							} else {
-								return item.categories.some((cat) =>
-									selectedCategories.includes(cat.description)
-								);
-							}
-						})}
+					dataSource={feeds.filter((item: FeedEpisodeModel) => {
+						if (selectedCategories.length === 0) {
+							return true;
+						} else {
+							return item.categories.some((cat) =>
+								selectedCategories.includes(cat.description)
+							);
+						}
+					})}
 					renderItem={(item) => (
 						<List.Item>
 							<FeedResultCard key={item.id} feed={item}></FeedResultCard>
