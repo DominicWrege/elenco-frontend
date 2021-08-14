@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import Episode, { EpisodeNext } from "../../models/episode";
 import EpisodeItem from "../EpisodeItem/EpisodeItem";
 import { Button, List } from "antd";
@@ -13,7 +13,6 @@ import api from "../../functions/api";
 import styled from "styled-components";
 
 interface Properties {
-	episodes: EpisodeNext;
 	feedMeta: FeedShort;
 	pagination?: boolean;
 }
@@ -25,7 +24,6 @@ const LoadingButtonWrapper = styled.div`
 `;
 
 const EpisodeList: React.FC<Properties> = ({
-	episodes,
 	feedMeta,
 	pagination = false,
 }) => {
@@ -34,19 +32,29 @@ const EpisodeList: React.FC<Properties> = ({
 	const status = context?.status;
 
 	const [isLoadingMore, setIsLoadingMore] = useState(false);
+	const [episodes, setEpisodes] = useState<EpisodeNext | null>(null);
 
-	const [innerEpisodes, setInnerEpisodes] = useState(episodes);
+	const init = useCallback(async () => {
+		if (feedMeta.id) {
+			const episodesJson = await api.getMoreEpisodes(feedMeta.id, 0);
+			setEpisodes(episodesJson);
+		}
+	}, [feedMeta]);
+
+	useEffect(() => {
+		init();
+	}, [init]);
 
 	const loadMoreEpisodes = async () => {
 		try {
-			if (feedMeta.id && innerEpisodes?.offset) {
+			if (feedMeta.id && episodes?.offset) {
 				setIsLoadingMore(true);
 				const episodesJson = await api.getMoreEpisodes(
 					feedMeta.id,
-					innerEpisodes.offset
+					episodes.offset
 				);
 
-				setInnerEpisodes({
+				setEpisodes({
 					items: [...episodes.items, ...episodesJson.items],
 					offset: episodesJson.offset,
 				});
@@ -59,7 +67,7 @@ const EpisodeList: React.FC<Properties> = ({
 	};
 
 	const renderNextButton = (): JSX.Element | null => {
-		if (innerEpisodes.offset) {
+		if (episodes?.offset) {
 			return (
 				<LoadingButtonWrapper>
 					<Button
@@ -96,12 +104,12 @@ const EpisodeList: React.FC<Properties> = ({
 					? { defaultPageSize: 50, hideOnSinglePage: true, simple: true }
 					: undefined
 			}
-			rowKey={(episode) => episode.guid ?? Math.random() * 1000}
-			dataSource={innerEpisodes.items}
+			rowKey={(episode) => episode.guid ?? episode.id}
+			dataSource={episodes?.items}
 			loadMore={renderNextButton()}
 			renderItem={(episode) => (
 				<EpisodeItem
-					key={episode.guid ?? Math.random() * 1000}
+					key={episode.guid ?? episode.id}
 					episode={episode}
 					feedMeta={feedMeta}
 					status={setEpisodeStatus(episode, context?.episode)}

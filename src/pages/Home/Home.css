@@ -8,7 +8,9 @@
 	animation-iteration-count: 1;
 	animation-name: appear;
 }
-
+.Home .FeedSmallList-horizontal li.ant-list-item.FeedSmallList-item {
+	margin-bottom: 0.5em;
+}
 @keyframes appear {
 	0% {
 		opacity: 0;

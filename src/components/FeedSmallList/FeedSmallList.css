@@ -19,6 +19,8 @@
 	/* flex-basis: 10rem !important; */
 	min-width: 10rem;
 	max-width: 10rem;
+	padding: 0;
+	margin-bottom: 1rem;
 }
 
 .FeedSmallList-horizontal ul.ant-list-items {

@@ -13,37 +13,24 @@ const config = {
             contrast: "#000",
             alt: "#fff"
         },
-
-        /**
-         * Fonts
-         * - by default the system font stack is used (https://css-tricks.com/snippets/css/system-font-stack/)
-         *
-         * font:
-         * - name: font name that is used in the font stack
-         * - family: list of fonts in a fallback order
-         * - weight: font weight of the defined font
-         * - src: list of web font sources (allowed: woff, woff2, ttf, eot, svg)
-         */
-
-        // FIX ME
         fonts: {
             ci: {
-                name: "RobotoBlack",
+                name: "Helvetica Neue",
                 family: [
-                    "RobotoBlack",
-                    "Calibri",
+                    "BlinkMacSystemFont",
+                    "Helvetica Neue",
                     "Candara",
                     "Arial",
                     "Helvetica",
                     "sans-serif"
                 ],
                 weight: 900,
-                src: ["./assets/Roboto-Black.ttf"]
+                src: []
             },
             regular: {
-                name: "FiraSansLight",
+                name: "Helvetica Neue",
                 family: [
-                    "FiraSansLight",
+                    "Helvetica Neue",
                     "Calibri",
                     "Candara",
                     "Arial",
@@ -51,7 +38,7 @@ const config = {
                     "sans-serif"
                 ],
                 weight: 300,
-                src: ["./assets/FiraSans-Light.ttf"]
+                src: []
             },
             bold: {
                 name: "FiraSansBold",
@@ -64,7 +51,7 @@ const config = {
                     "sans-serif"
                 ],
                 weight: 700,
-                src: ["./assets/FiraSans-Bold.ttf"]
+                src: []
             }
         }
     },
