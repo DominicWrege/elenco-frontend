@@ -25,6 +25,9 @@ const FeedResultCard: React.FC<Props> = ({ feed }) => {
 					...category.children,
 				];
 			})
+			.sort((a: Category, b: Category) =>
+				a.description.localeCompare(b.description)
+			)
 			.map((category: Category) => (
 				<Tag key={category.id} icon={<TagFilled />}>
 					{category.description}

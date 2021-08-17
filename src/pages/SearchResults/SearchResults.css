@@ -15,7 +15,7 @@
 }
 
 .SearchResults-categories-list {
-	min-width: 250px;
+	width: 27rem;
 	justify-self: start;
 	padding: 1em;
 }

@@ -96,7 +96,9 @@ const SearchResults: React.FC<RouteComponentProps<DefaultParams>> = () => {
 				categories.add(category.description);
 			});
 		});
-		setCategoriesList(Array.from(categories));
+		setCategoriesList(
+			Array.from(categories).sort((a: string, b: string) => a.localeCompare(b))
+		);
 	};
 	const filteredOptions = categoriesList
 		.filter((opt) => !selectedCategories.includes(opt))

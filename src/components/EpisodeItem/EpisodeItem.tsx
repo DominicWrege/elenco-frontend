@@ -23,6 +23,7 @@ interface Properties {
 const EpisodeItem: React.FC<Properties> = React.memo(
 	({ episode, feedMeta, status }) => {
 		const player = useContext(PlayerContext);
+
 		// console.log("render");
 		// const [guide, setguide] = useState(episode.guid.slice());
 		const handlePlay = (_event): void => {
