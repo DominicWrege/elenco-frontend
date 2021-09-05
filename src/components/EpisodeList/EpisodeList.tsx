@@ -105,8 +105,20 @@ const EpisodeList: React.FC<Properties> = React.memo(({
 		[status]
 	);
 
+	const isLoading = () => {
+		if (episodesList) {
+			return false;
+		}
+		if (!episodes) {
+			return true;
+		}
+
+		return false;
+
+	}
 	return (
 		<List
+			loading={isLoading()}
 			size="large"
 			pagination={
 				pagination
