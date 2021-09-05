@@ -72,7 +72,7 @@ export const UserFeeds: React.FC = () => {
 			submittedFeeds = feeds;
 			setFeedsList(feeds[filter.toLowerCase()]);
 		} catch (err) {
-			console.log(err);
+			console.error(err);
 		} finally {
 			setLoading(false);
 		}

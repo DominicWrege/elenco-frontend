@@ -24,7 +24,7 @@ const LoadingButtonWrapper = styled.div`
 	justify-content: center;
 `;
 
-const EpisodeList: React.FC<Properties> = ({
+const EpisodeList: React.FC<Properties> = React.memo(({
 	episodesList,
 	feedMeta,
 	pagination = false,
@@ -36,12 +36,15 @@ const EpisodeList: React.FC<Properties> = ({
 	const [isLoadingMore, setIsLoadingMore] = useState(false);
 	const [episodes, setEpisodes] = useState<EpisodeNext | null>(null);
 
+	/*eslint-disable */
 	const init = useCallback(async () => {
 		if (feedMeta.id && !episodesList) {
 			const episodesJson = await episode.lazyLoad(feedMeta.id, 0);
 			setEpisodes(episodesJson);
 		}
+		//
 	}, [feedMeta]);
+	/*eslint-disable */
 
 	useEffect(() => {
 		init();
@@ -119,6 +122,6 @@ const EpisodeList: React.FC<Properties> = ({
 			)}
 		/>
 	);
-};
+});
 
 export default EpisodeList;

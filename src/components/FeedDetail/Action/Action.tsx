@@ -11,7 +11,6 @@ interface Props {
 
 const Action: React.FC<Props> = ({ feedId }) => {
 	const [userFeedInfo, setUserFeedInfo] = useState<FeedUserInfo | null>(null);
-
 	const load = useCallback(async () => {
 		if (feedId) {
 			try {
@@ -21,6 +20,22 @@ const Action: React.FC<Props> = ({ feedId }) => {
 			}
 		}
 	}, [feedId]);
+
+	const subscribe = async (feedId: number): Promise<void> => {
+		await user.subscribe(feedId);
+		UpdateUserState(true);
+	};
+
+	const UpdateUserState = (status: boolean) => {
+		if (userFeedInfo) {
+			setUserFeedInfo({ ...userFeedInfo, hasSubscribed: status });
+		}
+	}
+
+	const unsubscribe = async (feedId: number): Promise<void> => {
+		await user.unsubscribe(feedId);
+		UpdateUserState(false);
+	};
 
 	useEffect(() => {
 		load();
@@ -33,7 +48,10 @@ const Action: React.FC<Props> = ({ feedId }) => {
 	if (userFeedInfo) {
 		return (
 			<div className="Action">
-				<SubscribeButton feedId={feedId} status={userFeedInfo?.hasSubscribed} />
+				<SubscribeButton feedId={feedId}
+					isSubscribed={userFeedInfo?.hasSubscribed}
+					onSubscribe={subscribe}
+					onUnSubscribe={unsubscribe} />
 				<HideButton
 					feedId={feedId}
 					status={userFeedInfo?.status}

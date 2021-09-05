@@ -32,9 +32,8 @@ export function toPlayerEpisode(
 		{
 			url: episode.enclosure.mediaUrl,
 			size: episode.enclosure.length,
-			title: `${episode.title}.${
-				episode.enclosure.mimeType.split("/")[1] ?? "mp3"
-			}`,
+			title: `${episode.title}.${episode.enclosure.mimeType.split("/")[1] ?? "mp3"
+				}`,
 			mimeType: episode.enclosure.mimeType,
 		},
 	];
@@ -83,6 +82,7 @@ export const PodcastPlayer: React.FC = () => {
 		player?.setEpisode(null);
 	};
 
+	/*eslint-disable */
 	const callBackAction = useCallback(() => {
 		if (player?.action === PlayerAction.Pause) {
 			pause(store);
@@ -90,6 +90,7 @@ export const PodcastPlayer: React.FC = () => {
 			play(store);
 		}
 	}, [player?.action]);
+	/*eslint-disable */
 
 	useEffect(() => {
 		callBackAction();

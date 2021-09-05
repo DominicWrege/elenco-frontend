@@ -42,7 +42,7 @@ interface Properties {
 
 const TAB_Query = "tab";
 
-export const FeedDetail: React.FC<Properties> = ({
+export const FeedDetail: React.FC<Properties> = React.memo(({
 	feed,
 	showUserActions = false,
 	showComments = false,
@@ -79,7 +79,7 @@ export const FeedDetail: React.FC<Properties> = ({
 	};
 
 	const renderArtwork = () => {
-		const src = feed?.imgCache ? `${API_URL}/img/${feed?.imgCache}` : feed?.img;
+		const src = feed?.imgCache !== null && !loadingFeed ? `${API_URL}/img/${feed?.imgCache}` : feed?.img;
 
 		return <Artwork loading={loadingFeed} src={src ?? null} width={"17rem"} />;
 	};
@@ -172,4 +172,6 @@ export const FeedDetail: React.FC<Properties> = ({
 			<BackTop />
 		</div>
 	);
-};
+});
+
+export default FeedDetail;

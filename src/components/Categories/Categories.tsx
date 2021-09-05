@@ -12,7 +12,7 @@ export const Categories: React.FC = () => {
 		try {
 			setCategories(await category.getAll());
 		} catch (err) {
-			console.log(err);
+			console.error(err);
 		} finally {
 			setLoading(false);
 		}

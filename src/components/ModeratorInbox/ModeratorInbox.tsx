@@ -18,7 +18,7 @@ export const ModeratorInbox = () => {
 			const feedJson = await admin.moderatorInbox();
 			setFeeds(feedJson);
 		} catch (err: any | ApiError) {
-			console.log(err);
+			console.error(err);
 		}
 	}, []);
 

@@ -44,7 +44,6 @@ const Preview: React.FC = () => {
 				setLocation("/new/done");
 			} catch (err: http.HttpError | any) {
 				setSaveLoading(false);
-				console.log(err.c);
 				setError(err.json);
 			}
 		}
