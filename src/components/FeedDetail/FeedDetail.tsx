@@ -79,8 +79,7 @@ export const FeedDetail: React.FC<Properties> = React.memo(({
 	};
 
 	const renderArtwork = () => {
-		const src = feed?.imgCache !== null && !loadingFeed ? `${API_URL}/img/${feed?.imgCache}` : feed?.img;
-
+		const src = feed?.imgCache ? `${API_URL}/img/${feed?.imgCache}` : feed?.img;
 		return <Artwork loading={loadingFeed} src={src ?? null} width={"17rem"} />;
 	};
 

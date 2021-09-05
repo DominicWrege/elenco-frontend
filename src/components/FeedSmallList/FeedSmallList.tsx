@@ -1,10 +1,10 @@
 import { List, Skeleton, Typography } from "antd";
+import React from "react";
 import { useMemo } from "react";
 import { Link } from "wouter";
-import { API_URL } from "../../env";
 import util from "../../functions/util";
 import { FeedSmall } from "../../models/feeds";
-import Artwork from "../Artwork/Artwork";
+import Artwork, { imgPath } from "../Artwork/Artwork";
 import "./FeedSmallList.css";
 
 type Orientation = "horizontal" | "vertical";
@@ -17,13 +17,15 @@ interface Properties {
 	orientation?: Orientation;
 }
 
-export const FeedSmallList: React.FC<Properties> = ({
+export const FeedSmallList: React.FC<Properties> = React.memo(({
 	feeds = [],
 	onlyArtwork = false,
 	loading = true,
 	skeletonSize = "11rem",
 	orientation = "vertical",
 }) => {
+
+
 	const className = ["FeedSmallList", `FeedSmallList-${orientation}`].join(" ");
 	const skeletons = useMemo(
 		() =>
@@ -37,7 +39,7 @@ export const FeedSmallList: React.FC<Properties> = ({
 		const artwork = (
 			<Artwork
 				href={`/feed/${feed.title}`}
-				src={`${API_URL}/img/${feed.img}`}
+				src={imgPath(feed.img)}
 				width="100%"
 			/>
 		);
@@ -79,6 +81,6 @@ export const FeedSmallList: React.FC<Properties> = ({
 			/>
 		</div>
 	);
-};
+});
 
 export default FeedSmallList;

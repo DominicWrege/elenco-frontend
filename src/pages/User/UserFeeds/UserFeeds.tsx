@@ -1,6 +1,6 @@
 import { Radio, RadioChangeEvent, Typography } from "antd";
 import "./UserFeeds.css";
-import { useCallback } from "react";
+import { useCallback, useRef } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { user } from "../../../functions/user";
@@ -12,6 +12,7 @@ import FeedFilter, {
 } from "../../../components/FeedFilter/FeedFilter";
 import util from "../../../functions/util";
 import useLocation from "wouter/use-location";
+import React from "react";
 const { Title } = Typography;
 
 function renderRadioButtons(
@@ -59,7 +60,10 @@ function initFilter(): FeedStatus {
 
 let submittedFeeds: SubmittedFeeds | null = null;
 
-export const UserFeeds: React.FC = () => {
+export const UserFeeds: React.FC = React.memo(() => {
+
+	const mountedRef = useRef(true);
+
 	const [feedsList, setFeedsList] = useState<FeedSmall[]>([]);
 	const [filter, setFilter] = useState<FeedStatus>(initFilter());
 	const [loading, setLoading] = useState(true);
@@ -80,6 +84,9 @@ export const UserFeeds: React.FC = () => {
 
 	useEffect(() => {
 		getFeeds();
+		return () => {
+			mountedRef.current = false;
+		};
 		// const select = util.urlParameter("select");
 	}, [getFeeds]);
 
@@ -123,6 +130,6 @@ export const UserFeeds: React.FC = () => {
 			</section>
 		</div>
 	);
-};
+});
 
 export default UserFeeds;

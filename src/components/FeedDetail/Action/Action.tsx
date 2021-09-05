@@ -4,12 +4,13 @@ import { user } from "../../../functions/user";
 import { FeedUserInfo } from "../../../models/api";
 import HideButton from "../HideButton/HideButton";
 import { SubscribeButton } from "../SubscribeButton/Subscribe";
+import React from "react";
 
 interface Props {
 	feedId?: number;
 }
 
-const Action: React.FC<Props> = ({ feedId }) => {
+const Action: React.FC<Props> = React.memo(({ feedId }) => {
 	const [userFeedInfo, setUserFeedInfo] = useState<FeedUserInfo | null>(null);
 	const load = useCallback(async () => {
 		if (feedId) {
@@ -62,6 +63,6 @@ const Action: React.FC<Props> = ({ feedId }) => {
 	}
 
 	return null;
-};
+});
 
 export default Action;

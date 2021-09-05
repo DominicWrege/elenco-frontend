@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { DefaultParams, useLocation, useRoute } from "wouter";
 import { feed } from "../../functions/feed";
 import type { FeedEpisodeModel, FeedSmall } from "../../models/feeds";
@@ -13,6 +13,8 @@ interface FeedRouterProperties extends DefaultParams {
 }
 
 export function Feed(): React.ReactElement<void> {
+
+	const mountedRef = useRef(true);
 	const [feedValue, setFeedValue] = useState<FeedEpisodeModel | null>(null);
 	const [relatedFeeds, setRelatedFeeds] = useState<FeedSmall[]>([]);
 	const userContext = useContext(UserContext);
@@ -43,6 +45,9 @@ export function Feed(): React.ReactElement<void> {
 
 	useEffect(() => {
 		loadFeed();
+		return () => {
+			mountedRef.current = false;
+		};
 	}, [loadFeed]);
 
 	return (

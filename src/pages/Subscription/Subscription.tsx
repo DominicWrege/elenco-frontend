@@ -1,5 +1,5 @@
 import "./Subscription.css";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import FeedFilter, {
   sortBy,
   SortByValue,
@@ -11,6 +11,7 @@ import { Typography } from "antd";
 const { Title } = Typography;
 
 export const Subscription = () => {
+  const mountedRef = useRef(true);
   const [feeds, setFeeds] = useState<FeedSmall[]>([]);
   const [currentSortBy, setCurrentSortBy] = useState<SortByValue>(sortBy.title);
   const [loading, setLoading] = useState(true);
@@ -31,6 +32,9 @@ export const Subscription = () => {
 
   useEffect(() => {
     loadFeeds();
+    return () => {
+      mountedRef.current = false;
+    };
   }, [loadFeeds]);
 
   return (

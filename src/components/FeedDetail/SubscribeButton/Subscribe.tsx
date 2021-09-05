@@ -1,8 +1,7 @@
 import { Button, message } from "antd";
 import "./Subscribe.css";
 import { CheckOutlined } from "@ant-design/icons";
-import { FC, useEffect, useState } from "react";
-import { user } from "../../../functions/user";
+import { FC, useState } from "react";;
 
 interface Property {
 	isSubscribed: boolean;

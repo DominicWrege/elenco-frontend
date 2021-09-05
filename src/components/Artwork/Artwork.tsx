@@ -1,6 +1,7 @@
 import { Image } from "antd";
 import { CSSProperties } from "react";
 import { Link } from "wouter";
+import { API_URL } from "../../env";
 import util from "../../functions/util";
 import "./Artwork.css";
 
@@ -13,6 +14,11 @@ interface Properties {
 	loading?: boolean;
 }
 const className = "Artwork";
+
+
+export function imgPath(img?: string | null) {
+	return img ? `${API_URL}/img/${img}` : null
+}
 
 export function Artwork({ width = "100%", src, href, loading }: Properties) {
 	const fallback = "/img/podcast_placeholder.jpg";
@@ -34,7 +40,6 @@ export function Artwork({ width = "100%", src, href, loading }: Properties) {
 			/>
 		);
 	}
-
 	const img = (
 		<Image
 			alt="Podcast Artwork Image"

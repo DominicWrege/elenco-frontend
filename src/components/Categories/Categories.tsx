@@ -1,10 +1,13 @@
 import { Card, List, Tag, Input } from "antd";
 import "./Categories.css";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
 import category from "../../functions/category";
 import { Category } from "../../models/category";
 export const Categories: React.FC = () => {
+
+	const mountedRef = useRef(true);
+
 	const [categories, setCategories] = useState<Category[]>([]);
 	const [loading, setLoading] = useState(true);
 	const [filter, setFilter] = useState<string>("");
@@ -20,6 +23,10 @@ export const Categories: React.FC = () => {
 
 	useEffect(() => {
 		fetchAll();
+
+		return () => {
+			mountedRef.current = false;
+		};
 	}, [fetchAll, filter]);
 
 	const renderItem = (item: Category) => {

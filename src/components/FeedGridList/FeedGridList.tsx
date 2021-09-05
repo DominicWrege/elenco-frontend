@@ -3,11 +3,10 @@ import "./FeedGridList.css";
 import React from "react";
 import styled from "styled-components";
 import { Link } from "wouter";
-import { API_URL } from "../../env";
 import { Spin } from "antd";
 import { Loading3QuartersOutlined } from "@ant-design/icons";
 import { FeedSmall } from "../../models/feeds";
-import Artwork from "../Artwork/Artwork";
+import Artwork, { imgPath } from "../Artwork/Artwork";
 import { SortByValue } from "../FeedFilter/FeedFilter";
 import MiddleCenter from "../Styles/shared.css";
 const { Title } = Typography;
@@ -35,7 +34,7 @@ function renderCard(feed: FeedSmall) {
 			key={feed.title}
 			cover={
 				<Artwork
-					src={`${API_URL}/img/${feed.img}`}
+					src={imgPath(feed.img)}
 					width="100%"
 					href={`/feed/${feed.title}`}
 				/>
@@ -51,7 +50,7 @@ function renderCard(feed: FeedSmall) {
 	);
 }
 
-export const FeedGridList: React.FC<Properties> = ({
+export const FeedGridList: React.FC<Properties> = React.memo(({
 	feeds,
 	loading,
 	sortedBy,
@@ -85,6 +84,6 @@ export const FeedGridList: React.FC<Properties> = ({
 	} else {
 		return <GridCard>{feeds.map(renderCard)}</GridCard>;
 	}
-};
+});
 
 export default FeedGridList;

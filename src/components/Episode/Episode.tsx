@@ -1,6 +1,6 @@
 import "./Episode.css";
 import { Card, Skeleton, Typography } from "antd";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useCallback } from "react";
 import { DefaultParams, useLocation, useRoute } from "wouter";
 import { Episode as EpisodeModel } from "../../models/episode";
@@ -22,6 +22,8 @@ interface FeedRouterProperties extends DefaultParams {
 }
 
 export const Episode: React.FC = () => {
+	const mountedRef = useRef(true);
+
 	const params = useRoute<FeedRouterProperties>(
 		"/feed/:feed_title/:episode_id"
 	)[1];
@@ -61,6 +63,9 @@ export const Episode: React.FC = () => {
 
 	useEffect(() => {
 		Promise.all([load(), getArtwork()]);
+		return () => {
+			mountedRef.current = false;
+		};
 	}, [load, getArtwork]);
 
 	return (
