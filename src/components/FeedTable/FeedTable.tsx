@@ -105,7 +105,7 @@ export const FeedTable: React.FC<Props> = ({
 				dataSource={feeds}
 				rowKey={(feed) => feed.id}
 				size="small"
-				pagination={{ pageSize: 25 }}
+				pagination={{ pageSize: 25, showSizeChanger: false }}
 			/>
 		</div>
 	);
