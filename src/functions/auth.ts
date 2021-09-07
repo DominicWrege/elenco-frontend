@@ -63,9 +63,12 @@ export namespace auth {
             if (window.localStorage.getItem(LOCALE_USER_CACHE)) {
                 window.localStorage.removeItem(LOCALE_USER_CACHE);
             }
-            if (Cookies.get(AUTH_COOKIE)) {
-                Cookies.remove(AUTH_COOKIE);
-            }
+            removeCookie();
+        }
+    }
+    export function removeCookie() {
+        if (Cookies.get(AUTH_COOKIE)) {
+            Cookies.remove(AUTH_COOKIE);
         }
     }
 }

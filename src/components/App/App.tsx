@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, {
+	useCallback,
+	useEffect,
+	useMemo,
+	useRef,
+	useState,
+} from "react";
 import "./App.css";
 import { Content, Footer } from "antd/lib/layout/layout";
 import AppHeader from "../Header/Header";
@@ -16,7 +22,7 @@ import MainRoutes from "./Routes";
 
 const App: React.FC = () => {
 	let userCache: User | null = auth.getSession();
-
+	const mountedRef = useRef(true);
 	const setLocation = useLocation()[1];
 
 	const [playingEpisode, setPlayingEpisode] = useState<EpisodeContext | null>(
@@ -57,6 +63,7 @@ const App: React.FC = () => {
 				window.location["user"] = JSON.stringify(userJson);
 			} catch (err) {
 				console.error({ ...err });
+				auth.removeCookie();
 				setLocation("/Login");
 			}
 		}
@@ -64,6 +71,9 @@ const App: React.FC = () => {
 
 	useEffect(() => {
 		checkUserStatus();
+		return () => {
+			mountedRef.current = false;
+		};
 	}, [checkUserStatus]);
 
 	return (

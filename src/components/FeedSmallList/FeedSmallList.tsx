@@ -17,15 +17,13 @@ interface Properties {
 	orientation?: Orientation;
 }
 
-export const FeedSmallList: React.FC<Properties> = React.memo(({
+export const FeedSmallList: React.FC<Properties> = ({
 	feeds = [],
 	onlyArtwork = false,
 	loading = true,
 	skeletonSize = "11rem",
 	orientation = "vertical",
 }) => {
-
-
 	const className = ["FeedSmallList", `FeedSmallList-${orientation}`].join(" ");
 	const skeletons = useMemo(
 		() =>
@@ -81,6 +79,6 @@ export const FeedSmallList: React.FC<Properties> = React.memo(({
 			/>
 		</div>
 	);
-});
+};
 
 export default FeedSmallList;

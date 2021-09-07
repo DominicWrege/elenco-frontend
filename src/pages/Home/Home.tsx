@@ -2,7 +2,7 @@ import "./Home.css";
 import { Card, Typography } from "antd";
 import Statistic from "../../components/Statistic/Statistic";
 import api from "../../functions/api";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { MetaStatistic } from "../../models/api";
 import { FeedSmall } from "../../models/feeds";
 import FeedSmallList from "../../components/FeedSmallList/FeedSmallList";
@@ -10,6 +10,8 @@ import feed from "../../functions/feed";
 import { LOGO } from "../../env";
 
 export const Home: React.FC = () => {
+	const mountedRef = useRef(true);
+
 	const [meta, setMeta] = useState<MetaStatistic | null>(null);
 	const [topFeeds, setTopFeeds] = useState<FeedSmall[]>([]);
 	const [recentFeeds, setRecentFeeds] = useState<FeedSmall[]>([]);
@@ -35,7 +37,9 @@ export const Home: React.FC = () => {
 
 	useEffect(() => {
 		loadMeta();
-
+		return () => {
+			mountedRef.current = false;
+		};
 	}, [loadMeta]);
 
 	return (

@@ -4,7 +4,7 @@ export namespace http {
 
     export class HttpError extends Error {
 
-        constructor(public response: Response, public json: ApiError) {
+        constructor(public response: Response, public json: ApiError | null) {
             super(response.statusText);
             this.response = response;
             this.json = json;
@@ -76,9 +76,14 @@ export namespace http {
             },
             body: ctx.data ? JSON.stringify(ctx.data) : undefined
         };
-        let resp = await fetch(url, options);
+        const resp = await fetch(url, options);
+
         if (resp.status >= 400) {
-            throw new HttpError(resp, await resp.json());
+            let json = null;
+            if (resp.json) {
+                json = await resp.json();
+            }
+            throw new HttpError(resp, json);
         }
 
         return resp;

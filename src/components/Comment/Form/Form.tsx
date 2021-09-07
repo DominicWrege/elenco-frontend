@@ -40,7 +40,7 @@ export const CommentForm: React.FC<Properties> = ({ feedId, newComment }) => {
 					message.success("Comment successfully posted!");
 				} catch (err) {
 					if (err instanceof http.HttpError) {
-						message.error(err.json.message);
+						message.error(err.json?.message);
 					} else {
 						console.log(err);
 					}
