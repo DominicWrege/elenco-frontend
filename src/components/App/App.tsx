@@ -56,8 +56,8 @@ const App: React.FC = () => {
 				setUser(userJson);
 				window.location["user"] = JSON.stringify(userJson);
 			} catch (err) {
-				setLocation("/Login");
 				console.error({ ...err });
+				setLocation("/Login");
 			}
 		}
 	}, [setLocation]);
