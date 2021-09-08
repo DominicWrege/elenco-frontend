@@ -59,11 +59,11 @@ export namespace auth {
 
     export async function logout(): Promise<void> {
         if (hasSession()) {
+            removeCookie();
             await http.post(`${API_URL}/auth/logout`, null, http.WithCredentials.Yes);
             if (window.localStorage.getItem(LOCALE_USER_CACHE)) {
                 window.localStorage.removeItem(LOCALE_USER_CACHE);
             }
-            removeCookie();
         }
     }
     export function removeCookie() {

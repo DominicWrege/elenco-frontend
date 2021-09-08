@@ -61,13 +61,12 @@ function initFilter(): FeedStatus {
 let submittedFeeds: SubmittedFeeds | null = null;
 
 export const UserFeeds: React.FC = React.memo(() => {
-
 	const mountedRef = useRef(true);
+	const setLocation = useLocation()[1];
 
 	const [feedsList, setFeedsList] = useState<FeedSmall[]>([]);
 	const [filter, setFilter] = useState<FeedStatus>(initFilter());
 	const [loading, setLoading] = useState(true);
-	const setLocation = useLocation()[1];
 	const [currentSortBy, setCurrentSortBy] = useState<SortByValue>(sortBy.title);
 
 	const getFeeds = useCallback(async () => {
@@ -75,16 +74,17 @@ export const UserFeeds: React.FC = React.memo(() => {
 			const feeds: SubmittedFeeds = await user.getSubmittedFeeds();
 			submittedFeeds = feeds;
 			setFeedsList(feeds[filter.toLowerCase()]);
+			setLoading(false);
 		} catch (err) {
 			console.error(err);
-		} finally {
-			setLoading(false);
+			setLocation("/login");
 		}
 	}, [filter]);
 
 	useEffect(() => {
 		getFeeds();
 		return () => {
+			setLoading(false);
 			mountedRef.current = false;
 		};
 		// const select = util.urlParameter("select");
