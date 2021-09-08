@@ -1,4 +1,4 @@
-import { Link, Redirect, Route, Switch } from "wouter";
+import { Link, Route, Switch } from "wouter";
 import { Explore } from "../../pages/Explore/Explore";
 import { Feed } from "../../pages/Feed/Feed";
 import FeedsByAuthorOrCategory, {
