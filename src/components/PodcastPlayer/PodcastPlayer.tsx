@@ -13,6 +13,8 @@ import { PlayerContext } from "../../contexts/PlayerContext";
 
 import { PodloveWebPlayer } from "@podlove/player-react";
 
+import { template } from "./template";
+
 import {
 	READY,
 	REQUEST_PAUSE,
@@ -32,8 +34,9 @@ export function toPlayerEpisode(
 		{
 			url: episode.enclosure.mediaUrl,
 			size: episode.enclosure.length,
-			title: `${episode.title}.${episode.enclosure.mimeType.split("/")[1] ?? "mp3"
-				}`,
+			title: `${episode.title}.${
+				episode.enclosure.mimeType.split("/")[1] ?? "mp3"
+			}`,
 			mimeType: episode.enclosure.mimeType,
 		},
 	];
@@ -123,11 +126,12 @@ export const PodcastPlayer: React.FC = () => {
 			</div>
 			{player?.episode && (
 				<PodloveWebPlayer
-					template="/podloveTemplate.html"
 					episode={player?.episode.value}
 					config={config}
 					onLoaded={handleOnLoaded}
-				/>
+				>
+					{template}
+				</PodloveWebPlayer>
 			)}
 		</div>
 	);

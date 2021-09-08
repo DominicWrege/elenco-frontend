@@ -1,10 +1,13 @@
 import "./EpisodeItem.css";
-import React, { PropsWithChildren, useContext } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import Episode from "../../models/episode";
 import { Typography, List } from "antd";
 import { util } from "../../functions/util";
 import { PlayCircleFilled, PauseCircleFilled } from "@ant-design/icons";
-import { PlayerContext } from "../../contexts/PlayerContext";
+import {
+	PlayerContext,
+	PodcastPlayerContext,
+} from "../../contexts/PlayerContext";
 import { FeedShort } from "../../models/feeds";
 import { toPlayerEpisode } from "../PodcastPlayer/PodcastPlayer";
 import { PlayerAction, PlayerStatus } from "../PodcastPlayer/types";
@@ -15,17 +18,28 @@ interface Properties {
 	episode: Episode;
 	feedMeta: FeedShort;
 	key: React.Key;
-	status?: PlayerStatus;
 }
 
 // function compare
 
 const EpisodeItem: React.FC<Properties> = React.memo(
-	({ episode, feedMeta, status }) => {
+	({ episode, feedMeta }) => {
+		const mountedRef = useRef(true);
+
+		const context = useContext<PodcastPlayerContext | null>(PlayerContext);
 		const player = useContext(PlayerContext);
 
-		// console.log("render");
-		// const [guide, setguide] = useState(episode.guid.slice());
+		const status =
+			player?.episode?.guid === episode.guid
+				? player.status
+				: PlayerStatus.Pause;
+
+		useEffect(() => {
+			return () => {
+				mountedRef.current = false;
+			};
+		}, [context?.status]);
+
 		const handlePlay = (_event): void => {
 			if (player?.episode === null || player?.episode.guid !== episode.guid) {
 				const playerEpisode = toPlayerEpisode(episode, feedMeta);
@@ -93,12 +107,6 @@ const EpisodeItem: React.FC<Properties> = React.memo(
 				</section>
 			</List.Item>
 		);
-	},
-	(
-		prevProps: Readonly<PropsWithChildren<Properties>>,
-		nextProps: Readonly<PropsWithChildren<Properties>>
-	): boolean => {
-		return prevProps.status === nextProps.status;
 	}
 );
 

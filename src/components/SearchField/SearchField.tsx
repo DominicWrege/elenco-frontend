@@ -105,8 +105,8 @@ const SearchField: React.FC = () => {
 				onSearch={handleSearch}
 				onChange={handleOnChange}
 				size="middle"
-				suffix="&#12644;&#12644;ctrl k"
-			// ref={input}
+				suffix="&#12644;ctrl k"
+				// ref={input}
 			/>
 		</AutoComplete>
 	);
