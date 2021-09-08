@@ -14,6 +14,7 @@ const Register: React.FC<RegisterLoginChildProps> = ({ onError }) => {
 		try {
 			setIsLoading(true);
 			await auth.register(values);
+			setIsLoading(false);
 			setLocation("/login");
 		} catch (err: any) {
 			if (err instanceof http.HttpError) {
@@ -23,9 +24,8 @@ const Register: React.FC<RegisterLoginChildProps> = ({ onError }) => {
 			} else if (err instanceof Error) {
 				onError("Something went wrong");
 				console.error(err.message);
+				setIsLoading(false);
 			}
-		} finally {
-			setIsLoading(false);
 		}
 	};
 

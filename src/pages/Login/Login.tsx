@@ -20,6 +20,7 @@ const Login: React.FC<RegisterLoginChildProps> = ({ onError }) => {
 			setIsLoading(true);
 			const resp: User = await auth.login(values);
 			userContext?.setUser(resp);
+			setIsLoading(false);
 			setLocation("/");
 		} catch (err) {
 			if (err instanceof http.HttpError) {
@@ -30,7 +31,6 @@ const Login: React.FC<RegisterLoginChildProps> = ({ onError }) => {
 				onError("Something went wrong");
 				console.error(err);
 			}
-		} finally {
 			setIsLoading(false);
 		}
 	};
