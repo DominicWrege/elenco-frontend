@@ -31,11 +31,7 @@ function AppHeader(): JSX.Element {
 	const setLocation = useLocation()[1];
 
 	const handleLogout = async () => {
-		try {
-			auth.logout();
-		} catch (e) {
-			console.log(e);
-		}
+		await auth.logout();
 		userContext?.setUser(null);
 		setLocation("/login");
 	};
