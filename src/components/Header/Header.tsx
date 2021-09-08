@@ -8,7 +8,7 @@ import { auth } from "../../functions/auth";
 import SearchField from "../SearchField/SearchField";
 import { UserContext } from "../../contexts/UserContext";
 import { LOGO } from "../../env";
-import { PlusOutlined } from '@ant-design/icons';
+import { PlusOutlined } from "@ant-design/icons";
 
 const dropMenu = (
 	<Menu>
@@ -75,9 +75,12 @@ function AppHeader(): JSX.Element {
 		if (userContext?.user) {
 			return (
 				<>
-					<Link href="/new/feed"  >
-						<Button type="default" className="Header-menu-plus-feed-btn" icon={<PlusOutlined />} />
-					</Link>
+					<Button
+						type="default"
+						className="Header-menu-plus-feed-btn"
+						icon={<PlusOutlined />}
+						onClick={() => setLocation("/new/feed")}
+					/>
 					<Dropdown key="btn-8861" overlay={menu} placement="bottomLeft" arrow>
 						<Button>
 							<UserOutlined />
@@ -128,9 +131,7 @@ function AppHeader(): JSX.Element {
 						</Link>
 					</div>
 				</div>
-				<div id="Header-menu">
-					{userActions()}
-				</div>
+				<div id="Header-menu">{userActions()}</div>
 			</div>
 		</header>
 	);

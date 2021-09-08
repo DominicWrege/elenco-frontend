@@ -48,7 +48,7 @@ export namespace auth {
             const resp = await http.get(`${API_URL}/user/info`, http.WithCredentials.Yes);
             return resp.json();
         } catch (err: http.HttpError | any) {
-            console.log(err);
+            console.error(err);
             return null;
         }
     }

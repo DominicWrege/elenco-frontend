@@ -77,21 +77,19 @@ const App: React.FC = () => {
 	}, [checkUserStatus]);
 
 	return (
-		<React.StrictMode>
-			<div className="App">
-				<UserContext.Provider value={userProviderValue}>
-					<PlayerContext.Provider value={playerProvideValue}>
-						<Layout>
-							<AppHeader />
-							<Content className="App-pages">{MainRoutes}</Content>
-							<Footer>
-								<PodcastPlayer />
-							</Footer>
-						</Layout>
-					</PlayerContext.Provider>
-				</UserContext.Provider>
-			</div>
-		</React.StrictMode>
+		<div className="App">
+			<UserContext.Provider value={userProviderValue}>
+				<PlayerContext.Provider value={playerProvideValue}>
+					<Layout>
+						<AppHeader />
+						<Content className="App-pages">{MainRoutes}</Content>
+						<Footer>
+							<PodcastPlayer />
+						</Footer>
+					</Layout>
+				</PlayerContext.Provider>
+			</UserContext.Provider>
+		</div>
 	);
 };
 

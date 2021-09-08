@@ -13,7 +13,6 @@ interface FeedRouterProperties extends DefaultParams {
 }
 
 export function Feed(): React.ReactElement<void> {
-
 	const mountedRef = useRef(true);
 	const [feedValue, setFeedValue] = useState<FeedEpisodeModel | null>(null);
 	const [relatedFeeds, setRelatedFeeds] = useState<FeedSmall[]>([]);
@@ -33,7 +32,7 @@ export function Feed(): React.ReactElement<void> {
 				setRelatedFeeds(await feed.getRelated(json_feed.id));
 			} catch (err: any) {
 				console.error(err);
-				if (err.response.status === 404) {
+				if (err?.response?.status === 404) {
 					setLocation("/404");
 				}
 			} finally {
