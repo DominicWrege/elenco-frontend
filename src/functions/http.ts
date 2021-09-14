@@ -72,13 +72,12 @@ export namespace http {
             mode: "cors" as RequestMode,
             credentials: ctx.credentials === WithCredentials.Yes ? "include" as RequestCredentials : undefined,
             headers: {
-                "Access-Control-Allow-Origin": window.location.origin,
+                // "Access-Control-Allow-Origin": window.location.origin,
                 "Access-Control-Allow-Credentials": "true",
                 "Content-Type": "application/json",
             },
             body: ctx.data ? JSON.stringify(ctx.data) : undefined
         };
-        console.log(url, options);
         const resp = await fetch(url, options);
 
         if (resp.status >= 400) {

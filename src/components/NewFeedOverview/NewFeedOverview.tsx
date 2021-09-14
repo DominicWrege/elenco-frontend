@@ -1,6 +1,6 @@
 import { Button, message, PageHeader } from "antd";
 import { useCallback, useEffect, useState } from "react";
-import { API_IP } from "../../env";
+import { API_URL_WS } from "../../env";
 import { admin } from "../../functions/admin";
 import util from "../../functions/util";
 import { FeedModerator } from "../../models/feeds";
@@ -18,7 +18,7 @@ export const NewFeedOverview: React.FC = () => {
 
 	useEffect(() => {
 		initData();
-		const feedSocket = new WebSocket(`ws://${API_IP}/admin/socket/unassigned`);
+		const feedSocket = new WebSocket(`${API_URL_WS}/admin/socket/unassigned`);
 
 		feedSocket.addEventListener("open", (e) => {
 			if (feedSocket.readyState === 1) {

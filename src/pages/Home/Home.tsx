@@ -45,7 +45,7 @@ export const Home: React.FC = () => {
 	return (
 		<div className="Home">
 			<header>
-				<img src={LOGO} height={270} alt="logo" />
+				<img src={LOGO} height={210} alt="logo" />
 				<Typography.Title level={4}>
 					An independent open source podcast directory
 				</Typography.Title>

@@ -28,3 +28,8 @@ public/api-spec.yaml
 public/icons
 
 public/web-player
+
+# firebase
+firebase.json
+.firebaserc
+*.cache
