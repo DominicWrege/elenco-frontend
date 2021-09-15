@@ -79,7 +79,7 @@ export const UserFeeds: React.FC = React.memo(() => {
 			console.error(err);
 			setLocation("/login");
 		}
-	}, [filter]);
+	}, [filter, setLocation]);
 
 	useEffect(() => {
 		getFeeds();

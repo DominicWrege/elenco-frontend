@@ -28,7 +28,7 @@ export const Subscription = () => {
 			console.error(err);
 			setLocation("/login");
 		}
-	}, []);
+	}, [setLocation]);
 
 	const onChangeFilter = (value: SortByValue) => {
 		setCurrentSortBy(value);

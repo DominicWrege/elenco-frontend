@@ -20,15 +20,15 @@
 	}
 }
 
-.Home header {
+.Home-header {
 	display: block;
 	text-align: center;
 }
 
-.Home header h2 {
+.Home-header h2 {
 	font-size: 2em;
 }
-.Home header .ant-typography {
+.Home-header .ant-typography {
 	margin: 1rem 0;
 }
 .Home h1.ant-typography {
@@ -47,15 +47,6 @@
 .Home-meta .ant-card-body::before {
 	content: unset;
 	display: inherit;
-}
-
-.swagger-ui {
-	background: #fff;
-	border-radius: 0.25em;
-}
-
-.swagger-ui .info {
-	margin: 1.25rem 0 !important;
 }
 
 @media (max-width: 600px) {

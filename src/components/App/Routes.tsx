@@ -13,10 +13,9 @@ import UserFeeds from "../../pages/User/UserFeeds/UserFeeds";
 import Guard from "../Guard/Guard";
 import { Home } from "../../pages/Home/Home";
 
-import SwaggerUI from "swagger-ui-react";
-import "swagger-ui-react/swagger-ui.css";
 import { Button, Card, Result, Typography } from "antd";
 import Episode from "../Episode/Episode";
+import Swagger from "../Swagger/Swagger";
 const { Text } = Typography;
 
 const faq = (
@@ -102,7 +101,7 @@ export const MainRoutes = (
 			</Guard>
 		</Route>
 		<Route path="/api">
-			<SwaggerUI url="/api-spec.yaml" />
+			<Swagger />
 		</Route>
 		<Route path="/faq">{faq}</Route>
 		<Route>

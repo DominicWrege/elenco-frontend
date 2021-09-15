@@ -99,6 +99,7 @@ const SearchField: React.FC = () => {
 			dropdownClassName="completion-search-dropdown"
 		>
 			<Input.Search
+				role="input"
 				placeholder="input search text"
 				allowClear
 				enterButton
