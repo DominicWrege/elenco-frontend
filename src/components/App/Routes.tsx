@@ -13,48 +13,10 @@ import UserFeeds from "../../pages/User/UserFeeds/UserFeeds";
 import Guard from "../Guard/Guard";
 import { Home } from "../../pages/Home/Home";
 
-import { Button, Card, Result, Typography } from "antd";
+import { Button, Result } from "antd";
 import Episode from "../Episode/Episode";
 import Swagger from "../Swagger/Swagger";
-const { Text } = Typography;
-
-const faq = (
-	<Card title="FAQ" style={{ height: "fit-content" }}>
-		<div style={{ height: "fit-content" }}>
-			<Text strong>What is Elenco?</Text>
-			<p>
-				Elenco is an open source independent Podcast Index where you can find or
-				discover your favorite podcast.
-			</p>
-			<Text strong>How can I use it?</Text>
-			<p>
-				You can listen, discover new Podcasts and read comments from other
-				users.
-			</p>
-			<Text strong>For which purpose do I need an account?</Text>
-			<p>
-				Only if you want to subscribe or provide feedback to your favorite
-				Podcasts, you need to
-				<Link href="/register"> sign up</Link> for an account.
-			</p>
-
-			<Text strong>How much costs Elenco?</Text>
-			<p>Elenco is totally free.</p>
-
-			<Text strong>Where can I contribute?</Text>
-			<p>
-				You can find it on{" "}
-				<a
-					href="https://github.com/DominicWrege/elenco"
-					target="_blank"
-					rel="noreferrer"
-				>
-					Github.com
-				</a>
-			</p>
-		</div>
-	</Card>
-);
+import Faq from "../Faq/Faq";
 
 export const MainRoutes = (
 	<Switch>
@@ -103,7 +65,9 @@ export const MainRoutes = (
 		<Route path="/api">
 			<Swagger />
 		</Route>
-		<Route path="/faq">{faq}</Route>
+		<Route path="/faq">
+			<Faq />
+		</Route>
 		<Route>
 			<Result
 				status="404"

@@ -1,10 +1,11 @@
-import { Empty, List, Select, Typography } from "antd";
-import React, { useCallback, useEffect, useState } from "react";
-import { DefaultParams, RouteComponentProps, useRoute } from "wouter";
+import { Button, Empty, List, Select, Typography } from "antd";
+import React, { useCallback, useContext, useEffect, useState } from "react";
+import { DefaultParams, Link, RouteComponentProps, useRoute } from "wouter";
 import "./SearchResults.css";
 import FeedResultCard from "../../components/FeedResultCard/FeedResultCard";
 import { FeedEpisodeModel } from "../../models/feeds";
 import { feed } from "../../functions/feed";
+import { UserContext } from "../../contexts/UserContext";
 const { Title } = Typography;
 
 export interface SearchProperties extends DefaultParams {
@@ -14,6 +15,7 @@ export interface SearchProperties extends DefaultParams {
 const SearchResults: React.FC<RouteComponentProps<DefaultParams>> = () => {
 	let [feeds, setResult] = useState<FeedEpisodeModel[]>([]);
 	const [loading, setLoading] = useState(true);
+	const userContext = useContext(UserContext);
 
 	const params = useRoute<SearchProperties>("/search/:query")[1];
 	const [categoriesList, setCategoriesList] = useState<string[]>([]);
@@ -40,8 +42,13 @@ const SearchResults: React.FC<RouteComponentProps<DefaultParams>> = () => {
 			return (
 				<div className="SearchResults-list SearchResults-list-empty">
 					<Title level={2}>
-						No Results for query: {decodeURI(params?.query ?? "")}
+						No search results for "{decodeURI(params?.query ?? "")}"
 					</Title>
+					{userContext?.user && (
+						<Link href="/new/feed">
+							<Button type="link">Add a new podcast.</Button>
+						</Link>
+					)}
 					<Empty description={false} />
 				</div>
 			);
