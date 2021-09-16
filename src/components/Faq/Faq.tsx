@@ -17,9 +17,7 @@ const Faq = () => {
 					You can listen, discover new Podcasts and read comments from other
 					users.
 				</p>
-				<Text strong>
-					I did not find my favorite podcast, how can a new one?
-				</Text>
+				<Text strong>How can I add an new podcast?</Text>
 				<p>
 					If you want to add a currently non-existing podcast, you have to have
 					an account, then you can submit a new RSS feed.<br></br> Every feed

@@ -4,8 +4,6 @@ import { http } from "./http";
 
 export namespace category {
 
-
-
     export async function getAll(): Promise<Category[]> {
 
         const resp = await http.get(`${API_URL}/categories`);

@@ -29,9 +29,15 @@ const FeedResultCard: React.FC<Props> = ({ feed }) => {
 				a.description.localeCompare(b.description)
 			)
 			.map((category: Category) => (
-				<Tag key={category.id} icon={<TagFilled />}>
-					{category.description}
-				</Tag>
+				<Link href={`/category/${category.description}`}>
+					<Tag
+						key={category.id}
+						icon={<TagFilled />}
+						onClick={() => util.scrollTop()}
+					>
+						{category.description}
+					</Tag>
+				</Link>
 			));
 
 		return <div>{CategoryTags}</div>;
