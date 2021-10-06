@@ -15,6 +15,10 @@
 	/* max-width: 24rem; */
 }
 
+.FeedSmallList-vertical li.ant-list-item.FeedSmallList-item {
+	width: 13rem;
+}
+
 .FeedSmallList-horizontal li.ant-list-item.FeedSmallList-item {
 	/* flex-basis: 10rem !important; */
 	min-width: 10rem;
